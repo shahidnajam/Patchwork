@@ -31,29 +31,35 @@ abstract class Patchwork_Controller_ModelController
 
     /**
      * finds the model if PK is in request
+     *
+     * @return Doctrine_Record
      */
-    protected function _initModelByPrimaryKey()
+    public function initModel($withPrimaryKey = true)
     {
-       if($pk = (int)$this->_getParam($this->modelPrimaryKey))
-           $this->model = Doctrine::getTable($this->modelName)->find($pk);
+        if(!$withPrimaryKey)
+            return new $this->modelName;
+        
+        return $this->model = $this->Doctrine
+                                ->getRecordOrException(
+                                    $this->modelName,
+                                    $this->_getParam($this->modelPrimaryKey)
+                                );
     }
 
     /**
      * default: list all
      *
-     * 
+     *
      */
-    public function indexAction()
-    {
+    public function indexAction() {
         $this->view->objects = Doctrine::getTable($this->modelName)->findAll();
     }
 
     /**
      * view particular
-     * 
+     *
      */
-    public function viewAction()
-    {
+    public function viewAction() {
         $this->_initModelByPrimaryKey();
         if($this->model)
             $this->view->object = $this->model;
@@ -62,10 +68,9 @@ abstract class Patchwork_Controller_ModelController
     /**
      * create
      *
-     * 
+     *
      */
-    public function createAction()
-    {
+    public function createAction() {
         $this->view->form = Patchwork_Doctrine_ModelForm::factory(
             $this->modelName
         );
@@ -74,10 +79,9 @@ abstract class Patchwork_Controller_ModelController
     /**
      * edit
      *
-     * 
+     *
      */
-    public function editAction()
-    {
+    public function editAction() {
         $this->_initModelByPrimaryKey();
         $this->view->form = Patchwork_Doctrine_ModelForm::factory(
             $this->model
@@ -89,8 +93,7 @@ abstract class Patchwork_Controller_ModelController
      *
      *
      */
-    public function deleteAction()
-    {
+    public function deleteAction() {
         $this->_initModelByPrimaryKey();
     }
 }
