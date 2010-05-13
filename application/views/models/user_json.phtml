@@ -1,0 +1,4 @@
+<?php
+$data = $this->model->toArray();
+unset($data['password'], $data['deleted_at'], $data['salt']);
+echo json_encode($data);

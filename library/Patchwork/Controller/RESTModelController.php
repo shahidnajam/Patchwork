@@ -7,6 +7,7 @@
  */
 abstract class Patchwork_Controller_RESTModelController
 extends Zend_Rest_Controller
+implements Patchwork_Controller
 {
     /**
      * @var string
@@ -38,12 +39,18 @@ extends Zend_Rest_Controller
      */
     public function init()
     {
+        $this->_helper->layout->disableLayout();
         $this->_helper->viewRenderer->setNoRender(true);
+        
+        $doctrine = new Patchwork_Controller_Action_Helper_Doctrine($this);
+        Zend_Controller_Action_HelperBroker::addHelper($doctrine);
     }
     
     /**
      * finds the model if PK is in request
      *
+     * @param boolean|integer $withPrimaryKey can be pk or bool
+     * 
      * @return Doctrine_Record
      */
     public function initModel($withPrimaryKey = true)
@@ -51,15 +58,82 @@ extends Zend_Rest_Controller
         if(!$withPrimaryKey)
             return new $this->modelName;
 
+        if($withPrimaryKey === TRUE)
+            $withPrimaryKey = $this->_getParam($this->modelPrimaryKey);
+
         return $this->model = $this->_helper->Doctrine
             ->getRecordOrException(
             $this->modelName,
-            $this->_getParam($this->modelPrimaryKey)
+            $withPrimaryKey
         );
     }
 
     /**
+     * renders json strings using special views 
+     *
+     * @param Doctrine_Record|Doctrine_Collection $data
+     *
+     * @return string
+     * @throws InvalidArgumentException
+     */
+    public function toJSON($data)
+    {
+        if($data instanceof Doctrine_Record){
+            return Patchwork_View_Helper_RenderModel::renderModel($data, 'json');
+        } elseif($data instanceOf Doctrine_Collection){
+            $return = array();
+            foreach($data as $model){
+                $return[] = Patchwork_View_Helper_RenderModel::renderModel(
+                    $model, 'json'
+                );
+            }
+            return "[". implode(',', $return).']'; //array entries come as json
+        } else {
+            throw new InvalidArgumentException(
+                'Doctrine_Record or Doctrine_Collection required'
+            );
+        }
+    }
+
+    /**
+     * parses incoming json, this is a special configuration for request sent
+     * by CappuccinoResource: there is an extra key (=model name) describing the data
+     *
+     * @param $forModel pick subset and convert to array
+     * 
+     * @return object|array
+     */
+    protected function getJSONParams($forModel = true)
+    {
+        $rawBody = $this->getRequest()->getRawBody();
+        $all = json_decode($rawBody);
+        if($forModel)
+            return (array)$all->{strtolower($this->modelName)};
+        else
+            return $all;
+    }
+
+    /**
+     *
+     * @param Doctrine_Record $model
+     * 
+     * @return string
+     */
+    protected function getModelURL(Doctrine_Record $model)
+    {
+        $controller = $this->getRequest()->getControllerName();
+        $url = $_SERVER['HTTP_HOST']
+            . Zend_Controller_Front::getInstance()->getBaseUrl()
+            . DIRECTORY_SEPARATOR . $controller
+            . DIRECTORY_SEPARATOR . $model->{$this->modelPrimaryKey};
+
+        return $url;
+    }
+
+    /**
      * list
+     *
+     * 
      */
     public function indexAction()
     {
@@ -70,18 +144,18 @@ extends Zend_Rest_Controller
      * listing
      *
      *
-     *
+     * @todo enable application/json header
      */
     public function getAction()
     {
         $offset = $this->_getParam(self::OFFSET_PARAM);
-        $objects = $this->Doctrine->list($this->modelName);
-
+        $objects = $this->_helper->Doctrine->listRecords($this->modelName);
         $this->getResponse()
             ->setHttpResponseCode(200)
+            //->setHeader('Content-type', 'application/json')
             ->appendBody(
-            Zend_Json::encode($objects->toArray())
-        );
+                $this->toJSON($objects)
+            );
     }
 
     /**
@@ -89,21 +163,23 @@ extends Zend_Rest_Controller
      *
      * @todo check resp code
      */
-    public function putAction() {
+    public function putAction()
+    {
         try {
             $model = $this->initModel();
         } catch (Exception $e) {
             $this->_forward('invalid');
         }
-
-        $model->fromArray($this->getRequest()->getParams());
-        $url = Zend_Controller_Front::getInstance()->getBaseUrl() . DS
-            . $this->modelName . DS . $model->id;
+        $params = $this->getJSONParams();
+        $model->fromArray($params);
+        $model->save();
+        
+        $url = $this->getModelURL($model);
 
         $this->getResponse()
-            ->setHttpResponseCode(201)
-            ->setHeader("Location", $url)
-            ->appendBody($url);
+                ->setHttpResponseCode(200)
+                ->setHeader("Location", $url)
+                ->appendBody($this->toJSON($model));
     }
 
     /**
@@ -113,18 +189,20 @@ extends Zend_Rest_Controller
      */
     public function postAction()
     {
-        $model = $this->initModel(false);
-        $model->fromArray($this->getRequest()->getParams());
+        $model = new $this->modelName;
+        $params = $this->getJSONParams();
+        $model->fromArray($params);
         $model->save();
 
         if($model->id) {
-            $url = Zend_Controller_Front::getInstance()->getBaseUrl() . DS
-                . $this->modelName . DS . $model->id;
+            $url = Zend_Controller_Front::getInstance()->getBaseUrl() 
+                . DIRECTORY_SEPARATOR . $this->modelName
+                . DIRECTORY_SEPARATOR . $model->id;
 
             $this->getResponse()
                 ->setHttpResponseCode(201)
                 ->setHeader("Location", $url)
-                ->appendBody($url);
+                ->appendBody($this->toJSON($model));
         }
     }
 

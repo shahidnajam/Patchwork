@@ -8,7 +8,7 @@
  * @package    Patchwork
  * @subpackage Views
  */
-class App_View_Helper_RenderModel extends Zend_View_Helper_Abstract
+class Patchwork_View_Helper_RenderModel extends Zend_View_Helper_Abstract
 {
     /**
      *
@@ -26,24 +26,23 @@ class App_View_Helper_RenderModel extends Zend_View_Helper_Abstract
         if(!$args)
             $args = array();
         $args['model'] = $model;
-        
+
+        $path = self::getViewPath(get_class($model), $context);
         $view = new Zend_View();
+        $view->setScriptPath( dirname($path) );
         $view->assign($args);
-        return $view->render(
-            $this->getViewPath(get_class($model), $context)
-        );
-        
+        return $view->render( basename($path) );
     }
 
     /**
-     * get view fiel including path
+     * get view file including path
      *
      * @param string $modelName
      * @param string $context
      * 
      * @return string
      */
-    public function getViewPath($modelName, $context = '')
+    public static function getViewPath($modelName, $context = '')
     {
         $path = APPLICATION_PATH . DIRECTORY_SEPARATOR . 'views'
             . DIRECTORY_SEPARATOR . 'models' . DIRECTORY_SEPARATOR
