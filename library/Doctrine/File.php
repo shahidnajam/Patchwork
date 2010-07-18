@@ -1,6 +1,6 @@
 <?php
 /*
- *  $Id: Doctrine.php 7490 2010-03-29 19:53:27Z jwage $
+ *  $Id$
  *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
  * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
@@ -19,20 +19,37 @@
  * <http://www.doctrine-project.org>.
  */
 
-require_once 'Doctrine/Core.php';
-
 /**
- * This class only exists for backwards compatability. All code was moved to 
- * Doctrine_Core and this class extends Doctrine_Core
+ * Doctrine_File
  *
  * @package     Doctrine
+ * @subpackage  File
  * @author      Konsta Vesterinen <kvesteri@cc.hut.fi>
- * @author      Lukas Smith <smith@pooteeweet.org> (PEAR MDB2 library)
  * @license     http://www.opensource.org/licenses/lgpl-license.php LGPL
+ * @version     $Revision$
  * @link        www.doctrine-project.org
  * @since       1.0
- * @version     $Revision: 7490 $
  */
-class Doctrine extends Doctrine_Core
+class Doctrine_File extends Doctrine_Record
 {
+    public function setTableDefinition()
+    {
+        $this->hasColumn('url', 'string', 255);
+    }
+
+    public function setUp()
+    {
+        $this->actAs('Searchable', array('className' => 'Doctrine_File_Index',
+                                         'fields' => array('url', 'content')));
+        
+        $this->index('url', array('fields' => array('url')));
+    }
+
+    public function get($name, $load = true)
+    {
+        if ($name === 'content') {
+            return file_get_contents(parent::get('url'));
+        }
+        return parent::get($name, $load);
+    }
 }

@@ -1,6 +1,6 @@
 <?php
 /*
- *  $Id: Doctrine.php 7490 2010-03-29 19:53:27Z jwage $
+ *  $Id: Offset.php 7490 2010-03-29 19:53:27Z jwage $
  *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
  * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
@@ -19,20 +19,47 @@
  * <http://www.doctrine-project.org>.
  */
 
-require_once 'Doctrine/Core.php';
-
 /**
- * This class only exists for backwards compatability. All code was moved to 
- * Doctrine_Core and this class extends Doctrine_Core
+ * Doctrine_Collection_Offset
+ * Collection of Doctrine_Record objects.
  *
  * @package     Doctrine
- * @author      Konsta Vesterinen <kvesteri@cc.hut.fi>
- * @author      Lukas Smith <smith@pooteeweet.org> (PEAR MDB2 library)
+ * @subpackage  Collection
  * @license     http://www.opensource.org/licenses/lgpl-license.php LGPL
  * @link        www.doctrine-project.org
  * @since       1.0
  * @version     $Revision: 7490 $
+ * @author      Konsta Vesterinen <kvesteri@cc.hut.fi>
  */
-class Doctrine extends Doctrine_Core
+class Doctrine_Collection_Offset extends Doctrine_Collection
 {
+    /**
+     * @var integer $limit
+     */
+    private $limit;
+
+    /**
+     * @param Doctrine_Table $table
+     */
+    public function __construct(Doctrine_Table $table)
+    {
+        parent::__construct($table);
+        $this->limit = $table->getAttribute(Doctrine_Core::ATTR_COLL_LIMIT);
+    }
+
+    /**
+     * @return integer
+     */
+    public function getLimit()
+    {
+        return $this->limit;
+    }
+
+    /**
+     * @return Doctrine_Collection_Iterator_Expandable
+     */
+    public function getIterator()
+    {
+        return new Doctrine_Collection_Iterator_Expandable($this);
+    }
 }

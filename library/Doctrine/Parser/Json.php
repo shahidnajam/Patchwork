@@ -1,6 +1,6 @@
 <?php
 /*
- *  $Id: Doctrine.php 7490 2010-03-29 19:53:27Z jwage $
+ *  $Id: Json.php 1080 2007-02-10 18:17:08Z jwage $
  *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
  * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
@@ -19,20 +19,51 @@
  * <http://www.doctrine-project.org>.
  */
 
-require_once 'Doctrine/Core.php';
-
 /**
- * This class only exists for backwards compatability. All code was moved to 
- * Doctrine_Core and this class extends Doctrine_Core
+ * Doctrine_Parser_Json
  *
  * @package     Doctrine
- * @author      Konsta Vesterinen <kvesteri@cc.hut.fi>
- * @author      Lukas Smith <smith@pooteeweet.org> (PEAR MDB2 library)
+ * @subpackage  Parser
  * @license     http://www.opensource.org/licenses/lgpl-license.php LGPL
  * @link        www.doctrine-project.org
  * @since       1.0
- * @version     $Revision: 7490 $
+ * @version     $Revision: 1080 $
+ * @author      Jonathan H. Wage <jwage@mac.com>
  */
-class Doctrine extends Doctrine_Core
+class Doctrine_Parser_Json extends Doctrine_Parser
 {
+    /**
+     * dumpData
+     *
+     * Dump an array of data to a specified path or return
+     * 
+     * @param string $array Array of data to dump to json
+     * @param string $path  Path to dump json data to
+     * @param string $charset The charset of the data being dumped
+     * @return string $json
+     * @return void
+     */
+    public function dumpData($array, $path = null, $charset = null)
+    {
+        $data = json_encode($array);
+        
+        return $this->doDump($data, $path);
+    }
+
+    /**
+     * loadData
+     *
+     * Load and unserialize data from a file or from passed data
+     * 
+     * @param  string $path   Path to dump data to
+     * @return array  $json   Array of json objects
+     */
+    public function loadData($path)
+    {
+        $contents = $this->doLoad($path);
+        
+        $json = json_decode($contents);
+        
+        return $json;
+    }
 }

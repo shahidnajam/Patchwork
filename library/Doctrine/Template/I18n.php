@@ -1,6 +1,6 @@
 <?php
 /*
- *  $Id: Doctrine.php 7490 2010-03-29 19:53:27Z jwage $
+ *  $Id$
  *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
  * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
@@ -19,20 +19,48 @@
  * <http://www.doctrine-project.org>.
  */
 
-require_once 'Doctrine/Core.php';
-
 /**
- * This class only exists for backwards compatability. All code was moved to 
- * Doctrine_Core and this class extends Doctrine_Core
+ * Add multilingual capabilities to your Doctrine models
  *
  * @package     Doctrine
- * @author      Konsta Vesterinen <kvesteri@cc.hut.fi>
- * @author      Lukas Smith <smith@pooteeweet.org> (PEAR MDB2 library)
+ * @subpackage  Template
  * @license     http://www.opensource.org/licenses/lgpl-license.php LGPL
  * @link        www.doctrine-project.org
  * @since       1.0
- * @version     $Revision: 7490 $
+ * @version     $Revision$
+ * @author      Konsta Vesterinen <kvesteri@cc.hut.fi>
  */
-class Doctrine extends Doctrine_Core
+class Doctrine_Template_I18n extends Doctrine_Template
 {
+    /**
+     * __construct
+     *
+     * @param string $array 
+     * @return void
+     */
+    public function __construct(array $options = array())
+    {
+	    parent::__construct($options);
+        $this->_plugin = new Doctrine_I18n($this->_options);
+    }
+
+    /**
+     * Initialize the I18n plugin for the template
+     *
+     * @return void
+     */
+    public function setUp()
+    {
+        $this->_plugin->initialize($this->_table); 
+    }
+
+    /**
+     * Get the plugin instance for the I18n template
+     *
+     * @return void
+     */
+    public function getI18n()
+    {
+        return $this->_plugin;
+    }
 }

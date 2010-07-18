@@ -1,6 +1,6 @@
 <?php
 /*
- *  $Id: Doctrine.php 7490 2010-03-29 19:53:27Z jwage $
+ *  $Id: LoadData.php 2761 2007-10-07 23:42:29Z zYne $
  *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
  * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
@@ -19,20 +19,29 @@
  * <http://www.doctrine-project.org>.
  */
 
-require_once 'Doctrine/Core.php';
-
 /**
- * This class only exists for backwards compatability. All code was moved to 
- * Doctrine_Core and this class extends Doctrine_Core
+ * Doctrine_Task_LoadData
  *
  * @package     Doctrine
- * @author      Konsta Vesterinen <kvesteri@cc.hut.fi>
- * @author      Lukas Smith <smith@pooteeweet.org> (PEAR MDB2 library)
+ * @subpackage  Task
  * @license     http://www.opensource.org/licenses/lgpl-license.php LGPL
  * @link        www.doctrine-project.org
  * @since       1.0
- * @version     $Revision: 7490 $
+ * @version     $Revision: 2761 $
+ * @author      Jonathan H. Wage <jwage@mac.com>
  */
-class Doctrine extends Doctrine_Core
+class Doctrine_Task_LoadData extends Doctrine_Task
 {
+    public $description          =   'Load data from a yaml data fixture file.',
+           $requiredArguments    =   array('data_fixtures_path' =>  'Specify the complete path to load the yaml data fixtures files from.',
+                                           'models_path'        =>  'Specify path to your Doctrine_Record definitions.'),
+           $optionalArguments    =   array('append'             =>  'Whether or not to append the data');
+    
+    public function execute()
+    {
+        Doctrine_Core::loadModels($this->getArgument('models_path'));
+        Doctrine_Core::loadData($this->getArgument('data_fixtures_path'), $this->getArgument('append', false));
+        
+        $this->notify('Data was successfully loaded');
+    }
 }

@@ -1,6 +1,6 @@
 <?php
 /*
- *  $Id: Doctrine.php 7490 2010-03-29 19:53:27Z jwage $
+ *  $Id: Timestamp.php 3884 2008-02-22 18:26:35Z jwage $
  *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
  * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
@@ -19,20 +19,46 @@
  * <http://www.doctrine-project.org>.
  */
 
-require_once 'Doctrine/Core.php';
-
 /**
- * This class only exists for backwards compatability. All code was moved to 
- * Doctrine_Core and this class extends Doctrine_Core
+ * Doctrine_Validator_Timestamp
  *
  * @package     Doctrine
- * @author      Konsta Vesterinen <kvesteri@cc.hut.fi>
- * @author      Lukas Smith <smith@pooteeweet.org> (PEAR MDB2 library)
+ * @subpackage  Validator
  * @license     http://www.opensource.org/licenses/lgpl-license.php LGPL
  * @link        www.doctrine-project.org
  * @since       1.0
- * @version     $Revision: 7490 $
+ * @version     $Revision: 3884 $
+ * @author      Mark Pearson <mark.pearson0@googlemail.com>
  */
-class Doctrine extends Doctrine_Core
+class Doctrine_Validator_Timestamp extends Doctrine_Validator_Driver
 {
+    /**
+     * checks if given value is a valid ISO-8601 timestamp (YYYY-MM-DDTHH:MM:SS+00:00)
+     *
+     * @param mixed $value
+     * @return boolean
+     */
+    public function validate($value)
+    {
+        if (is_null($value)) {
+            return true;
+        }
+
+        $e = explode('T', trim($value));
+        $date = isset($e[0]) ? $e[0]:null;
+        $time = isset($e[1]) ? $e[1]:null;
+
+        $dateValidator = Doctrine_Validator::getValidator('date');
+        $timeValidator = Doctrine_Validator::getValidator('time');
+
+        if ( ! $dateValidator->validate($date)) {
+            return false;
+        }
+
+        if ( ! $timeValidator->validate($time)) {
+            return false;
+        } 
+
+        return true;
+    }
 }

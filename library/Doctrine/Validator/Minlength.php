@@ -1,6 +1,6 @@
 <?php
 /*
- *  $Id: Doctrine.php 7490 2010-03-29 19:53:27Z jwage $
+ *  $Id: Minlength.php 7490 2010-03-29 19:53:27Z jwage $
  *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
  * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
@@ -19,20 +19,34 @@
  * <http://www.doctrine-project.org>.
  */
 
-require_once 'Doctrine/Core.php';
-
 /**
- * This class only exists for backwards compatability. All code was moved to 
- * Doctrine_Core and this class extends Doctrine_Core
+ * Doctrine_Validator_Regexp
  *
  * @package     Doctrine
- * @author      Konsta Vesterinen <kvesteri@cc.hut.fi>
- * @author      Lukas Smith <smith@pooteeweet.org> (PEAR MDB2 library)
+ * @subpackage  Validator
  * @license     http://www.opensource.org/licenses/lgpl-license.php LGPL
  * @link        www.doctrine-project.org
  * @since       1.0
  * @version     $Revision: 7490 $
+ * @author      Gijs van Dulmen <gijs@vandulmen.net>
  */
-class Doctrine extends Doctrine_Core
+class Doctrine_Validator_Minlength extends Doctrine_Validator_Driver
 {
+    /**
+     * checks if given value is more length than the minimum length required
+     *
+     * @param mixed $value
+     * @return boolean
+     */
+    public function validate($value)
+    {
+        if (is_null($value)) {
+            return true;
+        }
+        if (isset($this->args) && strlen($value) < $this->args) {
+            return false;
+        }
+
+        return true;
+    }
 }

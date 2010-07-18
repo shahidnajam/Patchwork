@@ -1,6 +1,6 @@
 <?php
 /*
- *  $Id: Doctrine.php 7490 2010-03-29 19:53:27Z jwage $
+ *  $Id: Equal.php 7490 2010-03-29 19:53:27Z jwage $
  *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
  * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
@@ -19,20 +19,34 @@
  * <http://www.doctrine-project.org>.
  */
 
-require_once 'Doctrine/Core.php';
-
 /**
- * This class only exists for backwards compatability. All code was moved to 
- * Doctrine_Core and this class extends Doctrine_Core
+ * Doctrine_Hook_Equal
  *
  * @package     Doctrine
- * @author      Konsta Vesterinen <kvesteri@cc.hut.fi>
- * @author      Lukas Smith <smith@pooteeweet.org> (PEAR MDB2 library)
+ * @subpackage  Hook
  * @license     http://www.opensource.org/licenses/lgpl-license.php LGPL
  * @link        www.doctrine-project.org
  * @since       1.0
  * @version     $Revision: 7490 $
+ * @author      Konsta Vesterinen <kvesteri@cc.hut.fi>
  */
-class Doctrine extends Doctrine_Core
+class Doctrine_Hook_Equal extends Doctrine_Hook_Parser
 {
+    /**
+     * parse
+     * Parses given field and field value to DQL condition
+     * and parameters. This method should always return
+     * prepared statement conditions (conditions that use
+     * placeholders instead of literal values).
+     *
+     * @param string $alias     component alias
+     * @param string $field     the field name
+     * @param mixed $value      the value of the field
+     * @return void
+     */
+    public function parse($alias, $field, $value)
+    {
+        $this->params    = (array) $value;
+        $this->condition = $alias . '.' . $field . ' = ?';
+    }
 }

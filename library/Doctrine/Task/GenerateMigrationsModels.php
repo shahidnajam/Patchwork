@@ -1,6 +1,6 @@
 <?php
 /*
- *  $Id: Doctrine.php 7490 2010-03-29 19:53:27Z jwage $
+ *  $Id: GenerateMigrationsModels.php 2761 2007-10-07 23:42:29Z zYne $
  *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
  * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
@@ -19,20 +19,28 @@
  * <http://www.doctrine-project.org>.
  */
 
-require_once 'Doctrine/Core.php';
-
 /**
- * This class only exists for backwards compatability. All code was moved to 
- * Doctrine_Core and this class extends Doctrine_Core
+ * Doctrine_Task_GenerateMigrationsModels
  *
  * @package     Doctrine
- * @author      Konsta Vesterinen <kvesteri@cc.hut.fi>
- * @author      Lukas Smith <smith@pooteeweet.org> (PEAR MDB2 library)
+ * @subpackage  Task
  * @license     http://www.opensource.org/licenses/lgpl-license.php LGPL
  * @link        www.doctrine-project.org
  * @since       1.0
- * @version     $Revision: 7490 $
+ * @version     $Revision: 2761 $
+ * @author      Jonathan H. Wage <jwage@mac.com>
  */
-class Doctrine extends Doctrine_Core
+class Doctrine_Task_GenerateMigrationsModels extends Doctrine_Task
 {
+    public $description          =   'Generate migration classes for an existing set of models',
+           $requiredArguments    =   array('migrations_path' => 'Specify the path to your migration classes folder.',
+                                           'models_path'     => 'Specify the path to your doctrine models folder.'),
+           $optionalArguments    =   array();
+    
+    public function execute()
+    {   
+        Doctrine_Core::generateMigrationsFromModels($this->getArgument('migrations_path'), $this->getArgument('models_path'));
+        
+        $this->notify('Generated migration classes successfully from models');
+    }
 }

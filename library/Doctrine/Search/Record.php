@@ -1,6 +1,6 @@
 <?php
 /*
- *  $Id: Doctrine.php 7490 2010-03-29 19:53:27Z jwage $
+ *  $Id$
  *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
  * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
@@ -19,20 +19,30 @@
  * <http://www.doctrine-project.org>.
  */
 
-require_once 'Doctrine/Core.php';
-
 /**
- * This class only exists for backwards compatability. All code was moved to 
- * Doctrine_Core and this class extends Doctrine_Core
+ * Doctrine_Search_Record
  *
  * @package     Doctrine
+ * @subpackage  Search
  * @author      Konsta Vesterinen <kvesteri@cc.hut.fi>
- * @author      Lukas Smith <smith@pooteeweet.org> (PEAR MDB2 library)
  * @license     http://www.opensource.org/licenses/lgpl-license.php LGPL
+ * @version     $Revision$
  * @link        www.doctrine-project.org
  * @since       1.0
- * @version     $Revision: 7490 $
  */
-class Doctrine extends Doctrine_Core
+class Doctrine_Search_Record extends Doctrine_Template
 {
+    public function setTableDefinition()
+    {
+        $this->hasColumn('keyword', 'string', 250, array('notnull' => true));
+        $this->hasColumn('field', 'string', 50, array('notnull' => true));
+        $this->hasColumn('position', 'integer', 8);
+        // depending on the identifiers of the owner record this record 
+        // has also one to many foreign key columns
+    }
+
+    public function setUp()
+    {
+        $this->hasOne('[Component]', array('onDelete' => 'CASCADE'));
+    }
 }

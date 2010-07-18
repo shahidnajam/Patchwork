@@ -1,6 +1,6 @@
 <?php
 /*
- *  $Id: Doctrine.php 7490 2010-03-29 19:53:27Z jwage $
+ *  $Id: GenerateModelsDb.php 2761 2007-10-07 23:42:29Z zYne $
  *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
  * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
@@ -19,20 +19,29 @@
  * <http://www.doctrine-project.org>.
  */
 
-require_once 'Doctrine/Core.php';
-
 /**
- * This class only exists for backwards compatability. All code was moved to 
- * Doctrine_Core and this class extends Doctrine_Core
+ * Doctrine_Task_GenerateModelsDb
  *
  * @package     Doctrine
- * @author      Konsta Vesterinen <kvesteri@cc.hut.fi>
- * @author      Lukas Smith <smith@pooteeweet.org> (PEAR MDB2 library)
+ * @subpackage  Task
  * @license     http://www.opensource.org/licenses/lgpl-license.php LGPL
  * @link        www.doctrine-project.org
  * @since       1.0
- * @version     $Revision: 7490 $
+ * @version     $Revision: 2761 $
+ * @author      Jonathan H. Wage <jwage@mac.com>
  */
-class Doctrine extends Doctrine_Core
+class Doctrine_Task_GenerateModelsDb extends Doctrine_Task
 {
+    public $description          =   'Generates your Doctrine_Record definitions from your existing database connections.',
+           $requiredArguments    =   array('models_path'    =>  'Specify path to your Doctrine_Record definitions.'),
+           $optionalArguments    =   array('connection'     =>  'Optionally specify a single connection to generate the models for.');
+    
+    public function execute()
+    {
+        $configs = $this->dispatcher->getConfig();
+        $options = isset($configs['generate_models_options']) ? $configs['generate_models_options'] : array();
+        Doctrine_Core::generateModelsFromDb($this->getArgument('models_path'), (array) $this->getArgument('connection'), $options);
+
+        $this->notify('Generated models successfully from databases');
+    }
 }

@@ -1,6 +1,6 @@
 <?php
 /*
- *  $Id: Doctrine.php 7490 2010-03-29 19:53:27Z jwage $
+ *  $Id: Enum.php 1080 2007-02-10 18:17:08Z romanb $
  *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
  * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
@@ -19,20 +19,42 @@
  * <http://www.doctrine-project.org>.
  */
 
-require_once 'Doctrine/Core.php';
-
 /**
- * This class only exists for backwards compatability. All code was moved to 
- * Doctrine_Core and this class extends Doctrine_Core
+ * Doctrine_Validator_Unsigned
  *
  * @package     Doctrine
- * @author      Konsta Vesterinen <kvesteri@cc.hut.fi>
- * @author      Lukas Smith <smith@pooteeweet.org> (PEAR MDB2 library)
+ * @subpackage  Validator
  * @license     http://www.opensource.org/licenses/lgpl-license.php LGPL
  * @link        www.doctrine-project.org
  * @since       1.0
- * @version     $Revision: 7490 $
+ * @version     $Revision: 1080 $
+ * @author      Konsta Vesterinen <kvesteri@cc.hut.fi>
  */
-class Doctrine extends Doctrine_Core
+class Doctrine_Validator_Unsigned extends Doctrine_Validator_Driver
 {
+    /**
+     * checks if given value is a valid unsigned integer or float
+     *
+     * valid values: null, '', 5, '5', 5.9, '5.9'
+     * invalid values: -5, '-5', 'five', -5.9, '-5.9', '5.5.5'
+     *
+     * @param mixed $value
+     * @return boolean
+     */
+    public function validate($value)
+    {
+        if (is_null($value) || $value == '') {
+            return true;
+        }
+        if (preg_match('/[^0-9\-\.]/', $value)) {
+            return false;
+        }
+
+        if ((double) $value >= 0)
+        {
+            return true;
+        }
+
+        return false;
+    }
 }

@@ -1,6 +1,6 @@
 <?php
 /*
- *  $Id: Doctrine.php 7490 2010-03-29 19:53:27Z jwage $
+ *  $Id$
  *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
  * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
@@ -19,20 +19,37 @@
  * <http://www.doctrine-project.org>.
  */
 
-require_once 'Doctrine/Core.php';
-
 /**
- * This class only exists for backwards compatability. All code was moved to 
- * Doctrine_Core and this class extends Doctrine_Core
+ * Doctrine template which implements the custom NestedSet implementation
  *
  * @package     Doctrine
- * @author      Konsta Vesterinen <kvesteri@cc.hut.fi>
- * @author      Lukas Smith <smith@pooteeweet.org> (PEAR MDB2 library)
+ * @subpackage  Template
  * @license     http://www.opensource.org/licenses/lgpl-license.php LGPL
  * @link        www.doctrine-project.org
  * @since       1.0
- * @version     $Revision: 7490 $
+ * @version     $Revision$
+ * @author      Roman Borschel <roman@code-factory.org>
  */
-class Doctrine extends Doctrine_Core
+class Doctrine_Template_NestedSet extends Doctrine_Template
 {
+    /**
+     * Set up NestedSet template
+     *
+     * @return void
+     */
+    public function setUp()
+    {
+        $this->_table->setOption('treeOptions', $this->_options);
+        $this->_table->setOption('treeImpl', 'NestedSet');
+    }
+
+    /**
+     * Call set table definition for the NestedSet behavior
+     *
+     * @return void
+     */
+    public function setTableDefinition()
+    {
+        $this->_table->getTree()->setTableDefinition();
+    }
 }

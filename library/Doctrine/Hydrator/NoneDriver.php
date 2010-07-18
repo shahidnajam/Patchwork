@@ -1,6 +1,6 @@
 <?php
 /*
- *  $Id: Doctrine.php 7490 2010-03-29 19:53:27Z jwage $
+ *  $Id: Hydrate.php 3192 2007-11-19 17:55:23Z romanb $
  *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
  * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
@@ -19,20 +19,22 @@
  * <http://www.doctrine-project.org>.
  */
 
-require_once 'Doctrine/Core.php';
-
 /**
- * This class only exists for backwards compatability. All code was moved to 
- * Doctrine_Core and this class extends Doctrine_Core
+ * Get results directly and skip hydration. Uses PDO::FETCH_NUM
+ *
  *
  * @package     Doctrine
- * @author      Konsta Vesterinen <kvesteri@cc.hut.fi>
- * @author      Lukas Smith <smith@pooteeweet.org> (PEAR MDB2 library)
+ * @subpackage  Hydrate
  * @license     http://www.opensource.org/licenses/lgpl-license.php LGPL
  * @link        www.doctrine-project.org
- * @since       1.0
- * @version     $Revision: 7490 $
+ * @since       1.2
+ * @version     $Revision: 3192 $
+ * @author      Jonathan H. Wage <jonwage@gmail.com>
  */
-class Doctrine extends Doctrine_Core
+class Doctrine_Hydrator_NoneDriver extends Doctrine_Hydrator_Abstract
 {
+    public function hydrateResultSet($stmt)
+    {
+        return $stmt->fetchAll(PDO::FETCH_NUM);
+    }
 }

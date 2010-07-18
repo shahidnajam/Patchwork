@@ -1,6 +1,6 @@
 <?php
 /*
- *  $Id: Doctrine.php 7490 2010-03-29 19:53:27Z jwage $
+ *  $Id: Iterator.php 7490 2010-03-29 19:53:27Z jwage $
  *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
  * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
@@ -19,20 +19,63 @@
  * <http://www.doctrine-project.org>.
  */
 
-require_once 'Doctrine/Core.php';
-
 /**
- * This class only exists for backwards compatability. All code was moved to 
- * Doctrine_Core and this class extends Doctrine_Core
+ * Doctrine_Record_Iterator
  *
  * @package     Doctrine
+ * @subpackage  Record
  * @author      Konsta Vesterinen <kvesteri@cc.hut.fi>
- * @author      Lukas Smith <smith@pooteeweet.org> (PEAR MDB2 library)
  * @license     http://www.opensource.org/licenses/lgpl-license.php LGPL
  * @link        www.doctrine-project.org
  * @since       1.0
  * @version     $Revision: 7490 $
  */
-class Doctrine extends Doctrine_Core
+class Doctrine_Record_Iterator extends ArrayIterator
 {
+    /**
+     * @var Doctrine_Record $record
+     */
+    private $record;
+
+    /**
+     * @var Doctrine_Null $null
+     */
+    private static $null;
+
+    /**
+     * constructor
+     *
+     * @param Doctrine_Record $record
+     */
+    public function __construct(Doctrine_Record $record)
+    {
+        $this->record = $record;
+        parent::__construct($record->getData());
+    }
+
+    /**
+     * initNullObject
+     *
+     * @param Doctrine_Null $null
+     */
+    public static function initNullObject(Doctrine_Null $null)
+    {
+        self::$null = $null;
+    }
+
+    /**
+     * current
+     *
+     * @return mixed
+     */
+    public function current()
+    {
+        $value = parent::current();
+
+        if ($value === self::$null) {
+            return null;
+        } else {
+            return $value;
+        }
+    }
 }
