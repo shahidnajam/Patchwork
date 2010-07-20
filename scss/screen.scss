@@ -7,6 +7,9 @@
 // Import all the default blueprint modules so that we can access their mixins.
 @import "blueprint";
 
+@import "blueprint/typography";
+@import "blueprint/colors";
+
 // Import the non-default scaffolding module.
 @import "blueprint/scaffolding";
 
@@ -28,8 +31,11 @@ body.bp {
   // Or leave it in if you're happy with how blueprint looks out-of-the-box
 }
 
-form.bp {
-  @include blueprint-form; }
+form {
+  @include blueprint-form;
+  background-color: $success_bg_color;
+}
+
 
 // Page layout can be done using mixins applied to your semantic classes and IDs:
 body.two-col {

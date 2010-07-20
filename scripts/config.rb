@@ -5,5 +5,7 @@ images_dir = "public/images"
 javascripts_dir = "public/js"
 css_dir = "public/css"
 sass_dir = "scss"
+output_style = "compressed"
+environment = "production"
 # To enable relative paths to assets via compass helper functions. Uncomment:
 # relative_assets = true
