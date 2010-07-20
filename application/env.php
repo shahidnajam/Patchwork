@@ -47,7 +47,6 @@ set_include_path(
         PATH_SEPARATOR, array(
             LIBRARY_PATH,
             LIBRARY_PATH . DIRECTORY_SEPARATOR . 'vendor/sfYaml',
-            MODELS_PATH,
             get_include_path()
         )
     )

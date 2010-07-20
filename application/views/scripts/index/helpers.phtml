@@ -1,6 +1,13 @@
 <h1>Helpers test</h1>
-<?php echo var_dump($this->model);
+<h2>var_dump(User)</h2>
+<?php echo var_dump($this->model->toArray());
 ?>
-<h2>RenderModel helper</h2>
+<h2>RenderModel View Helper: $this->renderModel(User,"dump")</h2>
 <?php
-$this->renderModel($this->model);
+echo $this->renderModel($this->model, 'dump');
+?>
+<p>
+    The RenderModel view helper loads model-specific partial views. The second
+    argument is the "context", i.e. appended to the view file name, and can be
+    omitted.
+</p>

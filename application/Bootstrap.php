@@ -17,11 +17,12 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
      */
     protected function _initAppAutoload()
     {      
-        $autoloader = Zend_Loader_Autoloader::getInstance();
-        $autoloader->registerNamespace('App_');
-        $autoloader->registerNamespace('Base');
-        $autoloader->registerNamespace('Patchwork');
-        return $autoloader;
+        $mal = new Zend_Application_Module_Autoloader(array(
+            'namespace' => 'App',
+            'basePath' => dirname(__FILE__),
+        ));
+
+        return $mal;
     }
 
     /**

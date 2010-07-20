@@ -10,6 +10,11 @@
 class Patchwork
 {
     /**
+     * Patchwork Version
+     */
+    const VERSION = "0.1a";
+
+    /**
      * where to find the config in the registry
      */
     const CONFIG_REGISTRY_KEY = 'config';

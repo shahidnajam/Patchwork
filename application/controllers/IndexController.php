@@ -36,7 +36,8 @@ class IndexController extends Zend_Controller_Action
     {
         $this->model = new User;
         $this->model->email = 'test@test.com';
-        $this->view->form = new Patchwork_Doctrine_ModelForm($this->model);
+        $this->view->form = new Patchwork_Form_Doctrine_ModelForm($this->model);
+        new Patchwork_Form_Tableize($this->view->form);
     }
 
     /**

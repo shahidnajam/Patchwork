@@ -16,7 +16,7 @@
  */
 class User
     extends BaseUser
-    implements Patchwork_Doctrine_FormRenderable
+    implements Patchwork_Form_Doctrine_Renderable
 {
     const AUTH_IDENTITY_COLUMN = 'email';
     const AUTH_CREDENTIAL_COLUMN = 'password';
