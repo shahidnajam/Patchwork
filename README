@@ -8,15 +8,31 @@ ready to start a new ZF project.
 - input scanning using PHPIDS (using a controller plugin)
 - Doctrine ORM
 - JSON-REST service using Doctrine (use Patchwork_Controller_RESTModelController)
+- shipped with a phing buildfile
+- shipped with a blueprint css template for compass, see scripts/generate-css.sh
+
+Libraries:
+==========
+
+Zend Framework 1.10.6 is used where all require-statements have been stripped
+using the instruction from:
+http://framework.zend.com/manual/en/performance.classloading.html#performance.classloading.striprequires
+
+Doctrine 1.2.2 is included.
+
+PHPIDS 0.6.3 is included.
+
+
 
 Installation
 ============
 
-1) Get Zend Framework 1.x and drop it into library/Zend.
-2) Get Doctrine 1.x and drop it into library/Doctrine and libary/vendor (the sfYaml stuff).
-3) The usual configuration: public/.htaccess, application/configs/application.ini
+1) Make sure the directories required by PHPIDS are writeable.
+2) Modify public/.htaccess to your needs
+3) Modify application/configs/application.ini
 
 License
 =======
 
 Patchwork is distributed under the MIT License. Use it for whatever you like.
+Doctrine 1.2.2 is published under the LGPL, http://www.doctrine-project.org.
