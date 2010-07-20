@@ -7,19 +7,3 @@ User:
     password: 778af09ce0b1760bb0dd0e7abef95984
     salt: 098f6bcd4621d373cade4e832627b4f6
     role: admin
-  User_2:
-    id: 2
-    email: carnett@gmx.de
-    password: 778af09ce0b1760bb0dd0e7abef95984
-    salt: 098f6bcd4621d373cade4e832627b4f6
-    role: admin
-
-Customer:
-  Customer_1:
-    id: 1
-    user_id: 1
-    name: Dans Laden
-  Customer_2:
-    id: 2
-    user_id: 2
-    name: Cars Laden

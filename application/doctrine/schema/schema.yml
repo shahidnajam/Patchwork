@@ -14,15 +14,16 @@ User:
     gender:
       type: enum
       values: ['female', 'male', 'nn']
+    username:
+      type: string(255)
     firstname:
       type: string(255)
     lastname:
       type: string(255)
     email:
       type: string(255)
-    mobile_number:
-      type: string(255)
-    preferred_language:
+      notnull: true
+    language:
       type: string(5)
       default: en_GB
     password:
@@ -37,72 +38,3 @@ User:
       type: enum
       values: ['guest', 'user', 'admin']
       default: 'guest'
-  relations:
-    ActivationCodes:
-      class: ActivationCode
-      local: id
-      foreign: user_id
-      type: many
-    LostPassword:
-      class: LostPassword
-      type: many
-      local: id
-      foreign: user_id
-
-LostPassword:
-  tableName: user_lost_passwords
-  actAs:
-    Timestampable:
-      created:
-        name: created
-      updated:
-        name: modified
-    SoftDelete:
-     name: deleted
-  columns:
-    id:
-      type: integer(4)
-      primary: true
-      autoincrement: true
-    user_id:
-      type: integer(4)
-      notnull: true
-    hash:
-      type: string(64)
-      notnull: true
-  relations:
-    User:
-      class: User
-      type: one
-      local: user_id
-      foreign: id
-
-ActivationCode:
- tableName: user_activation_codes
- actAs:
-   Timestampable:
-     created:
-       name: created
-     updated:
-       name: modified
-   SoftDelete:
-     name: deleted
- columns:
-   id:
-     type: integer(4)
-     primary: true
-     autoincrement: true
-   activation_code:
-     type: string(32)
-     notnull: true
-   activated:
-     type: timestamp
-   user_id:
-     type: integer(4)
-     notnull: true
- relations:
-   User:
-     local: user_id
-     foreign: id
-     class: User
-     type: one
