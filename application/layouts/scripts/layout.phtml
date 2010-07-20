@@ -8,8 +8,7 @@ header("Content-Type: text/html; charset=utf-8");
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
         <title>Patchwork</title>
         <link rel="shortcut icon" href="<?=$baseUrl?>/images/favicon.ico" type="image/x-icon" />
-        <link rel="stylesheet" type="text/css" href="<?=$baseUrl?>/css/styles.css" />
-        <meta name="viewport" content="width=320; initial-scale=1.0; maximum-scale=1.0; user-scalable=0;"/>
+        <link rel="stylesheet" type="text/css" href="<?=$baseUrl?>/css/screen.css" />
         <?php
         echo $this->headScript()
         //->appendFile($baseUrl.'/js/jquery-1.3.2.min.js','text/javascript')
@@ -17,10 +16,10 @@ header("Content-Type: text/html; charset=utf-8");
         ?>
         <script type="text/javascript">var base_url = '<?=$baseUrl?>';</script>
     </head>
-    <body>
+    <body class="two-col bp">
         <h1>Patchwork</h1>
         <?php echo $this->navigation()->menu()->render() ?>
-        <div id="content">
+        <div id="container">
             <div class="breadcrumbs">
             <?php
             echo $this->navigation()->breadcrumbs()->render();
@@ -28,5 +27,7 @@ header("Content-Type: text/html; charset=utf-8");
             </div>
             <?php echo $this->layout()->content ?>
         </div>
+
+        <div id="footer">Patchwork</div>
     </body>
 </html>

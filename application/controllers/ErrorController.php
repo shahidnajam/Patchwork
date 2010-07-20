@@ -43,6 +43,18 @@ class ErrorController extends Zend_Controller_Action
         die($this->view->translate('Access denied.'));
     }
 
+    /**
+     * bad request caught by PHPIDS
+     *
+     *
+     */
+    public function badrequestAction()
+    {
+        $this->getResponse()->setHttpResponseCode(400);
+        $this->view->message = 'Bad request.';
+        $this->render('error');
+    }
+
     public function getLog()
     {
         $bootstrap = $this->getInvokeArg('bootstrap');

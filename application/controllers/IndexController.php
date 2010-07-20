@@ -1,26 +1,49 @@
 <?php
 /**
- * Index Controller, associated to User model
+ * Example Index Controller, associated to User model
  *
  * 
  */
-class IndexController extends Patchwork_Controller_ModelController
+class IndexController extends Zend_Controller_Action
 {
+ 
     /**
-     * Doctrine User model
-     * @var string
-     */
-    var $modelName = 'User';
-    
-    /**
-     * index
+     * index, just to test the ModelController
      *
      *
      */
     public function indexAction(){
+        $this->_helper->getHelper('Doctrine');
         $this->model = new User;
+        $this->model->email = 'test@test.com';
         $this->view->user = $this->model;
+    }
 
-        $this->view->form = Patchwork_Doctrine_ModelForm::with($this->model);
+    /**
+     *
+     */
+    public function badrequestAction()
+    {
+       if(!isset($_GET['test'])){
+           $this->_redirect('/index/badrequest/?test=<script>');
+       }
+    }
+
+    /**
+     * 
+     */
+    public function formAction()
+    {
+        $this->model = new User;
+        $this->model->email = 'test@test.com';
+        $this->view->form = new Patchwork_Doctrine_ModelForm($this->model);
+    }
+
+    /**
+     * 
+     */
+    public function helpersAction()
+    {
+        $this->view->model = $this->_helper->Doctrine('User',1);
     }
 }
