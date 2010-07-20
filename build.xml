@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<project name="Patchwork" default="dist">
+
+    <!-- ============================================  -->
+    <!-- Target: prepare                               -->
+    <!-- ============================================  -->
+    <target name="prepare">
+        <echo msg="Making directory ./build" />
+        <mkdir dir="./build" />
+        <mkdir dir="coverage-report"/>
+
+    </target>
+
+    <!-- ============================================  -->
+    <!-- Target: unittest                                 -->
+    <!-- ============================================  -->
+    <target name="unittest" depends="prepare">
+        <coverage-setup database="./coverage-report/database">
+            <fileset dir=".">
+                <include name="*.php"/>
+                <exclude name="*Test.php"/>
+            </fileset>
+        </coverage-setup>
+
+        <phpunit codecoverage="true" haltonfailure="true" haltonerror="true">
+
+            <formatter type="plain" usefile="false"/>
+            <batchtest>
+                <fileset dir="tests">
+                    <include name="**/*Test*.php"/>
+                </fileset>
+            </batchtest>
+        </phpunit>
+    </target>
+
+    <!-- ============================================  -->
+    <!-- (DEFAULT)  Target: dist                       -->
+    <!-- ============================================  -->
+    <target name="dist" depends="unittest">
+        <echo msg="Creating archive..." />
+
+        <tar destfile="./build/build.tar.gz" compression="gzip">
+            <fileset dir=".">
+                <include name="**/**" />
+                <exclude name=".git" />
+                <exclude name="tests" />
+                <exclude name="build.xml"/>
+                <exclude name="build"/>
+                <exclude name="coverage-reports"/>
+            </fileset>
+        </tar>
+
+        <echo msg="Files copied and compressed in build directory OK!" />
+    </target>
+</project>
