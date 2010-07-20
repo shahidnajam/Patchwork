@@ -10,35 +10,30 @@ class Patchwork_Auth_Adapter_Doctrine implements Zend_Auth_Adapter_Interface
 
     /**
      * $_tableName - the table name to check
-     *
      * @var string
      */
     protected $_tableName = null;
 
     /**
      * $_identityColumn - the column to use as the identity
-     *
      * @var string
      */
     protected $_identityColumn = null;
 
     /**
      * $_credentialColumns - columns to be used as the credentials
-     *
      * @var string
      */
     protected $_credentialColumn = null;
 
     /**
      * $_identity - Identity value
-     *
      * @var string
      */
     protected $_identity = null;
 
     /**
      * $_credential - Credential values
-     *
      * @var string
      */
     protected $_credential = null;
@@ -46,21 +41,18 @@ class Patchwork_Auth_Adapter_Doctrine implements Zend_Auth_Adapter_Interface
     /**
      * $_credentialTreatment - Treatment applied to the credential,
      such as MD5() or PASSWORD()
-     *
      * @var string
      */
     protected $_credentialTreatment = null;
 
     /**
      * $_authenticateResultInfo
-     *
      * @var array
      */
     protected $_authenticateResultInfo = null;
 
     /**
      * $_resultRow - Results of database authentication query
-     *
      * @var array
      */
     protected $_resultRow = null;
@@ -186,18 +178,17 @@ class Patchwork_Auth_Adapter_Doctrine implements Zend_Auth_Adapter_Interface
 
     /**
      * authenticate() - defined by Zend_Auth_Adapter_Interface.  This
-     method is called to
-     * attempt an authenication.  Previous to this call, this adapter
-     would have already
-     * been configured with all nessissary information to successfully
-     connect to a database
-     * table and attempt to find a record matching the provided identity.
+     * method is called to attempt an authenication.  Previous to this call,
+     * this adapter would have already been configured with all nessissary
+     * information to successfully connect to a database table and attempt to
+     * find a record matching the provided identity.
      *
      * @throws Zend_Auth_Adapter_Exception if answering the
      authentication query is impossible
      * @return Zend_Auth_Result
      */
-    public function authenticate() {
+    public function authenticate()
+    {
         $this->_authenticateSetup();
         $table = $this->getDoctrineTable();
         try {

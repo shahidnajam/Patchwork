@@ -23,4 +23,9 @@ class Patchwork
      * Zend_Navigation
      */
     const NAVIGATION_REGISTRY_KEY = 'Zend_Navigation';
+
+    /**
+     * Zend_Session
+     */
+    const SESSION_REGISTRY_KEY = 'Zend_Session';
 }

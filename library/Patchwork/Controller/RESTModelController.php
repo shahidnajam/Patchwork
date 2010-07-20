@@ -2,12 +2,14 @@
 /**
  * REST Controller plus Doctrine
  *
- * @package Patchwork
+ * @category   Library
+ * @package    Patchwork
+ * @subpackage Controller
+ * @author     Daniel Pozzi <bonndan76@googlemail.com>
  * @link http://techchorus.net/create-restful-applications-using-zend-framework-part-ii-using-http-response-code
  */
 abstract class Patchwork_Controller_RESTModelController
-extends Zend_Rest_Controller
-implements Patchwork_Controller
+    extends Zend_Rest_Controller
 {
     /**
      * @var string
@@ -114,7 +116,7 @@ implements Patchwork_Controller
     }
 
     /**
-     *
+     * FIXME
      * @param Doctrine_Record $model
      * 
      * @return string

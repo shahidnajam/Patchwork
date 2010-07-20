@@ -4,7 +4,7 @@
  * a form that generates its fields from a doctrine record, based on
  * CU_ModelForm by Jani Hartikainen
  *
- * <code>
+<code>
 class ExampleForm extends Patchwork_Doctrine_ModelForm
 {
 	//Use Article as the model
@@ -147,69 +147,24 @@ class Patchwork_Doctrine_ModelForm
     protected $_relationForms = array();
 
     /**
-     * set the default values
-     *
-     * @param Doctrine_Record $model
-     * @return self
-     */
-    public function setDefaultsByModel(Doctrine_Record $model) {
-        $this->setDefaults($model->toArray(true));
-        return $this;
-    }
-
-
-    /**
      * constructor
      *
-     * @param mixed $model Doctrine_Record or string
      * @param array $options Options to pass to the Zend_Form constructor
      *
      * @return self
      */
-    public function __construct($model, $options = null) {
-        if($model instanceof Doctrine_Record) {
-            $this->_model = get_class($model);
-            $this->_instance = $model;
-        } elseif (is_string($model)) {
-            $this->_model = $model;
-        }
-
-        if($this->_model == '')
-            throw new Exception('No model defined');
-
-        $this->_table = Doctrine::getTable($this->_model);
-
+    public function __construct(Doctrine_Record $record,
+                                $options = null
+    ) {
         parent::__construct($options);
 
-        $this->_formLoader = new Zend_Loader_PluginLoader(array(
-                'App_Form_Model' => 'App/Form/Model/'
-        ));
-
+        $this->setRecord($record)->setDefaultsByModel($record);
         $this->addElement('submit', 'save');
         $this->addElement('hash', 'no_csrf_foo', array('salt' => 'unique'));
 
         $this->_preGenerate();
         $this->_generateForm();
         $this->_postGenerate();
-    }
-
-    /**
-     * instantiates a new ModelForm, factory method
-     *
-     * <code>
-     * $form = Patchwork_Doctrine_ModelForm::with($user);
-     * </code>
-     *
-     * @param Doctrine_Record $model
-     *
-     * @return Patchwork_Doctrine_ModelForm
-     */
-    public static function with(
-        Doctrine_Record $model,
-        $options = null
-    ){
-        $class_name = 'App_Form_'.get_class($model);
-        return new self($model, $options);
     }
 
     /**
@@ -234,20 +189,23 @@ class Patchwork_Doctrine_ModelForm
     protected function _postSave($persist) {
     }
 
-    public function getPluginLoader($type = null) {
-        if($type == self::FORM)
-            return $this->_formLoader;
-
-        return parent::getPluginLoader($type);
-    }
-
     /**
      * Set the model instance for editing existing rows
+     * 
      * @param Doctrine_Record $instance
+     *
+     * @return self
      */
     public function setRecord(Doctrine_Record $instance)
     {
+        $this->_model = get_class($instance);
         $this->_instance = $instance;
+        $this->_table = Doctrine::getTable($this->_model);
+
+        if($instance instanceof Patchwork_Doctrine_FormRenderable){
+            $this->_ignoreColumns = $instance->getIgnoredColumns();
+        }
+        
         foreach($this->_getColumns() as $name => $definition) {
             $this->setDefault($this->_fieldPrefix . $name, $this->_instance->$name);
         }
@@ -281,6 +239,19 @@ class Patchwork_Doctrine_ModelForm
                     break;
             }
         }
+
+        return $this;
+    }
+
+    /**
+     * set the default values
+     *
+     * @param Doctrine_Record $model
+     * @return self
+     */
+    public function setDefaultsByModel(Doctrine_Record $model) {
+        $this->setDefaults($model->toArray(true));
+        return $this;
     }
 
     /**
@@ -374,16 +345,20 @@ class Patchwork_Doctrine_ModelForm
                     break;
 
                 case Doctrine_Relation::MANY_AGGREGATE:
-                    $class = $this->getPluginLoader(self::FORM)->load($relation->getClass());
-                    $this->_relationForms[$relation->getClass()] = $class;
+                    $class = $relation->getClass();
+                    $this->_relationForms[$class] = self::factory(new $class);
 
-                    $label = $relation->getClass();
-                    if(isset($this->_relationLabels[$relation->getClass()]))
-                        $label = $this->_relationLabels[$relation->getClass()];
+                    $label = $class;
+                    if(isset($this->_relationLabels[$class]))
+                        $label = $this->_relationLabels[$class];
 
-                    $field = $this->createElement('submit', $this->_getNewButtonName($alias), array(
-                        'label' => 'Add new '. $label
-                    ));
+                    $field = $this->createElement(
+                        'submit',
+                        $this->_getNewButtonName($alias),
+                        array(
+                            'label' => 'Add new '. $label
+                        )
+                    );
                     break;
             }
 
@@ -405,8 +380,8 @@ class Patchwork_Doctrine_ModelForm
     /**
      * Returns the name of the delete button field for relation alias
      * 
-     * @param string $relationAlias alias of the relation
-     * @param Doctrine_Record $record if deleting existing records
+     * @param string          $relationAlias alias of the relation
+     * @param Doctrine_Record $record        if deleting existing records
      *
      * @return string name of the new button
      */
@@ -624,6 +599,5 @@ class Patchwork_Doctrine_ModelForm
                 return $value;
                 break;
         }
-        trigger_error('This line should never run', E_USER_ERROR);
     }
 }

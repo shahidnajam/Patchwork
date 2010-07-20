@@ -74,7 +74,8 @@ class Patchwork_Controller_Plugin_PHPIDS extends Zend_Controller_Plugin_Abstract
 	        $compositeLog->execute($result);
 	        // for high impact, we redirect to error page
 	        if($impact >= $this->config->impact_threshold) {
-	        	throw new Exception('Intrusion detected');
+	        	$request->setControllerName('error');
+                $request->setActionName('badrequest');
 	        }
 	    }
     }
