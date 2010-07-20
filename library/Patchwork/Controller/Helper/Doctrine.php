@@ -1,13 +1,29 @@
 <?php
 /**
+ * Doctrine Helper
+ *
+ * @category   Library
+ * @package    Patchwork
+ * @subpackage Controller
+ */
+
+/**
  * Controller helper to fetch Doctrine models
  * derived from CU_Controller_Action_Helper_Doctrine by Jani Hartikainen
  *
- * @package Patchwork
+ * @category   Library
+ * @package    Patchwork
  * @subpackage Controller
  */
-class Patchwork_Controller_Action_Helper_Doctrine
-extends Zend_Controller_Action_Helper_Abstract {
+class Patchwork_Controller_Helper_Doctrine
+    extends Zend_Controller_Action_Helper_Abstract
+{
+    /**
+     * default name of the primary key
+     * @var string
+     */
+    public static $primaryKey = 'id';
+
     /**
      * standard redirect
      * @var array
@@ -19,27 +35,39 @@ extends Zend_Controller_Action_Helper_Abstract {
     );
 
     /**
+     * helper accessor
      *
-     * @var Patchwork_Controller_RESTModelController
-     */
-    protected $_controller;
-
-    /**
+     * @param string $componentName name of the model to fetch
+     * @param mixed  $primary       int or request param name
      *
-     * @param Patchwork_Controller $controller
-     * @return self
+     * @return self|Doctrine_Record
+     * @throws Patchwork_Exception
      */
-    public function  __construct(Patchwork_Controller $controller = null)
+    public function direct($componentName = null, $primary = null)
     {
-        if($controller)
-            $this->_controller = $controller;
+        if($componentName == null)
+            return $this;
+
+        if($primary == NULL)
+            $primary = self::$primaryKey;
+
+        if(is_string($primary)){
+            $primary = (int)$this->getRequest()->getParam($primary);
+        }
+
+        if(!intval($primary) || $primary == 0)
+            throw new InvalidArgumentException ('Primary key must be an integer');
+
+        return $this->getRecordOrException($componentName, $primary);
     }
 
     /**
      * Set the redirection target
+     *
      * @param $action string action name
      * @param $controller string controller name
      * @param $module string module name
+     *
      * @return CU_Controller_Action_Helper_Doctrine implements a fluent interface
      */
     public function setRedirect(
@@ -62,7 +90,7 @@ extends Zend_Controller_Action_Helper_Abstract {
      * @return Doctrine_Record
      */
     public function getRecordOrRedirect($model, $id) {
-        $record = Doctrine::getTable($model)->find($id);
+        $record = $this->getRecord($model, $id);
         if($record == false) {
             $this->getActionController()->getHelper('Redirector')->goto(
                 $this->_redirect['action'],
@@ -77,15 +105,15 @@ extends Zend_Controller_Action_Helper_Abstract {
     /**
      * Fetch record from DB or throw a not found exception
      *
-     * @param $model string Name of the model class
-     * @param $id int the record's PK
+     * @param string $model Name of the model class
+     * @param int    $id    the record's PK
      *
      * @return Doctrine_Record
-     * @throws Exception
+     * @throws Patchwork_Exception
      */
     public function getRecordOrException($model, $id) {
-        if(!$record = Doctrine::getTable($model)->find($id))
-            throw new Exception('Model not found '.$model.' '.$id);
+        if(!$record = $this->getRecord($model, $id))
+            throw new Patchwork_Exception ('Model not found '.$model.' '.$id);
 
         return $record;
     }
