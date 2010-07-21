@@ -28,40 +28,6 @@ class AuthController extends Zend_Controller_Action
 			$this->_forward('login');
 	}
 
-	/**
-     * login
-     *
-     * @param string $identity
-     * @param string $credential
-     *
-     * @return boolean
-     */
-	protected function _login(
-        $identity,
-        $credential
-    ){
-        $adapter = new Patchwork_Auth_Adapter_Doctrine(
-            'User',
-            User::AUTH_IDENTITY_COLUMN,
-            User::AUTH_CREDENTIAL_COLUMN,
-            User::AUTH_CREDENTIAL_TREATMENT
-            );
-		$adapter->setIdentity($identity)->setCredential($credential);
-		$this->result = Zend_Auth::getInstance()->authenticate($adapter);
-
-		/*
-		 * save object on success
-		 */
-		if($this->result->isValid() && Zend_Auth::getInstance()->hasIdentity())
-		{
-			Zend_Auth::getInstance()->getStorage()->write(
-                $adapter->getAuthIdentity()
-            );
-			return true;
-		}
-        return false;
-	}
-
 	/*
 	 * perform login
 	 *
@@ -80,11 +46,12 @@ class AuthController extends Zend_Controller_Action
                 $identity = $request->getParam( User::AUTH_IDENTITY_COLUMN );
                 $credential = $request->getParam( User::AUTH_CREDENTIAL_COLUMN );
 
-                if($this->_login($identity, $credential)){
-                    $this->_forward('welcome');
+                if(User::authenticate($identity, $credential)){
+                    return $this->_forward('welcome');
                 }
 
-                $this->view->messages = $this->result->getMessages();
+                $this->view->messages = User::getAuthenticationResult()
+                    ->getMessages();
             } else {
                 $form->populate($params);
             }
