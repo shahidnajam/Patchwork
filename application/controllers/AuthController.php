@@ -9,19 +9,11 @@
  */
 class AuthController extends Zend_Controller_Action
 {
-	protected $userModelName = 'M2_Model_User';
-	protected $userModel;
-
-	/*
-	 * which model ist stored in session as identity?
-	 */
-	protected $storageModelName = 'M2_Model_User';
-
-	/*
-	 * this comes from the login form
-	 */
-	protected $requestIdentity = 'username';
-	protected $requestCredential = 'password';
+    /**
+     *
+     * @var Zend_Auth_Result
+     */
+	public $result;
 
 	/*
 	 *
@@ -49,28 +41,25 @@ class AuthController extends Zend_Controller_Action
         $credential
     ){
         $adapter = new Patchwork_Auth_Adapter_Doctrine(
-            Doctrine::getTable('User')->getTableName(),
+            'User',
             User::AUTH_IDENTITY_COLUMN,
             User::AUTH_CREDENTIAL_COLUMN,
             User::AUTH_CREDENTIAL_TREATMENT
             );
-		$adapter->setIdentity($identity);
-		$adapter->setCredential($credential);
-
-		$result = Zend_Auth::getInstance()->authenticate($adapter);
+		$adapter->setIdentity($identity)->setCredential($credential);
+		$this->result = Zend_Auth::getInstance()->authenticate($adapter);
 
 		/*
 		 * save object on success
 		 */
-		if($result->isValid() && Zend_Auth::getInstance()->hasIdentity())
+		if($this->result->isValid() && Zend_Auth::getInstance()->hasIdentity())
 		{
-			$id = Zend_Auth::getInstance()->getIdentity();
-            $user = Doctrine::getTable('User')
-                ->findWhere(User::AUTH_IDENTITY_COLUMN, $id);
-
-			Zend_Auth::getInstance()->getStorage()->write($user);
+			Zend_Auth::getInstance()->getStorage()->write(
+                $adapter->getAuthIdentity()
+            );
 			return true;
 		}
+        return false;
 	}
 
 	/*
@@ -95,7 +84,7 @@ class AuthController extends Zend_Controller_Action
                     $this->_forward('welcome');
                 }
 
-                $this->view->error = 'login_failed';
+                $this->view->messages = $this->result->getMessages();
             } else {
                 $form->populate($params);
             }

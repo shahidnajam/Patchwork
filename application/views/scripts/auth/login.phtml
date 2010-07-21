@@ -1,2 +1,11 @@
+<?php if($this->messages):?>
+<div class="notice">
+    <?php
+    foreach($this->messages as $m)
+        echo $this->translate($m);
+    ?>
+</div>
+<?php endif;?>
+
 <?php
 echo $this->form;

@@ -16,7 +16,7 @@
  */
 class User
     extends BaseUser
-    implements Patchwork_Form_Doctrine_Renderable
+    implements Patchwork_Form_Doctrine_Renderable, Patchwork_Auth_RoleIdentity
 {
     const AUTH_IDENTITY_COLUMN = 'email';
     const AUTH_CREDENTIAL_COLUMN = 'password';
@@ -30,5 +30,16 @@ class User
      */
     public function getIgnoredColumns() {
         return array('created_at', 'updated_at', 'deleted_at', 'password', 'salt');
+    }
+
+    /**
+     * return the roel
+     * 
+     * @return string
+     */
+    public function getRole()
+    {
+        var_dump($this->toArray());
+        return $this->role;
     }
 }

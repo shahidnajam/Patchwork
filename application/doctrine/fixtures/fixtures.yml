@@ -4,6 +4,6 @@ User:
   User_1:
     id: 1
     email: dpozzi@gmx.net
-    password: 778af09ce0b1760bb0dd0e7abef95984
+    password: 3f14b6841ab09dc36d32a3d6f80ade58
     salt: 098f6bcd4621d373cade4e832627b4f6
     role: admin
