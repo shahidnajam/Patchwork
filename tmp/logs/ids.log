@@ -11,3 +11,4 @@
 "local/unknown",2010-07-20T04:58:39+02:00,8,"xss csrf id rfe lfi","REQUEST.test=%3Cscript%3E GET.test=%3Cscript%3E","%2Findex%2Fbadrequest%2F%3Ftest%3D%253Cscript%253E","127.0.0.1"
 "local/unknown",2010-07-20T04:58:39+02:00,8,"xss csrf id rfe lfi","REQUEST.test=%3Cscript%3E GET.test=%3Cscript%3E","%2Findex%2Fbadrequest%2F%3Ftest%3D%253Cscript%253E","127.0.0.1"
 "local/unknown",2010-07-20T04:58:56+02:00,8,"xss csrf id rfe lfi","REQUEST.test=%3Cscript%3E GET.test=%3Cscript%3E","%2Findex%2Fbadrequest%2F%3Ftest%3D%253Cscript%253E","127.0.0.1"
+"local/unknown",2010-07-20T19:55:29+02:00,8,"xss csrf id rfe lfi","REQUEST.test=%3Cscript%3E GET.test=%3Cscript%3E","%2Findex%2Fbadrequest%2F%3Ftest%3D%253Cscript%253E","127.0.0.1"
