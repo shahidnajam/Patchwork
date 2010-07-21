@@ -21,3 +21,5 @@ $application = new Zend_Application(
 );
 $application->bootstrap()
             ->run();
+
+Zend_Session::writeClose(true);

@@ -94,14 +94,26 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
         require LIBRARY_PATH . DIRECTORY_SEPARATOR . 'Doctrine.php';
         $manager = Doctrine_Manager::getInstance();
         $manager->setAttribute(Doctrine::ATTR_AUTO_ACCESSOR_OVERRIDE, true);
+
+        /**
+         * caching
+         */
+        $cacheConn = Doctrine_Manager::connection(new PDO('sqlite::memory:'));
+        $cacheDriver = new Doctrine_Cache_Db(
+            array('connection' => $cacheConn, 'tableName' =>'cache')
+        );
+        $cacheDriver->createTable();
+        $manager->setAttribute(Doctrine_Core::ATTR_QUERY_CACHE, $cacheDriver);
+
+        /**
+         * autoloading
+         */
+        $config =  Zend_Registry::get('config');
         /*$manager->setAttribute(
             Doctrine::ATTR_MODEL_LOADING,
             Doctrine::MODEL_LOADING_CONSERVATIVE
         );*/
         $manager->setAttribute(Doctrine::ATTR_AUTOLOAD_TABLE_CLASSES, true);
-
-        $config =  Zend_Registry::get('config');
-
         Doctrine::loadModels($config->doctrine->options->models_path);
         Doctrine::loadModels($config->doctrine->options->models_path . '/generated');
 
