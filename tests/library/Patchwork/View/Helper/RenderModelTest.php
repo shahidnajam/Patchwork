@@ -6,7 +6,7 @@ require_once(dirname(dirname(dirname(dirname(dirname(__FILE__)))))).'/bootstrap.
  *
  * 
  */
-class Patchwork_View_Helper_RenderModelTest extends PHPUnit_Framework_TestCase
+class Patchwork_View_Helper_RenderModelTest extends ControllerTestCase
 {
     /**
      * @dataProvider viewPathProvider

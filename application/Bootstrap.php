@@ -91,7 +91,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
         $this->bootstrap('AppAutoload')
              ->bootstrap('ConfigToRegistry');
 
-        require LIBRARY_PATH . DIRECTORY_SEPARATOR . 'Doctrine.php';
+        require_once LIBRARY_PATH . DIRECTORY_SEPARATOR . 'Doctrine.php';
         $manager = Doctrine_Manager::getInstance();
         $manager->setAttribute(Doctrine::ATTR_AUTO_ACCESSOR_OVERRIDE, true);
 
@@ -138,5 +138,14 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
 
         // Return it, so that it can be stored by the bootstrap
         return $locale; 
+    }
+
+    /**
+     * 
+     */
+    public function _initCli()
+    {
+        $this->_initAppAutoload();
+        $this->_initConfigToRegistry();
     }
 }
