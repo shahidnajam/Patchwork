@@ -35,6 +35,24 @@
     </target>
 
     <!-- ============================================  -->
+    <!-- Target: phpdoc                                 -->
+    <!-- ============================================  -->
+    <target name="phpdoc" depends="unittest"  description="Generate API docs.">
+        <phpdoc title="Patchwork"
+          sourcecode="yes"
+          destdir="doc"
+          output="HTML:frames:DOM/phphtmllib"
+          quiet="true"
+          >
+          <fileset dir="./application">
+            <include name="**/*.php"/>
+          </fileset>
+          <fileset dir="./library/Patchwork">
+            <include name="**/*.php"/>
+          </fileset>
+        </phpdoc>
+    </target>
+    <!-- ============================================  -->
     <!-- (DEFAULT)  Target: dist                       -->
     <!-- ============================================  -->
     <target name="dist" depends="unittest">
