@@ -1,0 +1,396 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+  <html xmlns="http://www.w3.org/1999/xhtml">
+		<head>
+			<!-- template designed by Marco Von Ballmoos -->
+			<title>Docs For Class Patchwork_Controller_Helper_Doctrine</title>
+			<link rel="stylesheet" href="../../media/stylesheet.css" />
+			<meta http-equiv='Content-Type' content='text/html; charset=iso-8859-1'/>
+		</head>
+		<body>
+			<div class="page-body">			
+<h2 class="class-name">Class Patchwork_Controller_Helper_Doctrine</h2>
+
+<a name="sec-description"></a>
+<div class="info-box">
+	<div class="info-box-title">Description</div>
+	<div class="nav-bar">
+					<span class="disabled">Description</span> |
+													<a href="#sec-var-summary">Vars</a> (<a href="#sec-vars">details</a>)
+						|											<a href="#sec-method-summary">Methods</a> (<a href="#sec-methods">details</a>)
+						
+					</div>
+	<div class="info-box-body">
+        		<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Controller helper to fetch Doctrine models  derived from CU_Controller_Action_Helper_Doctrine by Jani Hartikainen</p>
+		<p class="notes">
+			Located in <a class="field" href="_library---Patchwork---Controller---Helper---Doctrine.php.html">/library/Patchwork/Controller/Helper/Doctrine.php</a> (line <span class="field">18</span>)
+		</p>
+		
+				
+		<pre>Zend_Controller_Action_Helper_Abstract
+   |
+   --Patchwork_Controller_Helper_Doctrine</pre>
+	
+			</div>
+</div>
+
+
+
+	<a name="sec-var-summary"></a>
+	<div class="info-box">
+		<div class="info-box-title">Variable Summary</span></div>
+		<div class="nav-bar">
+			<a href="#sec-description">Description</a> |
+						<span class="disabled">Vars</span> (<a href="#sec-vars">details</a>)
+							| 
+									<a href="#sec-method-summary">Methods</a> (<a href="#sec-methods">details</a>)
+							
+								</div>
+		<div class="info-box-body">
+			<div class="var-summary">
+												<div class="var-title">
+					static <span class="var-type">string</span>
+					<a href="#$primaryKey" title="details" class="var-name">$primaryKey</a>
+				</div>
+																																				<div class="var-title">
+					<span class="var-type">array</span>
+					<a href="#$_redirect" title="details" class="var-name">$_redirect</a>
+				</div>
+											</div>
+		</div>
+	</div>
+
+	<a name="sec-method-summary"></a>
+	<div class="info-box">
+		<div class="info-box-title">Method Summary</span></div>
+		<div class="nav-bar">
+			<a href="#sec-description">Description</a> |
+																		<a href="#sec-var-summary">Vars</a> (<a href="#sec-vars">details</a>)
+				 
+				|
+						<span class="disabled">Methods</span> (<a href="#sec-methods">details</a>)
+		</div>
+		<div class="info-box-body">			
+			<div class="method-summary">
+																																																				
+												<div class="method-definition">
+											<span class="method-result">self|Doctrine_Record</span>
+										<a href="#direct" title="details" class="method-name">direct</a>
+											([<span class="var-type">string</span>&nbsp;<span class="var-name">$componentName</span> = <span class="var-default">null</span>], [<span class="var-type">mixed</span>&nbsp;<span class="var-name">$primary</span> = <span class="var-default">null</span>])
+									</div>
+																<div class="method-definition">
+											<span class="method-result">Doctrine_Record|null</span>
+										<a href="#getRecord" title="details" class="method-name">getRecord</a>
+											(<span class="var-type">$model</span>&nbsp;<span class="var-name">$model</span>, <span class="var-type">$id</span>&nbsp;<span class="var-name">$id</span>)
+									</div>
+																<div class="method-definition">
+											<span class="method-result">Doctrine_Record</span>
+										<a href="#getRecordOrException" title="details" class="method-name">getRecordOrException</a>
+											(<span class="var-type">string</span>&nbsp;<span class="var-name">$model</span>, <span class="var-type">int</span>&nbsp;<span class="var-name">$id</span>)
+									</div>
+																<div class="method-definition">
+											<span class="method-result">Doctrine_Record</span>
+										<a href="#getRecordOrRedirect" title="details" class="method-name">getRecordOrRedirect</a>
+											(<span class="var-type">$model</span>&nbsp;<span class="var-name">$model</span>, <span class="var-type">$id</span>&nbsp;<span class="var-name">$id</span>)
+									</div>
+																<div class="method-definition">
+											<span class="method-result">Doctrine_Collection|Doctrine_Query</span>
+										<a href="#listRecords" title="details" class="method-name">listRecords</a>
+											(<span class="var-type">string</span>&nbsp;<span class="var-name">$model</span>, [<span class="var-type">integer</span>&nbsp;<span class="var-name">$limit</span> = <span class="var-default">0</span>], [<span class="var-type">integer</span>&nbsp;<span class="var-name">$offset</span> = <span class="var-default">0</span>], [<span class="var-type">boolean</span>&nbsp;<span class="var-name">$returnQuery</span> = <span class="var-default">false</span>])
+									</div>
+																<div class="method-definition">
+											<span class="method-result">CU_Controller_Action_Helper_Doctrine</span>
+										<a href="#setRedirect" title="details" class="method-name">setRedirect</a>
+											(<span class="var-type">$action</span>&nbsp;<span class="var-name">$action</span>, [<span class="var-type">$controller</span>&nbsp;<span class="var-name">$controller</span> = <span class="var-default">null</span>], [<span class="var-type">$module</span>&nbsp;<span class="var-name">$module</span> = <span class="var-default">null</span>])
+									</div>
+								</div>
+		</div>
+	</div>		
+
+	<a name="sec-vars"></a>
+	<div class="info-box">
+		<div class="info-box-title">Variables</div>
+		<div class="nav-bar">
+			<a href="#sec-description">Description</a> |
+										<a href="#sec-var-summary">Vars</a> (<span class="disabled">details</span>)
+						
+			
+										| 
+									<a href="#sec-method-summary">Methods</a> (<a href="#sec-methods">details</a>)
+							
+					</div>
+		<div class="info-box-body">
+			<a name="var$primaryKey" id="$primaryKey"><!-- --></A>
+<div class="evenrow">
+
+	<div class="var-header">
+		<span class="var-title">
+			static <span class="var-type">string</span>
+			<span class="var-name">$primaryKey</span>
+			 = <span class="var-default"> 'id'</span>			(line <span class="line-number">25</span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">default name of the primary key</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	
+		
+		
+
+</div>
+<a name="var$_redirect" id="$_redirect"><!-- --></A>
+<div class="oddrow">
+
+	<div class="var-header">
+		<span class="var-title">
+			<span class="var-type">array</span>
+			<span class="var-name">$_redirect</span>
+			 = <span class="var-default">array(<br />        'action' =&gt; 'index',<br />        'controller' =&gt; null,<br />        'module' =&gt; null<br />    )</span>			(line <span class="line-number">31</span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">standard redirect</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> protected</li>
+			</ul>
+	
+	
+		
+		
+
+</div>
+						
+		</div>
+	</div>
+	
+	<a name="sec-methods"></a>
+	<div class="info-box">
+		<div class="info-box-title">Methods</div>
+		<div class="nav-bar">
+			<a href="#sec-description">Description</a> |
+															<a href="#sec-var-summary">Vars</a> (<a href="#sec-vars">details</a>)
+																	<a href="#sec-method-summary">Methods</a> (<span class="disabled">details</span>)
+						
+		</div>
+		<div class="info-box-body">
+			<A NAME='method_detail'></A>
+
+<a name="methoddirect" id="direct"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">direct</span> (line <span class="line-number">46</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">helper accessor</p>
+	<ul class="tags">
+				<li><span class="field">throws:</span> Patchwork_Exception</li>
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">self|Doctrine_Record</span>
+		<span class="method-name">
+			direct
+		</span>
+					([<span class="var-type">string</span>&nbsp;<span class="var-name">$componentName</span> = <span class="var-default">null</span>], [<span class="var-type">mixed</span>&nbsp;<span class="var-name">$primary</span> = <span class="var-default">null</span>])
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$componentName</span><span class="var-description">: name of the model to fetch</span>			</li>
+					<li>
+				<span class="var-type">mixed</span>
+				<span class="var-name">$primary</span><span class="var-description">: int or request param name</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodgetRecord" id="getRecord"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">getRecord</span> (line <span class="line-number">129</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Fetch record from DB</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">Doctrine_Record|null</span>
+		<span class="method-name">
+			getRecord
+		</span>
+					(<span class="var-type">$model</span>&nbsp;<span class="var-name">$model</span>, <span class="var-type">$id</span>&nbsp;<span class="var-name">$id</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">$model</span>
+				<span class="var-name">$model</span><span class="var-description">: string Name of the model class</span>			</li>
+					<li>
+				<span class="var-type">$id</span>
+				<span class="var-name">$id</span><span class="var-description">: int the record's PK</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodgetRecordOrException" id="getRecordOrException"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">getRecordOrException</span> (line <span class="line-number">114</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Fetch record from DB or throw a not found exception</p>
+	<ul class="tags">
+				<li><span class="field">throws:</span> Patchwork_Exception</li>
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">Doctrine_Record</span>
+		<span class="method-name">
+			getRecordOrException
+		</span>
+					(<span class="var-type">string</span>&nbsp;<span class="var-name">$model</span>, <span class="var-type">int</span>&nbsp;<span class="var-name">$id</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$model</span><span class="var-description">: Name of the model class</span>			</li>
+					<li>
+				<span class="var-type">int</span>
+				<span class="var-name">$id</span><span class="var-description">: the record's PK</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodgetRecordOrRedirect" id="getRecordOrRedirect"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">getRecordOrRedirect</span> (line <span class="line-number">92</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Fetch record from DB or redirect</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">Doctrine_Record</span>
+		<span class="method-name">
+			getRecordOrRedirect
+		</span>
+					(<span class="var-type">$model</span>&nbsp;<span class="var-name">$model</span>, <span class="var-type">$id</span>&nbsp;<span class="var-name">$id</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">$model</span>
+				<span class="var-name">$model</span><span class="var-description">: string Name of the model class</span>			</li>
+					<li>
+				<span class="var-type">$id</span>
+				<span class="var-name">$id</span><span class="var-description">: int the record's PK</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodlistRecords" id="listRecords"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">listRecords</span> (line <span class="line-number">142</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">Doctrine_Collection|Doctrine_Query</span>
+		<span class="method-name">
+			listRecords
+		</span>
+					(<span class="var-type">string</span>&nbsp;<span class="var-name">$model</span>, [<span class="var-type">integer</span>&nbsp;<span class="var-name">$limit</span> = <span class="var-default">0</span>], [<span class="var-type">integer</span>&nbsp;<span class="var-name">$offset</span> = <span class="var-default">0</span>], [<span class="var-type">boolean</span>&nbsp;<span class="var-name">$returnQuery</span> = <span class="var-default">false</span>])
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$model</span>			</li>
+					<li>
+				<span class="var-type">integer</span>
+				<span class="var-name">$limit</span>			</li>
+					<li>
+				<span class="var-type">integer</span>
+				<span class="var-name">$offset</span>			</li>
+					<li>
+				<span class="var-type">boolean</span>
+				<span class="var-name">$returnQuery</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodsetRedirect" id="setRedirect"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">setRedirect</span> (line <span class="line-number">73</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Set the redirection target</p>
+	<ul class="tags">
+				<li><span class="field">return:</span> implements a fluent interface</li>
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">CU_Controller_Action_Helper_Doctrine</span>
+		<span class="method-name">
+			setRedirect
+		</span>
+					(<span class="var-type">$action</span>&nbsp;<span class="var-name">$action</span>, [<span class="var-type">$controller</span>&nbsp;<span class="var-name">$controller</span> = <span class="var-default">null</span>], [<span class="var-type">$module</span>&nbsp;<span class="var-name">$module</span> = <span class="var-default">null</span>])
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">$action</span>
+				<span class="var-name">$action</span><span class="var-description">: string action name</span>			</li>
+					<li>
+				<span class="var-type">$controller</span>
+				<span class="var-name">$controller</span><span class="var-description">: string controller name</span>			</li>
+					<li>
+				<span class="var-type">$module</span>
+				<span class="var-name">$module</span><span class="var-description">: string module name</span>			</li>
+				</ul>
+		
+			
+	</div>
+						
+		</div>
+	</div>
+
+
+	<p class="notes" id="credit">
+		Documentation generated on Fri, 23 Jul 2010 07:31:54 +0200 by <a href="http://www.phpdoc.org" target="_blank">phpDocumentor 1.4.3</a>
+	</p>
+	</div></body>
+</html>

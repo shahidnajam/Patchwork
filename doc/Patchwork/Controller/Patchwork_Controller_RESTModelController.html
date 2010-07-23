@@ -1,0 +1,664 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+  <html xmlns="http://www.w3.org/1999/xhtml">
+		<head>
+			<!-- template designed by Marco Von Ballmoos -->
+			<title>Docs For Class Patchwork_Controller_RESTModelController</title>
+			<link rel="stylesheet" href="../../media/stylesheet.css" />
+			<meta http-equiv='Content-Type' content='text/html; charset=iso-8859-1'/>
+		</head>
+		<body>
+			<div class="page-body">			
+<h2 class="class-name">Class Patchwork_Controller_RESTModelController</h2>
+
+<a name="sec-description"></a>
+<div class="info-box">
+	<div class="info-box-title">Description</div>
+	<div class="nav-bar">
+					<span class="disabled">Description</span> |
+							<a href="#sec-descendents">Descendents</a>
+			|											<a href="#sec-var-summary">Vars</a> (<a href="#sec-vars">details</a>)
+						|											<a href="#sec-method-summary">Methods</a> (<a href="#sec-methods">details</a>)
+						
+											<a href="#sec-const-summary">Constants</a> (<a href="#sec-consts">details</a>)
+						
+			</div>
+	<div class="info-box-body">
+        		<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">REST Controller plus Doctrine</p>
+	<ul class="tags">
+				<li><span class="field">author:</span> Daniel Pozzi &lt;<a href="mailto:bonndan76@googlemail.com">bonndan76@googlemail.com</a>&gt;</li>
+				<li><span class="field">link:</span> <a href="http://techchorus.net/create-restful-applications-using-zend-framework-part-ii-using-http-response-code">http://techchorus.net/create-restful-applications-using-zend-framework-part-ii-using-http-response-code</a></li>
+				<li><span class="field">abstract:</span> </li>
+			</ul>
+		<p class="notes">
+			Located in <a class="field" href="_library---Patchwork---Controller---RESTModelController.php.html">/library/Patchwork/Controller/RESTModelController.php</a> (line <span class="field">11</span>)
+		</p>
+		
+				
+		<pre>Zend_Rest_Controller
+   |
+   --Patchwork_Controller_RESTModelController</pre>
+	
+			</div>
+</div>
+
+	<a name="sec-descendents"></a>
+	<div class="info-box">
+		<div class="info-box-title">Direct descendents</div>
+		<div class="nav-bar">
+			<a href="#sec-description">Description</a> |
+			<span class="disabled">Descendents</span>
+			|												<a href="#sec-var-summary">Vars</a> (<a href="#sec-vars">details</a>)
+								|															<a href="#sec-method-summary">Methods</a> (<a href="#sec-methods">details</a>)
+							
+															<a href="#sec-const-summary">Constants</a> (<a href="#sec-consts">details</a>)
+							
+					</div>
+		<div class="info-box-body">
+			<table cellpadding="2" cellspacing="0" class="class-table">
+				<tr>
+					<th class="class-table-header">Class</th>
+					<th class="class-table-header">Description</th>
+				</tr>
+								<tr>
+					<td style="padding-right: 2em"><a href="../../Patchwork/Controller/UserController.html">UserController</a></td>
+					<td>
+											Related to Doctrine User
+										</td>
+				</tr>
+							</table>
+		</div>
+	</div>
+
+	<a name="sec-const-summary"></a>
+	<div class="info-box">
+		<div class="info-box-title">Class Constant Summary</span></div>
+		<div class="nav-bar">
+			<a href="#sec-description">Description</a> |
+							<a href="#sec-descendents">Descendants</a> |
+						<span class="disabled">Constants</span> (<a href="#sec-consts">details</a>)
+												<a href="#sec-var-summary">Vars</a> (<a href="#sec-vars">details</a>)
+				 
+				|
+										| 
+									<a href="#sec-method-summary">Methods</a> (<a href="#sec-methods">details</a>)
+							
+					</div>
+		<div class="info-box-body">
+			<div class="const-summary">
+								<div class="const-title">
+					<img src="../../media/images/Constant.png" alt=" " />
+					<a href="#LIMIT_PARAM" title="details" class="const-name">LIMIT_PARAM</a> = 					<span class="var-type"> 'limit'</span>
+
+				</div>
+								<div class="const-title">
+					<img src="../../media/images/Constant.png" alt=" " />
+					<a href="#OFFSET_PARAM" title="details" class="const-name">OFFSET_PARAM</a> = 					<span class="var-type"> 'offset'</span>
+
+				</div>
+							</div>
+		</div>
+	</div>
+
+	<a name="sec-var-summary"></a>
+	<div class="info-box">
+		<div class="info-box-title">Variable Summary</span></div>
+		<div class="nav-bar">
+			<a href="#sec-description">Description</a> |
+							<a href="#sec-descendents">Descendents</a> |
+						<span class="disabled">Vars</span> (<a href="#sec-vars">details</a>)
+							| 
+									<a href="#sec-method-summary">Methods</a> (<a href="#sec-methods">details</a>)
+							
+															<a href="#sec-const-summary">Constants</a> (<a href="#sec-consts">details</a>)
+							
+					</div>
+		<div class="info-box-body">
+			<div class="var-summary">
+																																								<div class="var-title">
+					<span class="var-type">object</span>
+					<a href="#$model" title="details" class="var-name">$model</a>
+				</div>
+																<div class="var-title">
+					<span class="var-type">string</span>
+					<a href="#$modelName" title="details" class="var-name">$modelName</a>
+				</div>
+																<div class="var-title">
+					<span class="var-type">string</span>
+					<a href="#$modelPrimaryKey" title="details" class="var-name">$modelPrimaryKey</a>
+				</div>
+											</div>
+		</div>
+	</div>
+
+	<a name="sec-method-summary"></a>
+	<div class="info-box">
+		<div class="info-box-title">Method Summary</span></div>
+		<div class="nav-bar">
+			<a href="#sec-description">Description</a> |
+							<a href="#sec-descendents">Descendents</a> |
+															<a href="#sec-const-summary">Constants</a> (<a href="#sec-consts">details</a>)
+							
+															<a href="#sec-var-summary">Vars</a> (<a href="#sec-vars">details</a>)
+				 
+				|
+						<span class="disabled">Methods</span> (<a href="#sec-methods">details</a>)
+		</div>
+		<div class="info-box-body">			
+			<div class="method-summary">
+																																																																																												
+												<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#deleteAction" title="details" class="method-name">deleteAction</a>
+										()
+									</div>
+																<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#getAction" title="details" class="method-name">getAction</a>
+										()
+									</div>
+																<div class="method-definition">
+											<span class="method-result">object|array</span>
+										<a href="#getJSONParams" title="details" class="method-name">getJSONParams</a>
+											([<span class="var-type">$forModel</span>&nbsp;<span class="var-name">$forModel</span> = <span class="var-default">true</span>])
+									</div>
+																<div class="method-definition">
+											<span class="method-result">string</span>
+										<a href="#getModelURL" title="details" class="method-name">getModelURL</a>
+											(<span class="var-type"></span>&nbsp;<span class="var-name">$model</span>)
+									</div>
+																<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#indexAction" title="details" class="method-name">indexAction</a>
+										()
+									</div>
+																<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#init" title="details" class="method-name">init</a>
+										()
+									</div>
+																<div class="method-definition">
+											<span class="method-result">Doctrine_Record</span>
+										<a href="#initModel" title="details" class="method-name">initModel</a>
+											([<span class="var-type">boolean|integer</span>&nbsp;<span class="var-name">$withPrimaryKey</span> = <span class="var-default">true</span>])
+									</div>
+																<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#invalidAction" title="details" class="method-name">invalidAction</a>
+										()
+									</div>
+																<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#postAction" title="details" class="method-name">postAction</a>
+										()
+									</div>
+																<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#putAction" title="details" class="method-name">putAction</a>
+										()
+									</div>
+																<div class="method-definition">
+											<span class="method-result">string</span>
+										<a href="#toJSON" title="details" class="method-name">toJSON</a>
+											(<span class="var-type">Doctrine_Record|Doctrine_Collection</span>&nbsp;<span class="var-name">$data</span>)
+									</div>
+								</div>
+		</div>
+	</div>		
+
+	<a name="sec-vars"></a>
+	<div class="info-box">
+		<div class="info-box-title">Variables</div>
+		<div class="nav-bar">
+			<a href="#sec-description">Description</a> |
+							<a href="#sec-descendents">Descendents</a> |
+										<a href="#sec-var-summary">Vars</a> (<span class="disabled">details</span>)
+						
+			
+												<a href="#sec-const-summary">Constants</a> (<a href="#sec-consts">details</a>)
+							
+										| 
+									<a href="#sec-method-summary">Methods</a> (<a href="#sec-methods">details</a>)
+							
+					</div>
+		<div class="info-box-body">
+			<a name="var$model" id="$model"><!-- --></A>
+<div class="evenrow">
+
+	<div class="var-header">
+		<span class="var-title">
+			<span class="var-type">object</span>
+			<span class="var-name">$model</span>
+						(line <span class="line-number">29</span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">model instance</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	
+		
+		
+
+</div>
+<a name="var$modelName" id="$modelName"><!-- --></A>
+<div class="oddrow">
+
+	<div class="var-header">
+		<span class="var-title">
+			<span class="var-type">string</span>
+			<span class="var-name">$modelName</span>
+						(line <span class="line-number">17</span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	
+		
+			<hr class="separator" />
+		<div class="notes">Redefined in descendants as:</div>
+		<ul class="redefinitions">
+					<li>
+				<a href="../../Patchwork/Controller/UserController.html#var$modelName">UserController::$modelName</a>
+							</li>
+				</ul>
+		
+
+</div>
+<a name="var$modelPrimaryKey" id="$modelPrimaryKey"><!-- --></A>
+<div class="evenrow">
+
+	<div class="var-header">
+		<span class="var-title">
+			<span class="var-type">string</span>
+			<span class="var-name">$modelPrimaryKey</span>
+			 = <span class="var-default"> 'id'</span>			(line <span class="line-number">23</span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">PK of the model, used to automatically instantiate the model if in request</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	
+		
+		
+
+</div>
+						
+		</div>
+	</div>
+	
+	<a name="sec-methods"></a>
+	<div class="info-box">
+		<div class="info-box-title">Methods</div>
+		<div class="nav-bar">
+			<a href="#sec-description">Description</a> |
+							<a href="#sec-descendents">Descendents</a> |
+															<a href="#sec-var-summary">Vars</a> (<a href="#sec-vars">details</a>)
+																			<a href="#sec-const-summary">Constants</a> (<a href="#sec-consts">details</a>)
+							
+										<a href="#sec-method-summary">Methods</a> (<span class="disabled">details</span>)
+						
+		</div>
+		<div class="info-box-body">
+			<A NAME='method_detail'></A>
+
+<a name="methoddeleteAction" id="deleteAction"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">deleteAction</span> (line <span class="line-number">216</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">delete</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			deleteAction
+		</span>
+				()
+			</div>
+	
+		
+			
+	</div>
+<a name="methodgetAction" id="getAction"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">getAction</span> (line <span class="line-number">151</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">listing</p>
+	<ul class="tags">
+				<li><span class="field">todo:</span> enable application/json header</li>
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			getAction
+		</span>
+				()
+			</div>
+	
+		
+			
+	</div>
+<a name="methodgetJSONParams" id="getJSONParams"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">getJSONParams</span> (line <span class="line-number">108</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">parses incoming json, this is a special configuration for request sent  by CappuccinoResource: there is an extra key (=model name) describing the data</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> protected</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">object|array</span>
+		<span class="method-name">
+			getJSONParams
+		</span>
+					([<span class="var-type">$forModel</span>&nbsp;<span class="var-name">$forModel</span> = <span class="var-default">true</span>])
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">$forModel</span>
+				<span class="var-name">$forModel</span><span class="var-description">: pick subset and convert to array</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodgetModelURL" id="getModelURL"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">getModelURL</span> (line <span class="line-number">124</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">FIXME</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> protected</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">string</span>
+		<span class="method-name">
+			getModelURL
+		</span>
+					(<span class="var-type"></span>&nbsp;<span class="var-name">$model</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">Doctrine_Record</span>
+				<span class="var-name">$model</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodindexAction" id="indexAction"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">indexAction</span> (line <span class="line-number">140</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">list</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			indexAction
+		</span>
+				()
+			</div>
+	
+		
+			
+	</div>
+<a name="methodinit" id="init"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">init</span> (line <span class="line-number">42</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">disable views and layouts</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			init
+		</span>
+				()
+			</div>
+	
+		
+			
+	</div>
+<a name="methodinitModel" id="initModel"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">initModel</span> (line <span class="line-number">58</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">finds the model if PK is in request</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">Doctrine_Record</span>
+		<span class="method-name">
+			initModel
+		</span>
+					([<span class="var-type">boolean|integer</span>&nbsp;<span class="var-name">$withPrimaryKey</span> = <span class="var-default">true</span>])
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">boolean|integer</span>
+				<span class="var-name">$withPrimaryKey</span><span class="var-description">: can be pk or bool</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodinvalidAction" id="invalidAction"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">invalidAction</span> (line <span class="line-number">232</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Invalid request</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			invalidAction
+		</span>
+				()
+			</div>
+	
+		
+			
+	</div>
+<a name="methodpostAction" id="postAction"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">postAction</span> (line <span class="line-number">192</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">post (create), sends back the url</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			postAction
+		</span>
+				()
+			</div>
+	
+		
+			
+	</div>
+<a name="methodputAction" id="putAction"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">putAction</span> (line <span class="line-number">168</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">put (update)</p>
+	<ul class="tags">
+				<li><span class="field">todo:</span> check resp code</li>
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			putAction
+		</span>
+				()
+			</div>
+	
+		
+			
+	</div>
+<a name="methodtoJSON" id="toJSON"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">toJSON</span> (line <span class="line-number">81</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">renders json strings using special views</p>
+	<ul class="tags">
+				<li><span class="field">throws:</span> InvalidArgumentException</li>
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">string</span>
+		<span class="method-name">
+			toJSON
+		</span>
+					(<span class="var-type">Doctrine_Record|Doctrine_Collection</span>&nbsp;<span class="var-name">$data</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">Doctrine_Record|Doctrine_Collection</span>
+				<span class="var-name">$data</span>			</li>
+				</ul>
+		
+			
+	</div>
+						
+		</div>
+	</div>
+
+	<a name="sec-consts"></a>
+	<div class="info-box">
+		<div class="info-box-title">Class Constants</div>
+		<div class="nav-bar">
+			<a href="#sec-description">Description</a> |
+							<a href="#sec-descendents">Descendants</a> |
+										<a href="#sec-var-summary">Constants</a> (<span class="disabled">details</span>)
+						
+			
+												<a href="#sec-var-summary">Vars</a> (<a href="#sec-vars">details</a>)
+														| 
+									<a href="#sec-method-summary">Methods</a> (<a href="#sec-methods">details</a>)
+							
+					</div>
+		<div class="info-box-body">
+			<a name="constLIMIT_PARAM" id="LIMIT_PARAM"><!-- --></A>
+<div class="evenrow">
+
+	<div class="const-header">
+		<img src="../../media/images/Variable.png" />
+		<span class="const-title">
+			<span class="const-name">LIMIT_PARAM</span>
+			 = <span class="const-default"> 'limit'</span>
+			(line <span class="line-number">35</span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+	
+	
+</div>
+<a name="constOFFSET_PARAM" id="OFFSET_PARAM"><!-- --></A>
+<div class="oddrow">
+
+	<div class="const-header">
+		<img src="../../media/images/Variable.png" />
+		<span class="const-title">
+			<span class="const-name">OFFSET_PARAM</span>
+			 = <span class="const-default"> 'offset'</span>
+			(line <span class="line-number">34</span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">request constants</p>
+	
+	
+</div>
+						
+		</div>
+	</div>
+
+	<p class="notes" id="credit">
+		Documentation generated on Fri, 23 Jul 2010 07:31:56 +0200 by <a href="http://www.phpdoc.org" target="_blank">phpDocumentor 1.4.3</a>
+	</p>
+	</div></body>
+</html>

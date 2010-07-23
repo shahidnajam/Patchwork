@@ -1,0 +1,583 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+  <html xmlns="http://www.w3.org/1999/xhtml">
+		<head>
+			<!-- template designed by Marco Von Ballmoos -->
+			<title>Docs For Class Patchwork_Auth_Adapter_Doctrine</title>
+			<link rel="stylesheet" href="../../media/stylesheet.css" />
+			<meta http-equiv='Content-Type' content='text/html; charset=iso-8859-1'/>
+		</head>
+		<body>
+			<div class="page-body">			
+<h2 class="class-name">Class Patchwork_Auth_Adapter_Doctrine</h2>
+
+<a name="sec-description"></a>
+<div class="info-box">
+	<div class="info-box-title">Description</div>
+	<div class="nav-bar">
+					<span class="disabled">Description</span> |
+													<a href="#sec-var-summary">Vars</a> (<a href="#sec-vars">details</a>)
+						|											<a href="#sec-method-summary">Methods</a> (<a href="#sec-methods">details</a>)
+						
+					</div>
+	<div class="info-box-body">
+        		<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Patchwork_Auth_Adapter_Doctrine</p>
+	<ul class="tags">
+				<li><span class="field">author:</span> Daniel Pozzi</li>
+			</ul>
+		<p class="notes">
+			Located in <a class="field" href="_library---Patchwork---Auth---Adapter---Doctrine.php.html">/library/Patchwork/Auth/Adapter/Doctrine.php</a> (line <span class="field">10</span>)
+		</p>
+		
+				
+		<pre></pre>
+	
+			</div>
+</div>
+
+
+
+	<a name="sec-var-summary"></a>
+	<div class="info-box">
+		<div class="info-box-title">Variable Summary</span></div>
+		<div class="nav-bar">
+			<a href="#sec-description">Description</a> |
+						<span class="disabled">Vars</span> (<a href="#sec-vars">details</a>)
+							| 
+									<a href="#sec-method-summary">Methods</a> (<a href="#sec-methods">details</a>)
+							
+								</div>
+		<div class="info-box-body">
+			<div class="var-summary">
+																																																																																<div class="var-title">
+					<span class="var-type">array</span>
+					<a href="#$_authenticateResultInfo" title="details" class="var-name">$_authenticateResultInfo</a>
+				</div>
+																<div class="var-title">
+					<span class="var-type">string</span>
+					<a href="#$_credential" title="details" class="var-name">$_credential</a>
+				</div>
+																<div class="var-title">
+					<span class="var-type">string</span>
+					<a href="#$_credentialColumn" title="details" class="var-name">$_credentialColumn</a>
+				</div>
+																<div class="var-title">
+					<span class="var-type">string</span>
+					<a href="#$_credentialTreatment" title="details" class="var-name">$_credentialTreatment</a>
+				</div>
+																<div class="var-title">
+					<span class="var-type">string</span>
+					<a href="#$_identity" title="details" class="var-name">$_identity</a>
+				</div>
+																<div class="var-title">
+					<span class="var-type">string</span>
+					<a href="#$_identityColumn" title="details" class="var-name">$_identityColumn</a>
+				</div>
+																<div class="var-title">
+					<span class="var-type">Doctrine_Record</span>
+					<a href="#$_result" title="details" class="var-name">$_result</a>
+				</div>
+																<div class="var-title">
+					<span class="var-type">string</span>
+					<a href="#$_tableName" title="details" class="var-name">$_tableName</a>
+				</div>
+											</div>
+		</div>
+	</div>
+
+	<a name="sec-method-summary"></a>
+	<div class="info-box">
+		<div class="info-box-title">Method Summary</span></div>
+		<div class="nav-bar">
+			<a href="#sec-description">Description</a> |
+																		<a href="#sec-var-summary">Vars</a> (<a href="#sec-vars">details</a>)
+				 
+				|
+						<span class="disabled">Methods</span> (<a href="#sec-methods">details</a>)
+		</div>
+		<div class="info-box-body">			
+			<div class="method-summary">
+																																																																				
+												<div class="method-definition">
+											<span class="method-result">Patchwork_Auth_Adapter_Doctrine</span>
+										<a href="#__construct" title="details" class="method-name">__construct</a>
+											(<span class="var-type">string</span>&nbsp;<span class="var-name">$tableName</span>, <span class="var-type">string</span>&nbsp;<span class="var-name">$identityColumn</span>, <span class="var-type">string</span>&nbsp;<span class="var-name">$credentialColumn</span>, <span class="var-type">string</span>&nbsp;<span class="var-name">$credentialTreatment</span>)
+									</div>
+																<div class="method-definition">
+											<span class="method-result">Zend_Auth_Result</span>
+										<a href="#authenticate" title="details" class="method-name">authenticate</a>
+										()
+									</div>
+																<div class="method-definition">
+											<span class="method-result">Doctrine_Record</span>
+										<a href="#getAuthIdentity" title="details" class="method-name">getAuthIdentity</a>
+										()
+									</div>
+																<div class="method-definition">
+											<span class="method-result"><a href="../../Patchwork/Authentification/Patchwork_Auth_Adapter_Doctrine.html">Patchwork_Auth_Adapter_Doctrine</a></span>
+										<a href="#setCredential" title="details" class="method-name">setCredential</a>
+											(<span class="var-type">string</span>&nbsp;<span class="var-name">$credential</span>)
+									</div>
+																<div class="method-definition">
+											<span class="method-result"><a href="../../Patchwork/Authentification/Patchwork_Auth_Adapter_Doctrine.html">Patchwork_Auth_Adapter_Doctrine</a></span>
+										<a href="#setIdentity" title="details" class="method-name">setIdentity</a>
+											(<span class="var-type">string</span>&nbsp;<span class="var-name">$identity</span>)
+									</div>
+																<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#_checkOptions" title="details" class="method-name">_checkOptions</a>
+										()
+									</div>
+																<div class="method-definition">
+											<span class="method-result">Zend_Auth_Result</span>
+										<a href="#_getAuthResult" title="details" class="method-name">_getAuthResult</a>
+										()
+									</div>
+																<div class="method-definition">
+											<span class="method-result">boolean</span>
+										<a href="#_isValidResultSet" title="details" class="method-name">_isValidResultSet</a>
+											(<span class="var-type"></span>&nbsp;<span class="var-name">$collection</span>)
+									</div>
+								</div>
+		</div>
+	</div>		
+
+	<a name="sec-vars"></a>
+	<div class="info-box">
+		<div class="info-box-title">Variables</div>
+		<div class="nav-bar">
+			<a href="#sec-description">Description</a> |
+										<a href="#sec-var-summary">Vars</a> (<span class="disabled">details</span>)
+						
+			
+										| 
+									<a href="#sec-method-summary">Methods</a> (<a href="#sec-methods">details</a>)
+							
+					</div>
+		<div class="info-box-body">
+			<a name="var$_authenticateResultInfo" id="$_authenticateResultInfo"><!-- --></A>
+<div class="evenrow">
+
+	<div class="var-header">
+		<span class="var-title">
+			<span class="var-type">array</span>
+			<span class="var-name">$_authenticateResultInfo</span>
+			 = <span class="var-default"> null</span>			(line <span class="line-number">54</span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">$_authenticateResultInfo</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> protected</li>
+			</ul>
+	
+	
+		
+		
+
+</div>
+<a name="var$_credential" id="$_credential"><!-- --></A>
+<div class="oddrow">
+
+	<div class="var-header">
+		<span class="var-title">
+			<span class="var-type">string</span>
+			<span class="var-name">$_credential</span>
+			 = <span class="var-default"> null</span>			(line <span class="line-number">41</span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">$_credential - Credential values</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> protected</li>
+			</ul>
+	
+	
+		
+		
+
+</div>
+<a name="var$_credentialColumn" id="$_credentialColumn"><!-- --></A>
+<div class="evenrow">
+
+	<div class="var-header">
+		<span class="var-title">
+			<span class="var-type">string</span>
+			<span class="var-name">$_credentialColumn</span>
+			 = <span class="var-default"> null</span>			(line <span class="line-number">29</span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">$_credentialColumns - columns to be used as the credentials</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> protected</li>
+			</ul>
+	
+	
+		
+		
+
+</div>
+<a name="var$_credentialTreatment" id="$_credentialTreatment"><!-- --></A>
+<div class="oddrow">
+
+	<div class="var-header">
+		<span class="var-title">
+			<span class="var-type">string</span>
+			<span class="var-name">$_credentialTreatment</span>
+			 = <span class="var-default"> null</span>			(line <span class="line-number">48</span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">$_credentialTreatment - Treatment applied to the credential,</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> protected</li>
+			</ul>
+	
+	
+		
+		
+
+</div>
+<a name="var$_identity" id="$_identity"><!-- --></A>
+<div class="evenrow">
+
+	<div class="var-header">
+		<span class="var-title">
+			<span class="var-type">string</span>
+			<span class="var-name">$_identity</span>
+			 = <span class="var-default"> null</span>			(line <span class="line-number">35</span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">$_identity - Identity value</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> protected</li>
+			</ul>
+	
+	
+		
+		
+
+</div>
+<a name="var$_identityColumn" id="$_identityColumn"><!-- --></A>
+<div class="oddrow">
+
+	<div class="var-header">
+		<span class="var-title">
+			<span class="var-type">string</span>
+			<span class="var-name">$_identityColumn</span>
+			 = <span class="var-default"> null</span>			(line <span class="line-number">23</span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">$_identityColumn - the column to use as the identity</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> protected</li>
+			</ul>
+	
+	
+		
+		
+
+</div>
+<a name="var$_result" id="$_result"><!-- --></A>
+<div class="evenrow">
+
+	<div class="var-header">
+		<span class="var-title">
+			<span class="var-type">Doctrine_Record</span>
+			<span class="var-name">$_result</span>
+			 = <span class="var-default"> null</span>			(line <span class="line-number">60</span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">identity</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> protected</li>
+			</ul>
+	
+	
+		
+		
+
+</div>
+<a name="var$_tableName" id="$_tableName"><!-- --></A>
+<div class="oddrow">
+
+	<div class="var-header">
+		<span class="var-title">
+			<span class="var-type">string</span>
+			<span class="var-name">$_tableName</span>
+			 = <span class="var-default"> null</span>			(line <span class="line-number">17</span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">$_tableName - the table name to check</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> protected</li>
+			</ul>
+	
+	
+		
+		
+
+</div>
+						
+		</div>
+	</div>
+	
+	<a name="sec-methods"></a>
+	<div class="info-box">
+		<div class="info-box-title">Methods</div>
+		<div class="nav-bar">
+			<a href="#sec-description">Description</a> |
+															<a href="#sec-var-summary">Vars</a> (<a href="#sec-vars">details</a>)
+																	<a href="#sec-method-summary">Methods</a> (<span class="disabled">details</span>)
+						
+		</div>
+		<div class="info-box-body">
+			<A NAME='method_detail'></A>
+
+<a name="method__construct" id="__construct"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">Constructor __construct</span> (line <span class="line-number">70</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">constructor requires configuration options</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">Patchwork_Auth_Adapter_Doctrine</span>
+		<span class="method-name">
+			__construct
+		</span>
+					(<span class="var-type">string</span>&nbsp;<span class="var-name">$tableName</span>, <span class="var-type">string</span>&nbsp;<span class="var-name">$identityColumn</span>, <span class="var-type">string</span>&nbsp;<span class="var-name">$credentialColumn</span>, <span class="var-type">string</span>&nbsp;<span class="var-name">$credentialTreatment</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$tableName</span>			</li>
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$identityColumn</span>			</li>
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$credentialColumn</span>			</li>
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$credentialTreatment</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodauthenticate" id="authenticate"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">authenticate</span> (line <span class="line-number">149</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">attempt an authenication.</p>
+	<ul class="tags">
+				<li><span class="field">throws:</span> Zend_Auth_Adapter_Exception</li>
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">Zend_Auth_Result</span>
+		<span class="method-name">
+			authenticate
+		</span>
+				()
+			</div>
+	
+		
+			
+	</div>
+<a name="methodgetAuthIdentity" id="getAuthIdentity"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">getAuthIdentity</span> (line <span class="line-number">179</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Return the identity</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">Doctrine_Record</span>
+		<span class="method-name">
+			getAuthIdentity
+		</span>
+				()
+			</div>
+	
+		
+			
+	</div>
+<a name="methodsetCredential" id="setCredential"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">setCredential</span> (line <span class="line-number">132</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">set the credential</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result"><a href="../../Patchwork/Authentification/Patchwork_Auth_Adapter_Doctrine.html">Patchwork_Auth_Adapter_Doctrine</a></span>
+		<span class="method-name">
+			setCredential
+		</span>
+					(<span class="var-type">string</span>&nbsp;<span class="var-name">$credential</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$credential</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodsetIdentity" id="setIdentity"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">setIdentity</span> (line <span class="line-number">116</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">set the identity</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result"><a href="../../Patchwork/Authentification/Patchwork_Auth_Adapter_Doctrine.html">Patchwork_Auth_Adapter_Doctrine</a></span>
+		<span class="method-name">
+			setIdentity
+		</span>
+					(<span class="var-type">string</span>&nbsp;<span class="var-name">$identity</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$identity</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="method_checkOptions" id="_checkOptions"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">_checkOptions</span> (line <span class="line-number">88</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">assures that valid options have been passed to the constructor</p>
+	<ul class="tags">
+				<li><span class="field">throws:</span> Zend_Auth_Adapter_Exception</li>
+				<li><span class="field">access:</span> protected</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			_checkOptions
+		</span>
+				()
+			</div>
+	
+		
+			
+	</div>
+<a name="method_getAuthResult" id="_getAuthResult"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">_getAuthResult</span> (line <span class="line-number">228</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">creates a Zend_Auth_Result object from the information that has been  collected during the authenticate() attempt.</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> protected</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">Zend_Auth_Result</span>
+		<span class="method-name">
+			_getAuthResult
+		</span>
+				()
+			</div>
+	
+		
+			
+	</div>
+<a name="method_isValidResultSet" id="_isValidResultSet"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">_isValidResultSet</span> (line <span class="line-number">190</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">validate the result collection</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> protected</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">boolean</span>
+		<span class="method-name">
+			_isValidResultSet
+		</span>
+					(<span class="var-type"></span>&nbsp;<span class="var-name">$collection</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">Doctrine_Collection</span>
+				<span class="var-name">$collection</span>			</li>
+				</ul>
+		
+			
+	</div>
+						
+		</div>
+	</div>
+
+
+	<p class="notes" id="credit">
+		Documentation generated on Fri, 23 Jul 2010 07:31:54 +0200 by <a href="http://www.phpdoc.org" target="_blank">phpDocumentor 1.4.3</a>
+	</p>
+	</div></body>
+</html>

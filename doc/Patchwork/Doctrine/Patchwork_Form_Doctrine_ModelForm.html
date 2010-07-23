@@ -1,0 +1,1188 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+  <html xmlns="http://www.w3.org/1999/xhtml">
+		<head>
+			<!-- template designed by Marco Von Ballmoos -->
+			<title>Docs For Class Patchwork_Form_Doctrine_ModelForm</title>
+			<link rel="stylesheet" href="../../media/stylesheet.css" />
+			<meta http-equiv='Content-Type' content='text/html; charset=iso-8859-1'/>
+		</head>
+		<body>
+			<div class="page-body">			
+<h2 class="class-name">Class Patchwork_Form_Doctrine_ModelForm</h2>
+
+<a name="sec-description"></a>
+<div class="info-box">
+	<div class="info-box-title">Description</div>
+	<div class="nav-bar">
+					<span class="disabled">Description</span> |
+													<a href="#sec-var-summary">Vars</a> (<a href="#sec-vars">details</a>)
+						|											<a href="#sec-method-summary">Methods</a> (<a href="#sec-methods">details</a>)
+						
+											<a href="#sec-const-summary">Constants</a> (<a href="#sec-consts">details</a>)
+						
+			</div>
+	<div class="info-box-body">
+        		<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">a form that generates its fields from a doctrine record, based on  CU_ModelForm by Jani Hartikainen</p>
+	<ul class="tags">
+				<li><span class="field">author:</span> Jani Hartikainen</li>
+				<li><span class="field">author:</span> Daniel Pozzi</li>
+			</ul>
+		<p class="notes">
+			Located in <a class="field" href="_library---Patchwork---Form---Doctrine---ModelForm.php.html">/library/Patchwork/Form/Doctrine/ModelForm.php</a> (line <span class="field">31</span>)
+		</p>
+		
+				
+		<pre>Zend_Form
+   |
+   --Patchwork_Form_Doctrine_ModelForm</pre>
+	
+			</div>
+</div>
+
+
+	<a name="sec-const-summary"></a>
+	<div class="info-box">
+		<div class="info-box-title">Class Constant Summary</span></div>
+		<div class="nav-bar">
+			<a href="#sec-description">Description</a> |
+						<span class="disabled">Constants</span> (<a href="#sec-consts">details</a>)
+												<a href="#sec-var-summary">Vars</a> (<a href="#sec-vars">details</a>)
+				 
+				|
+										| 
+									<a href="#sec-method-summary">Methods</a> (<a href="#sec-methods">details</a>)
+							
+					</div>
+		<div class="info-box-body">
+			<div class="const-summary">
+								<div class="const-title">
+					<img src="../../media/images/Constant.png" alt=" " />
+					<a href="#FORM" title="details" class="const-name">FORM</a> = 					<span class="var-type"> 'form'</span>
+
+				</div>
+							</div>
+		</div>
+	</div>
+
+	<a name="sec-var-summary"></a>
+	<div class="info-box">
+		<div class="info-box-title">Variable Summary</span></div>
+		<div class="nav-bar">
+			<a href="#sec-description">Description</a> |
+						<span class="disabled">Vars</span> (<a href="#sec-vars">details</a>)
+							| 
+									<a href="#sec-method-summary">Methods</a> (<a href="#sec-methods">details</a>)
+							
+															<a href="#sec-const-summary">Constants</a> (<a href="#sec-consts">details</a>)
+							
+					</div>
+		<div class="info-box-body">
+			<div class="var-summary">
+																																																																																																																																								<div class="var-title">
+					<span class="var-type">array</span>
+					<a href="#$_columnHooks" title="details" class="var-name">$_columnHooks</a>
+				</div>
+																<div class="var-title">
+					<span class="var-type">array</span>
+					<a href="#$_columnTypes" title="details" class="var-name">$_columnTypes</a>
+				</div>
+																<div class="var-title">
+					<span class="var-type">array</span>
+					<a href="#$_columnValidators" title="details" class="var-name">$_columnValidators</a>
+				</div>
+																<div class="var-title">
+					<span class="var-type">array</span>
+					<a href="#$_fieldLabels" title="details" class="var-name">$_fieldLabels</a>
+				</div>
+																<div class="var-title">
+					<span class="var-type">string</span>
+					<a href="#$_fieldPrefix" title="details" class="var-name">$_fieldPrefix</a>
+				</div>
+																<div class="var-title">
+					<span class="var-type">array</span>
+					<a href="#$_fieldTypes" title="details" class="var-name">$_fieldTypes</a>
+				</div>
+																<div class="var-title">
+					<span class="var-type">Zend_Form</span>
+					<a href="#$_form" title="details" class="var-name">$_form</a>
+				</div>
+																<div class="var-title">
+					<span class="var-type">Zend_Loader_PluginLoader</span>
+					<a href="#$_formLoader" title="details" class="var-name">$_formLoader</a>
+				</div>
+																<div class="var-title">
+					<span class="var-type">bool</span>
+					<a href="#$_generateManyFields" title="details" class="var-name">$_generateManyFields</a>
+				</div>
+																<div class="var-title">
+					<span class="var-type">array</span>
+					<a href="#$_ignoreColumns" title="details" class="var-name">$_ignoreColumns</a>
+				</div>
+																<div class="var-title">
+					<span class="var-type">Doctrine_Record</span>
+					<a href="#$_instance" title="details" class="var-name">$_instance</a>
+				</div>
+																<div class="var-title">
+					<span class="var-type">string</span>
+					<a href="#$_model" title="details" class="var-name">$_model</a>
+				</div>
+																<div class="var-title">
+					<span class="var-type">array</span>
+					<a href="#$_relationForms" title="details" class="var-name">$_relationForms</a>
+				</div>
+																<div class="var-title">
+					<span class="var-type">array</span>
+					<a href="#$_relationLabels" title="details" class="var-name">$_relationLabels</a>
+				</div>
+																<div class="var-title">
+					<span class="var-type">Doctrine_Table</span>
+					<a href="#$_table" title="details" class="var-name">$_table</a>
+				</div>
+											</div>
+		</div>
+	</div>
+
+	<a name="sec-method-summary"></a>
+	<div class="info-box">
+		<div class="info-box-title">Method Summary</span></div>
+		<div class="nav-bar">
+			<a href="#sec-description">Description</a> |
+															<a href="#sec-const-summary">Constants</a> (<a href="#sec-consts">details</a>)
+							
+															<a href="#sec-var-summary">Vars</a> (<a href="#sec-vars">details</a>)
+				 
+				|
+						<span class="disabled">Methods</span> (<a href="#sec-methods">details</a>)
+		</div>
+		<div class="info-box-body">			
+			<div class="method-summary">
+																																																																																																																																																												
+												<div class="method-definition">
+											<span class="method-result">self</span>
+										<a href="#__construct" title="details" class="method-name">__construct</a>
+											(<span class="var-type"></span>&nbsp;<span class="var-name">$record</span>, [<span class="var-type">array</span>&nbsp;<span class="var-name">$options</span> = <span class="var-default">null</span>])
+									</div>
+																<div class="method-definition">
+											<span class="method-result">Doctrine_Record</span>
+										<a href="#getRecord" title="details" class="method-name">getRecord</a>
+										()
+									</div>
+																<div class="method-definition">
+											<span class="method-result">boolean</span>
+										<a href="#isValid" title="details" class="method-name">isValid</a>
+											(<span class="var-type">array</span>&nbsp;<span class="var-name">$data</span>)
+									</div>
+																<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#loadDefaultDecorators" title="details" class="method-name">loadDefaultDecorators</a>
+										()
+									</div>
+																<div class="method-definition">
+											<span class="method-result">Doctrine_Record</span>
+										<a href="#save" title="details" class="method-name">save</a>
+											([<span class="var-type">bool</span>&nbsp;<span class="var-name">$persist</span> = <span class="var-default">true</span>])
+									</div>
+																<div class="method-definition">
+											<span class="method-result">self</span>
+										<a href="#setDefaultsByModel" title="details" class="method-name">setDefaultsByModel</a>
+											(<span class="var-type"></span>&nbsp;<span class="var-name">$model</span>)
+									</div>
+																<div class="method-definition">
+											<span class="method-result">self</span>
+										<a href="#setRecord" title="details" class="method-name">setRecord</a>
+											(<span class="var-type"></span>&nbsp;<span class="var-name">$instance</span>)
+									</div>
+																<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#_columnsToFields" title="details" class="method-name">_columnsToFields</a>
+										()
+									</div>
+																<div class="method-definition">
+											<span class="method-result">mixed</span>
+										<a href="#_doctrineizeValue" title="details" class="method-name">_doctrineizeValue</a>
+											(<span class="var-type">string</span>&nbsp;<span class="var-name">$value</span>, <span class="var-type">string</span>&nbsp;<span class="var-name">$type</span>)
+									</div>
+																<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#_generateForm" title="details" class="method-name">_generateForm</a>
+										()
+									</div>
+																<div class="method-definition">
+											<span class="method-result">array</span>
+										<a href="#_getColumns" title="details" class="method-name">_getColumns</a>
+										()
+									</div>
+																<div class="method-definition">
+											<span class="method-result">string</span>
+										<a href="#_getDeleteButtonName" title="details" class="method-name">_getDeleteButtonName</a>
+											(<span class="var-type">string</span>&nbsp;<span class="var-name">$relationAlias</span>, [<span class="var-type"></span>&nbsp;<span class="var-name">$record</span> = <span class="var-default">null</span>])
+									</div>
+																<div class="method-definition">
+											<span class="method-result">string</span>
+										<a href="#_getFormName" title="details" class="method-name">_getFormName</a>
+											(<span class="var-type">string</span>&nbsp;<span class="var-name">$relationAlias</span>, [<span class="var-type"></span>&nbsp;<span class="var-name">$record</span> = <span class="var-default">null</span>])
+									</div>
+																<div class="method-definition">
+											<span class="method-result">string</span>
+										<a href="#_getNewButtonName" title="details" class="method-name">_getNewButtonName</a>
+											(<span class="var-type">string</span>&nbsp;<span class="var-name">$relationAlias</span>)
+									</div>
+																<div class="method-definition">
+											<span class="method-result">array</span>
+										<a href="#_getRelations" title="details" class="method-name">_getRelations</a>
+										()
+									</div>
+																<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#_postGenerate" title="details" class="method-name">_postGenerate</a>
+										()
+									</div>
+																<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#_postSave" title="details" class="method-name">_postSave</a>
+											(<span class="var-type"></span>&nbsp;<span class="var-name">$persist</span>)
+									</div>
+																<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#_preGenerate" title="details" class="method-name">_preGenerate</a>
+										()
+									</div>
+																<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#_relationsToFields" title="details" class="method-name">_relationsToFields</a>
+										()
+									</div>
+								</div>
+		</div>
+	</div>		
+
+	<a name="sec-vars"></a>
+	<div class="info-box">
+		<div class="info-box-title">Variables</div>
+		<div class="nav-bar">
+			<a href="#sec-description">Description</a> |
+										<a href="#sec-var-summary">Vars</a> (<span class="disabled">details</span>)
+						
+			
+												<a href="#sec-const-summary">Constants</a> (<a href="#sec-consts">details</a>)
+							
+										| 
+									<a href="#sec-method-summary">Methods</a> (<a href="#sec-methods">details</a>)
+							
+					</div>
+		<div class="info-box-body">
+			<a name="var$_columnHooks" id="$_columnHooks"><!-- --></A>
+<div class="oddrow">
+
+	<div class="var-header">
+		<span class="var-title">
+			<span class="var-type">array</span>
+			<span class="var-name">$_columnHooks</span>
+			 = <span class="var-default">array()</span>			(line <span class="line-number">71</span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Array of hooks that are called before saving the column</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> protected</li>
+			</ul>
+	
+	
+		
+		
+
+</div>
+<a name="var$_columnTypes" id="$_columnTypes"><!-- --></A>
+<div class="evenrow">
+
+	<div class="var-header">
+		<span class="var-title">
+			<span class="var-type">array</span>
+			<span class="var-name">$_columnTypes</span>
+			 = <span class="var-default">array(<br />        'integer' =&gt; 'text',<br />        'decimal' =&gt; 'text',<br />        'float' =&gt; 'text',<br />        'string' =&gt; 'text',<br />        'varchar' =&gt; 'text',<br />        'boolean' =&gt; 'checkbox',<br />        'timestamp' =&gt; 'text',<br />        'time' =&gt; 'text',<br />        'date' =&gt; 'text',<br />        'enum' =&gt; 'select'<br />    )</span>			(line <span class="line-number">54</span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Which Zend_Form element types are associated with which doctrine type?</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> protected</li>
+			</ul>
+	
+	
+		
+		
+
+</div>
+<a name="var$_columnValidators" id="$_columnValidators"><!-- --></A>
+<div class="oddrow">
+
+	<div class="var-header">
+		<span class="var-title">
+			<span class="var-type">array</span>
+			<span class="var-name">$_columnValidators</span>
+			 = <span class="var-default">array(<br />        'integer' =&gt; 'int',<br />        'float' =&gt; 'float',<br />        'double' =&gt; 'float'<br />    )</span>			(line <span class="line-number">77</span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Default validators for doctrine column types</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> protected</li>
+			</ul>
+	
+	
+		
+		
+
+</div>
+<a name="var$_fieldLabels" id="$_fieldLabels"><!-- --></A>
+<div class="evenrow">
+
+	<div class="var-header">
+		<span class="var-title">
+			<span class="var-type">array</span>
+			<span class="var-name">$_fieldLabels</span>
+			 = <span class="var-default">array()</span>			(line <span class="line-number">115</span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Field labels. key = column name, value = label</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> protected</li>
+			</ul>
+	
+	
+		
+		
+
+</div>
+<a name="var$_fieldPrefix" id="$_fieldPrefix"><!-- --></A>
+<div class="oddrow">
+
+	<div class="var-header">
+		<span class="var-title">
+			<span class="var-type">string</span>
+			<span class="var-name">$_fieldPrefix</span>
+			 = <span class="var-default"> 'f_'</span>			(line <span class="line-number">87</span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Prefix fields with this</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> protected</li>
+			</ul>
+	
+	
+		
+		
+
+</div>
+<a name="var$_fieldTypes" id="$_fieldTypes"><!-- --></A>
+<div class="evenrow">
+
+	<div class="var-header">
+		<span class="var-title">
+			<span class="var-type">array</span>
+			<span class="var-name">$_fieldTypes</span>
+			 = <span class="var-default">array()</span>			(line <span class="line-number">109</span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Use this to override field types for columns. key = column, value = field type</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> protected</li>
+			</ul>
+	
+	
+		
+		
+
+</div>
+<a name="var$_form" id="$_form"><!-- --></A>
+<div class="oddrow">
+
+	<div class="var-header">
+		<span class="var-title">
+			<span class="var-type">Zend_Form</span>
+			<span class="var-name">$_form</span>
+						(line <span class="line-number">48</span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Instance of the Zend_Form based form used</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> protected</li>
+			</ul>
+	
+	
+		
+		
+
+</div>
+<a name="var$_formLoader" id="$_formLoader"><!-- --></A>
+<div class="evenrow">
+
+	<div class="var-header">
+		<span class="var-title">
+			<span class="var-type">Zend_Loader_PluginLoader</span>
+			<span class="var-name">$_formLoader</span>
+			 = <span class="var-default"> null</span>			(line <span class="line-number">140</span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Form PluginLoader</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> protected</li>
+			</ul>
+	
+	
+		
+		
+
+</div>
+<a name="var$_generateManyFields" id="$_generateManyFields"><!-- --></A>
+<div class="oddrow">
+
+	<div class="var-header">
+		<span class="var-title">
+			<span class="var-type">bool</span>
+			<span class="var-name">$_generateManyFields</span>
+			 = <span class="var-default"> false</span>			(line <span class="line-number">103</span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Whether or not to generate fields for many parts of m2o and m2m relations</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> protected</li>
+			</ul>
+	
+	
+		
+		
+
+</div>
+<a name="var$_ignoreColumns" id="$_ignoreColumns"><!-- --></A>
+<div class="evenrow">
+
+	<div class="var-header">
+		<span class="var-title">
+			<span class="var-type">array</span>
+			<span class="var-name">$_ignoreColumns</span>
+			 = <span class="var-default">array(<br />        'created_at',<br />        'updated_at',<br />        'deleted_at'<br />    )</span>			(line <span class="line-number">93</span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Column names listed in this array will not be shown in the form</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> protected</li>
+			</ul>
+	
+	
+		
+		
+
+</div>
+<a name="var$_instance" id="$_instance"><!-- --></A>
+<div class="oddrow">
+
+	<div class="var-header">
+		<span class="var-title">
+			<span class="var-type">Doctrine_Record</span>
+			<span class="var-name">$_instance</span>
+			 = <span class="var-default"> null</span>			(line <span class="line-number">134</span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Model instance for editing existing models</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> protected</li>
+			</ul>
+	
+	
+		
+		
+
+</div>
+<a name="var$_model" id="$_model"><!-- --></A>
+<div class="evenrow">
+
+	<div class="var-header">
+		<span class="var-title">
+			<span class="var-type">string</span>
+			<span class="var-name">$_model</span>
+			 = <span class="var-default"> ''</span>			(line <span class="line-number">128</span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Name of the model class</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> protected</li>
+			</ul>
+	
+	
+		
+		
+
+</div>
+<a name="var$_relationForms" id="$_relationForms"><!-- --></A>
+<div class="oddrow">
+
+	<div class="var-header">
+		<span class="var-title">
+			<span class="var-type">array</span>
+			<span class="var-name">$_relationForms</span>
+			 = <span class="var-default">array()</span>			(line <span class="line-number">146</span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Stores form class names for many-relations</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> protected</li>
+			</ul>
+	
+	
+		
+		
+
+</div>
+<a name="var$_relationLabels" id="$_relationLabels"><!-- --></A>
+<div class="evenrow">
+
+	<div class="var-header">
+		<span class="var-title">
+			<span class="var-type">array</span>
+			<span class="var-name">$_relationLabels</span>
+			 = <span class="var-default">array()</span>			(line <span class="line-number">122</span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Labels to use with many to many relations.</p>
+<p class="description"><p>key = related class name, value = label</p></p>
+	<ul class="tags">
+				<li><span class="field">access:</span> protected</li>
+			</ul>
+	
+	
+		
+		
+
+</div>
+<a name="var$_table" id="$_table"><!-- --></A>
+<div class="oddrow">
+
+	<div class="var-header">
+		<span class="var-title">
+			<span class="var-type">Doctrine_Table</span>
+			<span class="var-name">$_table</span>
+						(line <span class="line-number">42</span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Reference to the model's table class</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> protected</li>
+			</ul>
+	
+	
+		
+		
+
+</div>
+						
+		</div>
+	</div>
+	
+	<a name="sec-methods"></a>
+	<div class="info-box">
+		<div class="info-box-title">Methods</div>
+		<div class="nav-bar">
+			<a href="#sec-description">Description</a> |
+															<a href="#sec-var-summary">Vars</a> (<a href="#sec-vars">details</a>)
+																			<a href="#sec-const-summary">Constants</a> (<a href="#sec-consts">details</a>)
+							
+										<a href="#sec-method-summary">Methods</a> (<span class="disabled">details</span>)
+						
+		</div>
+		<div class="info-box-body">
+			<A NAME='method_detail'></A>
+
+<a name="method__construct" id="__construct"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">Constructor __construct</span> (line <span class="line-number">155</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">constructor</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">self</span>
+		<span class="method-name">
+			__construct
+		</span>
+					(<span class="var-type"></span>&nbsp;<span class="var-name">$record</span>, [<span class="var-type">array</span>&nbsp;<span class="var-name">$options</span> = <span class="var-default">null</span>])
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">array</span>
+				<span class="var-name">$options</span><span class="var-description">: Options to pass to the Zend_Form constructor</span>			</li>
+					<li>
+				<span class="var-type">Doctrine_Record</span>
+				<span class="var-name">$record</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodgetRecord" id="getRecord"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">getRecord</span> (line <span class="line-number">271</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">returns the associated instance or a new instance</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">Doctrine_Record</span>
+		<span class="method-name">
+			getRecord
+		</span>
+				()
+			</div>
+	
+		
+			
+	</div>
+<a name="methodisValid" id="isValid"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">isValid</span> (line <span class="line-number">435</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">validates</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">boolean</span>
+		<span class="method-name">
+			isValid
+		</span>
+					(<span class="var-type">array</span>&nbsp;<span class="var-name">$data</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">array</span>
+				<span class="var-name">$data</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodloadDefaultDecorators" id="loadDefaultDecorators"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">loadDefaultDecorators</span> (line <span class="line-number">170</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			loadDefaultDecorators
+		</span>
+				()
+			</div>
+	
+		
+			
+	</div>
+<a name="methodsave" id="save"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">save</span> (line <span class="line-number">538</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Save the form data</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">Doctrine_Record</span>
+		<span class="method-name">
+			save
+		</span>
+					([<span class="var-type">bool</span>&nbsp;<span class="var-name">$persist</span> = <span class="var-default">true</span>])
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">bool</span>
+				<span class="var-name">$persist</span><span class="var-description">: Save to DB or not</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodsetDefaultsByModel" id="setDefaultsByModel"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">setDefaultsByModel</span> (line <span class="line-number">261</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">set the default values</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">self</span>
+		<span class="method-name">
+			setDefaultsByModel
+		</span>
+					(<span class="var-type"></span>&nbsp;<span class="var-name">$model</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">Doctrine_Record</span>
+				<span class="var-name">$model</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodsetRecord" id="setRecord"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">setRecord</span> (line <span class="line-number">208</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Set the model instance for editing existing rows</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">self</span>
+		<span class="method-name">
+			setRecord
+		</span>
+					(<span class="var-type"></span>&nbsp;<span class="var-name">$instance</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">Doctrine_Record</span>
+				<span class="var-name">$instance</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="method_columnsToFields" id="_columnsToFields"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">_columnsToFields</span> (line <span class="line-number">292</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Parses columns to fields</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> protected</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			_columnsToFields
+		</span>
+				()
+			</div>
+	
+		
+			
+	</div>
+<a name="method_doctrineizeValue" id="_doctrineizeValue"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">_doctrineizeValue</span> (line <span class="line-number">601</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Correct form value types for Doctrine</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> protected</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">mixed</span>
+		<span class="method-name">
+			_doctrineizeValue
+		</span>
+					(<span class="var-type">string</span>&nbsp;<span class="var-name">$value</span>, <span class="var-type">string</span>&nbsp;<span class="var-name">$type</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$value</span><span class="var-description">: value</span>			</li>
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$type</span><span class="var-description">: column type</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="method_generateForm" id="_generateForm"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">_generateForm</span> (line <span class="line-number">281</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Generates the form</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> protected</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			_generateForm
+		</span>
+				()
+			</div>
+	
+		
+			
+	</div>
+<a name="method_getColumns" id="_getColumns"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">_getColumns</span> (line <span class="line-number">488</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Get unignored columns</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> protected</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">array</span>
+		<span class="method-name">
+			_getColumns
+		</span>
+				()
+			</div>
+	
+		
+			
+	</div>
+<a name="method_getDeleteButtonName" id="_getDeleteButtonName"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">_getDeleteButtonName</span> (line <span class="line-number">397</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Returns the name of the delete button field for relation alias</p>
+	<ul class="tags">
+				<li><span class="field">return:</span> name of the new button</li>
+				<li><span class="field">access:</span> protected</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">string</span>
+		<span class="method-name">
+			_getDeleteButtonName
+		</span>
+					(<span class="var-type">string</span>&nbsp;<span class="var-name">$relationAlias</span>, [<span class="var-type"></span>&nbsp;<span class="var-name">$record</span> = <span class="var-default">null</span>])
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$relationAlias</span><span class="var-description">: alias of the relation</span>			</li>
+					<li>
+				<span class="var-type">Doctrine_Record</span>
+				<span class="var-name">$record</span><span class="var-description">: if deleting existing records</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="method_getFormName" id="_getFormName"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">_getFormName</span> (line <span class="line-number">417</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Returns the new form name for relation alias</p>
+	<ul class="tags">
+				<li><span class="field">return:</span> name of the new form</li>
+				<li><span class="field">access:</span> protected</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">string</span>
+		<span class="method-name">
+			_getFormName
+		</span>
+					(<span class="var-type">string</span>&nbsp;<span class="var-name">$relationAlias</span>, [<span class="var-type"></span>&nbsp;<span class="var-name">$record</span> = <span class="var-default">null</span>])
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$relationAlias</span><span class="var-description">: alias of the relation</span>			</li>
+					<li>
+				<span class="var-type">Doctrine_Record</span>
+				<span class="var-name">$record</span><span class="var-description">: if editing existing records</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="method_getNewButtonName" id="_getNewButtonName"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">_getNewButtonName</span> (line <span class="line-number">385</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Returns the name of the new button field for relation alias</p>
+	<ul class="tags">
+				<li><span class="field">return:</span> name of the new button</li>
+				<li><span class="field">access:</span> protected</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">string</span>
+		<span class="method-name">
+			_getNewButtonName
+		</span>
+					(<span class="var-type">string</span>&nbsp;<span class="var-name">$relationAlias</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$relationAlias</span><span class="var-description">: alias of the relation</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="method_getRelations" id="_getRelations"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">_getRelations</span> (line <span class="line-number">512</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Returns all un-ignored relations</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> protected</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">array</span>
+		<span class="method-name">
+			_getRelations
+		</span>
+				()
+			</div>
+	
+		
+			
+	</div>
+<a name="method_postGenerate" id="_postGenerate"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">_postGenerate</span> (line <span class="line-number">192</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Override to provide custom post-form generation logic</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> protected</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			_postGenerate
+		</span>
+				()
+			</div>
+	
+		
+			
+	</div>
+<a name="method_postSave" id="_postSave"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">_postSave</span> (line <span class="line-number">198</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Override to provide custom post-save logic</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> protected</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			_postSave
+		</span>
+					(<span class="var-type"></span>&nbsp;<span class="var-name">$persist</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type"></span>
+				<span class="var-name">$persist</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="method_preGenerate" id="_preGenerate"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">_preGenerate</span> (line <span class="line-number">184</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Override to provide custom pre-form generation logic</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> protected</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			_preGenerate
+		</span>
+				()
+			</div>
+	
+		
+			
+	</div>
+<a name="method_relationsToFields" id="_relationsToFields"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">_relationsToFields</span> (line <span class="line-number">327</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Parses relations to fields</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> protected</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			_relationsToFields
+		</span>
+				()
+			</div>
+	
+		
+			
+	</div>
+						
+		</div>
+	</div>
+
+	<a name="sec-consts"></a>
+	<div class="info-box">
+		<div class="info-box-title">Class Constants</div>
+		<div class="nav-bar">
+			<a href="#sec-description">Description</a> |
+										<a href="#sec-var-summary">Constants</a> (<span class="disabled">details</span>)
+						
+			
+												<a href="#sec-var-summary">Vars</a> (<a href="#sec-vars">details</a>)
+														| 
+									<a href="#sec-method-summary">Methods</a> (<a href="#sec-methods">details</a>)
+							
+					</div>
+		<div class="info-box-body">
+			<a name="constFORM" id="FORM"><!-- --></A>
+<div class="oddrow">
+
+	<div class="const-header">
+		<img src="../../media/images/Variable.png" />
+		<span class="const-title">
+			<span class="const-name">FORM</span>
+			 = <span class="const-default"> 'form'</span>
+			(line <span class="line-number">36</span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">PluginLoader for loading many relation forms</p>
+	
+	
+</div>
+						
+		</div>
+	</div>
+
+	<p class="notes" id="credit">
+		Documentation generated on Fri, 23 Jul 2010 07:31:55 +0200 by <a href="http://www.phpdoc.org" target="_blank">phpDocumentor 1.4.3</a>
+	</p>
+	</div></body>
+</html>

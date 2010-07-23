@@ -1,0 +1,465 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+  <html xmlns="http://www.w3.org/1999/xhtml">
+		<head>
+			<!-- template designed by Marco Von Ballmoos -->
+			<title>Docs For Class User</title>
+			<link rel="stylesheet" href="../../media/stylesheet.css" />
+			<meta http-equiv='Content-Type' content='text/html; charset=iso-8859-1'/>
+		</head>
+		<body>
+			<div class="page-body">			
+<h2 class="class-name">Class User</h2>
+
+<a name="sec-description"></a>
+<div class="info-box">
+	<div class="info-box-title">Description</div>
+	<div class="nav-bar">
+					<span class="disabled">Description</span> |
+													<a href="#sec-var-summary">Vars</a> (<a href="#sec-vars">details</a>)
+						|											<a href="#sec-method-summary">Methods</a> (<a href="#sec-methods">details</a>)
+						
+											<a href="#sec-const-summary">Constants</a> (<a href="#sec-consts">details</a>)
+						
+			</div>
+	<div class="info-box-body">
+                <p class="implements">
+            Implements interfaces:
+            <ul>
+                <li><a href="../../Patchwork/Doctrine/Patchwork_Form_Doctrine_Renderable.html">Patchwork_Form_Doctrine_Renderable</a></li><li><a href="../../Patchwork/Authentication/Patchwork_Auth_RoleIdentity.html">Patchwork_Auth_RoleIdentity</a></li><li><a href="../../default/Patchwork_Auth_Model.html">Patchwork_Auth_Model</a></li>            </ul>
+        </p>
+        		<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">User class</p>
+	<ul class="tags">
+				<li><span class="field">author:</span> Daniel Pozzi</li>
+				<li><span class="field">version:</span> SVN: $Id: Builder.php 7490 2010-03-29 19:53:27Z jwage $</li>
+			</ul>
+		<p class="notes">
+			Located in <a class="field" href="_application---models---User.php.html">/application/models/User.php</a> (line <span class="field">17</span>)
+		</p>
+		
+				
+		<pre>Doctrine_Record
+   |
+   --<a href="../../--PACKAGE--/--SUBPACKAGE--/BaseUser.html">BaseUser</a>
+      |
+      --User</pre>
+	
+			</div>
+</div>
+
+
+	<a name="sec-const-summary"></a>
+	<div class="info-box">
+		<div class="info-box-title">Class Constant Summary</span></div>
+		<div class="nav-bar">
+			<a href="#sec-description">Description</a> |
+						<span class="disabled">Constants</span> (<a href="#sec-consts">details</a>)
+												<a href="#sec-var-summary">Vars</a> (<a href="#sec-vars">details</a>)
+				 
+				|
+										| 
+									<a href="#sec-method-summary">Methods</a> (<a href="#sec-methods">details</a>)
+							
+					</div>
+		<div class="info-box-body">
+			<div class="const-summary">
+								<div class="const-title">
+					<img src="../../media/images/Constant.png" alt=" " />
+					<a href="#AUTH_CREDENTIAL_COLUMN" title="details" class="const-name">AUTH_CREDENTIAL_COLUMN</a> = 					<span class="var-type"> 'password'</span>
+
+				</div>
+								<div class="const-title">
+					<img src="../../media/images/Constant.png" alt=" " />
+					<a href="#AUTH_CREDENTIAL_TREATMENT" title="details" class="const-name">AUTH_CREDENTIAL_TREATMENT</a> = 					<span class="var-type"> 'MD5(CONCAT(?, salt))'</span>
+
+				</div>
+								<div class="const-title">
+					<img src="../../media/images/Constant.png" alt=" " />
+					<a href="#AUTH_IDENTITY_COLUMN" title="details" class="const-name">AUTH_IDENTITY_COLUMN</a> = 					<span class="var-type"> 'email'</span>
+
+				</div>
+								<div class="const-title">
+					<img src="../../media/images/Constant.png" alt=" " />
+					<a href="#AUTH_SALT_COLUMN" title="details" class="const-name">AUTH_SALT_COLUMN</a> = 					<span class="var-type"> 'salt'</span>
+
+				</div>
+							</div>
+		</div>
+	</div>
+
+	<a name="sec-var-summary"></a>
+	<div class="info-box">
+		<div class="info-box-title">Variable Summary</span></div>
+		<div class="nav-bar">
+			<a href="#sec-description">Description</a> |
+						<span class="disabled">Vars</span> (<a href="#sec-vars">details</a>)
+							| 
+									<a href="#sec-method-summary">Methods</a> (<a href="#sec-methods">details</a>)
+							
+															<a href="#sec-const-summary">Constants</a> (<a href="#sec-consts">details</a>)
+							
+					</div>
+		<div class="info-box-body">
+			<div class="var-summary">
+												<div class="var-title">
+					static <span class="var-type"><a href="../../Application/Models/User.html">User</a></span>
+					<a href="#$authenticatedUser" title="details" class="var-name">$authenticatedUser</a>
+				</div>
+																<div class="var-title">
+					static <span class="var-type">Zend_Auth_Result</span>
+					<a href="#$_authResult" title="details" class="var-name">$_authResult</a>
+				</div>
+																															</div>
+		</div>
+	</div>
+
+	<a name="sec-method-summary"></a>
+	<div class="info-box">
+		<div class="info-box-title">Method Summary</span></div>
+		<div class="nav-bar">
+			<a href="#sec-description">Description</a> |
+															<a href="#sec-const-summary">Constants</a> (<a href="#sec-consts">details</a>)
+							
+															<a href="#sec-var-summary">Vars</a> (<a href="#sec-vars">details</a>)
+				 
+				|
+						<span class="disabled">Methods</span> (<a href="#sec-methods">details</a>)
+		</div>
+		<div class="info-box-body">			
+			<div class="method-summary">
+												<div class="method-definition">
+					static 						<span class="method-result">boolean</span>
+										<a href="#authenticate" title="details" class="method-name">authenticate</a>
+											(<span class="var-type"><type></span>&nbsp;<span class="var-name">$identity</span>, <span class="var-type"><type></span>&nbsp;<span class="var-name">$credential</span>)
+									</div>
+																<div class="method-definition">
+					static 						<span class="method-result">self</span>
+										<a href="#getAuthenticatedUser" title="details" class="method-name">getAuthenticatedUser</a>
+										()
+									</div>
+																<div class="method-definition">
+					static 						<span class="method-result">Zend_Auth_Result</span>
+										<a href="#getAuthenticationResult" title="details" class="method-name">getAuthenticationResult</a>
+										()
+									</div>
+																								
+																																				<div class="method-definition">
+											<span class="method-result">array</span>
+										<a href="#getIgnoredColumns" title="details" class="method-name">getIgnoredColumns</a>
+										()
+									</div>
+																<div class="method-definition">
+											<span class="method-result">string</span>
+										<a href="#getRole" title="details" class="method-name">getRole</a>
+										()
+									</div>
+								</div>
+		</div>
+	</div>		
+
+	<a name="sec-vars"></a>
+	<div class="info-box">
+		<div class="info-box-title">Variables</div>
+		<div class="nav-bar">
+			<a href="#sec-description">Description</a> |
+										<a href="#sec-var-summary">Vars</a> (<span class="disabled">details</span>)
+						
+			
+												<a href="#sec-const-summary">Constants</a> (<a href="#sec-consts">details</a>)
+							
+										| 
+									<a href="#sec-method-summary">Methods</a> (<a href="#sec-methods">details</a>)
+							
+					</div>
+		<div class="info-box-body">
+			<a name="var$authenticatedUser" id="$authenticatedUser"><!-- --></A>
+<div class="evenrow">
+
+	<div class="var-header">
+		<span class="var-title">
+			static <span class="var-type"><a href="../../Application/Models/User.html">User</a></span>
+			<span class="var-name">$authenticatedUser</span>
+						(line <span class="line-number">33</span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">instance of User</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> protected</li>
+			</ul>
+	
+	
+		
+		
+
+</div>
+<a name="var$_authResult" id="$_authResult"><!-- --></A>
+<div class="oddrow">
+
+	<div class="var-header">
+		<span class="var-title">
+			static <span class="var-type">Zend_Auth_Result</span>
+			<span class="var-name">$_authResult</span>
+						(line <span class="line-number">39</span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">result of auth</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> protected</li>
+			</ul>
+	
+	
+		
+		
+
+</div>
+						
+		</div>
+	</div>
+	
+	<a name="sec-methods"></a>
+	<div class="info-box">
+		<div class="info-box-title">Methods</div>
+		<div class="nav-bar">
+			<a href="#sec-description">Description</a> |
+															<a href="#sec-var-summary">Vars</a> (<a href="#sec-vars">details</a>)
+																			<a href="#sec-const-summary">Constants</a> (<a href="#sec-consts">details</a>)
+							
+										<a href="#sec-method-summary">Methods</a> (<span class="disabled">details</span>)
+						
+		</div>
+		<div class="info-box-body">
+			<A NAME='method_detail'></A>
+<a name="methodauthenticate" id="authenticate"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">static method authenticate</span> (line <span class="line-number">67</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+	    static
+		<span class="method-result">boolean</span>
+		<span class="method-name">
+			authenticate
+		</span>
+					(<span class="var-type"><type></span>&nbsp;<span class="var-name">$identity</span>, <span class="var-type"><type></span>&nbsp;<span class="var-name">$credential</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type"><type></span>
+				<span class="var-name">$identity</span>			</li>
+					<li>
+				<span class="var-type"><type></span>
+				<span class="var-name">$credential</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodgetAuthenticatedUser" id="getAuthenticatedUser"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">static method getAuthenticatedUser</span> (line <span class="line-number">105</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">for Patchwork_Auth_Model interface, return the authenticated user</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+	    static
+		<span class="method-result">self</span>
+		<span class="method-name">
+			getAuthenticatedUser
+		</span>
+				()
+			</div>
+	
+		
+			
+	</div>
+<a name="methodgetAuthenticationResult" id="getAuthenticationResult"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">static method getAuthenticationResult</span> (line <span class="line-number">95</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+	    static
+		<span class="method-result">Zend_Auth_Result</span>
+		<span class="method-name">
+			getAuthenticationResult
+		</span>
+				()
+			</div>
+	
+		
+			
+	</div>
+
+<a name="methodgetIgnoredColumns" id="getIgnoredColumns"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">getIgnoredColumns</span> (line <span class="line-number">46</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">fields not to show in modelform</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">array</span>
+		<span class="method-name">
+			getIgnoredColumns
+		</span>
+				()
+			</div>
+	
+		
+			
+	</div>
+<a name="methodgetRole" id="getRole"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">getRole</span> (line <span class="line-number">55</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">return the roel</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">string</span>
+		<span class="method-name">
+			getRole
+		</span>
+				()
+			</div>
+	
+		
+			
+	</div>
+							<h4>Inherited Methods</h4>
+				<a name='inherited_methods'><!-- --></a>	
+									<!-- =========== Summary =========== -->
+					<p>Inherited From <span class="classname"><a href="../../--PACKAGE--/--SUBPACKAGE--/BaseUser.html">BaseUser</a></span></p>
+					<blockquote>
+													<span class="method-name"><a href="../../--PACKAGE--/--SUBPACKAGE--/BaseUser.html#methodsetTableDefinition">BaseUser::setTableDefinition()</a></span><br>
+													<span class="method-name"><a href="../../--PACKAGE--/--SUBPACKAGE--/BaseUser.html#methodsetUp">BaseUser::setUp()</a></span><br>
+											</blockquote>
+										
+		</div>
+	</div>
+
+	<a name="sec-consts"></a>
+	<div class="info-box">
+		<div class="info-box-title">Class Constants</div>
+		<div class="nav-bar">
+			<a href="#sec-description">Description</a> |
+										<a href="#sec-var-summary">Constants</a> (<span class="disabled">details</span>)
+						
+			
+												<a href="#sec-var-summary">Vars</a> (<a href="#sec-vars">details</a>)
+														| 
+									<a href="#sec-method-summary">Methods</a> (<a href="#sec-methods">details</a>)
+							
+					</div>
+		<div class="info-box-body">
+			<a name="constAUTH_CREDENTIAL_COLUMN" id="AUTH_CREDENTIAL_COLUMN"><!-- --></A>
+<div class="oddrow">
+
+	<div class="const-header">
+		<img src="../../media/images/Variable.png" />
+		<span class="const-title">
+			<span class="const-name">AUTH_CREDENTIAL_COLUMN</span>
+			 = <span class="const-default"> 'password'</span>
+			(line <span class="line-number">25</span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+	
+	
+</div>
+<a name="constAUTH_CREDENTIAL_TREATMENT" id="AUTH_CREDENTIAL_TREATMENT"><!-- --></A>
+<div class="evenrow">
+
+	<div class="const-header">
+		<img src="../../media/images/Variable.png" />
+		<span class="const-title">
+			<span class="const-name">AUTH_CREDENTIAL_TREATMENT</span>
+			 = <span class="const-default"> 'MD5(CONCAT(?, salt))'</span>
+			(line <span class="line-number">27</span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+	
+	
+</div>
+<a name="constAUTH_IDENTITY_COLUMN" id="AUTH_IDENTITY_COLUMN"><!-- --></A>
+<div class="oddrow">
+
+	<div class="const-header">
+		<img src="../../media/images/Variable.png" />
+		<span class="const-title">
+			<span class="const-name">AUTH_IDENTITY_COLUMN</span>
+			 = <span class="const-default"> 'email'</span>
+			(line <span class="line-number">24</span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+	
+	
+</div>
+<a name="constAUTH_SALT_COLUMN" id="AUTH_SALT_COLUMN"><!-- --></A>
+<div class="evenrow">
+
+	<div class="const-header">
+		<img src="../../media/images/Variable.png" />
+		<span class="const-title">
+			<span class="const-name">AUTH_SALT_COLUMN</span>
+			 = <span class="const-default"> 'salt'</span>
+			(line <span class="line-number">26</span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+	
+	
+</div>
+						
+		</div>
+	</div>
+
+	<p class="notes" id="credit">
+		Documentation generated on Fri, 23 Jul 2010 07:31:56 +0200 by <a href="http://www.phpdoc.org" target="_blank">phpDocumentor 1.4.3</a>
+	</p>
+	</div></body>
+</html>
