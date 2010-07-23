@@ -34,13 +34,41 @@ Installation
 License
 =======
 
-Patchwork is distributed under the MIT License. Use it for whatever you like.
-Doctrine 1.2.2 is published under the LGPL, http://www.doctrine-project.org.
-PHPIDS ...
-ZEND ...
+Patchwork is distributed under the MIT License.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS
+ FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR
+COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER
+IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
+CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+
+Doctrine 1.2.2 is published under the LGPL
+http://www.doctrine-project.org
+
+PHPIDS is released under the LGPL
+http://code.google.com/p/phpids/
+
+Zend Framework is released under the BSD license.
+http://framework.zend.com/license
+
+
+To Do
+=====
+
+- Upgrade PHPIDS to 0.6.4
+- Unit testing
+- review ModelForm and compare to Beberlei's Version
+- make script callable form everywhere
 
 Read more
 =========
 
-PHING
+PHING + PPHDocumentor
 http://technosophos.com/category/tags/phing
+
+Compass + SASS + Blueprint
+http://sass-lang.com/
+http://compass-style.org/
+http://net.tutsplus.com/tutorials/html-css-techniques/using-compass-and-sass-for-css-in-your-next-project/
+A blueprint cheat sheet is included in the doc directory.
