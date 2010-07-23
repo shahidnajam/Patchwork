@@ -35,11 +35,9 @@ abstract class ControllerTestCase extends Zend_Test_PHPUnit_ControllerTestCase
      */
     public function appBootstrap()
     {
-        $this->application->bootstrap();
-        /*Doctrine::loadModels(MODELS_PATH .'/generated');
-        Doctrine::loadModels(MODELS_PATH);*/
+        $this->application->bootstrap('Cli');
         Doctrine::createTablesFromModels();
-        Doctrine::loadData(APPLICATION_PATH . '/doctrine/data/fixtures');
+        Doctrine::loadData(APPLICATION_PATH . '/doctrine/fixtures');
     }
 
     public function tearDown()

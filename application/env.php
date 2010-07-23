@@ -24,7 +24,7 @@ defined('LIBRARY_PATH')
 defined('TMP_PATH')
     || define('TMP_PATH', realpath(dirname(__FILE__) . '/../tmp'));
 defined('MODELS_PATH')
-    || define('MODELS_PATH', realpath(dirname(__FILE__) . '/models/generated'));
+    || define('MODELS_PATH', realpath(dirname(__FILE__) . '/models'));
 defined('ROOT_PATH')
     || define('ROOT_PATH', realpath(dirname(dirname(__FILE__))));
 

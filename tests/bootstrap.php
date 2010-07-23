@@ -15,6 +15,7 @@ require_once dirname(dirname(__FILE__)) . DIRECTORY_SEPARATOR . 'application'
 
 /** Zend_Application */
 require_once 'Zend/Application.php';
+require_once 'vendor/sfYaml/sfYaml.php';
 
 $application = new Zend_Application(
     APPLICATION_ENV,

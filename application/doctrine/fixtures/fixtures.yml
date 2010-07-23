@@ -3,7 +3,15 @@ User:
   # salt test
   User_1:
     id: 1
+    username: bonndan
     email: dpozzi@gmx.net
     password: 3f14b6841ab09dc36d32a3d6f80ade58
     salt: 098f6bcd4621d373cade4e832627b4f6
     role: admin
+  User_2:
+    id: 2
+    username: alex
+    email: aspaeth@m2soft.com
+    password: 3f14b6841ab09dc36d32a3d6f80ade58
+    salt: 098f6bcd4621d373cade4e832627b4f6
+    role: guest

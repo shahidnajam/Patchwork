@@ -43,8 +43,12 @@ class User
      *
      * @return array
      */
-    public function getIgnoredColumns() {
-        return array('created_at', 'updated_at', 'deleted_at', 'password', 'salt');
+    public function getIgnoredColumns()
+    {
+        return array(
+            'created_at',
+            'deleted_at'
+        );
     }
 
     /**
@@ -54,7 +58,7 @@ class User
      */
     public function getRole()
     {
-        return $this->role;
+        //return $this->role;
     }
 
     /**

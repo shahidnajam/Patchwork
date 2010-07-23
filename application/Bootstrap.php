@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Bootstrap class
  *
@@ -10,17 +11,21 @@
  */
 class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
 {
+
     /**
      * start autoloading
      *
      * @return Zend_Loader_Autoloader
      */
     protected function _initAppAutoload()
-    {      
+    {
+        $autoloader = Zend_Loader_Autoloader::getInstance();
+        $autoloader->setFallbackAutoloader(true);
+
         $mal = new Zend_Application_Module_Autoloader(array(
-            'namespace' => 'App',
-            'basePath' => dirname(__FILE__),
-        ));
+                'namespace' => 'App',
+                'basePath' => dirname(__FILE__),
+            ));
 
         return $mal;
     }
@@ -33,10 +38,10 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
     protected function _initNavigation()
     {
         Zend_Registry::set(
-            Patchwork::NAVIGATION_REGISTRY_KEY,
-            new Zend_Navigation(
-                require(CONFIG_PATH . DIRECTORY_SEPARATOR . 'navigation.php')
-            )
+                Patchwork::NAVIGATION_REGISTRY_KEY,
+                new Zend_Navigation(
+                    require(CONFIG_PATH . DIRECTORY_SEPARATOR . 'navigation.php')
+                )
         );
     }
 
@@ -48,8 +53,8 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
     public function _initConfigToRegistry()
     {
         Zend_Registry::set(
-            Patchwork::CONFIG_REGISTRY_KEY,
-            new Zend_Config($this->getOptions())
+                Patchwork::CONFIG_REGISTRY_KEY,
+                new Zend_Config($this->getOptions())
         );
     }
 
@@ -69,11 +74,11 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
             $acl->add(new Zend_Acl_Resource($res));
         }
 
-        foreach($config["role"] as $role) {
+        foreach ($config["role"] as $role) {
             $acl->addRole(new Zend_Acl_Role($role));
 
-            if(isset($config["access"][$role])) {
-                foreach($config["access"][$role] as $access) {
+            if (isset($config["access"][$role])) {
+                foreach ($config["access"][$role] as $access) {
                     $acl->allow($role, $access);
                 }
             }
@@ -89,7 +94,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
     public function _initDoctrine()
     {
         $this->bootstrap('AppAutoload')
-             ->bootstrap('ConfigToRegistry');
+            ->bootstrap('ConfigToRegistry');
 
         require_once LIBRARY_PATH . DIRECTORY_SEPARATOR . 'Doctrine.php';
         $manager = Doctrine_Manager::getInstance();
@@ -100,7 +105,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
          */
         $cacheConn = Doctrine_Manager::connection(new PDO('sqlite::memory:'));
         $cacheDriver = new Doctrine_Cache_Db(
-            array('connection' => $cacheConn, 'tableName' =>'cache')
+                array('connection' => $cacheConn, 'tableName' => 'cache')
         );
         $cacheDriver->createTable();
         $manager->setAttribute(Doctrine_Core::ATTR_QUERY_CACHE, $cacheDriver);
@@ -108,19 +113,19 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
         /**
          * autoloading
          */
-        $config =  Zend_Registry::get('config');
+        $config = Zend_Registry::get('config');
         /*$manager->setAttribute(
             Doctrine::ATTR_MODEL_LOADING,
             Doctrine::MODEL_LOADING_CONSERVATIVE
         );*/
-        $manager->setAttribute(Doctrine::ATTR_AUTOLOAD_TABLE_CLASSES, true);
+        //$manager->setAttribute(Doctrine::ATTR_AUTOLOAD_TABLE_CLASSES, true);
         Doctrine::loadModels($config->doctrine->options->models_path);
         Doctrine::loadModels($config->doctrine->options->models_path . '/generated');
 
         Zend_Controller_Action_HelperBroker::addPrefix('Patchwork_Controller_Helper');
 
         $conn = Doctrine_Manager::connection(
-            $config->doctrine->connections->db, 'doctrine'
+                $config->doctrine->connections->db, 'doctrine'
         );
         $conn->setAttribute(Doctrine::ATTR_USE_NATIVE_ENUM, true);
         return $conn;
@@ -137,7 +142,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
         Zend_Registry::set('Zend_Locale', $locale);
 
         // Return it, so that it can be stored by the bootstrap
-        return $locale; 
+        return $locale;
     }
 
     /**
@@ -147,5 +152,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
     {
         $this->_initAppAutoload();
         $this->_initConfigToRegistry();
+        $this->_initDoctrine();
     }
+
 }
