@@ -59,7 +59,9 @@ To Do
 - Upgrade PHPIDS to 0.6.4
 - Unit testing
 - review ModelForm and compare to Beberlei's Version
-- make script callable form everywhere
+- make scripts callable form everywhere
+- test PUT/POST/DELETE from RestController
+- http basic auth for rest
 
 Read more
 =========
