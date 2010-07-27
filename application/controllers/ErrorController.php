@@ -1,7 +1,9 @@
 <?php
 /**
+ * ErrorController
  *
- *
+ * @category Application
+ * @package  Controller
  * 
  */
 class ErrorController extends Zend_Controller_Action
@@ -10,7 +12,6 @@ class ErrorController extends Zend_Controller_Action
     public function errorAction()
     {
         $errors = $this->_getParam('error_handler');
-        
         switch ($errors->type) {
             case Zend_Controller_Plugin_ErrorHandler::EXCEPTION_NO_ROUTE:
             case Zend_Controller_Plugin_ErrorHandler::EXCEPTION_NO_CONTROLLER:
