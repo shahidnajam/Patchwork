@@ -114,10 +114,10 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
          * autoloading
          */
         $config = Zend_Registry::get('config');
-        /*$manager->setAttribute(
-            Doctrine::ATTR_MODEL_LOADING,
-            Doctrine::MODEL_LOADING_CONSERVATIVE
-        );*/
+        /* $manager->setAttribute(
+          Doctrine::ATTR_MODEL_LOADING,
+          Doctrine::MODEL_LOADING_CONSERVATIVE
+          ); */
         //$manager->setAttribute(Doctrine::ATTR_AUTOLOAD_TABLE_CLASSES, true);
         Doctrine::loadModels($config->doctrine->options->models_path);
         Doctrine::loadModels($config->doctrine->options->models_path . '/generated');
@@ -146,6 +146,24 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
     }
 
     /**
+     * REST routing
+     *
+     *
+     */
+    protected function _initRestRoute()
+    {
+        $config = Zend_Registry::get(Patchwork::CONFIG_REGISTRY_KEY);
+        if ($config->general->setting->rest_routing) {
+            $this->bootstrap('frontController');
+            $frontController = Zend_Controller_Front::getInstance();
+            $restRoute = new Zend_Rest_Route($frontController);
+            $frontController->getRouter()->addRoute('default', $restRoute);
+        }
+    }
+
+    /**
+     * command line interface bootstrapping
+     *
      * 
      */
     public function _initCli()

@@ -47,7 +47,8 @@ class Patchwork_Controller_Plugin_Auth extends Zend_Controller_Plugin_Abstract
     }
 
     /**
-     * checks if controller name is an allowed resource
+     * checks if controller name is an allowed resource, modifies the request
+     * if not valid
      * 
      * @param Zend_Controller_Request_Abstract $request request
      */
@@ -59,7 +60,11 @@ class Patchwork_Controller_Plugin_Auth extends Zend_Controller_Plugin_Abstract
             );
 
         $acl = Zend_Registry::get(Patchwork::ACL_REGISTRY_KEY);
-        if(!$acl->isAllowed(self::getUserRole(), $request->getControllerName())) {
+        $resource = $request->getControllerName();
+        if(
+            !$acl->has($resource) ||
+            !$acl->isAllowed(self::getUserRole(), $resource)
+        ) {
             $this->redirectToAccessDenied($request);
         }
     }

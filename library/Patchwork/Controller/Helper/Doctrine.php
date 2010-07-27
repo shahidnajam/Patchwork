@@ -43,8 +43,9 @@ class Patchwork_Controller_Helper_Doctrine
      * @return self|Doctrine_Record
      * @throws Patchwork_Exception
      */
-    public function direct($componentName = null, $primary = null)
-    {
+    public function direct($componentName = null,
+                           $primary = null
+    ){
         if($componentName == null)
             return $this;
 
@@ -131,6 +132,7 @@ class Patchwork_Controller_Helper_Doctrine
     }
 
     /**
+     * lists all models, or returns the doctrine_query for it
      *
      * @param string  $model
      * @param integer $limit
@@ -142,15 +144,15 @@ class Patchwork_Controller_Helper_Doctrine
     public function listRecords(
         $model,
         $limit = 0,
-        $offset = 0,
+        $offset = null,
         $returnQuery = false
     ) {
         $query = Doctrine::getTable($model)->getQueryObject();
 
         if(((int)$limit) > 0)
             $query->limit($limit);
-        if(((int)$offset) > 0)
-            $query>offset($offset);
+        if(is_int($offset))
+            $query->offset($offset);
 
         if($returnQuery)
             return $query;
