@@ -145,20 +145,14 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
         return $locale;
     }
 
-    /**
-     * REST routing
-     *
-     *
-     */
-    protected function _initRestRoute()
+    public function _initApiModule()
     {
-        $config = Zend_Registry::get(Patchwork::CONFIG_REGISTRY_KEY);
-        if ($config->general->setting->rest_routing) {
-            $this->bootstrap('frontController');
-            $frontController = Zend_Controller_Front::getInstance();
-            $restRoute = new Zend_Rest_Route($frontController);
-            $frontController->getRouter()->addRoute('default', $restRoute);
-        }
+        $frontController = Zend_Controller_Front::getInstance();
+        $restRoute = new Zend_Rest_Route($frontController);
+        $frontController->getRouter()->addRoute('api', $restRoute);
+
+        $plugin = new Patchwork_Controller_Plugin_HttpAuth('api');
+        $frontController->registerPlugin($plugin);
     }
 
     /**

@@ -1,6 +1,6 @@
 <?php
 /**
- * REST Controller plus Doctrine
+ * REST Controller plus Doctrine, uses basic http auth
  *
  * make sure to enable rest routing
  *
@@ -41,7 +41,7 @@ abstract class Patchwork_Controller_RESTModelController
      */
     const OFFSET_PARAM = 'offset';
     const LIMIT_PARAM  = 'limit';
-
+    
     /**
      * disable views and layouts
      *

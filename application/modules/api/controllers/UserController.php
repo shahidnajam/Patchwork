@@ -5,7 +5,7 @@
  *
  * 
  */
-class UserController extends Patchwork_Controller_RESTModelController
+class Api_UserController extends Patchwork_Controller_RESTModelController
 {
     var $modelName = 'User';
 }
