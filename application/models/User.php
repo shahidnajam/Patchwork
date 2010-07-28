@@ -17,7 +17,7 @@
 class User
     extends BaseUser
     implements
-    Patchwork_Form_Doctrine_Renderable,
+    Patchwork_Doctrine_Model_Renderable,
     Patchwork_Auth_RoleIdentity,
     Patchwork_Auth_Model
 {
@@ -46,8 +46,9 @@ class User
     public function getIgnoredColumns()
     {
         return array(
-            'created_at',
-            'deleted_at'
+            'deleted_at',
+            'password',
+            'salt',
         );
     }
 

@@ -114,10 +114,10 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
          * autoloading
          */
         $config = Zend_Registry::get('config');
-        /*$manager->setAttribute(
-            Doctrine::ATTR_MODEL_LOADING,
-            Doctrine::MODEL_LOADING_CONSERVATIVE
-        );*/
+        /* $manager->setAttribute(
+          Doctrine::ATTR_MODEL_LOADING,
+          Doctrine::MODEL_LOADING_CONSERVATIVE
+          ); */
         //$manager->setAttribute(Doctrine::ATTR_AUTOLOAD_TABLE_CLASSES, true);
         Doctrine::loadModels($config->doctrine->options->models_path);
         Doctrine::loadModels($config->doctrine->options->models_path . '/generated');
@@ -145,7 +145,19 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
         return $locale;
     }
 
+    public function _initApiModule()
+    {
+        $frontController = Zend_Controller_Front::getInstance();
+        $restRoute = new Zend_Rest_Route($frontController);
+        $frontController->getRouter()->addRoute('api', $restRoute);
+
+        $plugin = new Patchwork_Controller_Plugin_HttpAuth('api');
+        $frontController->registerPlugin($plugin);
+    }
+
     /**
+     * command line interface bootstrapping
+     *
      * 
      */
     public function _initCli()

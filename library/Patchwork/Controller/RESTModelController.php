@@ -1,6 +1,8 @@
 <?php
 /**
- * REST Controller plus Doctrine
+ * REST Controller plus Doctrine, uses basic http auth
+ *
+ * make sure to enable rest routing
  *
  * @category   Library
  * @package    Patchwork
@@ -29,11 +31,17 @@ abstract class Patchwork_Controller_RESTModelController
     public $model;
 
     /**
+     * parse incoming json from cappuccinoResource
+     * @var boolean
+     */
+    public $cappuccinoResourceCompatible = false;
+
+    /**
      * request constants
      */
     const OFFSET_PARAM = 'offset';
     const LIMIT_PARAM  = 'limit';
-
+    
     /**
      * disable views and layouts
      *
@@ -44,7 +52,7 @@ abstract class Patchwork_Controller_RESTModelController
         $this->_helper->layout->disableLayout();
         $this->_helper->viewRenderer->setNoRender(true);
         
-        $doctrine = new Patchwork_Controller_Action_Helper_Doctrine($this);
+        $doctrine = new Patchwork_Controller_Helper_Doctrine($this);
         Zend_Controller_Action_HelperBroker::addHelper($doctrine);
     }
     
@@ -54,6 +62,7 @@ abstract class Patchwork_Controller_RESTModelController
      * @param boolean|integer $withPrimaryKey can be pk or bool
      * 
      * @return Doctrine_Record
+     * @throws Patchwork_Exception
      */
     public function initModel($withPrimaryKey = true)
     {
@@ -61,7 +70,9 @@ abstract class Patchwork_Controller_RESTModelController
             return new $this->modelName;
 
         if($withPrimaryKey === TRUE)
-            $withPrimaryKey = $this->_getParam($this->modelPrimaryKey);
+            $withPrimaryKey = (int)$this->_getParam($this->modelPrimaryKey);
+        else
+            $withPrimaryKey = (int)$withPrimaryKey;
 
         return $this->model = $this->_helper->Doctrine
             ->getRecordOrException(
@@ -80,14 +91,17 @@ abstract class Patchwork_Controller_RESTModelController
      */
     public function toJSON($data)
     {
-        if($data instanceof Doctrine_Record){
-            return Patchwork_View_Helper_RenderModel::renderModel($data, 'json');
+        if($data instanceof Patchwork_Doctrine_Model_Renderable){
+            $output = $data->toArray();
+            foreach($data->getIgnoredColumns() as $field)
+                unset($output[$field]);
+            return json_encode((object)$output);
+        } elseif ($data instanceof Doctrine_Record) {
+            return json_encode((object)$data->toArray());
         } elseif($data instanceOf Doctrine_Collection){
             $return = array();
             foreach($data as $model){
-                $return[] = Patchwork_View_Helper_RenderModel::renderModel(
-                    $model, 'json'
-                );
+                $return[] = $this->toJSON($model);
             }
             return "[". implode(',', $return).']'; //array entries come as json
         } else {
@@ -99,14 +113,18 @@ abstract class Patchwork_Controller_RESTModelController
 
     /**
      * parses incoming json, this is a special configuration for request sent
-     * by CappuccinoResource: there is an extra key (=model name) describing the data
+     * by CappuccinoResource: there is an extra key (=model name) describing the
+     * data
      *
-     * @param $forModel pick subset and convert to array
+     * @param boolean $forModel pick subset and convert to array
      * 
      * @return object|array
      */
-    protected function getJSONParams($forModel = true)
+    protected function _getAllParams($forModel = true)
     {
+        if(!$this->cappuccinoResourceCompatible)
+            return $this->_getAllParams();
+        
         $rawBody = $this->getRequest()->getRawBody();
         $all = json_decode($rawBody);
         if($forModel)
@@ -116,7 +134,8 @@ abstract class Patchwork_Controller_RESTModelController
     }
 
     /**
-     * FIXME
+     * returns the get url for a model: /user/1
+     *
      * @param Doctrine_Record $model
      * 
      * @return string
@@ -133,30 +152,49 @@ abstract class Patchwork_Controller_RESTModelController
     }
 
     /**
-     * list
+     * list, the standard request
      *
      * 
      */
     public function indexAction()
     {
-        $this->_forward('get');
+        $offset = (int)$this->_getParam(self::OFFSET_PARAM);
+        $limit  = (int)$this->_getParam(self::LIMIT_PARAM);
+        $objects = $this->_helper->Doctrine->listRecords(
+            $this->modelName,
+            $limit,
+            $offset
+        );
+        $this->getResponse()
+            ->setHttpResponseCode(200)
+            ->setHeader('Content-type', 'application/json')
+            ->appendBody(
+                $this->toJSON($objects)
+            );
     }
 
     /**
-     * listing
+     * one object
      *
      *
      * @todo enable application/json header
      */
     public function getAction()
     {
-        $offset = $this->_getParam(self::OFFSET_PARAM);
-        $objects = $this->_helper->Doctrine->listRecords($this->modelName);
+        try {
+            $this->initModel();
+        } catch (Exception $e){
+            $this->invalidAction();
+        }
+
+        if(!$this->model)
+            return $this->_returnNotfound();
+
         $this->getResponse()
             ->setHttpResponseCode(200)
-            //->setHeader('Content-type', 'application/json')
+            ->setHeader('Content-type', 'application/json')
             ->appendBody(
-                $this->toJSON($objects)
+                $this->toJSON($this->model)
             );
     }
 
@@ -168,11 +206,15 @@ abstract class Patchwork_Controller_RESTModelController
     public function putAction()
     {
         try {
-            $model = $this->initModel();
-        } catch (Exception $e) {
-            $this->_forward('invalid');
+            $this->initModel();
+        } catch (Exception $e){
+            $this->invalidAction();
         }
-        $params = $this->getJSONParams();
+
+        if(!$this->model)
+            return $this->_returnNotfound();
+        
+        $params = $this->_getAllParams();
         $model->fromArray($params);
         $model->save();
         
@@ -192,7 +234,7 @@ abstract class Patchwork_Controller_RESTModelController
     public function postAction()
     {
         $model = new $this->modelName;
-        $params = $this->getJSONParams();
+        $params = $this->_getAllParams();
         $model->fromArray($params);
         $model->save();
 
@@ -213,13 +255,18 @@ abstract class Patchwork_Controller_RESTModelController
      *
      *
      */
-    public function deleteAction() {
+    public function deleteAction()
+    {
         try {
-            $model = $this->initModel();
-        } catch (Exception $e) {
-            $this->_forward('invalid');
+            $this->initModel();
+        } catch (Exception $e){
+            $this->invalidAction();
         }
-        $model->delete();
+
+        if(!$this->model)
+            return $this->_returnNotfound();
+
+        $this->model->delete();
         $this->getResponse()
             ->setHttpResponseCode(204);
     }
@@ -229,7 +276,18 @@ abstract class Patchwork_Controller_RESTModelController
      *
      *
      */
-    public function invalidAction() {
+    public function invalidAction()
+    {
         $this->getResponse()->setHttpResponseCode(403);
+    }
+
+    /**
+     * not found
+     *
+     *
+     */
+    protected function _returnNotfound()
+    {
+        return $this->getResponse()->setHttpResponseCode(404);
     }
 }

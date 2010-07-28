@@ -5,7 +5,7 @@
  * CU_ModelForm by Jani Hartikainen
  *
 <code>
-class ExampleForm extends Patchwork_Doctrine_ModelForm
+class ExampleForm extends Patchwork_Doctrine_Model_Form
 {
 	//Use Article as the model
 	protected $_model = 'Article';
@@ -28,7 +28,7 @@ class ExampleForm extends Patchwork_Doctrine_ModelForm
  * @package   Patchwork
  * @subpackage Doctrine
  */
-class Patchwork_Form_Doctrine_ModelForm extends Zend_Form
+class Patchwork_Doctrine_Model_Form extends Zend_Form
 {
     /**
      * PluginLoader for loading many relation forms
@@ -211,7 +211,7 @@ class Patchwork_Form_Doctrine_ModelForm extends Zend_Form
         $this->_instance = $instance;
         $this->_table = Doctrine::getTable($this->_model);
 
-        if($instance instanceof Patchwork_Doctrine_FormRenderable){
+        if($instance instanceof Patchwork_Doctrine_Model_Renderable){
             $this->_ignoreColumns = $instance->getIgnoredColumns();
         }
         
