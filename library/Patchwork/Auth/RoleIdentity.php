@@ -1,5 +1,15 @@
 <?php
 /**
+ * Patchwork
+ *
+ * @package    Patchwork
+ * @subpackage Authentication
+ * @author     Daniel Pozzi
+ */
+
+/**
+ * Patchwork_Auth_RoleIdentity
+ *
  * Identity having a role
  *
  * @package    Patchwork

@@ -60,8 +60,12 @@ To Do
 - Unit testing
 - review ModelForm and compare to Beberlei's Version
 - make scripts callable form everywhere
-- test PUT/POST/DELETE from RestController
-- http basic auth for rest
+- RestController
+    - test PUT/POST/DELETE from RestController
+    - make RestController compatible to ROR rest responses?
+    - add limit, offset, results to GET listing
+-
+X http basic auth for rest
 
 Read more
 =========

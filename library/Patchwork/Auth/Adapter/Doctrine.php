@@ -7,6 +7,15 @@
  * @subpackage Authentification
  * @author     Daniel Pozzi
  */
+
+/**
+ * Patchwork_Auth_Adapter_Doctrine
+ *
+ * @category   Library
+ * @package    Patchwork
+ * @subpackage Authentification
+ * @author     Daniel Pozzi
+ */
 class Patchwork_Auth_Adapter_Doctrine implements Zend_Auth_Adapter_Interface
 {
 
@@ -83,7 +92,7 @@ class Patchwork_Auth_Adapter_Doctrine implements Zend_Auth_Adapter_Interface
      * assures that valid options have been passed to the constructor
      *
      * @throws Zend_Auth_Adapter_Exception
-     * @return void
+     * @return boolean
      */
     protected function _checkOptions()
     {
@@ -105,6 +114,8 @@ class Patchwork_Auth_Adapter_Doctrine implements Zend_Auth_Adapter_Interface
                 'identity' => $this->_identity,
                 'messages' => array()
         );
+
+        return true;
     }
 
     /**
