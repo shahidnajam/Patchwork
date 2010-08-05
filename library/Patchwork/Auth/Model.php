@@ -4,8 +4,10 @@
  * 
  * allows authentication
  *
- * @category Library
- * @author Daniel Pozzi
+ * @category   Library
+ * @package    Authentication
+ * @subpackage AuthModel
+ * @author     Daniel Pozzi
  */
 interface Patchwork_Auth_Model
 {

@@ -53,13 +53,13 @@ class User
     }
 
     /**
-     * return the roel
+     * return the role
      * 
      * @return string
      */
     public function getRole()
     {
-        //return $this->role;
+        return $this->_get('role');
     }
 
     /**
@@ -105,7 +105,7 @@ class User
     /**
      * for Patchwork_Auth_Model interface, return the authenticated user
      *
-     * @return self
+     * @return self|null
      */
     public static function getAuthenticatedUser()
     {

@@ -13,8 +13,9 @@ class UserTest extends ControllerTestCase
         $result = $user->getIgnoredColumns();
 
         $expected = array(
-            'created_at',
             'deleted_at',
+            'password',
+            'salt',
         );
 
         $this->assertEquals($expected, $result);
@@ -55,8 +56,17 @@ class UserTest extends ControllerTestCase
         );
     }
 
-    public function testX()
+    public function testGetRole()
     {
-        $this->markTestIncomplete();
+        $user = new User;
+        $user->role = 'guest';
+        $this->assertTrue($user->getRole() == 'guest');
+    }
+
+    public function testGetAuthenticatedUser()
+    {
+        User::authenticate('dpozzi@gmx.net', 'test');
+        $res = User::getAuthenticatedUser();
+        $this->assertTrue($res->id == 1);
     }
 }

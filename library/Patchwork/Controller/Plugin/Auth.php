@@ -25,6 +25,9 @@ class Patchwork_Controller_Plugin_Auth extends Zend_Controller_Plugin_Abstract
      */
     const GUEST_ROLE = 'guest';
 
+    const ERROR_CONTROLLER = 'error';
+    const ERROR_ACTION     = 'denied';
+
     /**
      * return the current role
      *
