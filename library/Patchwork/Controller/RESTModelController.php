@@ -49,9 +49,17 @@ abstract class Patchwork_Controller_RESTModelController
      */
     public function init()
     {
-        $this->_helper->layout->disableLayout();
+        try{
+            $this->_helper->layout->disableLayout();
+        } catch (Zend_Controller_Action_Exception $e){
+            //layout helper was not present
+        }
+
+        try{
         $this->_helper->viewRenderer->setNoRender(true);
-        
+        } catch (Zend_Controller_Action_Exception $e){
+            //ok, since not needed
+        }
         $doctrine = new Patchwork_Controller_Helper_Doctrine($this);
         Zend_Controller_Action_HelperBroker::addHelper($doctrine);
     }
@@ -123,7 +131,7 @@ abstract class Patchwork_Controller_RESTModelController
     protected function _getAllParams($forModel = true)
     {
         if(!$this->cappuccinoResourceCompatible)
-            return $this->_getAllParams();
+            return parent::_getAllParams();
         
         $rawBody = $this->getRequest()->getRawBody();
         $all = json_decode($rawBody);
@@ -140,7 +148,7 @@ abstract class Patchwork_Controller_RESTModelController
      * 
      * @return string
      */
-    protected function getModelURL(Doctrine_Record $model)
+    public function getModelURL(Doctrine_Record $model)
     {
         $controller = $this->getRequest()->getControllerName();
         $url = $_SERVER['HTTP_HOST']
@@ -215,15 +223,16 @@ abstract class Patchwork_Controller_RESTModelController
             return $this->_returnNotfound();
         
         $params = $this->_getAllParams();
-        $model->fromArray($params);
-        $model->save();
+
+        $this->model->fromArray($params);
+        $this->model->save();
         
-        $url = $this->getModelURL($model);
+        $url = $this->getModelURL($this->model);
 
         $this->getResponse()
                 ->setHttpResponseCode(200)
                 ->setHeader("Location", $url)
-                ->appendBody($this->toJSON($model));
+                ->appendBody($this->toJSON($this->model));
     }
 
     /**
