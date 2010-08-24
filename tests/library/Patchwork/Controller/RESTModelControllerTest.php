@@ -9,50 +9,27 @@ require_once(dirname(dirname(dirname(dirname(__FILE__))))).'/bootstrap.php';
 class Patchwork_Controller_RESTModelControllerTest extends ControllerTestCase
 {
     /**
-     * create request
-     * 
-     * @param array $requestArgs request params
-     *
-     * @return Zend_Controller_Request_Http
-     */
-    protected function _getNewRequest(array $requestArgs = null, $method = 'GET')
-    {
-        $_SERVER['REQUEST_METHOD'] = $method;
-        $_SERVER['HTTP_HOST'] = 'testhost';
-        $request = new Zend_Controller_Request_Http;
-        
-        if(is_array($requestArgs))
-            foreach($requestArgs as $key=>$value)
-                $request->setParam($key, $value);
-        
-        return $request;
-    }
-
-    /**
-     * get response object
-     * @return Zend_Controller_Response_Http 
-     */
-    protected function _getNewResponse()
-    {
-        $response = new Zend_Controller_Response_Http;
-        $response->headersSentThrowsException = false;
-        return $response;
-    }
-
-    /**
-     *
-     * @param <type> $requestArgs
      *
      * @return TestController
      */
-    protected function _getController(array $requestArgs = null, $method = 'GET')
+    protected function _getController()
     {
         $controller = new TestController(
-            $this->_getNewRequest($requestArgs, $method),
-            $this->_getNewResponse()
+            new Zend_Controller_Request_Http,
+            new Zend_Controller_Response_Http
         );
 
         return $controller;
+    }
+
+    /**
+     * disable http auth plugin
+     */
+    protected function _disableHttpAuth()
+    {
+        $front =  Zend_Controller_Front::getInstance();
+        if($front->hasPlugin('Patchwork_Controller_Plugin_HttpAuth'))
+            $front->unregisterPlugin('Patchwork_Controller_Plugin_HttpAuth');
     }
 
     /**
@@ -86,44 +63,158 @@ class Patchwork_Controller_RESTModelControllerTest extends ControllerTestCase
     }
 
     /**
+     * test index/list request
      *
      */
-    public function testInitModelFromRequestId()
+    public function testIndex()
     {
-        $args = array('id' => 1);
-        $controller = $this->_getController($args);
-        $res = $controller->initModel(true);
-        $this->assertTrue($res instanceof User);
-        $this->assertEquals(1, $res->id);
+        $this->_disableHttpAuth();
+        $this->dispatch('api/user');
+
+        $this->assertAction('index');
+        $this->assertResponseCode(200);
+        $body = json_decode($this->getResponse()->getBody());
+        $this->assertEquals(2, count($body));
+        $this->assertEquals('bonndan', $body[0]->username);
+    }
+
+    /**
+     * test index/list request with suername search
+     *
+     */
+    public function testIndexWithSearch()
+    {
+        $this->_disableHttpAuth();
+        $this->dispatch('api/user', 'GET', array('username' => 'bon'));
+
+        $this->assertAction('index');
+        $this->assertResponseCode(200);
+        $body = json_decode($this->getResponse()->getBody());
+        $this->assertEquals(1, count($body));
+        $this->assertEquals('bonndan', $body[0]->username);
+    }
+
+    /**
+     * test index with limit
+     *
+     */
+    public function testIndexWithLimit()
+    {
+        $this->_disableHttpAuth();
+        $this->dispatch('api/user', 'GET', array('limit'=>1));
+
+        $this->assertAction('index');
+        $this->assertResponseCode(200);
+        $body = json_decode($this->getResponse()->getBody());
+        $this->assertEquals(1, count($body));
+        $this->assertEquals('bonndan', $body[0]->username);
+    }
+
+    /**
+     * test index with limit
+     *
+     */
+    public function testIndexWithOffset()
+    {
+        $this->_disableHttpAuth();
+        $this->dispatch('api/user', 'GET', array('offset'=>1,'limit' => 1));
+
+        $this->assertAction('index');
+        $this->assertResponseCode(200);
+        $body = json_decode($this->getResponse()->getBody());
+        $this->assertEquals(1, count($body));
+        $this->assertEquals('alex', $body[0]->username);
     }
 
     /**
      *
      */
-    public function testInitModelFromPOSTRequestId()
+    public function testGET()
     {
-        $args = array('id' => 1);
-        $controller = $this->_getController($args, 'POST');
-        $res = $controller->initModel(true);
-        $this->assertTrue($res instanceof User);
-        $this->assertEquals(1, $res->id);
+        $this->_disableHttpAuth();
+        $this->dispatch('api/user', 'GET', array('id' => 1));
+
+        $this->assertAction('get');
+        $this->assertResponseCode(200);
+        $body = json_decode($this->getResponse()->getBody());
+        $this->assertTrue(is_object($body));
+        $this->assertEquals('bonndan', $body->username);
     }
 
     /**
+     *
+     */
+    public function testPOST()
+    {
+        $this->_disableHttpAuth();
+        $this->dispatch('api/user', 'POST', array('username' => 'test', 'email' => 'test@123.com'));
+
+        $this->assertAction('post');
+        $this->assertResponseCode(201);
+    }
+
+    /**
+     * put test
+     *
+     *
      * 
      */
     public function testPutAction()
     {
+        $this->_disableHttpAuth();
         $payload = array('id' => 1, 'email' => 'test@123.com');
-
-        $controller = $this->_getController($payload, 'PUT');
-        $controller->init();
-        $controller->putAction();
-        $this->assertResponseCode(200);
-        $this->assertContains(
-            'user/1',
-            $controller->getResponse()->__toString()
+        $this->dispatch('api/user', 'PUT', $payload);
+        $this->assertAction(
+            'put',
+            Zend_Controller_Front::getInstance()->getResponse()->getBody()
         );
+        $this->assertController('user');
+        
+        $this->assertResponseCode(
+            200,
+            'Response code: '.$this->getResponse()->getHttpResponseCode()
+        );
+        $response = $this->getResponse()->getBody();
+        $this->assertContains(
+            '"username":"bonndan"',
+            $response
+        );
+    }
+
+    /**
+     * delete test
+     *
+     * 
+     */
+    public function testUnauthDeleteAction()
+    {
+        $payload = array('id' => 1);
+        $this->dispatch('api/user', 'DELETE', $payload);
+        $this->assertResponseCode(403);
+    }
+
+    /**
+     * delete test
+     *
+     *
+     */
+    public function testDeleteAction()
+    {
+        $this->_disableHttpAuth();
+
+        $payload = array('id' => 1);
+        $this->dispatch('api/user', 'DELETE', $payload);
+
+       $this->assertResponseCode(
+            204
+        );
+        /**
+         * user entry deleted?
+         */
+        $user = Doctrine::getTable('User')->find(1);
+        $this->assertFalse($user);
+
+        
     }
 }
 

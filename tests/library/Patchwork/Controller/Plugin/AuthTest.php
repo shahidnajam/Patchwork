@@ -29,15 +29,6 @@ class Patchwork_Controller_Plugin_AuthTest extends ControllerTestCase
     }
 
     /**
-     * @expectedException Patchwork_Exception
-     */
-    public function testDispatchLoopStartupWithoutACL()
-    {
-        $auth = new Patchwork_Controller_Plugin_Auth;
-        $auth->dispatchLoopStartup(new Zend_Controller_Request_Http);
-    }
-
-    /**
      * 
      */
     public function testDispatchLoopStartup()

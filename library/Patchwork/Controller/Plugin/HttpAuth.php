@@ -11,6 +11,8 @@
 /**
  * Patchwork_Controller_Plugin_HttpAuth
  *
+ * basic http authentciation against doctrine/database
+ *
  * @package    Patchwork
  * @subpackage Authorisation
  * @author     Daniel Pozzi <bonndan76@googlemail.com>
@@ -29,8 +31,9 @@ extends Zend_Controller_Plugin_Abstract
     protected $_module;
     
     /**
+     * constructor
      *
-     * @param strign $module
+     * @param string $module module name
      * @return self
      */
     public function  __construct($module)
@@ -86,7 +89,8 @@ extends Zend_Controller_Plugin_Abstract
 
         $result = Zend_Auth::getInstance()->authenticate($adapter);
         if(!$result->isValid()){
-            die('Access denied.');
+            $request->setControllerName('index');
+            $request->setActionName('denied');
         }
 
         /**
@@ -103,9 +107,8 @@ extends Zend_Controller_Plugin_Abstract
             !$acl->has($resource) ||
             !$acl->isAllowed($this->getUserRole(), $resource)
         ) {
-            $response->setHeader('Access denied.', 401, true);
-            die('Permission denied for role '.$this->getUserRole().' and resource: '.$resource);
+            $request->setControllerName('index');
+            $request->setActionName('denied');
         }
     }
-
 }
