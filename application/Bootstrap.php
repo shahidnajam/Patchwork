@@ -89,7 +89,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
     /**
      * starting doctrine
      *
-     *
+     * @return Doctrine_Connection
      */
     public function _initDoctrine()
     {
@@ -99,6 +99,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
         require_once LIBRARY_PATH . DIRECTORY_SEPARATOR . 'Doctrine.php';
         $manager = Doctrine_Manager::getInstance();
         $manager->setAttribute(Doctrine::ATTR_AUTO_ACCESSOR_OVERRIDE, true);
+        $manager->setAttribute(Doctrine::ATTR_USE_DQL_CALLBACKS, true);
 
         /**
          * caching
@@ -145,6 +146,10 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
         return $locale;
     }
 
+    /**
+     * switches to rest routing for the api module and enables http auth
+     *
+     */
     public function _initApiModule()
     {
         $frontController = Zend_Controller_Front::getInstance();

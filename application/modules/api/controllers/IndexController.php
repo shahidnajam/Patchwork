@@ -19,4 +19,13 @@ class Api_IndexController extends Patchwork_Controller_RESTModelController
             echo "HttpAuth plugin loaded.";
     }
 
+    /**
+     * access denied
+     * 
+     */
+    public function  deniedAction()
+    {
+        $this->getResponse()->setHttpResponseCode(403);
+        $this->getResponse()->setBody('Access denied');
+    }
 }

@@ -26,7 +26,7 @@ abstract class Patchwork_Controller_RESTModelController
 
     /**
      * model instance
-     * @var object
+     * @var Doctrine_Record
      */
     public $model;
 
@@ -275,9 +275,20 @@ abstract class Patchwork_Controller_RESTModelController
         if(!$this->model)
             return $this->_returnNotfound();
 
-        $this->model->delete();
+        if(!$this->model->delete())
+            return $this->errorAction();
+        
         $this->getResponse()
             ->setHttpResponseCode(204);
+    }
+
+    /**
+     * error sends code 500
+     * 
+     */
+    public function errorAction()
+    {
+        $this->getResponse()->setHttpResponseCode(500);
     }
 
     /**
