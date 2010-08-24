@@ -147,20 +147,6 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
     }
 
     /**
-     * switches to rest routing for the api module and enables http auth
-     *
-     */
-    public function _initApiModule()
-    {
-        $frontController = Zend_Controller_Front::getInstance();
-        $restRoute = new Zend_Rest_Route($frontController);
-        $frontController->getRouter()->addRoute('api', $restRoute);
-
-        $plugin = new Patchwork_Controller_Plugin_HttpAuth('api');
-        $frontController->registerPlugin($plugin);
-    }
-
-    /**
      * command line interface bootstrapping
      *
      * 
