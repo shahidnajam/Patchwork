@@ -1,18 +1,19 @@
 Patchwork
----------
+=========
 
 Patchwork is a combination of Zend Framework, PHPIDS and Doctrine and comes
 ready to start a new ZF project.
 
-- standard Zend Application and project structure
-- input scanning using PHPIDS (using a controller plugin)
-- Doctrine ORM
-- JSON-REST service using Doctrine (use Patchwork_Controller_RESTModelController)
-- shipped with a phing buildfile
-- shipped with a blueprint css template for compass, see scripts/generate-css.sh
+* standard Zend Application and project structure
+* input scanning using PHPIDS (using a controller plugin)
+* Doctrine ORM
+* Authentication against Doctrine + HTTP basic auth against Doctrine 
+* JSON-REST service using Doctrine (use Patchwork_Controller_RESTModelController)
+* shipped with a phing buildfile
+* shipped with a blueprint css template for compass, see scripts/generate-css.sh
 
 Libraries:
-==========
+----------
 
 Zend Framework 1.10.6 is used where all require-statements have been stripped
 using the instruction from:
@@ -25,14 +26,14 @@ PHPIDS 0.6.3 is included.
 
 
 Installation
-============
+------------
 
 1) Make sure the directories required by PHPIDS are writeable.
 2) Modify public/.htaccess to your needs
 3) Modify application/configs/application.ini
 
 License
-=======
+-------
 
 Patchwork is distributed under the MIT License.
 
@@ -54,21 +55,18 @@ http://framework.zend.com/license
 
 
 To Do
-=====
+-----
 
 - Upgrade PHPIDS to 0.6.4
 - Unit testing
-- review ModelForm and compare to Beberlei's Version
 - make scripts callable form everywhere
 - RestController
-    - test PUT/POST/DELETE from RestController
     - make RestController compatible to ROR rest responses?
     - add limit, offset, results to GET listing
--
-X http basic auth for rest
+- review ZFDoctrine (http://github.com/beberlei/zf-doctrine)
 
 Read more
-=========
+---------
 
 PHING + PPHDocumentor
 http://technosophos.com/category/tags/phing

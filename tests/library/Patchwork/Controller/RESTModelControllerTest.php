@@ -63,9 +63,40 @@ class Patchwork_Controller_RESTModelControllerTest extends ControllerTestCase
     }
 
     /**
+     * test index/list request
      *
      */
-    public function testInitModelFromPOSTRequestId()
+    public function testIndex()
+    {
+        $this->_disableHttpAuth();
+        $this->dispatch('api/user');
+
+        $this->assertAction('index');
+        $this->assertResponseCode(200);
+        $body = json_decode($this->getResponse()->getBody());
+        $this->assertEquals(2, count($body));
+        $this->assertEquals('bonndan', $body[0]->username);
+    }
+
+    /**
+     *
+     */
+    public function testGET()
+    {
+        $this->_disableHttpAuth();
+        $this->dispatch('api/user', 'GET', array('id' => 1));
+
+        $this->assertAction('get');
+        $this->assertResponseCode(200);
+        $body = json_decode($this->getResponse()->getBody());
+        $this->assertTrue(is_object($body));
+        $this->assertEquals('bonndan', $body->username);
+    }
+
+    /**
+     *
+     */
+    public function testPOST()
     {
         $this->_disableHttpAuth();
         $this->dispatch('api/user', 'POST', array('username' => 'test', 'email' => 'test@123.com'));
