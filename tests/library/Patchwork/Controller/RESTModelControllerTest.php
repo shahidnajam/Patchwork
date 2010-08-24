@@ -79,6 +79,54 @@ class Patchwork_Controller_RESTModelControllerTest extends ControllerTestCase
     }
 
     /**
+     * test index/list request with suername search
+     *
+     */
+    public function testIndexWithSearch()
+    {
+        $this->_disableHttpAuth();
+        $this->dispatch('api/user', 'GET', array('username' => 'bon'));
+
+        $this->assertAction('index');
+        $this->assertResponseCode(200);
+        $body = json_decode($this->getResponse()->getBody());
+        $this->assertEquals(1, count($body));
+        $this->assertEquals('bonndan', $body[0]->username);
+    }
+
+    /**
+     * test index with limit
+     *
+     */
+    public function testIndexWithLimit()
+    {
+        $this->_disableHttpAuth();
+        $this->dispatch('api/user', 'GET', array('limit'=>1));
+
+        $this->assertAction('index');
+        $this->assertResponseCode(200);
+        $body = json_decode($this->getResponse()->getBody());
+        $this->assertEquals(1, count($body));
+        $this->assertEquals('bonndan', $body[0]->username);
+    }
+
+    /**
+     * test index with limit
+     *
+     */
+    public function testIndexWithOffset()
+    {
+        $this->_disableHttpAuth();
+        $this->dispatch('api/user', 'GET', array('offset'=>1,'limit' => 1));
+
+        $this->assertAction('index');
+        $this->assertResponseCode(200);
+        $body = json_decode($this->getResponse()->getBody());
+        $this->assertEquals(1, count($body));
+        $this->assertEquals('alex', $body[0]->username);
+    }
+
+    /**
      *
      */
     public function testGET()
