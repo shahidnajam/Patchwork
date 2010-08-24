@@ -19,9 +19,9 @@ Zend Framework 1.10.6 is used where all require-statements have been stripped
 using the instruction from:
 http://framework.zend.com/manual/en/performance.classloading.html#performance.classloading.striprequires
 
-Doctrine 1.2.2 is included.
+Doctrine 1.2.3 is included.
 
-PHPIDS 0.6.3 is included.
+PHPIDS 0.6.4 is included.
 
 
 
@@ -44,7 +44,7 @@ COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER
 IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
 CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-Doctrine 1.2.2 is published under the LGPL
+Doctrine is published under the LGPL
 http://www.doctrine-project.org
 
 PHPIDS is released under the LGPL
@@ -57,12 +57,9 @@ http://framework.zend.com/license
 To Do
 -----
 
-- Upgrade PHPIDS to 0.6.4
 - Unit testing
 - make scripts callable form everywhere
-- RestController
-    - make RestController compatible to ROR rest responses?
-    - add limit, offset, results to GET listing
+- make RestController compatible to ROR rest responses? (add results to GET listing?)
 - review ZFDoctrine (http://github.com/beberlei/zf-doctrine)
 
 Read more
