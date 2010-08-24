@@ -68,10 +68,10 @@ class Patchwork_Controller_RESTModelControllerTest extends ControllerTestCase
     public function testInitModelFromPOSTRequestId()
     {
         $this->_disableHttpAuth();
-        $this->dispatch('api/user', 'POST', array('id' => 1));
+        $this->dispatch('api/user', 'POST', array('username' => 'test', 'email' => 'test@123.com'));
 
         $this->assertAction('post');
-        $this->assertResponseCode(200);
+        $this->assertResponseCode(201);
     }
 
     /**
@@ -93,7 +93,7 @@ class Patchwork_Controller_RESTModelControllerTest extends ControllerTestCase
         
         $this->assertResponseCode(
             200,
-            'Respone code: '.$this->getResponse()->getHttpResponseCode()
+            'Response code: '.$this->getResponse()->getHttpResponseCode()
         );
         $response = $this->getResponse()->getBody();
         $this->assertContains(
