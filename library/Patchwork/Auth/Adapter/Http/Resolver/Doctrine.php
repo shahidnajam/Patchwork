@@ -22,7 +22,7 @@ class Patchwork_Auth_Adapter_Http_Resolver_Doctrine implements Zend_Auth_Adapter
      * @param string $username username to look for
      * @param string $realm    not used
      *
-     * @return string
+     * @return string|null
      */
     public function resolve($username, $realm)
     {

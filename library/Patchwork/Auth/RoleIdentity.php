@@ -23,5 +23,5 @@ interface Patchwork_Auth_RoleIdentity
      *
      * @return string role name
      */
-    public function getRole();
+    public function getRoleForAuthentication();
 }
