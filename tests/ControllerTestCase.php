@@ -92,7 +92,7 @@ abstract class ControllerTestCase extends Zend_Test_PHPUnit_ControllerTestCase
         /**
          * add payload and method
          */
-        $this->request->setMethod($method);
+        $request->setMethod($method);
         $_SERVER['REQUEST_METHOD'] = $method;
         $_SERVER['HTTP_HOST'] = 'testhost';
         if (is_array($requestArgs))

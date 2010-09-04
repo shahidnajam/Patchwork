@@ -142,13 +142,21 @@ class Patchwork_Controller_RESTModelControllerTest extends ControllerTestCase
     }
 
     /**
+     * test that postAction is excuted
      *
+     * 
      */
     public function testPOST()
     {
         $this->_disableHttpAuth();
-        $this->dispatch('api/user', 'POST', array('username' => 'test', 'email' => 'test@123.com'));
+        $this->dispatch(
+            'api/user',
+            'POST',
+            array('username' => 'test', 'email' => 'test@123.com')
+        );
 
+        $this->assertModule('api');
+        $this->assertController('user');
         $this->assertAction('post');
         $this->assertResponseCode(201);
     }
