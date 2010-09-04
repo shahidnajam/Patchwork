@@ -15,18 +15,19 @@ error_reporting(E_ALL);
 /**
  *  Define path to application directory
  */
+defined('ROOT_PATH')
+    || define('ROOT_PATH', realpath(dirname(dirname(__FILE__))));
 defined('APPLICATION_PATH')
     || define('APPLICATION_PATH', realpath(dirname(__FILE__)));
 defined('CONFIG_PATH')
-    || define('CONFIG_PATH', APPLICATION_PATH . DIRECTORY_SEPARATOR . 'configs');
+    || define('CONFIG_PATH', APPLICATION_PATH . '/configs');
 defined('LIBRARY_PATH')
-    || define('LIBRARY_PATH', realpath(dirname(__FILE__) . '/../library'));
+    || define('LIBRARY_PATH', ROOT_PATH . '/library');
 defined('TMP_PATH')
-    || define('TMP_PATH', realpath(dirname(__FILE__) . '/../tmp'));
+    || define('TMP_PATH', ROOT_PATH . '/tmp');
 defined('MODELS_PATH')
-    || define('MODELS_PATH', realpath(dirname(__FILE__) . '/models'));
-defined('ROOT_PATH')
-    || define('ROOT_PATH', realpath(dirname(dirname(__FILE__))));
+    || define('MODELS_PATH', APPLICATION_PATH . '/models');
+
 
 /**
  *  Define application environment
