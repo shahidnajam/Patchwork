@@ -38,10 +38,10 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
     protected function _initNavigation()
     {
         Zend_Registry::set(
-                Patchwork::NAVIGATION_REGISTRY_KEY,
-                new Zend_Navigation(
-                    require(CONFIG_PATH . DIRECTORY_SEPARATOR . 'navigation.php')
-                )
+            Patchwork::NAVIGATION_REGISTRY_KEY,
+            new Zend_Navigation(
+                require(CONFIG_PATH . DIRECTORY_SEPARATOR . 'navigation.php')
+            )
         );
     }
 
@@ -87,52 +87,6 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
     }
 
     /**
-     * starting doctrine
-     *
-     * @return Doctrine_Connection
-     */
-    public function _initDoctrine()
-    {
-        $this->bootstrap('AppAutoload')
-            ->bootstrap('ConfigToRegistry');
-
-        require_once LIBRARY_PATH . DIRECTORY_SEPARATOR . 'Doctrine.php';
-        $manager = Doctrine_Manager::getInstance();
-        $manager->setAttribute(Doctrine::ATTR_AUTO_ACCESSOR_OVERRIDE, true);
-        $manager->setAttribute(Doctrine::ATTR_USE_DQL_CALLBACKS, true);
-
-        /**
-         * caching
-         */
-        $cacheConn = Doctrine_Manager::connection(new PDO('sqlite::memory:'));
-        $cacheDriver = new Doctrine_Cache_Db(
-                array('connection' => $cacheConn, 'tableName' => 'cache')
-        );
-        $cacheDriver->createTable();
-        $manager->setAttribute(Doctrine_Core::ATTR_QUERY_CACHE, $cacheDriver);
-
-        /**
-         * autoloading
-         */
-        $config = Zend_Registry::get('config');
-        /* $manager->setAttribute(
-          Doctrine::ATTR_MODEL_LOADING,
-          Doctrine::MODEL_LOADING_CONSERVATIVE
-          ); */
-        //$manager->setAttribute(Doctrine::ATTR_AUTOLOAD_TABLE_CLASSES, true);
-        Doctrine::loadModels($config->doctrine->options->models_path);
-        Doctrine::loadModels($config->doctrine->options->models_path . '/generated');
-
-        Zend_Controller_Action_HelperBroker::addPrefix('Patchwork_Controller_Helper');
-
-        $conn = Doctrine_Manager::connection(
-                $config->doctrine->connections->db, 'doctrine'
-        );
-        $conn->setAttribute(Doctrine::ATTR_USE_NATIVE_ENUM, true);
-        return $conn;
-    }
-
-    /**
      * init app-wide locale
      *
      * @return Zend_Locale
@@ -155,7 +109,5 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
     {
         $this->_initAppAutoload();
         $this->_initConfigToRegistry();
-        $this->_initDoctrine();
     }
-
 }
