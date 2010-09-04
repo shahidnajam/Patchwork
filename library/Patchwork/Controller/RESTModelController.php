@@ -31,12 +31,6 @@ abstract class Patchwork_Controller_RESTModelController
     public $model;
 
     /**
-     * parse incoming json from cappuccinoResource
-     * @var boolean
-     */
-    public $cappuccinoResourceCompatible = false;
-
-    /**
      * request constants
      */
     const OFFSET_PARAM = 'offset';
@@ -60,6 +54,7 @@ abstract class Patchwork_Controller_RESTModelController
         } catch (Zend_Controller_Action_Exception $e){
             //ok, since not needed
         }
+        
         $doctrine = new Patchwork_Controller_Helper_Doctrine($this);
         Zend_Controller_Action_HelperBroker::addHelper($doctrine);
     }
@@ -90,59 +85,7 @@ abstract class Patchwork_Controller_RESTModelController
     }
 
     /**
-     * renders json strings using special views 
-     *
-     * @param Doctrine_Record|Doctrine_Collection $data
-     *
-     * @return string
-     * @throws InvalidArgumentException
-     */
-    public function toJSON($data)
-    {
-        if($data instanceof Patchwork_Doctrine_Model_Renderable){
-            $output = $data->toArray();
-            foreach($data->getIgnoredColumns() as $field)
-                unset($output[$field]);
-            return json_encode((object)$output);
-        } elseif ($data instanceof Doctrine_Record) {
-            return json_encode((object)$data->toArray());
-        } elseif($data instanceOf Doctrine_Collection){
-            $return = array();
-            foreach($data as $model){
-                $return[] = $this->toJSON($model);
-            }
-            return "[". implode(',', $return).']'; //array entries come as json
-        } else {
-            throw new InvalidArgumentException(
-                'Doctrine_Record or Doctrine_Collection required'
-            );
-        }
-    }
-
-    /**
-     * parses incoming json, this is a special configuration for request sent
-     * by CappuccinoResource: there is an extra key (=model name) describing the
-     * data
-     *
-     * @param boolean $forModel pick subset and convert to array
-     * 
-     * @return object|array
-     */
-    protected function _getAllParams($forModel = true)
-    {
-        if(!$this->cappuccinoResourceCompatible)
-            return parent::_getAllParams();
-        
-        $rawBody = $this->getRequest()->getRawBody();
-        $all = json_decode($rawBody);
-        if($forModel)
-            return (array)$all->{strtolower($this->modelName)};
-        else
-            return $all;
-    }
-
-    /**
-     * returns the get url for a model: /user/1
+     * returns the get url for a model: /users/1
      *
      * @param Doctrine_Record $model
      * 
@@ -150,35 +93,50 @@ abstract class Patchwork_Controller_RESTModelController
      */
     public function getModelURL(Doctrine_Record $model)
     {
-        $controller = $this->getRequest()->getControllerName();
         $url = $_SERVER['HTTP_HOST']
             . Zend_Controller_Front::getInstance()->getBaseUrl()
-            . DIRECTORY_SEPARATOR . $controller
+            . DIRECTORY_SEPARATOR . $this->getRequest()->getControllerName()
             . DIRECTORY_SEPARATOR . $model->{$this->modelPrimaryKey};
 
         return $url;
     }
 
     /**
-     * list, the standard request
+     * returns limit param
+     * @return int
+     */
+    protected function _getLimit()
+    {
+        return (int)$this->_getParam(self::LIMIT_PARAM, 0);
+    }
+
+    /**
+     * returns offset param
+     * @return int
+     */
+    protected function _getOffset()
+    {
+        return (int)$this->_getParam(self::OFFSET_PARAM, 0);
+    }
+
+    /**
+     * list, the standard GET request without an id
      *
-     * 
+     * response is a json array with fields: limit, offset, total, data
      */
     public function indexAction()
     {
-        $offset = (int)$this->_getParam(self::OFFSET_PARAM);
-        $limit  = (int)$this->_getParam(self::LIMIT_PARAM);
         $objects = $this->_helper->Doctrine->listRecords(
             $this->modelName,
-            $limit,
-            $offset
+            $where = null,
+            $this->_getLimit(),
+            $this->_getOffset()
         );
+
         $this->getResponse()
             ->setHttpResponseCode(200)
             ->setHeader('Content-type', 'application/json')
-            ->appendBody(
-                $this->toJSON($objects)
-            );
+            ->appendBody($this->_helper->Doctrine->toJSON($objects));
     }
 
     /**
@@ -202,14 +160,13 @@ abstract class Patchwork_Controller_RESTModelController
             ->setHttpResponseCode(200)
             ->setHeader('Content-type', 'application/json')
             ->appendBody(
-                $this->toJSON($this->model)
+                $this->_helper->Doctrine->toJSON($this->model)
             );
     }
 
     /**
      * put (update)
      *
-     * @todo check resp code
      */
     public function putAction()
     {
@@ -230,9 +187,9 @@ abstract class Patchwork_Controller_RESTModelController
         $url = $this->getModelURL($this->model);
 
         $this->getResponse()
-                ->setHttpResponseCode(200)
-                ->setHeader("Location", $url)
-                ->appendBody($this->toJSON($this->model));
+            ->setHttpResponseCode(200)
+            ->setHeader("Location", $url)
+            ->appendBody($this->_helper->Doctrine->toJSON($this->model));
     }
 
     /**
@@ -245,17 +202,17 @@ abstract class Patchwork_Controller_RESTModelController
         $model = new $this->modelName;
         $params = $this->_getAllParams();
         $model->fromArray($params);
-        $model->save();
-
+        try {
+            $model->save();
+        } catch (Exception $e) {
+            return $this->errorAction('Error creating entity.');
+        }
+        
         if($model->id) {
-            $url = Zend_Controller_Front::getInstance()->getBaseUrl() 
-                . DIRECTORY_SEPARATOR . $this->modelName
-                . DIRECTORY_SEPARATOR . $model->id;
-
             $this->getResponse()
                 ->setHttpResponseCode(201)
-                ->setHeader("Location", $url)
-                ->appendBody($this->toJSON($model));
+                ->setHeader("Location", $this->getModelURL($model))
+                ->appendBody($this->_helper->Doctrine->toJSON($model));
         }
     }
 
@@ -284,11 +241,14 @@ abstract class Patchwork_Controller_RESTModelController
 
     /**
      * error sends code 500
-     * 
+     *
+     * @param string $message error message
      */
-    public function errorAction()
+    public function errorAction($message = null)
     {
         $this->getResponse()->setHttpResponseCode(500);
+        if($message)
+            $this->getResponse()->setBody($message);
     }
 
     /**

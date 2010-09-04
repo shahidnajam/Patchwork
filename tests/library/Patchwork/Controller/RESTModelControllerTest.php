@@ -196,8 +196,10 @@ class Patchwork_Controller_RESTModelControllerTest extends ControllerTestCase
      */
     public function testUnauthDeleteAction()
     {
+        Zend_Registry::set(Patchwork::ACL_REGISTRY_KEY, new Zend_Acl);
         $payload = array('id' => 1);
         $this->dispatch('api/user', 'DELETE', $payload);
+        $this->assertAction('denied');
         $this->assertResponseCode(403);
     }
 

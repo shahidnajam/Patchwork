@@ -11,7 +11,7 @@
 /**
  * REST API plugin
  *
- * enables rest routing and http auth
+ * enables rest routing and http auth for a specific module
  *
  * @category   Library
  * @package    Patchwork
@@ -33,8 +33,8 @@ class Patchwork_Controller_Plugin_RESTAPI extends Zend_Controller_Plugin_Abstrac
      * patchwork.options.restAPI.module = 'api'
      * patchwork.options.restAPI.useHttpBasicAuth = true
      * 
-     * @param Zend_Controller_Request_Abstract $request
-     * FIXME overwrites all routing with restRoute
+     * @param Zend_Controller_Request_Abstract $request request object
+     * @return void
      */
     public function routeStartup(Zend_Controller_Request_Abstract $request)
     {
@@ -42,9 +42,9 @@ class Patchwork_Controller_Plugin_RESTAPI extends Zend_Controller_Plugin_Abstrac
         $httpBasicAuth = false;
         if(Zend_Registry::isRegistered(Patchwork::CONFIG_REGISTRY_KEY)){
             $config = Zend_Registry::get(Patchwork::CONFIG_REGISTRY_KEY);
-            if($config->patchwork && $config->patchwork->restAPI){
-                $restRoutingModule = $config->patchwork->restAPI->module;
-                $httpBasicAuth = $config->patchwork->restAPI->useHttpBasicAuth;
+            if($config->patchwork && $config->patchwork->options->restAPI){
+                $restRoutingModule = $config->patchwork->options->restAPI->module;
+                $httpBasicAuth = $config->patchwork->options->restAPI->useHttpBasicAuth;
             }
         }
 

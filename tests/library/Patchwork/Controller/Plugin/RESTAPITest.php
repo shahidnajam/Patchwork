@@ -20,12 +20,18 @@ class Patchwork_Controller_Plugin_RESTAPITest extends ControllerTestCase
      */
     public function testAPIModuleRouting()
     {
-        Zend_Registry::set(Patchwork::ACL_REGISTRY_KEY, new Zend_Acl);
+        $acl = Zend_Registry::get(Patchwork::ACL_REGISTRY_KEY);
+        $acl->allow('guest', 'user');
+        
         $request = new Zend_Controller_Request_Http;
         $request->setModuleName('api');
         $request->setControllerName('users');
         $_SERVER['REQUEST_METHOD'] = 'POST';
         $_SERVER['HTTP_HOST'] = 'testhost';
+
+        $front =  Zend_Controller_Front::getInstance();
+        if($front->hasPlugin('Patchwork_Controller_Plugin_HttpAuth'))
+            $front->unregisterPlugin('Patchwork_Controller_Plugin_HttpAuth');
 
         $plugin = new Patchwork_Controller_Plugin_RESTAPI;
         $plugin->routeStartup($request);

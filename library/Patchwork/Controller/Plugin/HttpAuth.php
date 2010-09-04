@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Patchwork_Controller_Plugin_HttpAuth
  *
@@ -28,6 +27,10 @@ extends Zend_Controller_Plugin_Abstract
      */
     public $resolver;
 
+    /**
+     * module to protect
+     * @var string
+     */
     protected $_module;
     
     /**
@@ -88,18 +91,12 @@ extends Zend_Controller_Plugin_Abstract
         $adapter->setResponse($response);
 
         $result = Zend_Auth::getInstance()->authenticate($adapter);
-        if(!$result->isValid()){
-            $request->setControllerName('index');
-            $request->setActionName('denied');
-        }
 
         /**
          * standard acl stuff
          */
         if (!Zend_Registry::isRegistered(Patchwork::ACL_REGISTRY_KEY))
-            throw new Patchwork_Exception(
-                'ACL not found in registry under ' . Patchwork::ACL_REGISTRY_KEY
-            );
+            Patchwork_Exception::ACLnotRegistered();
 
         $acl = Zend_Registry::get(Patchwork::ACL_REGISTRY_KEY);
         $resource = $request->getControllerName();

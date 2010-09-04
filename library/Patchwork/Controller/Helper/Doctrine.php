@@ -134,29 +134,67 @@ class Patchwork_Controller_Helper_Doctrine
     /**
      * lists all models, or returns the doctrine_query for it
      *
-     * @param string  $model
-     * @param integer $limit
-     * @param integer $offset
+     * @param string  $model model name
+     * @param array   $where assoc array of where conditions
+     * @param integer $limit limit
+     * @param integer $offset offset
      * @param boolean $returnQuery
      *
      * @return Doctrine_Collection|Doctrine_Query
      */
     public function listRecords(
         $model,
+        array $where = null,
         $limit = 0,
-        $offset = null,
-        $returnQuery = false
+        $offset = null
     ) {
         $query = Doctrine::getTable($model)->getQueryObject();
-
+        if(!$query)
+            throw new Patchwork_Exception(
+                'Could not query query object for ' . $model
+            );
+        
+        if($where){
+            foreach($where as $key => $cond)
+                $query->where($key, $cond);
+        }
+        
         if(((int)$limit) > 0)
             $query->limit($limit);
         if(is_int($offset))
             $query->offset($offset);
 
-        if($returnQuery)
-            return $query;
-        else
-            return $query->execute();
+        return $query->execute();
+    }
+
+    /**
+     * renders json strings using special views
+     *
+     * @param Doctrine_Record|Doctrine_Collection $data
+     *
+     * @return string
+     * @throws InvalidArgumentException
+     * @todo fix json_encode missing fields from object
+     */
+    public function toJSON($data)
+    {
+        if($data instanceof Patchwork_Doctrine_Model_Renderable){
+            $output = $data->toArray();
+            foreach($data->getIgnoredColumns() as $field)
+                unset($output[$field]);
+            return json_encode((object)$output);
+        } elseif ($data instanceof Doctrine_Record) {
+            return json_encode((object)$data->toArray());
+        } elseif($data instanceOf Doctrine_Collection){
+            $return = array();
+            foreach($data as $model){
+                $return[] = $this->toJSON($model);
+            }
+            return "[". implode(',', $return).']'; //array entries come as json
+        } else {
+            throw new InvalidArgumentException(
+                'Doctrine_Record or Doctrine_Collection required'
+            );
+        }
     }
 }
