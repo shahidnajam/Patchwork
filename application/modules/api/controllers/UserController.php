@@ -20,28 +20,24 @@ class Api_UserController extends Patchwork_Controller_RESTModelController
      */
     public function indexAction()
     {
-        $offset = (int)$this->_getParam(self::OFFSET_PARAM);
-        $limit  = (int)$this->_getParam(self::LIMIT_PARAM);
+        $where = array();
         $username = $this->_getParam(self::SEARCH_USERNAME_PARAM);
+        if($username != ''){
+            $where['username LIKE ?'] = $username.'%';
+        }
 
-        
-        $query = $this->_helper->Doctrine->listRecords(
+        $objects = $this->_helper->Doctrine->listRecords(
             $this->modelName,
-            $limit,
-            $offset,
-            true
+            $where,
+            $this->_getLimit(),
+            $this->_getOffset()
         );
 
-        if($username != ''){
-            $query->where('username LIKE ?', $username.'%');
-
-        }
-        $objects = $query->execute();
         $this->getResponse()
             ->setHttpResponseCode(200)
             ->setHeader('Content-type', 'application/json')
             ->appendBody(
-                $this->toJSON($objects)
+                $this->_helper->Doctrine->toJSON($objects)
             );
     }
 }
