@@ -9,7 +9,6 @@
         <echo msg="Making directory ./build" />
         <mkdir dir="./build" />
         <mkdir dir="coverage-report"/>
-
     </target>
 
     <!-- ============================================  -->
@@ -24,7 +23,6 @@
         </coverage-setup>
 
         <phpunit codecoverage="true" haltonfailure="true" haltonerror="true">
-
             <formatter type="plain" usefile="false"/>
             <batchtest>
                 <fileset dir="tests">
@@ -56,8 +54,8 @@
     <!-- (DEFAULT)  Target: dist                       -->
     <!-- ============================================  -->
     <target name="dist" depends="unittest">
+        <!--
         <echo msg="Creating archive..." />
-
         <tar destfile="./build/build.tar.gz" compression="gzip">
             <fileset dir=".">
                 <include name="**/**" />
@@ -70,5 +68,6 @@
         </tar>
 
         <echo msg="Files copied and compressed in build directory OK!" />
+        -->
     </target>
 </project>
