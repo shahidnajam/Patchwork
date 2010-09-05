@@ -1,5 +1,4 @@
-Patchwork
-=========
+#Patchwork
 
 Patchwork is a combination of Zend Framework, PHPIDS and Doctrine and comes
 ready to start a new ZF project.
@@ -12,8 +11,7 @@ ready to start a new ZF project.
 * shipped with a phing buildfile
 * shipped with a blueprint css template for compass, see scripts/generate-css.sh
 
-Libraries:
-----------
+##Libraries:
 
 Zend Framework 1.10.6 is used where all require-statements have been stripped
 using the instruction from:
@@ -25,15 +23,13 @@ PHPIDS 0.6.4 is included.
 
 
 
-Installation
-------------
+##Installation
 
 1) Make sure the directories required by PHPIDS are writeable.
 2) Modify public/.htaccess to your needs
 3) Modify application/configs/application.ini
 
-License
--------
+##License
 
 Patchwork is distributed under the MIT License.
 
@@ -53,17 +49,16 @@ http://code.google.com/p/phpids/
 Zend Framework is released under the BSD license.
 http://framework.zend.com/license
 
+Patchwork contains code from ZFDoctrine, published under the BSD license
+http://github.com/beberlei/zf-doctrine
 
-To Do
------
 
-- Unit testing
+##To Do
+
+- extend unit testing
 - make scripts callable form everywhere
-- make RestController compatible to ROR rest responses? (add results to GET listing?)
-- review ZFDoctrine (http://github.com/beberlei/zf-doctrine)
 
-Read more
----------
+##Read more
 
 PHING + PPHDocumentor
 http://technosophos.com/category/tags/phing
