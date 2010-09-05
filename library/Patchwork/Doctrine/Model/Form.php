@@ -1,28 +1,36 @@
 <?php
+/**
+ * Patchwork
+ *
+ * @category   Library
+ * @author     Daniel Pozzi
+ * @package    Form
+ * @subpackage ModelForm
+ */
 
 /**
  * a form that generates its fields from a doctrine record, based on
  * CU_ModelForm by Jani Hartikainen
  *
-<code>
-class ExampleForm extends Patchwork_Doctrine_Model_Form
-{
-	//Use Article as the model
-	protected $_model = 'Article';
+  <code>
+  class ExampleForm extends Patchwork_Doctrine_Model_Form
+  {
+  //Use Article as the model
+  protected $_model = 'Article';
 
-	//Let's ignore columns views and page_id
-	protected $_ignoreFields = array('views','page_id');
+  //Let's ignore columns views and page_id
+  protected $_ignoreFields = array('views','page_id');
 
-	//Let's use textarea as the field type for content
-	protected $_fieldTypes = array('content' => 'textarea');
+  //Let's use textarea as the field type for content
+  protected $_fieldTypes = array('content' => 'textarea');
 
-	//Labels for the fields
-	protected $_fieldLabels = array(
-			'name' => 'Article name',
-			'content' => 'Article content'
-	);
-}
-</code>
+  //Labels for the fields
+  protected $_fieldLabels = array(
+  'name' => 'Article name',
+  'content' => 'Article content'
+  );
+  }
+  </code>
  * @author    Jani Hartikainen
  * @author    Daniel Pozzi
  * @package   Patchwork
@@ -34,19 +42,18 @@ class Patchwork_Doctrine_Model_Form extends Zend_Form
      * PluginLoader for loading many relation forms
      */
     const FORM = 'form';
+    const CSRF_PROTECTION_FIELD = 'crsfprot';
 
     /**
      * Reference to the model's table class
      * @var Doctrine_Table
      */
     protected $_table;
-
     /**
      * Instance of the Zend_Form based form used
      * @var Zend_Form
      */
     protected $_form;
-
     /**
      * Which Zend_Form element types are associated with which doctrine type?
      * @var array
@@ -63,13 +70,11 @@ class Patchwork_Doctrine_Model_Form extends Zend_Form
         'date' => 'text',
         'enum' => 'select'
     );
-
     /**
      * Array of hooks that are called before saving the column
      * @var array
      */
     protected $_columnHooks = array();
-
     /**
      * Default validators for doctrine column types
      * @var array
@@ -81,12 +86,6 @@ class Patchwork_Doctrine_Model_Form extends Zend_Form
     );
 
     /**
-     * Prefix fields with this
-     * @var string
-     */
-    protected $_fieldPrefix = 'f_';
-
-    /**
      * Column names listed in this array will not be shown in the form
      * @var array
      */
@@ -95,50 +94,42 @@ class Patchwork_Doctrine_Model_Form extends Zend_Form
         'updated_at',
         'deleted_at'
     );
-
     /**
      * Whether or not to generate fields for many parts of m2o and m2m relations
      * @var bool
      */
     protected $_generateManyFields = false;
-
     /**
      * Use this to override field types for columns. key = column, value = field type
      * @var array
      */
     protected $_fieldTypes = array();
-
     /**
      * Field labels. key = column name, value = label
      * @var array
      */
     protected $_fieldLabels = array();
-
     /**
      * Labels to use with many to many relations.
      * key = related class name, value = label
      * @var array
      */
     protected $_relationLabels = array();
-
     /**
      * Name of the model class
      * @var string
      */
     protected $_model = '';
-
     /**
      * Model instance for editing existing models
      * @var Doctrine_Record
      */
     protected $_instance = null;
-
     /**
      * Form PluginLoader
      * @var Zend_Loader_PluginLoader
      */
     protected $_formLoader = null;
-
     /**
      * Stores form class names for many-relations
      * @var array
@@ -148,13 +139,18 @@ class Patchwork_Doctrine_Model_Form extends Zend_Form
     /**
      * constructor
      *
-     * @param array $options Options to pass to the Zend_Form constructor
+     * adds all fields plus submit and hash
+     *
+     * @param Doctrine_Record $record
+     * @param array           $options Options for Zend_Form constructor
      *
      * @return self
      */
-    public function __construct(Doctrine_Record $record,
-                                $options = null
-    ) {
+    public function __construct(
+        Doctrine_Record $record,
+        $options = null
+    )
+    {
         parent::__construct($options);
 
         $this->setRecord($record)->setDefaultsByModel($record);
@@ -164,24 +160,21 @@ class Patchwork_Doctrine_Model_Form extends Zend_Form
         $this->_postGenerate();
 
         $this->addElement('submit', 'save');
-        $this->addElement('hash', 'no_csrf_foo', array('salt' => 'unique'));
+        $this->addElement(
+            'hash',
+            self::CSRF_PROTECTION_FIELD,
+            array('salt' => 'unique')
+        );
     }
 
-    public function loadDefaultDecorators()
-    {
-        $this->setDecorators(array(
-            'FormElements',
-            array('HtmlTag', array('tag' => 'table')),
-            'Form',
-        ));
-    }
-    
     /**
      * Override to provide custom pre-form generation logic
      *
      *
      */
-    protected function _preGenerate() {
+    protected function _preGenerate()
+    {
+
     }
 
     /**
@@ -189,13 +182,17 @@ class Patchwork_Doctrine_Model_Form extends Zend_Form
      *
      *
      */
-    protected function _postGenerate() {
+    protected function _postGenerate()
+    {
+
     }
 
     /**
      * Override to provide custom post-save logic
      */
-    protected function _postSave($persist) {
+    protected function _postSave($persist)
+    {
+
     }
 
     /**
@@ -211,23 +208,26 @@ class Patchwork_Doctrine_Model_Form extends Zend_Form
         $this->_instance = $instance;
         $this->_table = Doctrine::getTable($this->_model);
 
-        if($instance instanceof Patchwork_Doctrine_Model_Renderable){
+        if ($instance instanceof Patchwork_Doctrine_Model_Renderable) {
             $this->_ignoreColumns = $instance->getIgnoredColumns();
         }
-        
-        foreach($this->_getColumns() as $name => $definition) {
-            $this->setDefault($this->_fieldPrefix . $name, $this->_instance->$name);
+
+        foreach ($this->_getColumns() as $name => $definition) {
+            $this->setDefault($name, $this->_instance->$name);
         }
 
-        foreach($this->_getRelations() as $name => $relation) {
-            switch($relation->getType()) {
+        foreach ($this->_getRelations() as $name => $relation) {
+            switch ($relation->getType()) {
                 case Doctrine_Relation::ONE:
                     $idColumn = $relation->getTable()->getIdentifier();
-                    $this->setDefault($this->_fieldPrefix . $relation->getLocal(), $this->_instance->$name->$idColumn);
+                    $this->setDefault(
+                        $relation->getLocal(),
+                        $this->_instance->$name->$idColumn
+                    );
                     break;
                 case Doctrine_Relation::MANY:
                     $formClass = $this->_relationForms[$relation->getClass()];
-                    foreach($this->_instance->$name as $num => $rec) {
+                    foreach ($this->_instance->$name as $num => $rec) {
                         $form = new $formClass;
                         $form->setRecord($rec);
                         $form->setIsArray(true);
@@ -238,7 +238,7 @@ class Patchwork_Doctrine_Model_Form extends Zend_Form
                             'label' => 'Delete'
                         ));
                         $label = $relation->getClass();
-                        if(isset($this->_relationLabels[$relation->getClass()]))
+                        if (isset($this->_relationLabels[$relation->getClass()]))
                             $label = $this->_relationLabels[$relation->getClass()];
 
                         $form->setLegend($label . ' ' . ($num + 1))
@@ -258,7 +258,8 @@ class Patchwork_Doctrine_Model_Form extends Zend_Form
      * @param Doctrine_Record $model
      * @return self
      */
-    public function setDefaultsByModel(Doctrine_Record $model) {
+    public function setDefaultsByModel(Doctrine_Record $model)
+    {
         $this->setDefaults($model->toArray(true));
         return $this;
     }
@@ -276,7 +277,7 @@ class Patchwork_Doctrine_Model_Form extends Zend_Form
     /**
      * Generates the form
      *
-     * 
+     * @return void
      */
     protected function _generateForm()
     {
@@ -291,26 +292,26 @@ class Patchwork_Doctrine_Model_Form extends Zend_Form
      */
     protected function _columnsToFields()
     {
-        foreach($this->_getColumns() as $name => $definition) {
+        foreach ($this->_getColumns() as $name => $definition) {
             $type = $this->_columnTypes[$definition['type']];
-            if(isset($this->_fieldTypes[$name]))
+            if (isset($this->_fieldTypes[$name]))
                 $type = $this->_fieldTypes[$name];
 
-            $field = $this->createElement($type, $this->_fieldPrefix . $name);
+            $field = $this->createElement($type, $name);
             $label = $name;
-            if(isset($this->_fieldLabels[$name]))
+            if (isset($this->_fieldLabels[$name]))
                 $label = $this->_fieldLabels[$name];
 
-            if(isset($this->_columnValidators[$definition['type']]))
+            if (isset($this->_columnValidators[$definition['type']]))
                 $field->addValidator($this->_columnValidators[$definition['type']]);
 
-            if(isset($definition['notnull']) && $definition['notnull'] == true)
+            if (isset($definition['notnull']) && $definition['notnull'] == true)
                 $field->setRequired(true);
 
             $field->setLabel($label);
 
-            if($type == 'select' && $definition['type'] == 'enum') {
-                foreach($definition['values'] as $text) {
+            if ($type == 'select' && $definition['type'] == 'enum') {
+                foreach ($definition['values'] as $text) {
                     $field->addMultiOption($text, ucwords($text));
                 }
             }
@@ -326,28 +327,31 @@ class Patchwork_Doctrine_Model_Form extends Zend_Form
      */
     protected function _relationsToFields()
     {
-        foreach($this->_getRelations() as $alias => $relation) {
+        foreach ($this->_getRelations() as $alias => $relation) {
             $field = null;
 
-            switch($relation->getType()) {
+            switch ($relation->getType()) {
                 case Doctrine_Relation::ONE_AGGREGATE:
                     $table = $relation->getTable();
                     $idColumn = $table->getIdentifier();
 
                     $options = array('------');
-                    foreach($table->findAll() as $row) {
-                        $options[$row->$idColumn] = (string)$row;
+                    foreach ($table->findAll() as $row) {
+                        $options[$row->$idColumn] = (string) $row;
                     }
 
-                    $field = $this->createElement('select', $this->_fieldPrefix . $relation->getLocal());
-                    $label = (string)Doctrine_Manager::connection()->getTable($alias);
-                    if(isset($this->_fieldLabels[$alias]))
+                    $field = $this->createElement(
+                        'select',
+                        $relation->getLocal()
+                    );
+                    $label = (string) Doctrine_Manager::connection()->getTable($alias);
+                    if (isset($this->_fieldLabels[$alias]))
                         $label = $this->_fieldLabels[$alias];
 
                     $field->setLabel($label);
 
                     $definition = $this->_table->getColumnDefinition($relation->getLocal());
-                    if(isset($definition['notnull']) && $definition['notnull'] == true)
+                    if (isset($definition['notnull']) && $definition['notnull'] == true)
                         $field->addValidator(new CU_Validate_DbRowExists($table));
 
                     $field->setMultiOptions($options);
@@ -358,20 +362,20 @@ class Patchwork_Doctrine_Model_Form extends Zend_Form
                     $this->_relationForms[$class] = self::factory(new $class);
 
                     $label = $class;
-                    if(isset($this->_relationLabels[$class]))
+                    if (isset($this->_relationLabels[$class]))
                         $label = $this->_relationLabels[$class];
 
                     $field = $this->createElement(
-                        'submit',
-                        $this->_getNewButtonName($alias),
-                        array(
-                            'label' => 'Add new '. $label
-                        )
+                            'submit',
+                            $this->_getNewButtonName($alias),
+                            array(
+                                'label' => 'Add new ' . $label
+                            )
                     );
                     break;
             }
 
-            if($field != null)
+            if ($field != null)
                 $this->addElement($field);
         }
     }
@@ -382,7 +386,8 @@ class Patchwork_Doctrine_Model_Form extends Zend_Form
      * @param string $relationAlias alias of the relation
      * @return string name of the new button
      */
-    protected function _getNewButtonName($relationAlias) {
+    protected function _getNewButtonName($relationAlias)
+    {
         return $relationAlias . '_new_button';
     }
 
@@ -395,17 +400,17 @@ class Patchwork_Doctrine_Model_Form extends Zend_Form
      * @return string name of the new button
      */
     protected function _getDeleteButtonName(
-        $relationAlias,
-        Doctrine_Record $record = null
-    ) {
+    $relationAlias, Doctrine_Record $record = null
+    )
+    {
         $val = 'new';
         $idColumn = $record->getTable()->getIdentifier();
-        if($record != null)
+        if ($record != null)
             $val = $record->$idColumn;
 
         return $relationAlias . '_' . $val . '_delete';
     }
-    
+
     /**
      * Returns the new form name for relation alias
      *
@@ -417,8 +422,9 @@ class Patchwork_Doctrine_Model_Form extends Zend_Form
     protected function _getFormName(
         $relationAlias,
         Doctrine_Record $record = null
-    ) {
-        if($record != null) {
+    )
+    {
+        if ($record != null) {
             $idColumn = $record->getTable()->getIdentifier();
             return $relationAlias . '_' . $record->$idColumn;
         }
@@ -432,7 +438,8 @@ class Patchwork_Doctrine_Model_Form extends Zend_Form
      * @param array $data
      * @return boolean
      */
-    public function isValid($data) {
+    public function isValid($data)
+    {
         $ndata = $data;
         if ($this->isArray()) {
             $key = $this->_getArrayName($this->getElementsBelongTo());
@@ -441,13 +448,13 @@ class Patchwork_Doctrine_Model_Form extends Zend_Form
             }
         }
 
-        foreach($this->_getRelations() as $name => $relation) {
-            if($relation->getType() != Doctrine_Relation::MANY)
+        foreach ($this->_getRelations() as $name => $relation) {
+            if ($relation->getType() != Doctrine_Relation::MANY)
                 continue;
 
-            if(isset($ndata[$this->_getNewButtonName($name)])
+            if (isset($ndata[$this->_getNewButtonName($name)])
                 || isset($ndata[$this->_getFormName($name)])) {
-                if(isset($ndata[$this->_getFormName($name)]) &&
+                if (isset($ndata[$this->_getFormName($name)]) &&
                     isset($ndata[$this->_getFormName($name)][$this->_getDeleteButtonName($name)])) {
                     return false;
                 }
@@ -462,14 +469,14 @@ class Patchwork_Doctrine_Model_Form extends Zend_Form
                     array('label' => 'Delete')
                 );
                 $this->addSubForm($form, $this->_getFormName($name));
-                if(isset($ndata[$this->_getNewButtonName($name)]))
+                if (isset($ndata[$this->_getNewButtonName($name)]))
                     return false;
             }
 
-            foreach($this->getRecord()->$name as $rec) {
+            foreach ($this->getRecord()->$name as $rec) {
                 $formName = $this->_getFormName($name, $rec);
-                if(isset($ndata[$formName])
-                   && isset($ndata[$formName][$this->_getDeleteButtonName($name, $rec)])) {
+                if (isset($ndata[$formName])
+                    && isset($ndata[$formName][$this->_getDeleteButtonName($name, $rec)])) {
                     $this->removeSubForm($formName);
                     $rec->delete();
                     return false;
@@ -488,10 +495,8 @@ class Patchwork_Doctrine_Model_Form extends Zend_Form
     protected function _getColumns()
     {
         $columns = array();
-        foreach($this->_table->getColumns() as $name => $definition) {
-            if(
-                (isset($definition['primary']) && $definition['primary'])
-                ||
+        foreach ($this->_table->getColumns() as $name => $definition) {
+            if (
                 !isset($this->_columnTypes[$definition['type']])
                 ||
                 in_array($name, $this->_ignoreColumns)
@@ -513,12 +518,12 @@ class Patchwork_Doctrine_Model_Form extends Zend_Form
     {
         $relations = array();
 
-        foreach($this->_table->getRelations() as $name => $definition) {
-            if(in_array($definition->getLocal(), $this->_ignoreColumns)
+        foreach ($this->_table->getRelations() as $name => $definition) {
+            if (in_array($definition->getLocal(), $this->_ignoreColumns)
                 ||
-                ($this->_generateManyFields == false 
-                 &&
-                 $definition->getType() == Doctrine_Relation::MANY
+                ($this->_generateManyFields == false
+                &&
+                $definition->getType() == Doctrine_Relation::MANY
                 )
             )
                 continue;
@@ -539,23 +544,23 @@ class Patchwork_Doctrine_Model_Form extends Zend_Form
     {
         $inst = $this->getRecord();
 
-        foreach($this->_getColumns() as $name => $definition) {
+        foreach ($this->_getColumns() as $name => $definition) {
             $inst->$name = $this->_doctrineizeValue(
-                $this->getUnfilteredValue($this->_fieldPrefix . $name),
-                $definition['type']
+                    $this->getUnfilteredValue($name),
+                    $definition['type']
             );
         }
 
-        foreach($this->_getRelations() as $name => $relation) {
+        foreach ($this->_getRelations() as $name => $relation) {
             $colName = $relation->getLocal();
-            switch($relation->getType()) {
+            switch ($relation->getType()) {
                 case Doctrine_Relation::ONE:
-                //Must use null if value=0 so integrity actions won't fail
-                    $val = $this->getUnfilteredValue($this->_fieldPrefix . $colName);
-                    if($val == 0)
+                    //Must use null if value=0 so integrity actions won't fail
+                    $val = $this->getUnfilteredValue($colName);
+                    if ($val == 0)
                         $val = null;
 
-                    if(isset($this->_columnHooks[$colName]))
+                    if (isset($this->_columnHooks[$colName]))
                         $val = call_user_func($this->_columnHooks[$colName], $val);
 
                     $inst->set($colName, $val);
@@ -563,7 +568,7 @@ class Patchwork_Doctrine_Model_Form extends Zend_Form
 
                 case Doctrine_Relation::MANY:
                     $idColumn = $relation->getTable()->getIdentifier();
-                    foreach($inst->$name as $rec) {
+                    foreach ($inst->$name as $rec) {
                         $subForm = $this->getSubForm($name . '_' . $rec->$idColumn);
 
                         //Should get saved along with the main instance later
@@ -571,7 +576,7 @@ class Patchwork_Doctrine_Model_Form extends Zend_Form
                     }
 
                     $subForm = $this->getSubForm($name . '_new_form');
-                    if($subForm) {
+                    if ($subForm) {
                         $newRec = $subForm->save(false);
                         $inst->{$name}[] = $newRec;
                     }
@@ -580,10 +585,10 @@ class Patchwork_Doctrine_Model_Form extends Zend_Form
             }
         }
 
-        if($persist)
+        if ($persist)
             $inst->save();
 
-        foreach($this->getSubForms() as $subForm)
+        foreach ($this->getSubForms() as $subForm)
             $subForm->save($persist);
 
         $this->_postSave($persist);
@@ -600,13 +605,14 @@ class Patchwork_Doctrine_Model_Form extends Zend_Form
      */
     protected function _doctrineizeValue($value, $type)
     {
-        switch($type) {
+        switch ($type) {
             case 'boolean':
-                return (boolean)$value;
+                return (boolean) $value;
                 break;
             default:
                 return $value;
                 break;
         }
     }
+
 }
