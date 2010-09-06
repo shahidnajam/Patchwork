@@ -1,59 +1,61 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
 <project name="Patchwork" default="dist">
-
+    <property name="builddir" value="${ws}/build" />
+    
     <!-- ============================================  -->
     <!-- Target: prepare                               -->
     <!-- ============================================  -->
     <target name="prepare">
-        <echo msg="Making directory ./build" />
-        <mkdir dir="./build" />
-        <mkdir dir="coverage-report"/>
+        <echo msg="Prepare..." />
+        <mkdir dir="${builddir}" />
+        <mkdir dir="${builddir}/logs" />
+        <mkdir dir="${builddir}/logs/coverage" />
+        <mkdir dir="${builddir}/docs" />
+        <mkdir dir="${builddir}/app" />
     </target>
 
-    <!-- ============================================  -->
-    <!-- Target: unittest                                 -->
-    <!-- ============================================  -->
-    <target name="unittest" depends="prepare">
-        <coverage-setup database="./coverage-report/database">
-            <fileset dir=".">
-                <include name="*.php"/>
-                <exclude name="*Test.php"/>
+    <!-- PHP API Documentation -->
+    <target name="phpdoc">
+        <echo msg="PHP Documentor..." />
+        <phpdoc title="API Documentation"
+                destdir="${builddir}/docs"
+                sourcecode="yes"
+                defaultpackagename="Patchwork"
+                output="HTML:Smarty:PHP">
+            <fileset dir="./library/Patchwork">
+                <include name="**/*.php" />
             </fileset>
-        </coverage-setup>
-
-        <phpunit codecoverage="true" haltonfailure="true" haltonerror="true">
-            <formatter type="plain" usefile="false"/>
-            <batchtest>
-                <fileset dir="tests">
-                    <include name="**/*Test*.php"/>
-                </fileset>
-            </batchtest>
-        </phpunit>
-    </target>
-
-    <!-- ============================================  -->
-    <!-- Target: phpdoc                                 -->
-    <!-- ============================================  -->
-    <target name="phpdoc" depends="unittest"  description="Generate API docs.">
-        <phpdoc title="Patchwork"
-          sourcecode="yes"
-          destdir="doc"
-          output="HTML:frames:DOM/phphtmllib"
-          quiet="true"
-          >
-          <fileset dir="./application">
-            <include name="**/*.php"/>
-          </fileset>
-          <fileset dir="./library/Patchwork">
-            <include name="**/*.php"/>
-          </fileset>
         </phpdoc>
     </target>
+
+    <!-- PHP copy/paste analysis -->
+    <target name="phpcpd">
+        <echo msg="PHP Copy/Paste..." />
+        <exec command="phpcpd --log-pmd=${builddir}/logs/pmd.xml library/Patchwork" escape="false" />
+    </target>
+
+    <!-- PHP dependency checker -->
+    <target name="pdepend">
+        <echo msg="PHP Depend..." />
+        <exec command="pdepend --jdepend-xml=${builddir}/logs/jdepend.xml ${ws}/library/Patchwork" escape="false" />
+    </target>
+
+    <!-- PHP CodeSniffer -->
+    <target name="phpcs">
+        <echo msg="PHP CodeSniffer..." />
+        <exec command="phpcs --standard=ZEND --report=checkstyle ${ws}/source > ${builddir}/logs/checkstyle.xml" escape="false" />
+    </target>
+
+    <!-- Unit Tests & coverage analysis -->
+    <target name="phpunit">
+        <echo msg="PHP Unit..." />
+        <exec command="phpunit --log-junit ${builddir}/logs/phpunit.xml --log-pmd ${builddir}/logs/phpunit.pmd.xml --coverage-clover ${builddir}/logs/coverage/clover.xml --coverage-html ${builddir}/logs/coverage/ ${ws}/tests"/>
+    </target>
+    
     <!-- ============================================  -->
     <!-- (DEFAULT)  Target: dist                       -->
     <!-- ============================================  -->
-    <target name="dist" depends="unittest">
+    <target name="app" depends="phpunit">
         <!--
         <echo msg="Creating archive..." />
         <tar destfile="./build/build.tar.gz" compression="gzip">

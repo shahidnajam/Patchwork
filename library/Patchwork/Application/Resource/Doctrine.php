@@ -56,6 +56,9 @@ class Patchwork_Application_Resource_Doctrine extends Zend_Application_Resource_
                 $config->connections->db, 'doctrine'
         );
         $conn->setAttribute(Doctrine::ATTR_USE_NATIVE_ENUM, true);
+        $conn->setAttribute(Doctrine::ATTR_DEFAULT_TABLE_CHARSET,'utf8');
+        $manager->setCharset('utf8');
+        $manager->setCollate('utf8_general_ci');
         return $conn;
     }
 
