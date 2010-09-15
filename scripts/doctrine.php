@@ -14,7 +14,6 @@ $application = new Zend_Application(
     CONFIG_PATH . DIRECTORY_SEPARATOR . 'application.ini'
 );
 
-
 $application->getBootstrap()->bootstrap('Doctrine');
 $resource = $application->getBootstrap()->getResource('Doctrine');
 
@@ -23,8 +22,8 @@ $config = new Zend_Config_Ini(
     APPLICATION_ENV
 );
 
-Doctrine_Manager::connection($config->doctrine->connections->db);
-$doctrineConfig = $config->doctrine->options->toArray();
+Doctrine_Manager::connection($config->resources->doctrine->connections->db);
+$doctrineConfig = $config->resources->doctrine->options->toArray();
  
 $cli = new Doctrine_Cli($doctrineConfig);
 $cli->run($_SERVER['argv']);
