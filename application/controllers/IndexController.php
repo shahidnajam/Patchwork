@@ -47,4 +47,18 @@ class IndexController extends Zend_Controller_Action
     {
         $this->view->model = $this->_helper->Doctrine('User',1);
     }
+
+    /**
+     * 
+     */
+    public function testcacheAction()
+    {
+        $query = Doctrine_Query::create()->from('User')
+            ->where('id > ?', 0)
+            ->andWhere('username = ?', 'alex');
+        $res = $query->execute();
+
+        var_dump($res->toArray());
+        exit();
+    }
 }
