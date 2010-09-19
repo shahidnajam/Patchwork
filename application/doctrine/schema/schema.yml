@@ -38,3 +38,23 @@ User:
       type: enum
       values: ['guest', 'user', 'admin']
       default: 'guest'
+
+Token:
+  tableName: tokens
+  actAs: [Timestampable, SoftDelete]
+  columns:
+    id:
+      type: integer(4)
+      primary: true
+      autoincrement: true
+    hash:
+      type: string(64)
+      notnull: true
+    service:
+      type: string(255)
+      notnull: true
+    once:
+      type: boolean
+      default: 1
+    jsoncontext:
+      type: string
