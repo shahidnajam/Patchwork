@@ -16,9 +16,8 @@
  */
 class User
     extends BaseUser
-    implements
+    implements Zend_Acl_Role_Interface,
     Patchwork_Doctrine_Model_Renderable,
-    Patchwork_Auth_RoleIdentity,
     Patchwork_Auth_Model
 {
     const AUTH_IDENTITY_COLUMN = 'email';
@@ -53,11 +52,11 @@ class User
     }
 
     /**
-     * return the role
+     * return the role for ACL (Zend_Acl_Role_Interface)
      * 
      * @return string
      */
-    public function getRole()
+    public function getRoleId()
     {
         return $this->_get('role');
     }
@@ -72,7 +71,7 @@ class User
     public static function authenticate($identity, $credential)
     {
         $adapter = new Patchwork_Auth_Adapter_Doctrine(
-            'User',
+            __CLASS__,
             self::AUTH_IDENTITY_COLUMN,
             self::AUTH_CREDENTIAL_COLUMN,
             self::AUTH_CREDENTIAL_TREATMENT
@@ -94,7 +93,8 @@ class User
     }
 
     /**
-     *
+     * returns the authentication result
+     * 
      * @return Zend_Auth_Result
      */
     public static function getAuthenticationResult()
@@ -112,7 +112,8 @@ class User
         if(Zend_Auth::getInstance()->hasIdentity()){
             if(self::$authenticatedUser == null){
                 $data = Zend_Auth::getInstance()->getIdentity();
-                self::$authenticatedUser = Doctrine::getTable('User')->findOneBy(
+                self::$authenticatedUser = Doctrine::getTable(__CLASS__)
+                    ->findOneBy(
                     self::AUTH_IDENTITY_COLUMN,
                     $data[self::AUTH_IDENTITY_COLUMN]
                 );

@@ -12,7 +12,7 @@
  *
  * checks if the role is allowed to access controller->action
  * requires "Zend_Acl" to be registered in registry
- * the Zend_Auth identity may implement Patchwork_Auth_Interface_RoleIdentity
+ * the Zend_Auth identity should implement Zend_Acl_Role_Interface
  *
  * @package    Patchwork
  * @subpackage Authorisation
@@ -41,8 +41,8 @@ class Patchwork_Controller_Plugin_Auth extends Zend_Controller_Plugin_Abstract
             return self::GUEST_ROLE;
 
         $id = $auth->getIdentity();
-        if(is_object($id) && $id instanceof Patchwork_Auth_RoleIdentity)
-            return $id->getRole();
+        if(is_object($id) && $id instanceof Zend_Acl_Role_Interface)
+            return $id->getRoleId();
         elseif(isset($id['role']))
             return $id['role'];
         else

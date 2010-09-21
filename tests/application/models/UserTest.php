@@ -56,11 +56,11 @@ class UserTest extends ControllerTestCase
         );
     }
 
-    public function testGetRole()
+    public function testGetRoleId()
     {
         $user = new User;
         $user->role = 'guest';
-        $this->assertTrue($user->getRole() == 'guest');
+        $this->assertTrue($user->getRoleid() == 'guest');
     }
 
     public function testGetAuthenticatedUser()
