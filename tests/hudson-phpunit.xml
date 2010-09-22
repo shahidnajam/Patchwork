@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<phpunit bootstrap="workspace/tests/bootstrap.php"
+    convertErrorsToExceptions="true"
+    convertNoticesToExceptions="true"
+    convertWarningsToExceptions="true"
+    stopOnFailure="false"
+    backupGlobals="false"
+    syntaxCheck="true">
+
+    <logging>
+        <log type="coverage-html" target="workspace/build/coverage/" title="Deeplink"
+            charset="UTF-8" yui="true" highlight="true"
+            lowUpperBound="35" highLowerBound="70"/>
+        <log type="coverage-clover" target="workspace/build/coverage/clover.xml"/>
+        <log type="junit" target="workspace/build/logs/junit.xml" logIncompleteSkipped="false"/>
+    </logging>
+
+</phpunit>
+
