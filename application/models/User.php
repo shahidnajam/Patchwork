@@ -4,7 +4,7 @@
  *
  * @package    Application
  * @subpackage Models
- * @author     Daniel Pozzi
+ * @author     Daniel Pozzi <bonndan76@googlemail.com>
  */
 
 /**
@@ -12,7 +12,7 @@
  * 
  * @package    Application
  * @subpackage Models
- * @author     Daniel Pozzi
+ * @author     Daniel Pozzi <bonndan76@googlemail.com>
  */
 class User
     extends BaseUser
@@ -62,9 +62,10 @@ class User
     }
 
     /**
+     * authenticate using Zend_Auth
      *
-     * @param <type> $identity
-     * @param <type> $credential
+     * @param string $identity   identity
+     * @param string $credential credential (password)
      *
      * @return boolean
      */
@@ -105,7 +106,7 @@ class User
     /**
      * for Patchwork_Auth_Model interface, return the authenticated user
      *
-     * @return self|null
+     * @return User|null
      */
     public static function getAuthenticatedUser()
     {
