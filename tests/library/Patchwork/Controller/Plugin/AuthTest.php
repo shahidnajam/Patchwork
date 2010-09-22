@@ -20,11 +20,11 @@ class Patchwork_Controller_Plugin_AuthTest extends ControllerTestCase
     }
 
     /**
-     *
+     * @todo works on hudson only if false auth tried
      */
     public function testDefaultUserRoleIsGuest()
     {
-        //User::authenticate('dpozzi@gmx.net', 'not');
+        User::authenticate('dpozzi@gmx.net', 'not');
         $role = Patchwork_Controller_Plugin_Auth::getUserRole();
         $this->assertEquals('guest', $role);
     }

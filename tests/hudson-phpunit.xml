@@ -7,6 +7,15 @@
     backupGlobals="false"
     syntaxCheck="true">
 
+    <filter>
+        <blacklist>
+            <directory suffix=".php">workspace/library</directory>
+            <exclude>
+                <directory suffix=".php">workspace/library/Patchwork</directory>
+            </exclude>
+        </blacklist>
+    </filter>
+
     <logging>
         <log type="coverage-html" target="workspace/build/coverage/" title="Deeplink"
             charset="UTF-8" yui="true" highlight="true"
