@@ -27,7 +27,7 @@ class Patchwork
     /**
      * Zend_Navigation
      */
-    const NAVIGATION_REGISTRY_KEY = 'Zend_Navigation';
+    const BOOTSTRAP_NAVIGATION_KEY = 'navigation';
 
     /**
      * Zend_Session

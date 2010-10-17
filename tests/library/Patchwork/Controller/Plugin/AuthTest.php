@@ -34,17 +34,23 @@ class Patchwork_Controller_Plugin_AuthTest extends ControllerTestCase
      */
     public function testDispatchLoopStartup()
     {
-        Zend_Registry::set(Patchwork::ACL_REGISTRY_KEY, new Zend_Acl);
+        Patchwork_Acl::factory(
+            Patchwork_Acl::GUEST_ROLE,
+            dirname(__FILE__) . '/acl.ini'
+        );
+        
         $request = new Zend_Controller_Request_Http;
         $auth = new Patchwork_Controller_Plugin_Auth;
         $auth->dispatchLoopStartup($request);
 
         $this->assertEquals(
-            Patchwork_Controller_Plugin_Auth::ERROR_CONTROLLER,
+            Zend_Registry::get(Patchwork::CONFIG_REGISTRY_KEY)
+                ->patchwork->options->acl->errorController,
             $request->getControllerName()
             );
         $this->assertEquals(
-            Patchwork_Controller_Plugin_Auth::ERROR_ACTION,
+            Zend_Registry::get(Patchwork::CONFIG_REGISTRY_KEY)
+                ->patchwork->options->acl->errorAction,
             $request->getActionName()
             );
     }

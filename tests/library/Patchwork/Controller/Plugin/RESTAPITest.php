@@ -15,13 +15,15 @@ require_once(dirname(dirname(dirname(dirname(dirname(__FILE__)))))).'/bootstrap.
  */
 class Patchwork_Controller_Plugin_RESTAPITest extends ControllerTestCase
 {
+
+
     /**
      * test that
      */
     public function testAPIModuleRouting()
     {
-        $acl = Zend_Registry::get(Patchwork::ACL_REGISTRY_KEY);
-        $acl->allow('guest', 'user');
+        Patchwork_Acl::factory('user', dirname(__FILE__) . '/acl.ini' )
+            ->registerInRegistry();
         
         $request = new Zend_Controller_Request_Http;
         $request->setModuleName('api');

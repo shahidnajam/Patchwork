@@ -30,27 +30,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
         return $mal;
     }
 
-    /**
-     * start Zend_Navigation, register it in registry
-     *
-     * 
-     */
-    protected function _initNavigation()
-    {
-        Zend_Registry::set(
-            Patchwork::NAVIGATION_REGISTRY_KEY,
-            new Zend_Navigation(
-                require(CONFIG_PATH . DIRECTORY_SEPARATOR . 'navigation.php')
-            )
-        );
-    }
-
-    /**
-     * make config available in registry
-     *
-     * 
-     */
-    public function _initConfigToRegistry()
+    protected function _initConfigToRegistry()
     {
         Zend_Registry::set(
                 Patchwork::CONFIG_REGISTRY_KEY,
@@ -59,31 +39,15 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
     }
 
     /**
-     * access control, registerd in registry for navigation
+     * start Zend_Navigation
      *
-     * 
-     * 
+     * @return Zend_Navigation
      */
-    public function _initAcl()
+    protected function _initNavigation()
     {
-        $acl = new Zend_Acl();
-        $config = new Zend_Config_Ini(APPLICATION_PATH . "/configs/acl.ini");
-        $config = $config->toArray();
-
-        foreach ($config["res"] as $res) {
-            $acl->add(new Zend_Acl_Resource($res));
-        }
-
-        foreach ($config["role"] as $role) {
-            $acl->addRole(new Zend_Acl_Role($role));
-
-            if (isset($config["access"][$role])) {
-                foreach ($config["access"][$role] as $access) {
-                    $acl->allow($role, $access);
-                }
-            }
-        }
-        Zend_Registry::set(Patchwork::ACL_REGISTRY_KEY, $acl);
+        return new Zend_Navigation(
+            require(CONFIG_PATH . DIRECTORY_SEPARATOR . 'navigation.php')
+        );
     }
 
     /**
@@ -108,6 +72,6 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
     public function _initCli()
     {
         $this->_initAppAutoload();
-        $this->_initConfigToRegistry();
     }
+
 }

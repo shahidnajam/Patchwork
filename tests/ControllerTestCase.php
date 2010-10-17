@@ -105,7 +105,7 @@ abstract class ControllerTestCase extends Zend_Test_PHPUnit_ControllerTestCase
             ->throwExceptions(true)
             ->returnResponse(false);
 
-        $this->getFrontController()->dispatch();
+        $this->application->getBootstrap()->run();
     }
 
 }
