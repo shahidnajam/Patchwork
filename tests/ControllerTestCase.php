@@ -1,5 +1,11 @@
 <?php
-
+/**
+ * Patchwork
+ *
+ * @package    Tests
+ * @subpackage Testcase
+ * @author     Daniel Pozzi <dpozzi@m2soft.com>
+ */
 require_once 'Zend/Application.php';
 require_once 'Zend/Test/PHPUnit/ControllerTestCase.php';
 
