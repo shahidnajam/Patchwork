@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Patchwork
  *
@@ -20,11 +21,6 @@
  */
 class Patchwork_Controller_Plugin_RESTAPI extends Zend_Controller_Plugin_Abstract
 {
-    /**
-     * default module which is used for rest routing: api
-     * @var string
-     */
-    const DEFAULT_API_MODULE_NAME = 'api';
 
     /**
      * enables rest routing for the configured module and enables http auth plugin
@@ -38,28 +34,36 @@ class Patchwork_Controller_Plugin_RESTAPI extends Zend_Controller_Plugin_Abstrac
      */
     public function routeStartup(Zend_Controller_Request_Abstract $request)
     {
-        $restRoutingModule = self::DEFAULT_API_MODULE_NAME;
         $httpBasicAuth = false;
-        if(Zend_Registry::isRegistered(Patchwork::CONFIG_REGISTRY_KEY)){
+        if (Zend_Registry::isRegistered(Patchwork::CONFIG_REGISTRY_KEY)) {
             $config = Zend_Registry::get(Patchwork::CONFIG_REGISTRY_KEY);
-            if($config->patchwork && $config->patchwork->options->restAPI){
+
+            if ($config->patchwork && $config->patchwork->options->restAPI) {
                 $restRoutingModule = $config->patchwork->options->restAPI->module;
                 $httpBasicAuth = $config->patchwork->options->restAPI->useHttpBasicAuth;
+            } else {
+                throw new Patchwork_Exception(
+                    'REST API configuration missing in config'
+                );
             }
         }
 
         $frontController = Zend_Controller_Front::getInstance();
         $restRoute = new Zend_Rest_Route(
-            $frontController,
-            array(),
-            array($restRoutingModule)
+                $frontController,
+                array(),
+                array($restRoutingModule)
         );
         $frontController->getRouter()->addRoute('rest', $restRoute);
 
-        if($httpBasicAuth){
+        /**
+         * TODO rewrite to use dependency injection
+         */
+        if ($httpBasicAuth) {
             $plugin = new Patchwork_Controller_Plugin_HttpAuth($restRoutingModule);
             $frontController->registerPlugin($plugin);
         }
         parent::routeStartup($request);
     }
+
 }

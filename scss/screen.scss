@@ -3,9 +3,11 @@
 @import "blueprint/typography";
 @import "blueprint/colors";
 @import "blueprint/grid";
+@import "blueprint/interaction";
 
 $blueprint-grid-columns: 24;
 $blueprint_grid_width: 30px;
+$padding: 5px;
 
 // Use this to calculate the width based on the total width.
 // Or you can set !blueprint_grid_width to a fixed value and unset !blueprint_container_size -- it will be calculated for you.
@@ -18,6 +20,7 @@ body {
 
 form {
     @include blueprint-form;
+    table td {padding: $padding;}
 }
 
 #container {
@@ -26,6 +29,7 @@ form {
     #sidebar {
         background-color: $blueprint-table-header-color;
         @include column(6);
+        ul {padding: $blueprint-grid-margin; list-style: none;}
     }
 
     #content {
@@ -37,4 +41,8 @@ form {
         background-color: $blueprint-table-header-color;
         padding: $blueprint-grid-margin;
     }
+}
+
+.notice {
+    @include notice;
 }

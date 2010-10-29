@@ -1,7 +1,9 @@
 <?php
+
 /**
- * Patchwork_Controller_Plugin_Auth
+ * Patchwork
  *
+ * @category   Library
  * @package    Patchwork
  * @subpackage Authorisation
  * @author     Daniel Pozzi <bonndan76@googlemail.com>
@@ -21,32 +23,62 @@
 class Patchwork_Controller_Plugin_Auth extends Zend_Controller_Plugin_Abstract
 {
     /**
-     * guest role name
-     */
-    const GUEST_ROLE = 'guest';
-
-    const ERROR_CONTROLLER = 'error';
-    const ERROR_ACTION     = 'denied';
-
-    /**
      * return the current role
-     *
      *
      * @return string
      */
     public static function getUserRole()
     {
         $auth = Zend_Auth::getInstance();
-        if(!$auth->hasIdentity())
-            return self::GUEST_ROLE;
+        if (!$auth->hasIdentity())
+            return Patchwork_Acl::GUEST_ROLE;
 
         $id = $auth->getIdentity();
-        if(is_object($id) && $id instanceof Zend_Acl_Role_Interface)
+        if (is_object($id) && $id instanceof Zend_Acl_Role_Interface)
             return $id->getRoleId();
-        elseif(isset($id['role']))
+        elseif (isset($id['role']))
             return $id['role'];
         else
-            return self::GUEST_ROLE;
+            return Patchwork_Acl::GUEST_ROLE;
+    }
+
+    /**
+     *
+     * @return Zend_Config
+     * @throws Patchwork_Exception
+     */
+    protected function _getConfig()
+    {
+        $config = Zend_Registry::get(Patchwork::CONFIG_REGISTRY_KEY);
+        if(isset($config->patchwork->options->acl))
+            return $config->patchwork->options->acl;
+        else
+            throw Patchwork_Exception::missingAclConfig();
+    }
+
+    /**
+     * get the patchwork acl
+     * 
+     * @return Patchwork_Acl
+     */
+    protected function _getACL()
+    {
+        if (!Zend_Registry::isRegistered(Patchwork::ACL_REGISTRY_KEY)) {
+            $config = $this->_getConfig();
+            if (isset($config->autoload) && $config->autoload) {
+                $acl = Patchwork_Acl::factory(self::getUserRole())
+                    ->registerInRegistry();
+            } else {
+                throw Patchwork_Exception::ACLnotRegistered();
+            }
+        } else {
+            $acl = Zend_Registry::get(Patchwork::ACL_REGISTRY_KEY);
+            if(!$acl instanceof Patchwork_Acl){
+                throw Patchwork_Exception::wrongACLType();
+            }
+        }
+
+        return $acl;
     }
 
     /**
@@ -54,20 +86,13 @@ class Patchwork_Controller_Plugin_Auth extends Zend_Controller_Plugin_Abstract
      * if not valid
      * 
      * @param Zend_Controller_Request_Abstract $request request
+     * @throws Patchwork_Exception
      */
     public function dispatchLoopStartup(Zend_Controller_Request_Abstract $request)
     {
-        if(!Zend_Registry::isRegistered(Patchwork::ACL_REGISTRY_KEY))
-            throw new Patchwork_Exception(
-                'ACL not found in registry under '. Patchwork::ACL_REGISTRY_KEY
-            );
+        $acl = $this->_getACL();
 
-        $acl = Zend_Registry::get(Patchwork::ACL_REGISTRY_KEY);
-        $resource = $request->getControllerName();
-        if(
-            !$acl->has($resource) ||
-            !$acl->isAllowed(self::getUserRole(), $resource)
-        ) {
+        if (!$acl->isAllowedRequest(self::getUserRole(), $request)) {
             $this->redirectToAccessDenied($request);
         }
     }
@@ -75,13 +100,16 @@ class Patchwork_Controller_Plugin_Auth extends Zend_Controller_Plugin_Abstract
     /**
      * Checks permission using ACL
      *
-     * @param Zend_Controller_Request_Abstract $request
+     * @param Zend_Controller_Request_Abstract $request request
      *
      * @return void
      */
     public function redirectToAccessDenied(Zend_Controller_Request_Abstract $request)
     {
-        $request->setControllerName('error');
-        $request->setActionName('denied');
+        $config = $this->_getConfig();
+        
+        $request->setControllerName($config->errorController);
+        $request->setActionName($config->errorAction);
     }
+
 }

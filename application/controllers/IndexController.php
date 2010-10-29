@@ -4,7 +4,7 @@
  *
  * 
  */
-class IndexController extends Zend_Controller_Action
+class IndexController extends Patchwork_Controller_Action
 {
  
     /**
@@ -13,7 +13,7 @@ class IndexController extends Zend_Controller_Action
      *
      */
     public function indexAction(){
-        $this->_helper->getHelper('Doctrine');
+        $doctrine = $this->_getDoctrine();
         $this->model = new User;
         $this->model->email = 'test@test.com';
         $this->view->user = $this->model;
