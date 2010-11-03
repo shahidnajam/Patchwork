@@ -57,6 +57,17 @@ http://github.com/beberlei/zf-doctrine
 
 - extend unit testing
 - make scripts callable form everywhere
+- user management module
+- modular acl
+- blueprint flash messenger view helper
+- application firewall
+- check: form csrf protection using zend hash element
+- check: zend registry vs dependency injection container
+
+##Not to do (Best pratise howto instead)
+
+- escaping
+- jquery view helpers
 
 ##Read more
 
