@@ -55,6 +55,7 @@ http://github.com/beberlei/zf-doctrine
 
 ##To Do
 
+- integrate ZFDoctrine as gitmodule
 - extend unit testing
 - make scripts callable form everywhere
 - user management module
@@ -64,7 +65,7 @@ http://github.com/beberlei/zf-doctrine
 - check: form csrf protection using zend hash element
 - check: zend registry vs dependency injection container
 
-##Not to do (Best pratise howto instead)
+##Not to do (Best practise - howto instead)
 
 - escaping
 - jquery view helpers
