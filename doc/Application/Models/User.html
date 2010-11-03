@@ -23,19 +23,14 @@
 						
 			</div>
 	<div class="info-box-body">
-                <p class="implements">
-            Implements interfaces:
-            <ul>
-                <li><a href="../../Patchwork/Doctrine/Patchwork_Form_Doctrine_Renderable.html">Patchwork_Form_Doctrine_Renderable</a></li><li><a href="../../Patchwork/Authentication/Patchwork_Auth_RoleIdentity.html">Patchwork_Auth_RoleIdentity</a></li><li><a href="../../default/Patchwork_Auth_Model.html">Patchwork_Auth_Model</a></li>            </ul>
-        </p>
         		<!-- ========== Info from phpDoc block ========= -->
 <p class="short-description">User class</p>
 	<ul class="tags">
-				<li><span class="field">author:</span> Daniel Pozzi</li>
+				<li><span class="field">author:</span> Daniel Pozzi &lt;<a href="mailto:bonndan76@googlemail.com">bonndan76@googlemail.com</a>&gt;</li>
 				<li><span class="field">version:</span> SVN: $Id: Builder.php 7490 2010-03-29 19:53:27Z jwage $</li>
 			</ul>
 		<p class="notes">
-			Located in <a class="field" href="_application---models---User.php.html">/application/models/User.php</a> (line <span class="field">17</span>)
+			Located in <a class="field" href="_models---User.php.html">/models/User.php</a> (line <span class="field">17</span>)
 		</p>
 		
 				
@@ -131,10 +126,10 @@
 												<div class="method-definition">
 					static 						<span class="method-result">boolean</span>
 										<a href="#authenticate" title="details" class="method-name">authenticate</a>
-											(<span class="var-type"><type></span>&nbsp;<span class="var-name">$identity</span>, <span class="var-type"><type></span>&nbsp;<span class="var-name">$credential</span>)
+											(<span class="var-type">string</span>&nbsp;<span class="var-name">$identity</span>, <span class="var-type">string</span>&nbsp;<span class="var-name">$credential</span>)
 									</div>
 																<div class="method-definition">
-					static 						<span class="method-result">self</span>
+					static 						<span class="method-result"><a href="../../Application/Models/User.html">User</a>|null</span>
 										<a href="#getAuthenticatedUser" title="details" class="method-name">getAuthenticatedUser</a>
 										()
 									</div>
@@ -151,7 +146,7 @@
 									</div>
 																<div class="method-definition">
 											<span class="method-result">string</span>
-										<a href="#getRole" title="details" class="method-name">getRole</a>
+										<a href="#getRoleId" title="details" class="method-name">getRoleId</a>
 										()
 									</div>
 								</div>
@@ -174,13 +169,13 @@
 					</div>
 		<div class="info-box-body">
 			<a name="var$authenticatedUser" id="$authenticatedUser"><!-- --></A>
-<div class="evenrow">
+<div class="oddrow">
 
 	<div class="var-header">
 		<span class="var-title">
 			static <span class="var-type"><a href="../../Application/Models/User.html">User</a></span>
 			<span class="var-name">$authenticatedUser</span>
-						(line <span class="line-number">33</span>)
+						(line <span class="line-number">32</span>)
 		</span>
 	</div>
 
@@ -196,13 +191,13 @@
 
 </div>
 <a name="var$_authResult" id="$_authResult"><!-- --></A>
-<div class="oddrow">
+<div class="evenrow">
 
 	<div class="var-header">
 		<span class="var-title">
 			static <span class="var-type">Zend_Auth_Result</span>
 			<span class="var-name">$_authResult</span>
-						(line <span class="line-number">39</span>)
+						(line <span class="line-number">38</span>)
 		</span>
 	</div>
 
@@ -235,13 +230,14 @@
 		<div class="info-box-body">
 			<A NAME='method_detail'></A>
 <a name="methodauthenticate" id="authenticate"><!-- --></a>
-<div class="evenrow">
+<div class="oddrow">
 	
 	<div class="method-header">
-		<span class="method-title">static method authenticate</span> (line <span class="line-number">67</span>)
+		<span class="method-title">static method authenticate</span> (line <span class="line-number">72</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">authenticate using Zend_Auth</p>
 	<ul class="tags">
 				<li><span class="field">access:</span> public</li>
 			</ul>
@@ -252,25 +248,25 @@
 		<span class="method-name">
 			authenticate
 		</span>
-					(<span class="var-type"><type></span>&nbsp;<span class="var-name">$identity</span>, <span class="var-type"><type></span>&nbsp;<span class="var-name">$credential</span>)
+					(<span class="var-type">string</span>&nbsp;<span class="var-name">$identity</span>, <span class="var-type">string</span>&nbsp;<span class="var-name">$credential</span>)
 			</div>
 	
 			<ul class="parameters">
 					<li>
-				<span class="var-type"><type></span>
-				<span class="var-name">$identity</span>			</li>
+				<span class="var-type">string</span>
+				<span class="var-name">$identity</span><span class="var-description">: identity</span>			</li>
 					<li>
-				<span class="var-type"><type></span>
-				<span class="var-name">$credential</span>			</li>
+				<span class="var-type">string</span>
+				<span class="var-name">$credential</span><span class="var-description">: credential (password)</span>			</li>
 				</ul>
 		
 			
 	</div>
 <a name="methodgetAuthenticatedUser" id="getAuthenticatedUser"><!-- --></a>
-<div class="oddrow">
+<div class="evenrow">
 	
 	<div class="method-header">
-		<span class="method-title">static method getAuthenticatedUser</span> (line <span class="line-number">105</span>)
+		<span class="method-title">static method getAuthenticatedUser</span> (line <span class="line-number">111</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -281,7 +277,7 @@
 	
 	<div class="method-signature">
 	    static
-		<span class="method-result">self</span>
+		<span class="method-result"><a href="../../Application/Models/User.html">User</a>|null</span>
 		<span class="method-name">
 			getAuthenticatedUser
 		</span>
@@ -292,13 +288,14 @@
 			
 	</div>
 <a name="methodgetAuthenticationResult" id="getAuthenticationResult"><!-- --></a>
-<div class="evenrow">
+<div class="oddrow">
 	
 	<div class="method-header">
-		<span class="method-title">static method getAuthenticationResult</span> (line <span class="line-number">95</span>)
+		<span class="method-title">static method getAuthenticationResult</span> (line <span class="line-number">101</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">returns the authentication result</p>
 	<ul class="tags">
 				<li><span class="field">access:</span> public</li>
 			</ul>
@@ -317,10 +314,10 @@
 	</div>
 
 <a name="methodgetIgnoredColumns" id="getIgnoredColumns"><!-- --></a>
-<div class="oddrow">
+<div class="evenrow">
 	
 	<div class="method-header">
-		<span class="method-title">getIgnoredColumns</span> (line <span class="line-number">46</span>)
+		<span class="method-title">getIgnoredColumns</span> (line <span class="line-number">45</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -340,15 +337,15 @@
 		
 			
 	</div>
-<a name="methodgetRole" id="getRole"><!-- --></a>
-<div class="evenrow">
+<a name="methodgetRoleId" id="getRoleId"><!-- --></a>
+<div class="oddrow">
 	
 	<div class="method-header">
-		<span class="method-title">getRole</span> (line <span class="line-number">55</span>)
+		<span class="method-title">getRoleId</span> (line <span class="line-number">59</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
-<p class="short-description">return the roel</p>
+<p class="short-description">return the role for ACL (Zend_Acl_Role_Interface)</p>
 	<ul class="tags">
 				<li><span class="field">access:</span> public</li>
 			</ul>
@@ -356,7 +353,7 @@
 	<div class="method-signature">
 		<span class="method-result">string</span>
 		<span class="method-name">
-			getRole
+			getRoleId
 		</span>
 				()
 			</div>
@@ -391,45 +388,13 @@
 					</div>
 		<div class="info-box-body">
 			<a name="constAUTH_CREDENTIAL_COLUMN" id="AUTH_CREDENTIAL_COLUMN"><!-- --></A>
-<div class="oddrow">
+<div class="evenrow">
 
 	<div class="const-header">
 		<img src="../../media/images/Variable.png" />
 		<span class="const-title">
 			<span class="const-name">AUTH_CREDENTIAL_COLUMN</span>
 			 = <span class="const-default"> 'password'</span>
-			(line <span class="line-number">25</span>)
-		</span>
-	</div>
-
-	<!-- ========== Info from phpDoc block ========= -->
-	
-	
-</div>
-<a name="constAUTH_CREDENTIAL_TREATMENT" id="AUTH_CREDENTIAL_TREATMENT"><!-- --></A>
-<div class="evenrow">
-
-	<div class="const-header">
-		<img src="../../media/images/Variable.png" />
-		<span class="const-title">
-			<span class="const-name">AUTH_CREDENTIAL_TREATMENT</span>
-			 = <span class="const-default"> 'MD5(CONCAT(?, salt))'</span>
-			(line <span class="line-number">27</span>)
-		</span>
-	</div>
-
-	<!-- ========== Info from phpDoc block ========= -->
-	
-	
-</div>
-<a name="constAUTH_IDENTITY_COLUMN" id="AUTH_IDENTITY_COLUMN"><!-- --></A>
-<div class="oddrow">
-
-	<div class="const-header">
-		<img src="../../media/images/Variable.png" />
-		<span class="const-title">
-			<span class="const-name">AUTH_IDENTITY_COLUMN</span>
-			 = <span class="const-default"> 'email'</span>
 			(line <span class="line-number">24</span>)
 		</span>
 	</div>
@@ -438,15 +403,47 @@
 	
 	
 </div>
-<a name="constAUTH_SALT_COLUMN" id="AUTH_SALT_COLUMN"><!-- --></A>
+<a name="constAUTH_CREDENTIAL_TREATMENT" id="AUTH_CREDENTIAL_TREATMENT"><!-- --></A>
+<div class="oddrow">
+
+	<div class="const-header">
+		<img src="../../media/images/Variable.png" />
+		<span class="const-title">
+			<span class="const-name">AUTH_CREDENTIAL_TREATMENT</span>
+			 = <span class="const-default"> 'MD5(CONCAT(?, salt))'</span>
+			(line <span class="line-number">26</span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+	
+	
+</div>
+<a name="constAUTH_IDENTITY_COLUMN" id="AUTH_IDENTITY_COLUMN"><!-- --></A>
 <div class="evenrow">
+
+	<div class="const-header">
+		<img src="../../media/images/Variable.png" />
+		<span class="const-title">
+			<span class="const-name">AUTH_IDENTITY_COLUMN</span>
+			 = <span class="const-default"> 'email'</span>
+			(line <span class="line-number">23</span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+	
+	
+</div>
+<a name="constAUTH_SALT_COLUMN" id="AUTH_SALT_COLUMN"><!-- --></A>
+<div class="oddrow">
 
 	<div class="const-header">
 		<img src="../../media/images/Variable.png" />
 		<span class="const-title">
 			<span class="const-name">AUTH_SALT_COLUMN</span>
 			 = <span class="const-default"> 'salt'</span>
-			(line <span class="line-number">26</span>)
+			(line <span class="line-number">25</span>)
 		</span>
 	</div>
 
@@ -459,7 +456,7 @@
 	</div>
 
 	<p class="notes" id="credit">
-		Documentation generated on Fri, 23 Jul 2010 07:31:56 +0200 by <a href="http://www.phpdoc.org" target="_blank">phpDocumentor 1.4.3</a>
+		Documentation generated on Fri, 29 Oct 2010 16:38:15 +0200 by <a href="http://www.phpdoc.org" target="_blank">phpDocumentor 1.4.3</a>
 	</p>
 	</div></body>
 </html>

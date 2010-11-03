@@ -12,10 +12,14 @@
 <h2>[Application] element index</h2>
 	<h3>Package indexes</h3>
 	<ul>
-						<li><a href="elementindex_default.html">default</a></li>
-					<li><a href="elementindex_Authentication.html">Authentication</a></li>
+				<li><a href="elementindex_default.html">default</a></li>
+					<li><a href="elementindex_Controller.html">Controller</a></li>
+					<li><a href="elementindex_Demo.html">Demo</a></li>
+					<li><a href="elementindex_API.html">API</a></li>
+							<li><a href="elementindex_Service.html">Service</a></li>
+					<li><a href="elementindex_Models.html">Models</a></li>
 					<li><a href="elementindex_--PACKAGE--.html">--PACKAGE--</a></li>
-					<li><a href="elementindex_Patchwork.html">Patchwork</a></li>
+					<li><a href="elementindex_Authentication.html">Authentication</a></li>
 			</ul>
 <a href="elementindex.html">All elements</a>
 <br />
@@ -27,6 +31,7 @@
 	<a class="index-letter" href="elementindex_Application.html#g">g</a>
 	<a class="index-letter" href="elementindex_Application.html#l">l</a>
 	<a class="index-letter" href="elementindex_Application.html#m">m</a>
+	<a class="index-letter" href="elementindex_Application.html#r">r</a>
 	<a class="index-letter" href="elementindex_Application.html#s">s</a>
 	<a class="index-letter" href="elementindex_Application.html#t">t</a>
 	<a class="index-letter" href="elementindex_Application.html#u">u</a>
@@ -41,13 +46,6 @@
 	</div>
 	<dl>
 			<dt class="field">
-						<span class="method-title">_initAcl</span>
-					</dt>
-		<dd class="index-item-body">
-			<div class="index-item-details"><a href="Application/Bootstrap/Bootstrap.html#method_initAcl">Bootstrap::_initAcl()</a> in Bootstrap.php</div>
-							<div class="index-item-description">access control, registerd in registry for navigation</div>
-					</dd>
-			<dt class="field">
 						<span class="method-title">_initAppAutoload</span>
 					</dt>
 		<dd class="index-item-body">
@@ -55,18 +53,17 @@
 							<div class="index-item-description">start autoloading</div>
 					</dd>
 			<dt class="field">
+						<span class="method-title">_initCli</span>
+					</dt>
+		<dd class="index-item-body">
+			<div class="index-item-details"><a href="Application/Bootstrap/Bootstrap.html#method_initCli">Bootstrap::_initCli()</a> in Bootstrap.php</div>
+							<div class="index-item-description">command line interface bootstrapping</div>
+					</dd>
+			<dt class="field">
 						<span class="method-title">_initConfigToRegistry</span>
 					</dt>
 		<dd class="index-item-body">
 			<div class="index-item-details"><a href="Application/Bootstrap/Bootstrap.html#method_initConfigToRegistry">Bootstrap::_initConfigToRegistry()</a> in Bootstrap.php</div>
-							<div class="index-item-description">make config available in registry</div>
-					</dd>
-			<dt class="field">
-						<span class="method-title">_initDoctrine</span>
-					</dt>
-		<dd class="index-item-body">
-			<div class="index-item-details"><a href="Application/Bootstrap/Bootstrap.html#method_initDoctrine">Bootstrap::_initDoctrine()</a> in Bootstrap.php</div>
-							<div class="index-item-description">starting doctrine</div>
 					</dd>
 			<dt class="field">
 						<span class="method-title">_initLocale</span>
@@ -80,7 +77,7 @@
 					</dt>
 		<dd class="index-item-body">
 			<div class="index-item-details"><a href="Application/Bootstrap/Bootstrap.html#method_initNavigation">Bootstrap::_initNavigation()</a> in Bootstrap.php</div>
-							<div class="index-item-description">start Zend_Navigation, register it in registry</div>
+							<div class="index-item-description">start Zend_Navigation</div>
 					</dd>
 			<dt class="field">
 						<span class="var-title">$_authResult</span>
@@ -101,14 +98,13 @@
 						<span class="const-title">APPLICATION_ENV</span>
 					</dt>
 		<dd class="index-item-body">
-			<div class="index-item-details"><a href="Application/Bootstrap/_application---env.php.html#defineAPPLICATION_ENV">APPLICATION_ENV</a> in env.php</div>
+			<div class="index-item-details"><a href="Application/Bootstrap/_env.php.html#defineAPPLICATION_ENV">APPLICATION_ENV</a> in env.php</div>
 					</dd>
 			<dt class="field">
 						<span class="const-title">APPLICATION_PATH</span>
 					</dt>
 		<dd class="index-item-body">
-			<div class="index-item-details"><a href="Application/Bootstrap/_application---env.php.html#defineAPPLICATION_PATH">APPLICATION_PATH</a> in env.php</div>
-							<div class="index-item-description">Define path to application directory</div>
+			<div class="index-item-details"><a href="Application/Bootstrap/_env.php.html#defineAPPLICATION_PATH">APPLICATION_PATH</a> in env.php</div>
 					</dd>
 			<dt class="field">
 						<span class="var-title">$authenticatedUser</span>
@@ -122,6 +118,7 @@
 					</dt>
 		<dd class="index-item-body">
 			<div class="index-item-details"><a href="Application/Models/User.html#methodauthenticate">User::authenticate()</a> in User.php</div>
+							<div class="index-item-description">authenticate using Zend_Auth</div>
 					</dd>
 			<dt class="field">
 						AUTH_CREDENTIAL_COLUMN
@@ -156,17 +153,17 @@
 	</div>
 	<dl>
 			<dt class="field">
-						<span class="include-title">Bootstrap.php</span>
-					</dt>
-		<dd class="index-item-body">
-			<div class="index-item-details"><a href="Application/Bootstrap/_application---Bootstrap.php.html">Bootstrap.php</a> in Bootstrap.php</div>
-					</dd>
-			<dt class="field">
 						Bootstrap
 					</dt>
 		<dd class="index-item-body">
 			<div class="index-item-details"><a href="Application/Bootstrap/Bootstrap.html">Bootstrap</a> in Bootstrap.php</div>
 							<div class="index-item-description">Bootstrap class</div>
+					</dd>
+			<dt class="field">
+						<span class="include-title">Bootstrap.php</span>
+					</dt>
+		<dd class="index-item-body">
+			<div class="index-item-details"><a href="Application/Bootstrap/_Bootstrap.php.html">Bootstrap.php</a> in Bootstrap.php</div>
 					</dd>
 		</dl>
 	<a name="c"></a>
@@ -180,7 +177,7 @@
 						<span class="const-title">CONFIG_PATH</span>
 					</dt>
 		<dd class="index-item-body">
-			<div class="index-item-details"><a href="Application/Bootstrap/_application---env.php.html#defineCONFIG_PATH">CONFIG_PATH</a> in env.php</div>
+			<div class="index-item-details"><a href="Application/Bootstrap/_env.php.html#defineCONFIG_PATH">CONFIG_PATH</a> in env.php</div>
 					</dd>
 		</dl>
 	<a name="e"></a>
@@ -194,7 +191,7 @@
 						<span class="include-title">env.php</span>
 					</dt>
 		<dd class="index-item-body">
-			<div class="index-item-details"><a href="Application/Bootstrap/_application---env.php.html">env.php</a> in env.php</div>
+			<div class="index-item-details"><a href="Application/Bootstrap/_env.php.html">env.php</a> in env.php</div>
 					</dd>
 		</dl>
 	<a name="g"></a>
@@ -216,6 +213,7 @@
 					</dt>
 		<dd class="index-item-body">
 			<div class="index-item-details"><a href="Application/Models/User.html#methodgetAuthenticationResult">User::getAuthenticationResult()</a> in User.php</div>
+							<div class="index-item-description">returns the authentication result</div>
 					</dd>
 			<dt class="field">
 						<span class="method-title">getIgnoredColumns</span>
@@ -225,11 +223,11 @@
 							<div class="index-item-description">fields not to show in modelform</div>
 					</dd>
 			<dt class="field">
-						<span class="method-title">getRole</span>
+						<span class="method-title">getRoleId</span>
 					</dt>
 		<dd class="index-item-body">
-			<div class="index-item-details"><a href="Application/Models/User.html#methodgetRole">User::getRole()</a> in User.php</div>
-							<div class="index-item-description">return the roel</div>
+			<div class="index-item-details"><a href="Application/Models/User.html#methodgetRoleId">User::getRoleId()</a> in User.php</div>
+							<div class="index-item-description">return the role for ACL (Zend_Acl_Role_Interface)</div>
 					</dd>
 		</dl>
 	<a name="l"></a>
@@ -243,7 +241,7 @@
 						<span class="const-title">LIBRARY_PATH</span>
 					</dt>
 		<dd class="index-item-body">
-			<div class="index-item-details"><a href="Application/Bootstrap/_application---env.php.html#defineLIBRARY_PATH">LIBRARY_PATH</a> in env.php</div>
+			<div class="index-item-details"><a href="Application/Bootstrap/_env.php.html#defineLIBRARY_PATH">LIBRARY_PATH</a> in env.php</div>
 					</dd>
 		</dl>
 	<a name="m"></a>
@@ -257,7 +255,22 @@
 						<span class="const-title">MODELS_PATH</span>
 					</dt>
 		<dd class="index-item-body">
-			<div class="index-item-details"><a href="Application/Bootstrap/_application---env.php.html#defineMODELS_PATH">MODELS_PATH</a> in env.php</div>
+			<div class="index-item-details"><a href="Application/Bootstrap/_env.php.html#defineMODELS_PATH">MODELS_PATH</a> in env.php</div>
+					</dd>
+		</dl>
+	<a name="r"></a>
+	<div class="index-letter-section">
+		<div style="float: left" class="index-letter-title">r</div>
+		<div style="float: right"><a href="#top">top</a></div>
+		<div style="clear: both"></div>
+	</div>
+	<dl>
+			<dt class="field">
+						<span class="const-title">ROOT_PATH</span>
+					</dt>
+		<dd class="index-item-body">
+			<div class="index-item-details"><a href="Application/Bootstrap/_env.php.html#defineROOT_PATH">ROOT_PATH</a> in env.php</div>
+							<div class="index-item-description">Define path to application directory</div>
 					</dd>
 		</dl>
 	<a name="s"></a>
@@ -268,10 +281,10 @@
 	</div>
 	<dl>
 			<dt class="field">
-						<span class="const-title">SERVER_TYPE</span>
+						<span class="const-title">SERVER_NAME</span>
 					</dt>
 		<dd class="index-item-body">
-			<div class="index-item-details"><a href="Application/Bootstrap/_application---env.php.html#defineSERVER_TYPE">SERVER_TYPE</a> in env.php</div>
+			<div class="index-item-details"><a href="Application/Bootstrap/_env.php.html#defineSERVER_NAME">SERVER_NAME</a> in env.php</div>
 							<div class="index-item-description">Define application environment</div>
 					</dd>
 		</dl>
@@ -286,7 +299,7 @@
 						<span class="const-title">TMP_PATH</span>
 					</dt>
 		<dd class="index-item-body">
-			<div class="index-item-details"><a href="Application/Bootstrap/_application---env.php.html#defineTMP_PATH">TMP_PATH</a> in env.php</div>
+			<div class="index-item-details"><a href="Application/Bootstrap/_env.php.html#defineTMP_PATH">TMP_PATH</a> in env.php</div>
 					</dd>
 		</dl>
 	<a name="u"></a>
@@ -300,7 +313,7 @@
 						<span class="include-title">User.php</span>
 					</dt>
 		<dd class="index-item-body">
-			<div class="index-item-details"><a href="Application/Models/_application---models---User.php.html">User.php</a> in User.php</div>
+			<div class="index-item-details"><a href="Application/Models/_models---User.php.html">User.php</a> in User.php</div>
 					</dd>
 			<dt class="field">
 						User
@@ -319,6 +332,7 @@
 	<a class="index-letter" href="elementindex_Application.html#g">g</a>
 	<a class="index-letter" href="elementindex_Application.html#l">l</a>
 	<a class="index-letter" href="elementindex_Application.html#m">m</a>
+	<a class="index-letter" href="elementindex_Application.html#r">r</a>
 	<a class="index-letter" href="elementindex_Application.html#s">s</a>
 	<a class="index-letter" href="elementindex_Application.html#t">t</a>
 	<a class="index-letter" href="elementindex_Application.html#u">u</a>

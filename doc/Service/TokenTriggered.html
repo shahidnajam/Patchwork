@@ -3,13 +3,13 @@
   <html xmlns="http://www.w3.org/1999/xhtml">
 		<head>
 			<!-- template designed by Marco Von Ballmoos -->
-			<title>Docs For Class App_Form_Auth_Login</title>
-			<link rel="stylesheet" href="../../media/stylesheet.css" />
+			<title>Docs For Class TokenTriggered</title>
+			<link rel="stylesheet" href="../media/stylesheet.css" />
 			<meta http-equiv='Content-Type' content='text/html; charset=iso-8859-1'/>
 		</head>
 		<body>
 			<div class="page-body">			
-<h2 class="class-name">Class App_Form_Auth_Login</h2>
+<h2 class="class-name">Interface TokenTriggered</h2>
 
 <a name="sec-description"></a>
 <div class="info-box">
@@ -21,18 +21,16 @@
 					</div>
 	<div class="info-box-body">
         		<!-- ========== Info from phpDoc block ========= -->
-<p class="short-description">Simple login form</p>
+<p class="short-description">TokenTriggered interface</p>
 	<ul class="tags">
-				<li><span class="field">author:</span> Daniel Pozzi</li>
+				<li><span class="field">author:</span> Daniel Pozzi &lt;<a href="mailto:bonndan76@googlemail.com">bonndan76@googlemail.com</a>&gt;</li>
 			</ul>
 		<p class="notes">
-			Located in <a class="field" href="_forms---Auth---Login.php.html">/forms/Auth/Login.php</a> (line <span class="field">10</span>)
+			Located in <a class="field" href="_models---TokenTriggered.php.html">/models/TokenTriggered.php</a> (line <span class="field">17</span>)
 		</p>
 		
 				
-		<pre>Zend_Form
-   |
-   --App_Form_Auth_Login</pre>
+		<pre></pre>
 	
 			</div>
 </div>
@@ -51,9 +49,9 @@
 			<div class="method-summary">
 												
 												<div class="method-definition">
-											<span class="method-result">void</span>
-										<a href="#init" title="details" class="method-name">init</a>
-										()
+											<span class="method-result">self</span>
+										<a href="#startWithToken" title="details" class="method-name">startWithToken</a>
+											(<span class="var-type"></span>&nbsp;<span class="var-name">$token</span>)
 									</div>
 								</div>
 		</div>
@@ -71,27 +69,29 @@
 		<div class="info-box-body">
 			<A NAME='method_detail'></A>
 
-<a name="methodinit" id="init"><!-- --></a>
-<div class="oddrow">
+<a name="methodstartWithToken" id="startWithToken"><!-- --></a>
+<div class="evenrow">
 	
 	<div class="method-header">
-		<span class="method-title">init</span> (line <span class="line-number">16</span>)
+		<span class="method-title">startWithToken</span> (line <span class="line-number">25</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
-<p class="short-description">just email + credential field</p>
-	<ul class="tags">
-				<li><span class="field">access:</span> public</li>
-			</ul>
+<p class="short-description">method to start the service using a token's data</p>
 	
 	<div class="method-signature">
-		<span class="method-result">void</span>
+		<span class="method-result">self</span>
 		<span class="method-name">
-			init
+			startWithToken
 		</span>
-				()
+					(<span class="var-type"></span>&nbsp;<span class="var-name">$token</span>)
 			</div>
 	
+			<ul class="parameters">
+					<li>
+				<span class="var-type"><a href="../Models/Token.html">Token</a></span>
+				<span class="var-name">$token</span><span class="var-description">: pass an instance of Token</span>			</li>
+				</ul>
 		
 			
 	</div>

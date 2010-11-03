@@ -3,13 +3,13 @@
   <html xmlns="http://www.w3.org/1999/xhtml">
 		<head>
 			<!-- template designed by Marco Von Ballmoos -->
-			<title>Docs For Class Bootstrap</title>
-			<link rel="stylesheet" href="../../media/stylesheet.css" />
+			<title>Docs For Class ErrorController</title>
+			<link rel="stylesheet" href="../media/stylesheet.css" />
 			<meta http-equiv='Content-Type' content='text/html; charset=iso-8859-1'/>
 		</head>
 		<body>
 			<div class="page-body">			
-<h2 class="class-name">Class Bootstrap</h2>
+<h2 class="class-name">Class ErrorController</h2>
 
 <a name="sec-description"></a>
 <div class="info-box">
@@ -21,19 +21,15 @@
 					</div>
 	<div class="info-box-body">
         		<!-- ========== Info from phpDoc block ========= -->
-<p class="short-description">Bootstrap class</p>
-<p class="description"><p>registers registry keys and starts Doctrine</p></p>
-	<ul class="tags">
-				<li><span class="field">author:</span> Daniel Pozzi</li>
-			</ul>
+<p class="short-description">ErrorController</p>
 		<p class="notes">
-			Located in <a class="field" href="_Bootstrap.php.html">/Bootstrap.php</a> (line <span class="field">12</span>)
+			Located in <a class="field" href="_controllers---ErrorController.php.html">/controllers/ErrorController.php</a> (line <span class="field">9</span>)
 		</p>
 		
 				
-		<pre>Zend_Application_Bootstrap_Bootstrap
+		<pre>Zend_Controller_Action
    |
-   --Bootstrap</pre>
+   --ErrorController</pre>
 	
 			</div>
 </div>
@@ -50,30 +46,25 @@
 		</div>
 		<div class="info-box-body">			
 			<div class="method-summary">
-																																												
+																																				
 												<div class="method-definition">
-											<span class="method-result">Zend_Loader_Autoloader</span>
-										<a href="#_initAppAutoload" title="details" class="method-name">_initAppAutoload</a>
+											<span class="method-result">void</span>
+										<a href="#badrequestAction" title="details" class="method-name">badrequestAction</a>
 										()
 									</div>
 																<div class="method-definition">
 											<span class="method-result">void</span>
-										<a href="#_initCli" title="details" class="method-name">_initCli</a>
+										<a href="#deniedAction" title="details" class="method-name">deniedAction</a>
 										()
 									</div>
 																<div class="method-definition">
 											<span class="method-result">void</span>
-										<a href="#_initConfigToRegistry" title="details" class="method-name">_initConfigToRegistry</a>
+										<a href="#errorAction" title="details" class="method-name">errorAction</a>
 										()
 									</div>
 																<div class="method-definition">
-											<span class="method-result">Zend_Locale</span>
-										<a href="#_initLocale" title="details" class="method-name">_initLocale</a>
-										()
-									</div>
-																<div class="method-definition">
-											<span class="method-result">Zend_Navigation</span>
-										<a href="#_initNavigation" title="details" class="method-name">_initNavigation</a>
+											<span class="method-result">void</span>
+										<a href="#getLog" title="details" class="method-name">getLog</a>
 										()
 									</div>
 								</div>
@@ -92,39 +83,15 @@
 		<div class="info-box-body">
 			<A NAME='method_detail'></A>
 
-<a name="method_initAppAutoload" id="_initAppAutoload"><!-- --></a>
-<div class="oddrow">
-	
-	<div class="method-header">
-		<span class="method-title">_initAppAutoload</span> (line <span class="line-number">20</span>)
-	</div> 
-	
-	<!-- ========== Info from phpDoc block ========= -->
-<p class="short-description">start autoloading</p>
-	<ul class="tags">
-				<li><span class="field">access:</span> protected</li>
-			</ul>
-	
-	<div class="method-signature">
-		<span class="method-result">Zend_Loader_Autoloader</span>
-		<span class="method-name">
-			_initAppAutoload
-		</span>
-				()
-			</div>
-	
-		
-			
-	</div>
-<a name="method_initCli" id="_initCli"><!-- --></a>
+<a name="methodbadrequestAction" id="badrequestAction"><!-- --></a>
 <div class="evenrow">
 	
 	<div class="method-header">
-		<span class="method-title">_initCli</span> (line <span class="line-number">72</span>)
+		<span class="method-title">badrequestAction</span> (line <span class="line-number">56</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
-<p class="short-description">command line interface bootstrapping</p>
+<p class="short-description">bad request caught by PHPIDS</p>
 	<ul class="tags">
 				<li><span class="field">access:</span> public</li>
 			</ul>
@@ -132,7 +99,7 @@
 	<div class="method-signature">
 		<span class="method-result">void</span>
 		<span class="method-name">
-			_initCli
+			badrequestAction
 		</span>
 				()
 			</div>
@@ -140,46 +107,22 @@
 		
 			
 	</div>
-<a name="method_initConfigToRegistry" id="_initConfigToRegistry"><!-- --></a>
+<a name="methoddeniedAction" id="deniedAction"><!-- --></a>
 <div class="oddrow">
 	
 	<div class="method-header">
-		<span class="method-title">_initConfigToRegistry</span> (line <span class="line-number">33</span>)
+		<span class="method-title">deniedAction</span> (line <span class="line-number">47</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
-	<ul class="tags">
-				<li><span class="field">access:</span> protected</li>
-			</ul>
-	
-	<div class="method-signature">
-		<span class="method-result">void</span>
-		<span class="method-name">
-			_initConfigToRegistry
-		</span>
-				()
-			</div>
-	
-		
-			
-	</div>
-<a name="method_initLocale" id="_initLocale"><!-- --></a>
-<div class="evenrow">
-	
-	<div class="method-header">
-		<span class="method-title">_initLocale</span> (line <span class="line-number">58</span>)
-	</div> 
-	
-	<!-- ========== Info from phpDoc block ========= -->
-<p class="short-description">init app-wide locale</p>
 	<ul class="tags">
 				<li><span class="field">access:</span> public</li>
 			</ul>
 	
 	<div class="method-signature">
-		<span class="method-result">Zend_Locale</span>
+		<span class="method-result">void</span>
 		<span class="method-name">
-			_initLocale
+			deniedAction
 		</span>
 				()
 			</div>
@@ -187,23 +130,45 @@
 		
 			
 	</div>
-<a name="method_initNavigation" id="_initNavigation"><!-- --></a>
-<div class="oddrow">
+<a name="methoderrorAction" id="errorAction"><!-- --></a>
+<div class="evenrow">
 	
 	<div class="method-header">
-		<span class="method-title">_initNavigation</span> (line <span class="line-number">46</span>)
+		<span class="method-title">errorAction</span> (line <span class="line-number">12</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
-<p class="short-description">start Zend_Navigation</p>
 	<ul class="tags">
-				<li><span class="field">access:</span> protected</li>
+				<li><span class="field">access:</span> public</li>
 			</ul>
 	
 	<div class="method-signature">
-		<span class="method-result">Zend_Navigation</span>
+		<span class="method-result">void</span>
 		<span class="method-name">
-			_initNavigation
+			errorAction
+		</span>
+				()
+			</div>
+	
+		
+			
+	</div>
+<a name="methodgetLog" id="getLog"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">getLog</span> (line <span class="line-number">63</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			getLog
 		</span>
 				()
 			</div>

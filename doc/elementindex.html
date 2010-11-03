@@ -12,11 +12,15 @@
 <h2>Full index</h2>
 <h3>Package indexes</h3>
 <ul>
-	<li><a href="elementindex_Application.html">Application</a></li>
 	<li><a href="elementindex_default.html">default</a></li>
-	<li><a href="elementindex_Authentication.html">Authentication</a></li>
+	<li><a href="elementindex_Controller.html">Controller</a></li>
+	<li><a href="elementindex_Demo.html">Demo</a></li>
+	<li><a href="elementindex_API.html">API</a></li>
+	<li><a href="elementindex_Application.html">Application</a></li>
+	<li><a href="elementindex_Service.html">Service</a></li>
+	<li><a href="elementindex_Models.html">Models</a></li>
 	<li><a href="elementindex_--PACKAGE--.html">--PACKAGE--</a></li>
-	<li><a href="elementindex_Patchwork.html">Patchwork</a></li>
+	<li><a href="elementindex_Authentication.html">Authentication</a></li>
 </ul>
 <br />
 <div class="index-letter-menu">
@@ -32,14 +36,11 @@
 	<a class="index-letter" href="elementindex.html#l">l</a>
 	<a class="index-letter" href="elementindex.html#m">m</a>
 	<a class="index-letter" href="elementindex.html#n">n</a>
-	<a class="index-letter" href="elementindex.html#o">o</a>
-	<a class="index-letter" href="elementindex.html#p">p</a>
 	<a class="index-letter" href="elementindex.html#r">r</a>
 	<a class="index-letter" href="elementindex.html#s">s</a>
 	<a class="index-letter" href="elementindex.html#t">t</a>
 	<a class="index-letter" href="elementindex.html#u">u</a>
 	<a class="index-letter" href="elementindex.html#w">w</a>
-	<a class="index-letter" href="elementindex.html#z">z</a>
 	<a class="index-letter" href="elementindex.html#_">_</a>
 </div>
 
@@ -58,23 +59,29 @@
 							<div class="index-item-description">instance of User</div>
 					</dd>
 			<dt class="field">
-						<span class="include-title">AuthController.php</span>
+						Api_IndexController
 					</dt>
 		<dd class="index-item-body">
-			<div class="index-item-details"><a href="default/_application---controllers---AuthController.php.html">AuthController.php</a> in AuthController.php</div>
+			<div class="index-item-details"><a href="default/Api_IndexController.html">Api_IndexController</a> in IndexController.php</div>
+					</dd>
+			<dt class="field">
+						Api_UserController
+					</dt>
+		<dd class="index-item-body">
+			<div class="index-item-details"><a href="API/Controller/Api_UserController.html">Api_UserController</a> in UserController.php</div>
+							<div class="index-item-description">REST controller related to Doctrine User</div>
 					</dd>
 			<dt class="field">
 						<span class="const-title">APPLICATION_ENV</span>
 					</dt>
 		<dd class="index-item-body">
-			<div class="index-item-details"><a href="Application/Bootstrap/_application---env.php.html#defineAPPLICATION_ENV">APPLICATION_ENV</a> in env.php</div>
+			<div class="index-item-details"><a href="Application/Bootstrap/_env.php.html#defineAPPLICATION_ENV">APPLICATION_ENV</a> in env.php</div>
 					</dd>
 			<dt class="field">
 						<span class="const-title">APPLICATION_PATH</span>
 					</dt>
 		<dd class="index-item-body">
-			<div class="index-item-details"><a href="Application/Bootstrap/_application---env.php.html#defineAPPLICATION_PATH">APPLICATION_PATH</a> in env.php</div>
-							<div class="index-item-description">Define path to application directory</div>
+			<div class="index-item-details"><a href="Application/Bootstrap/_env.php.html#defineAPPLICATION_PATH">APPLICATION_PATH</a> in env.php</div>
 					</dd>
 			<dt class="field">
 						App_Form_Auth_Login
@@ -93,21 +100,8 @@
 						<span class="method-title">authenticate</span>
 					</dt>
 		<dd class="index-item-body">
-			<div class="index-item-details"><a href="Patchwork/Authentification/Patchwork_Auth_Adapter_Doctrine.html#methodauthenticate">Patchwork_Auth_Adapter_Doctrine::authenticate()</a> in Doctrine.php</div>
-							<div class="index-item-description">attempt an authenication.</div>
-					</dd>
-			<dt class="field">
-						<span class="method-title">authenticate</span>
-					</dt>
-		<dd class="index-item-body">
 			<div class="index-item-details"><a href="Application/Models/User.html#methodauthenticate">User::authenticate()</a> in User.php</div>
-					</dd>
-			<dt class="field">
-						<span class="method-title">authenticate</span>
-					</dt>
-		<dd class="index-item-body">
-			<div class="index-item-details"><a href="default/Patchwork_Auth_Model.html#methodauthenticate">Patchwork_Auth_Model::authenticate()</a> in Model.php</div>
-							<div class="index-item-description">authenticate against the db using the Patchwork Doctrine Adapter</div>
+							<div class="index-item-description">authenticate using Zend_Auth</div>
 					</dd>
 			<dt class="field">
 						AUTH_CREDENTIAL_COLUMN
@@ -134,10 +128,10 @@
 			<div class="index-item-details"><a href="Application/Models/User.html#constAUTH_SALT_COLUMN">User::AUTH_SALT_COLUMN</a> in User.php</div>
 					</dd>
 			<dt class="field">
-						<span class="include-title">Auth.php</span>
+						<span class="include-title">AuthController.php</span>
 					</dt>
 		<dd class="index-item-body">
-			<div class="index-item-details"><a href="Patchwork/Authorisation/_library---Patchwork---Controller---Plugin---Auth.php.html">Auth.php</a> in Auth.php</div>
+			<div class="index-item-details"><a href="default/_controllers---AuthController.php.html">AuthController.php</a> in AuthController.php</div>
 					</dd>
 		</dl>
 	<a name="b"></a>
@@ -148,23 +142,11 @@
 	</div>
 	<dl>
 			<dt class="field">
-						<span class="var-title">$buttonDecorators</span>
+						<span class="method-title">badrequestAction</span>
 					</dt>
 		<dd class="index-item-body">
-			<div class="index-item-details"><a href="Patchwork/Form/Patchwork_Form_Tableize.html#var$buttonDecorators">Patchwork_Form_Tableize::$buttonDecorators</a> in Tableize.php</div>
-							<div class="index-item-description">button decorators</div>
-					</dd>
-			<dt class="field">
-						<span class="include-title">Bootstrap.php</span>
-					</dt>
-		<dd class="index-item-body">
-			<div class="index-item-details"><a href="Application/Bootstrap/_application---Bootstrap.php.html">Bootstrap.php</a> in Bootstrap.php</div>
-					</dd>
-			<dt class="field">
-						<span class="include-title">BaseUser.php</span>
-					</dt>
-		<dd class="index-item-body">
-			<div class="index-item-details"><a href="--PACKAGE--/--SUBPACKAGE--/_application---models---generated---BaseUser.php.html">BaseUser.php</a> in BaseUser.php</div>
+			<div class="index-item-details"><a href="Controller/ErrorController.html#methodbadrequestAction">ErrorController::badrequestAction()</a> in ErrorController.php</div>
+							<div class="index-item-description">bad request caught by PHPIDS</div>
 					</dd>
 			<dt class="field">
 						<span class="method-title">badrequestAction</span>
@@ -173,11 +155,11 @@
 			<div class="index-item-details"><a href="default/IndexController.html#methodbadrequestAction">IndexController::badrequestAction()</a> in IndexController.php</div>
 					</dd>
 			<dt class="field">
-						<span class="method-title">badrequestAction</span>
+						BaseToken
 					</dt>
 		<dd class="index-item-body">
-			<div class="index-item-details"><a href="default/ErrorController.html#methodbadrequestAction">ErrorController::badrequestAction()</a> in ErrorController.php</div>
-							<div class="index-item-description">bad request caught by PHPIDS</div>
+			<div class="index-item-details"><a href="--PACKAGE--/--SUBPACKAGE--/BaseToken.html">BaseToken</a> in BaseToken.php</div>
+							<div class="index-item-description">BaseToken</div>
 					</dd>
 			<dt class="field">
 						BaseUser
@@ -194,10 +176,22 @@
 							<div class="index-item-description">Bootstrap class</div>
 					</dd>
 			<dt class="field">
-						<span class="include-title">Beberlei.php</span>
+						<span class="include-title">Bootstrap.php</span>
 					</dt>
 		<dd class="index-item-body">
-			<div class="index-item-details"><a href="default/_library---Patchwork---Doctrine---Beberlei.php.html">Beberlei.php</a> in Beberlei.php</div>
+			<div class="index-item-details"><a href="Application/Bootstrap/_Bootstrap.php.html">Bootstrap.php</a> in Bootstrap.php</div>
+					</dd>
+			<dt class="field">
+						<span class="include-title">BaseToken.php</span>
+					</dt>
+		<dd class="index-item-body">
+			<div class="index-item-details"><a href="--PACKAGE--/--SUBPACKAGE--/_models---generated---BaseToken.php.html">BaseToken.php</a> in BaseToken.php</div>
+					</dd>
+			<dt class="field">
+						<span class="include-title">BaseUser.php</span>
+					</dt>
+		<dd class="index-item-body">
+			<div class="index-item-details"><a href="--PACKAGE--/--SUBPACKAGE--/_models---generated---BaseUser.php.html">BaseUser.php</a> in BaseUser.php</div>
 					</dd>
 		</dl>
 	<a name="c"></a>
@@ -211,7 +205,7 @@
 						<span class="const-title">CONFIG_PATH</span>
 					</dt>
 		<dd class="index-item-body">
-			<div class="index-item-details"><a href="Application/Bootstrap/_application---env.php.html#defineCONFIG_PATH">CONFIG_PATH</a> in env.php</div>
+			<div class="index-item-details"><a href="Application/Bootstrap/_env.php.html#defineCONFIG_PATH">CONFIG_PATH</a> in env.php</div>
 					</dd>
 		</dl>
 	<a name="d"></a>
@@ -222,49 +216,17 @@
 	</div>
 	<dl>
 			<dt class="field">
-						<span class="include-title">denied.phtml</span>
+						<span class="method-title">deniedAction</span>
 					</dt>
 		<dd class="index-item-body">
-			<div class="index-item-details"><a href="default/_application---views---scripts---error---denied.phtml.html">denied.phtml</a> in denied.phtml</div>
-					</dd>
-			<dt class="field">
-						<span class="method-title">deleteAction</span>
-					</dt>
-		<dd class="index-item-body">
-			<div class="index-item-details"><a href="Patchwork/Controller/Patchwork_Controller_RESTModelController.html#methoddeleteAction">Patchwork_Controller_RESTModelController::deleteAction()</a> in RESTModelController.php</div>
-							<div class="index-item-description">delete</div>
+			<div class="index-item-details"><a href="default/Api_IndexController.html#methoddeniedAction">Api_IndexController::deniedAction()</a> in IndexController.php</div>
+							<div class="index-item-description">access denied</div>
 					</dd>
 			<dt class="field">
 						<span class="method-title">deniedAction</span>
 					</dt>
 		<dd class="index-item-body">
-			<div class="index-item-details"><a href="default/ErrorController.html#methoddeniedAction">ErrorController::deniedAction()</a> in ErrorController.php</div>
-					</dd>
-			<dt class="field">
-						<span class="method-title">direct</span>
-					</dt>
-		<dd class="index-item-body">
-			<div class="index-item-details"><a href="Patchwork/Controller/Patchwork_Controller_Helper_Doctrine.html#methoddirect">Patchwork_Controller_Helper_Doctrine::direct()</a> in Doctrine.php</div>
-							<div class="index-item-description">helper accessor</div>
-					</dd>
-			<dt class="field">
-						<span class="method-title">dispatchLoopStartup</span>
-					</dt>
-		<dd class="index-item-body">
-			<div class="index-item-details"><a href="Patchwork/Authorisation/Patchwork_Controller_Plugin_Auth.html#methoddispatchLoopStartup">Patchwork_Controller_Plugin_Auth::dispatchLoopStartup()</a> in Auth.php</div>
-							<div class="index-item-description">checks if controller name is an allowed resource</div>
-					</dd>
-			<dt class="field">
-						<span class="include-title">Doctrine.php</span>
-					</dt>
-		<dd class="index-item-body">
-			<div class="index-item-details"><a href="Patchwork/Authentification/_library---Patchwork---Auth---Adapter---Doctrine.php.html">Doctrine.php</a> in Doctrine.php</div>
-					</dd>
-			<dt class="field">
-						<span class="include-title">Doctrine.php</span>
-					</dt>
-		<dd class="index-item-body">
-			<div class="index-item-details"><a href="Patchwork/Controller/_library---Patchwork---Controller---Helper---Doctrine.php.html">Doctrine.php</a> in Doctrine.php</div>
+			<div class="index-item-details"><a href="Controller/ErrorController.html#methoddeniedAction">ErrorController::deniedAction()</a> in ErrorController.php</div>
 					</dd>
 		</dl>
 	<a name="e"></a>
@@ -275,47 +237,29 @@
 	</div>
 	<dl>
 			<dt class="field">
-						<span class="var-title">$elementDecorators</span>
-					</dt>
-		<dd class="index-item-body">
-			<div class="index-item-details"><a href="Patchwork/Form/Patchwork_Form_Tableize.html#var$elementDecorators">Patchwork_Form_Tableize::$elementDecorators</a> in Tableize.php</div>
-							<div class="index-item-description">element decorators</div>
-					</dd>
-			<dt class="field">
 						<span class="include-title">ErrorController.php</span>
 					</dt>
 		<dd class="index-item-body">
-			<div class="index-item-details"><a href="default/_application---controllers---ErrorController.php.html">ErrorController.php</a> in ErrorController.php</div>
+			<div class="index-item-details"><a href="Controller/_controllers---ErrorController.php.html">ErrorController.php</a> in ErrorController.php</div>
 					</dd>
 			<dt class="field">
 						<span class="include-title">env.php</span>
 					</dt>
 		<dd class="index-item-body">
-			<div class="index-item-details"><a href="Application/Bootstrap/_application---env.php.html">env.php</a> in env.php</div>
-					</dd>
-			<dt class="field">
-						<span class="include-title">error.phtml</span>
-					</dt>
-		<dd class="index-item-body">
-			<div class="index-item-details"><a href="default/_application---views---scripts---error---error.phtml.html">error.phtml</a> in error.phtml</div>
+			<div class="index-item-details"><a href="Application/Bootstrap/_env.php.html">env.php</a> in env.php</div>
 					</dd>
 			<dt class="field">
 						<span class="method-title">errorAction</span>
 					</dt>
 		<dd class="index-item-body">
-			<div class="index-item-details"><a href="default/ErrorController.html#methoderrorAction">ErrorController::errorAction()</a> in ErrorController.php</div>
+			<div class="index-item-details"><a href="Controller/ErrorController.html#methoderrorAction">ErrorController::errorAction()</a> in ErrorController.php</div>
 					</dd>
 			<dt class="field">
 						ErrorController
 					</dt>
 		<dd class="index-item-body">
-			<div class="index-item-details"><a href="default/ErrorController.html">ErrorController</a> in ErrorController.php</div>
-					</dd>
-			<dt class="field">
-						<span class="include-title">Exception.php</span>
-					</dt>
-		<dd class="index-item-body">
-			<div class="index-item-details"><a href="Patchwork/Exception/_library---Patchwork---Exception.php.html">Exception.php</a> in Exception.php</div>
+			<div class="index-item-details"><a href="Controller/ErrorController.html">ErrorController</a> in ErrorController.php</div>
+							<div class="index-item-description">ErrorController</div>
 					</dd>
 		</dl>
 	<a name="f"></a>
@@ -326,24 +270,11 @@
 	</div>
 	<dl>
 			<dt class="field">
-						<span class="include-title">form.phtml</span>
+						<span class="method-title">factory</span>
 					</dt>
 		<dd class="index-item-body">
-			<div class="index-item-details"><a href="default/_application---views---scripts---index---form.phtml.html">form.phtml</a> in form.phtml</div>
-					</dd>
-			<dt class="field">
-						FORM
-					</dt>
-		<dd class="index-item-body">
-			<div class="index-item-details"><a href="default/ZFDoctrine_Form_Model.html#constFORM">ZFDoctrine_Form_Model::FORM</a> in Beberlei.php</div>
-							<div class="index-item-description">PluginLoader for loading many relation forms</div>
-					</dd>
-			<dt class="field">
-						FORM
-					</dt>
-		<dd class="index-item-body">
-			<div class="index-item-details"><a href="Patchwork/Doctrine/Patchwork_Form_Doctrine_ModelForm.html#constFORM">Patchwork_Form_Doctrine_ModelForm::FORM</a> in ModelForm.php</div>
-							<div class="index-item-description">PluginLoader for loading many relation forms</div>
+			<div class="index-item-details"><a href="Models/Token.html#methodfactory">Token::factory()</a> in Token.php</div>
+							<div class="index-item-description">factory method</div>
 					</dd>
 			<dt class="field">
 						<span class="method-title">formAction</span>
@@ -360,19 +291,6 @@
 	</div>
 	<dl>
 			<dt class="field">
-						<span class="method-title">getAction</span>
-					</dt>
-		<dd class="index-item-body">
-			<div class="index-item-details"><a href="Patchwork/Controller/Patchwork_Controller_RESTModelController.html#methodgetAction">Patchwork_Controller_RESTModelController::getAction()</a> in RESTModelController.php</div>
-							<div class="index-item-description">listing</div>
-					</dd>
-			<dt class="field">
-						<span class="method-title">getAdapter</span>
-					</dt>
-		<dd class="index-item-body">
-			<div class="index-item-details"><a href="default/ZFDoctrine_Form_Model.html#methodgetAdapter">ZFDoctrine_Form_Model::getAdapter()</a> in Beberlei.php</div>
-					</dd>
-			<dt class="field">
 						<span class="method-title">getAuthenticatedUser</span>
 					</dt>
 		<dd class="index-item-body">
@@ -380,38 +298,18 @@
 							<div class="index-item-description">for Patchwork_Auth_Model interface, return the authenticated user</div>
 					</dd>
 			<dt class="field">
-						<span class="method-title">getAuthenticatedUser</span>
-					</dt>
-		<dd class="index-item-body">
-			<div class="index-item-details"><a href="default/Patchwork_Auth_Model.html#methodgetAuthenticatedUser">Patchwork_Auth_Model::getAuthenticatedUser()</a> in Model.php</div>
-							<div class="index-item-description">returns instance of self using Zend_Auth stored data</div>
-					</dd>
-			<dt class="field">
-						<span class="method-title">getAuthenticationResult</span>
-					</dt>
-		<dd class="index-item-body">
-			<div class="index-item-details"><a href="default/Patchwork_Auth_Model.html#methodgetAuthenticationResult">Patchwork_Auth_Model::getAuthenticationResult()</a> in Model.php</div>
-							<div class="index-item-description">returns the auth result</div>
-					</dd>
-			<dt class="field">
 						<span class="method-title">getAuthenticationResult</span>
 					</dt>
 		<dd class="index-item-body">
 			<div class="index-item-details"><a href="Application/Models/User.html#methodgetAuthenticationResult">User::getAuthenticationResult()</a> in User.php</div>
+							<div class="index-item-description">returns the authentication result</div>
 					</dd>
 			<dt class="field">
-						<span class="method-title">getAuthIdentity</span>
+						<span class="method-title">getContext</span>
 					</dt>
 		<dd class="index-item-body">
-			<div class="index-item-details"><a href="Patchwork/Authentification/Patchwork_Auth_Adapter_Doctrine.html#methodgetAuthIdentity">Patchwork_Auth_Adapter_Doctrine::getAuthIdentity()</a> in Doctrine.php</div>
-							<div class="index-item-description">Return the identity</div>
-					</dd>
-			<dt class="field">
-						<span class="method-title">getIgnoredColumns</span>
-					</dt>
-		<dd class="index-item-body">
-			<div class="index-item-details"><a href="Patchwork/Doctrine/Patchwork_Form_Doctrine_Renderable.html#methodgetIgnoredColumns">Patchwork_Form_Doctrine_Renderable::getIgnoredColumns()</a> in Renderable.php</div>
-							<div class="index-item-description">returns an array of field names which must not occur in form</div>
+			<div class="index-item-details"><a href="Models/Token.html#methodgetContext">Token::getContext()</a> in Token.php</div>
+							<div class="index-item-description">returns the json-decoded context data</div>
 					</dd>
 			<dt class="field">
 						<span class="method-title">getIgnoredColumns</span>
@@ -421,105 +319,17 @@
 							<div class="index-item-description">fields not to show in modelform</div>
 					</dd>
 			<dt class="field">
-						<span class="method-title">getJSONParams</span>
-					</dt>
-		<dd class="index-item-body">
-			<div class="index-item-details"><a href="Patchwork/Controller/Patchwork_Controller_RESTModelController.html#methodgetJSONParams">Patchwork_Controller_RESTModelController::getJSONParams()</a> in RESTModelController.php</div>
-							<div class="index-item-description">parses incoming json, this is a special configuration for request sent  by CappuccinoResource: there is an extra key (=model name) describing the data</div>
-					</dd>
-			<dt class="field">
 						<span class="method-title">getLog</span>
 					</dt>
 		<dd class="index-item-body">
-			<div class="index-item-details"><a href="default/ErrorController.html#methodgetLog">ErrorController::getLog()</a> in ErrorController.php</div>
+			<div class="index-item-details"><a href="Controller/ErrorController.html#methodgetLog">ErrorController::getLog()</a> in ErrorController.php</div>
 					</dd>
 			<dt class="field">
-						<span class="method-title">getModelName</span>
+						<span class="method-title">getRoleId</span>
 					</dt>
 		<dd class="index-item-body">
-			<div class="index-item-details"><a href="default/ZFDoctrine_Form_Model.html#methodgetModelName">ZFDoctrine_Form_Model::getModelName()</a> in Beberlei.php</div>
-					</dd>
-			<dt class="field">
-						<span class="method-title">getModelURL</span>
-					</dt>
-		<dd class="index-item-body">
-			<div class="index-item-details"><a href="Patchwork/Controller/Patchwork_Controller_RESTModelController.html#methodgetModelURL">Patchwork_Controller_RESTModelController::getModelURL()</a> in RESTModelController.php</div>
-							<div class="index-item-description">FIXME</div>
-					</dd>
-			<dt class="field">
-						<span class="method-title">getRecord</span>
-					</dt>
-		<dd class="index-item-body">
-			<div class="index-item-details"><a href="Patchwork/Doctrine/Patchwork_Form_Doctrine_ModelForm.html#methodgetRecord">Patchwork_Form_Doctrine_ModelForm::getRecord()</a> in ModelForm.php</div>
-							<div class="index-item-description">returns the associated instance or a new instance</div>
-					</dd>
-			<dt class="field">
-						<span class="method-title">getRecord</span>
-					</dt>
-		<dd class="index-item-body">
-			<div class="index-item-details"><a href="Patchwork/Controller/Patchwork_Controller_Helper_Doctrine.html#methodgetRecord">Patchwork_Controller_Helper_Doctrine::getRecord()</a> in Doctrine.php</div>
-							<div class="index-item-description">Fetch record from DB</div>
-					</dd>
-			<dt class="field">
-						<span class="method-title">getRecord</span>
-					</dt>
-		<dd class="index-item-body">
-			<div class="index-item-details"><a href="default/ZFDoctrine_Form_Model.html#methodgetRecord">ZFDoctrine_Form_Model::getRecord()</a> in Beberlei.php</div>
-					</dd>
-			<dt class="field">
-						<span class="method-title">getRecordOrException</span>
-					</dt>
-		<dd class="index-item-body">
-			<div class="index-item-details"><a href="Patchwork/Controller/Patchwork_Controller_Helper_Doctrine.html#methodgetRecordOrException">Patchwork_Controller_Helper_Doctrine::getRecordOrException()</a> in Doctrine.php</div>
-							<div class="index-item-description">Fetch record from DB or throw a not found exception</div>
-					</dd>
-			<dt class="field">
-						<span class="method-title">getRecordOrRedirect</span>
-					</dt>
-		<dd class="index-item-body">
-			<div class="index-item-details"><a href="Patchwork/Controller/Patchwork_Controller_Helper_Doctrine.html#methodgetRecordOrRedirect">Patchwork_Controller_Helper_Doctrine::getRecordOrRedirect()</a> in Doctrine.php</div>
-							<div class="index-item-description">Fetch record from DB or redirect</div>
-					</dd>
-			<dt class="field">
-						<span class="method-title">getRole</span>
-					</dt>
-		<dd class="index-item-body">
-			<div class="index-item-details"><a href="Application/Models/User.html#methodgetRole">User::getRole()</a> in User.php</div>
-							<div class="index-item-description">return the roel</div>
-					</dd>
-			<dt class="field">
-						<span class="method-title">getRole</span>
-					</dt>
-		<dd class="index-item-body">
-			<div class="index-item-details"><a href="Patchwork/Authentication/Patchwork_Auth_RoleIdentity.html#methodgetRole">Patchwork_Auth_RoleIdentity::getRole()</a> in RoleIdentity.php</div>
-							<div class="index-item-description">returns the role descriptor</div>
-					</dd>
-			<dt class="field">
-						<span class="method-title">getTable</span>
-					</dt>
-		<dd class="index-item-body">
-			<div class="index-item-details"><a href="default/ZFDoctrine_Form_Model.html#methodgetTable">ZFDoctrine_Form_Model::getTable()</a> in Beberlei.php</div>
-					</dd>
-			<dt class="field">
-						<span class="method-title">getUserRole</span>
-					</dt>
-		<dd class="index-item-body">
-			<div class="index-item-details"><a href="Patchwork/Authorisation/Patchwork_Controller_Plugin_Auth.html#methodgetUserRole">Patchwork_Controller_Plugin_Auth::getUserRole()</a> in Auth.php</div>
-							<div class="index-item-description">return the current role</div>
-					</dd>
-			<dt class="field">
-						<span class="method-title">getViewPath</span>
-					</dt>
-		<dd class="index-item-body">
-			<div class="index-item-details"><a href="Patchwork/Views/Patchwork_View_Helper_RenderModel.html#methodgetViewPath">Patchwork_View_Helper_RenderModel::getViewPath()</a> in RenderModel.php</div>
-							<div class="index-item-description">get view file including path</div>
-					</dd>
-			<dt class="field">
-						GUEST_ROLE
-					</dt>
-		<dd class="index-item-body">
-			<div class="index-item-details"><a href="Patchwork/Authorisation/Patchwork_Controller_Plugin_Auth.html#constGUEST_ROLE">Patchwork_Controller_Plugin_Auth::GUEST_ROLE</a> in Auth.php</div>
-							<div class="index-item-description">guest role name</div>
+			<div class="index-item-details"><a href="Application/Models/User.html#methodgetRoleId">User::getRoleId()</a> in User.php</div>
+							<div class="index-item-description">return the role for ACL (Zend_Acl_Role_Interface)</div>
 					</dd>
 		</dl>
 	<a name="h"></a>
@@ -529,12 +339,6 @@
 		<div style="clear: both"></div>
 	</div>
 	<dl>
-			<dt class="field">
-						<span class="include-title">helpers.phtml</span>
-					</dt>
-		<dd class="index-item-body">
-			<div class="index-item-details"><a href="default/_application---views---scripts---index---helpers.phtml.html">helpers.phtml</a> in helpers.phtml</div>
-					</dd>
 			<dt class="field">
 						<span class="method-title">helpersAction</span>
 					</dt>
@@ -553,13 +357,20 @@
 						<span class="include-title">IndexController.php</span>
 					</dt>
 		<dd class="index-item-body">
-			<div class="index-item-details"><a href="default/_application---controllers---IndexController.php.html">IndexController.php</a> in IndexController.php</div>
+			<div class="index-item-details"><a href="default/_controllers---IndexController.php.html">IndexController.php</a> in IndexController.php</div>
 					</dd>
 			<dt class="field">
-						<span class="include-title">index.phtml</span>
+						<span class="method-title">indexAction</span>
 					</dt>
 		<dd class="index-item-body">
-			<div class="index-item-details"><a href="default/_application---views---scripts---index---index.phtml.html">index.phtml</a> in index.phtml</div>
+			<div class="index-item-details"><a href="API/Controller/Api_UserController.html#methodindexAction">Api_UserController::indexAction()</a> in UserController.php</div>
+							<div class="index-item-description">list</div>
+					</dd>
+			<dt class="field">
+						<span class="method-title">indexAction</span>
+					</dt>
+		<dd class="index-item-body">
+			<div class="index-item-details"><a href="default/Api_IndexController.html#methodindexAction">Api_IndexController::indexAction()</a> in IndexController.php</div>
 					</dd>
 			<dt class="field">
 						<span class="method-title">indexAction</span>
@@ -575,13 +386,6 @@
 			<div class="index-item-details"><a href="default/AuthController.html#methodindexAction">AuthController::indexAction()</a> in AuthController.php</div>
 					</dd>
 			<dt class="field">
-						<span class="method-title">indexAction</span>
-					</dt>
-		<dd class="index-item-body">
-			<div class="index-item-details"><a href="Patchwork/Controller/Patchwork_Controller_RESTModelController.html#methodindexAction">Patchwork_Controller_RESTModelController::indexAction()</a> in RESTModelController.php</div>
-							<div class="index-item-description">list</div>
-					</dd>
-			<dt class="field">
 						IndexController
 					</dt>
 		<dd class="index-item-body">
@@ -592,36 +396,14 @@
 						<span class="method-title">init</span>
 					</dt>
 		<dd class="index-item-body">
-			<div class="index-item-details"><a href="Patchwork/Controller/Patchwork_Controller_RESTModelController.html#methodinit">Patchwork_Controller_RESTModelController::init()</a> in RESTModelController.php</div>
-							<div class="index-item-description">disable views and layouts</div>
-					</dd>
-			<dt class="field">
-						<span class="method-title">init</span>
-					</dt>
-		<dd class="index-item-body">
 			<div class="index-item-details"><a href="Authentication/Forms/App_Form_Auth_Login.html#methodinit">App_Form_Auth_Login::init()</a> in Login.php</div>
 							<div class="index-item-description">just email + credential field</div>
 					</dd>
 			<dt class="field">
-						<span class="method-title">initModel</span>
+						<span class="include-title">IndexController.php</span>
 					</dt>
 		<dd class="index-item-body">
-			<div class="index-item-details"><a href="Patchwork/Controller/Patchwork_Controller_RESTModelController.html#methodinitModel">Patchwork_Controller_RESTModelController::initModel()</a> in RESTModelController.php</div>
-							<div class="index-item-description">finds the model if PK is in request</div>
-					</dd>
-			<dt class="field">
-						<span class="method-title">invalidAction</span>
-					</dt>
-		<dd class="index-item-body">
-			<div class="index-item-details"><a href="Patchwork/Controller/Patchwork_Controller_RESTModelController.html#methodinvalidAction">Patchwork_Controller_RESTModelController::invalidAction()</a> in RESTModelController.php</div>
-							<div class="index-item-description">Invalid request</div>
-					</dd>
-			<dt class="field">
-						<span class="method-title">isValid</span>
-					</dt>
-		<dd class="index-item-body">
-			<div class="index-item-details"><a href="Patchwork/Doctrine/Patchwork_Form_Doctrine_ModelForm.html#methodisValid">Patchwork_Form_Doctrine_ModelForm::isValid()</a> in ModelForm.php</div>
-							<div class="index-item-description">validates</div>
+			<div class="index-item-details"><a href="default/_modules---api---controllers---IndexController.php.html">IndexController.php</a> in IndexController.php</div>
 					</dd>
 		</dl>
 	<a name="l"></a>
@@ -635,43 +417,13 @@
 						<span class="include-title">Login.php</span>
 					</dt>
 		<dd class="index-item-body">
-			<div class="index-item-details"><a href="Authentication/Forms/_application---forms---Auth---Login.php.html">Login.php</a> in Login.php</div>
-					</dd>
-			<dt class="field">
-						<span class="include-title">layout.phtml</span>
-					</dt>
-		<dd class="index-item-body">
-			<div class="index-item-details"><a href="default/_application---layouts---scripts---layout.phtml.html">layout.phtml</a> in layout.phtml</div>
-					</dd>
-			<dt class="field">
-						<span class="include-title">login.phtml</span>
-					</dt>
-		<dd class="index-item-body">
-			<div class="index-item-details"><a href="default/_application---views---scripts---auth---login.phtml.html">login.phtml</a> in login.phtml</div>
+			<div class="index-item-details"><a href="Authentication/Forms/_forms---Auth---Login.php.html">Login.php</a> in Login.php</div>
 					</dd>
 			<dt class="field">
 						<span class="const-title">LIBRARY_PATH</span>
 					</dt>
 		<dd class="index-item-body">
-			<div class="index-item-details"><a href="Application/Bootstrap/_application---env.php.html#defineLIBRARY_PATH">LIBRARY_PATH</a> in env.php</div>
-					</dd>
-			<dt class="field">
-						LIMIT_PARAM
-					</dt>
-		<dd class="index-item-body">
-			<div class="index-item-details"><a href="Patchwork/Controller/Patchwork_Controller_RESTModelController.html#constLIMIT_PARAM">Patchwork_Controller_RESTModelController::LIMIT_PARAM</a> in RESTModelController.php</div>
-					</dd>
-			<dt class="field">
-						<span class="method-title">listRecords</span>
-					</dt>
-		<dd class="index-item-body">
-			<div class="index-item-details"><a href="Patchwork/Controller/Patchwork_Controller_Helper_Doctrine.html#methodlistRecords">Patchwork_Controller_Helper_Doctrine::listRecords()</a> in Doctrine.php</div>
-					</dd>
-			<dt class="field">
-						<span class="method-title">loadDefaultDecorators</span>
-					</dt>
-		<dd class="index-item-body">
-			<div class="index-item-details"><a href="Patchwork/Doctrine/Patchwork_Form_Doctrine_ModelForm.html#methodloadDefaultDecorators">Patchwork_Form_Doctrine_ModelForm::loadDefaultDecorators()</a> in ModelForm.php</div>
+			<div class="index-item-details"><a href="Application/Bootstrap/_env.php.html#defineLIBRARY_PATH">LIBRARY_PATH</a> in env.php</div>
 					</dd>
 			<dt class="field">
 						<span class="method-title">loginAction</span>
@@ -694,48 +446,16 @@
 	</div>
 	<dl>
 			<dt class="field">
-						<span class="var-title">$model</span>
-					</dt>
-		<dd class="index-item-body">
-			<div class="index-item-details"><a href="Patchwork/Controller/Patchwork_Controller_RESTModelController.html#var$model">Patchwork_Controller_RESTModelController::$model</a> in RESTModelController.php</div>
-							<div class="index-item-description">model instance</div>
-					</dd>
-			<dt class="field">
 						<span class="var-title">$modelName</span>
 					</dt>
 		<dd class="index-item-body">
-			<div class="index-item-details"><a href="Patchwork/Controller/Patchwork_Controller_RESTModelController.html#var$modelName">Patchwork_Controller_RESTModelController::$modelName</a> in RESTModelController.php</div>
-					</dd>
-			<dt class="field">
-						<span class="var-title">$modelName</span>
-					</dt>
-		<dd class="index-item-body">
-			<div class="index-item-details"><a href="Patchwork/Controller/UserController.html#var$modelName">UserController::$modelName</a> in UserController.php</div>
-					</dd>
-			<dt class="field">
-						<span class="var-title">$modelPrimaryKey</span>
-					</dt>
-		<dd class="index-item-body">
-			<div class="index-item-details"><a href="Patchwork/Controller/Patchwork_Controller_RESTModelController.html#var$modelPrimaryKey">Patchwork_Controller_RESTModelController::$modelPrimaryKey</a> in RESTModelController.php</div>
-							<div class="index-item-description">PK of the model, used to automatically instantiate the model if in request</div>
-					</dd>
-			<dt class="field">
-						<span class="include-title">Model.php</span>
-					</dt>
-		<dd class="index-item-body">
-			<div class="index-item-details"><a href="default/_library---Patchwork---Auth---Model.php.html">Model.php</a> in Model.php</div>
-					</dd>
-			<dt class="field">
-						<span class="include-title">ModelForm.php</span>
-					</dt>
-		<dd class="index-item-body">
-			<div class="index-item-details"><a href="Patchwork/Doctrine/_library---Patchwork---Form---Doctrine---ModelForm.php.html">ModelForm.php</a> in ModelForm.php</div>
+			<div class="index-item-details"><a href="API/Controller/Api_UserController.html#var$modelName">Api_UserController::$modelName</a> in UserController.php</div>
 					</dd>
 			<dt class="field">
 						<span class="const-title">MODELS_PATH</span>
 					</dt>
 		<dd class="index-item-body">
-			<div class="index-item-details"><a href="Application/Bootstrap/_application---env.php.html#defineMODELS_PATH">MODELS_PATH</a> in env.php</div>
+			<div class="index-item-details"><a href="Application/Bootstrap/_env.php.html#defineMODELS_PATH">MODELS_PATH</a> in env.php</div>
 					</dd>
 		</dl>
 	<a name="n"></a>
@@ -749,155 +469,7 @@
 						<span class="include-title">navigation.php</span>
 					</dt>
 		<dd class="index-item-body">
-			<div class="index-item-details"><a href="default/_application---configs---navigation.php.html">navigation.php</a> in navigation.php</div>
-					</dd>
-		</dl>
-	<a name="o"></a>
-	<div class="index-letter-section">
-		<div style="float: left" class="index-letter-title">o</div>
-		<div style="float: right"><a href="#top">top</a></div>
-		<div style="clear: both"></div>
-	</div>
-	<dl>
-			<dt class="field">
-						OFFSET_PARAM
-					</dt>
-		<dd class="index-item-body">
-			<div class="index-item-details"><a href="Patchwork/Controller/Patchwork_Controller_RESTModelController.html#constOFFSET_PARAM">Patchwork_Controller_RESTModelController::OFFSET_PARAM</a> in RESTModelController.php</div>
-							<div class="index-item-description">request constants</div>
-					</dd>
-		</dl>
-	<a name="p"></a>
-	<div class="index-letter-section">
-		<div style="float: left" class="index-letter-title">p</div>
-		<div style="float: right"><a href="#top">top</a></div>
-		<div style="clear: both"></div>
-	</div>
-	<dl>
-			<dt class="field">
-						<span class="var-title">$primaryKey</span>
-					</dt>
-		<dd class="index-item-body">
-			<div class="index-item-details"><a href="Patchwork/Controller/Patchwork_Controller_Helper_Doctrine.html#var$primaryKey">Patchwork_Controller_Helper_Doctrine::$primaryKey</a> in Doctrine.php</div>
-							<div class="index-item-description">default name of the primary key</div>
-					</dd>
-			<dt class="field">
-						<span class="include-title">PHPIDS.php</span>
-					</dt>
-		<dd class="index-item-body">
-			<div class="index-item-details"><a href="Patchwork/Security/_library---Patchwork---Controller---Plugin---PHPIDS.php.html">PHPIDS.php</a> in PHPIDS.php</div>
-					</dd>
-			<dt class="field">
-						Patchwork_Auth_Adapter_Doctrine
-					</dt>
-		<dd class="index-item-body">
-			<div class="index-item-details"><a href="Patchwork/Authentification/Patchwork_Auth_Adapter_Doctrine.html">Patchwork_Auth_Adapter_Doctrine</a> in Doctrine.php</div>
-							<div class="index-item-description">Patchwork_Auth_Adapter_Doctrine</div>
-					</dd>
-			<dt class="field">
-						Patchwork_Auth_Model
-					</dt>
-		<dd class="index-item-body">
-			<div class="index-item-details"><a href="default/Patchwork_Auth_Model.html">Patchwork_Auth_Model</a> in Model.php</div>
-							<div class="index-item-description">Patchwork_Auth_Model</div>
-					</dd>
-			<dt class="field">
-						Patchwork_Auth_RoleIdentity
-					</dt>
-		<dd class="index-item-body">
-			<div class="index-item-details"><a href="Patchwork/Authentication/Patchwork_Auth_RoleIdentity.html">Patchwork_Auth_RoleIdentity</a> in RoleIdentity.php</div>
-							<div class="index-item-description">Identity having a role</div>
-					</dd>
-			<dt class="field">
-						Patchwork_Controller_Helper_Doctrine
-					</dt>
-		<dd class="index-item-body">
-			<div class="index-item-details"><a href="Patchwork/Controller/Patchwork_Controller_Helper_Doctrine.html">Patchwork_Controller_Helper_Doctrine</a> in Doctrine.php</div>
-							<div class="index-item-description">Controller helper to fetch Doctrine models  derived from CU_Controller_Action_Helper_Doctrine by Jani Hartikainen</div>
-					</dd>
-			<dt class="field">
-						Patchwork_Controller_Plugin_Auth
-					</dt>
-		<dd class="index-item-body">
-			<div class="index-item-details"><a href="Patchwork/Authorisation/Patchwork_Controller_Plugin_Auth.html">Patchwork_Controller_Plugin_Auth</a> in Auth.php</div>
-							<div class="index-item-description">Patchwork_Controller_Plugin_Auth</div>
-					</dd>
-			<dt class="field">
-						Patchwork_Controller_Plugin_PHPIDS
-					</dt>
-		<dd class="index-item-body">
-			<div class="index-item-details"><a href="Patchwork/Security/Patchwork_Controller_Plugin_PHPIDS.html">Patchwork_Controller_Plugin_PHPIDS</a> in PHPIDS.php</div>
-							<div class="index-item-description">PHPIDS plugin</div>
-					</dd>
-			<dt class="field">
-						Patchwork_Controller_RESTModelController
-					</dt>
-		<dd class="index-item-body">
-			<div class="index-item-details"><a href="Patchwork/Controller/Patchwork_Controller_RESTModelController.html">Patchwork_Controller_RESTModelController</a> in RESTModelController.php</div>
-							<div class="index-item-description">REST Controller plus Doctrine</div>
-					</dd>
-			<dt class="field">
-						Patchwork_Exception
-					</dt>
-		<dd class="index-item-body">
-			<div class="index-item-details"><a href="Patchwork/Exception/Patchwork_Exception.html">Patchwork_Exception</a> in Exception.php</div>
-							<div class="index-item-description">Patchwork Exception</div>
-					</dd>
-			<dt class="field">
-						Patchwork_Form_Doctrine_ModelForm
-					</dt>
-		<dd class="index-item-body">
-			<div class="index-item-details"><a href="Patchwork/Doctrine/Patchwork_Form_Doctrine_ModelForm.html">Patchwork_Form_Doctrine_ModelForm</a> in ModelForm.php</div>
-							<div class="index-item-description">a form that generates its fields from a doctrine record, based on  CU_ModelForm by Jani Hartikainen</div>
-					</dd>
-			<dt class="field">
-						Patchwork_Form_Doctrine_Renderable
-					</dt>
-		<dd class="index-item-body">
-			<div class="index-item-details"><a href="Patchwork/Doctrine/Patchwork_Form_Doctrine_Renderable.html">Patchwork_Form_Doctrine_Renderable</a> in Renderable.php</div>
-							<div class="index-item-description">Patchwork_Doctrine_FormRenderable</div>
-					</dd>
-			<dt class="field">
-						Patchwork_Form_Tableize
-					</dt>
-		<dd class="index-item-body">
-			<div class="index-item-details"><a href="Patchwork/Form/Patchwork_Form_Tableize.html">Patchwork_Form_Tableize</a> in Tableize.php</div>
-							<div class="index-item-description">takes a Zend_Form and sets all decorators to render a table-based form</div>
-					</dd>
-			<dt class="field">
-						Patchwork_View_Helper_RenderModel
-					</dt>
-		<dd class="index-item-body">
-			<div class="index-item-details"><a href="Patchwork/Views/Patchwork_View_Helper_RenderModel.html">Patchwork_View_Helper_RenderModel</a> in RenderModel.php</div>
-							<div class="index-item-description">renderModel view helper</div>
-					</dd>
-			<dt class="field">
-						PHPIDS_CONFIG_SECTION
-					</dt>
-		<dd class="index-item-body">
-			<div class="index-item-details"><a href="Patchwork/Security/Patchwork_Controller_Plugin_PHPIDS.html#constPHPIDS_CONFIG_SECTION">Patchwork_Controller_Plugin_PHPIDS::PHPIDS_CONFIG_SECTION</a> in PHPIDS.php</div>
-							<div class="index-item-description">where to find the phpids settings in the config</div>
-					</dd>
-			<dt class="field">
-						<span class="method-title">postAction</span>
-					</dt>
-		<dd class="index-item-body">
-			<div class="index-item-details"><a href="Patchwork/Controller/Patchwork_Controller_RESTModelController.html#methodpostAction">Patchwork_Controller_RESTModelController::postAction()</a> in RESTModelController.php</div>
-							<div class="index-item-description">post (create), sends back the url</div>
-					</dd>
-			<dt class="field">
-						<span class="method-title">preDispatch</span>
-					</dt>
-		<dd class="index-item-body">
-			<div class="index-item-details"><a href="Patchwork/Security/Patchwork_Controller_Plugin_PHPIDS.html#methodpreDispatch">Patchwork_Controller_Plugin_PHPIDS::preDispatch()</a> in PHPIDS.php</div>
-							<div class="index-item-description">scans the request</div>
-					</dd>
-			<dt class="field">
-						<span class="method-title">putAction</span>
-					</dt>
-		<dd class="index-item-body">
-			<div class="index-item-details"><a href="Patchwork/Controller/Patchwork_Controller_RESTModelController.html#methodputAction">Patchwork_Controller_RESTModelController::putAction()</a> in RESTModelController.php</div>
-							<div class="index-item-description">put (update)</div>
+			<div class="index-item-details"><a href="Demo/_configs---navigation.php.html">navigation.php</a> in navigation.php</div>
 					</dd>
 		</dl>
 	<a name="r"></a>
@@ -914,54 +486,11 @@
 			<div class="index-item-details"><a href="default/AuthController.html#var$result">AuthController::$result</a> in AuthController.php</div>
 					</dd>
 			<dt class="field">
-						<span class="include-title">RoleIdentity.php</span>
+						<span class="const-title">ROOT_PATH</span>
 					</dt>
 		<dd class="index-item-body">
-			<div class="index-item-details"><a href="Patchwork/Authentication/_library---Patchwork---Auth---RoleIdentity.php.html">RoleIdentity.php</a> in RoleIdentity.php</div>
-					</dd>
-			<dt class="field">
-						<span class="include-title">RESTModelController.php</span>
-					</dt>
-		<dd class="index-item-body">
-			<div class="index-item-details"><a href="Patchwork/Controller/_library---Patchwork---Controller---RESTModelController.php.html">RESTModelController.php</a> in RESTModelController.php</div>
-					</dd>
-			<dt class="field">
-						<span class="include-title">Renderable.php</span>
-					</dt>
-		<dd class="index-item-body">
-			<div class="index-item-details"><a href="Patchwork/Doctrine/_library---Patchwork---Form---Doctrine---Renderable.php.html">Renderable.php</a> in Renderable.php</div>
-					</dd>
-			<dt class="field">
-						<span class="include-title">RenderModel.php</span>
-					</dt>
-		<dd class="index-item-body">
-			<div class="index-item-details"><a href="Patchwork/Views/_library---Patchwork---View---Helper---RenderModel.php.html">RenderModel.php</a> in RenderModel.php</div>
-					</dd>
-			<dt class="field">
-						<span class="method-title">redirectToAccessDenied</span>
-					</dt>
-		<dd class="index-item-body">
-			<div class="index-item-details"><a href="Patchwork/Authorisation/Patchwork_Controller_Plugin_Auth.html#methodredirectToAccessDenied">Patchwork_Controller_Plugin_Auth::redirectToAccessDenied()</a> in Auth.php</div>
-							<div class="index-item-description">Checks permission using ACL</div>
-					</dd>
-			<dt class="field">
-						RELATION_MANY
-					</dt>
-		<dd class="index-item-body">
-			<div class="index-item-details"><a href="default/ZFDoctrine_Form_Model.html#constRELATION_MANY">ZFDoctrine_Form_Model::RELATION_MANY</a> in Beberlei.php</div>
-					</dd>
-			<dt class="field">
-						RELATION_ONE
-					</dt>
-		<dd class="index-item-body">
-			<div class="index-item-details"><a href="default/ZFDoctrine_Form_Model.html#constRELATION_ONE">ZFDoctrine_Form_Model::RELATION_ONE</a> in Beberlei.php</div>
-					</dd>
-			<dt class="field">
-						<span class="method-title">renderModel</span>
-					</dt>
-		<dd class="index-item-body">
-			<div class="index-item-details"><a href="Patchwork/Views/Patchwork_View_Helper_RenderModel.html#methodrenderModel">Patchwork_View_Helper_RenderModel::renderModel()</a> in RenderModel.php</div>
-							<div class="index-item-description">loads a model-context specific view and assigns a variable named after  the model's class</div>
+			<div class="index-item-details"><a href="Application/Bootstrap/_env.php.html#defineROOT_PATH">ROOT_PATH</a> in env.php</div>
+							<div class="index-item-description">Define path to application directory</div>
 					</dd>
 		</dl>
 	<a name="s"></a>
@@ -972,109 +501,23 @@
 	</div>
 	<dl>
 			<dt class="field">
-						<span class="method-title">save</span>
+						SEARCH_USERNAME_PARAM
 					</dt>
 		<dd class="index-item-body">
-			<div class="index-item-details"><a href="Patchwork/Doctrine/Patchwork_Form_Doctrine_ModelForm.html#methodsave">Patchwork_Form_Doctrine_ModelForm::save()</a> in ModelForm.php</div>
-							<div class="index-item-description">Save the form data</div>
+			<div class="index-item-details"><a href="API/Controller/Api_UserController.html#constSEARCH_USERNAME_PARAM">Api_UserController::SEARCH_USERNAME_PARAM</a> in UserController.php</div>
 					</dd>
 			<dt class="field">
-						<span class="method-title">save</span>
+						<span class="const-title">SERVER_NAME</span>
 					</dt>
 		<dd class="index-item-body">
-			<div class="index-item-details"><a href="default/ZFDoctrine_Form_Model.html#methodsave">ZFDoctrine_Form_Model::save()</a> in Beberlei.php</div>
-							<div class="index-item-description">Save the form data</div>
-					</dd>
-			<dt class="field">
-						<span class="const-title">SERVER_TYPE</span>
-					</dt>
-		<dd class="index-item-body">
-			<div class="index-item-details"><a href="Application/Bootstrap/_application---env.php.html#defineSERVER_TYPE">SERVER_TYPE</a> in env.php</div>
+			<div class="index-item-details"><a href="Application/Bootstrap/_env.php.html#defineSERVER_NAME">SERVER_NAME</a> in env.php</div>
 							<div class="index-item-description">Define application environment</div>
 					</dd>
 			<dt class="field">
-						<span class="method-title">setAdapter</span>
+						<span class="method-title">setTableDefinition</span>
 					</dt>
 		<dd class="index-item-body">
-			<div class="index-item-details"><a href="default/ZFDoctrine_Form_Model.html#methodsetAdapter">ZFDoctrine_Form_Model::setAdapter()</a> in Beberlei.php</div>
-					</dd>
-			<dt class="field">
-						<span class="method-title">setColumnTypes</span>
-					</dt>
-		<dd class="index-item-body">
-			<div class="index-item-details"><a href="default/ZFDoctrine_Form_Model.html#methodsetColumnTypes">ZFDoctrine_Form_Model::setColumnTypes()</a> in Beberlei.php</div>
-					</dd>
-			<dt class="field">
-						<span class="method-title">setCredential</span>
-					</dt>
-		<dd class="index-item-body">
-			<div class="index-item-details"><a href="Patchwork/Authentification/Patchwork_Auth_Adapter_Doctrine.html#methodsetCredential">Patchwork_Auth_Adapter_Doctrine::setCredential()</a> in Doctrine.php</div>
-							<div class="index-item-description">set the credential</div>
-					</dd>
-			<dt class="field">
-						<span class="method-title">setDefaultsByModel</span>
-					</dt>
-		<dd class="index-item-body">
-			<div class="index-item-details"><a href="Patchwork/Doctrine/Patchwork_Form_Doctrine_ModelForm.html#methodsetDefaultsByModel">Patchwork_Form_Doctrine_ModelForm::setDefaultsByModel()</a> in ModelForm.php</div>
-							<div class="index-item-description">set the default values</div>
-					</dd>
-			<dt class="field">
-						<span class="method-title">setFieldLabels</span>
-					</dt>
-		<dd class="index-item-body">
-			<div class="index-item-details"><a href="default/ZFDoctrine_Form_Model.html#methodsetFieldLabels">ZFDoctrine_Form_Model::setFieldLabels()</a> in Beberlei.php</div>
-					</dd>
-			<dt class="field">
-						<span class="method-title">setFieldTypes</span>
-					</dt>
-		<dd class="index-item-body">
-			<div class="index-item-details"><a href="default/ZFDoctrine_Form_Model.html#methodsetFieldTypes">ZFDoctrine_Form_Model::setFieldTypes()</a> in Beberlei.php</div>
-					</dd>
-			<dt class="field">
-						<span class="method-title">setGenerateManyFields</span>
-					</dt>
-		<dd class="index-item-body">
-			<div class="index-item-details"><a href="default/ZFDoctrine_Form_Model.html#methodsetGenerateManyFields">ZFDoctrine_Form_Model::setGenerateManyFields()</a> in Beberlei.php</div>
-					</dd>
-			<dt class="field">
-						<span class="method-title">setIdentity</span>
-					</dt>
-		<dd class="index-item-body">
-			<div class="index-item-details"><a href="Patchwork/Authentification/Patchwork_Auth_Adapter_Doctrine.html#methodsetIdentity">Patchwork_Auth_Adapter_Doctrine::setIdentity()</a> in Doctrine.php</div>
-							<div class="index-item-description">set the identity</div>
-					</dd>
-			<dt class="field">
-						<span class="method-title">setIgnoreFields</span>
-					</dt>
-		<dd class="index-item-body">
-			<div class="index-item-details"><a href="default/ZFDoctrine_Form_Model.html#methodsetIgnoreFields">ZFDoctrine_Form_Model::setIgnoreFields()</a> in Beberlei.php</div>
-					</dd>
-			<dt class="field">
-						<span class="method-title">setOptions</span>
-					</dt>
-		<dd class="index-item-body">
-			<div class="index-item-details"><a href="default/ZFDoctrine_Form_Model.html#methodsetOptions">ZFDoctrine_Form_Model::setOptions()</a> in Beberlei.php</div>
-					</dd>
-			<dt class="field">
-						<span class="method-title">setRecord</span>
-					</dt>
-		<dd class="index-item-body">
-			<div class="index-item-details"><a href="Patchwork/Doctrine/Patchwork_Form_Doctrine_ModelForm.html#methodsetRecord">Patchwork_Form_Doctrine_ModelForm::setRecord()</a> in ModelForm.php</div>
-							<div class="index-item-description">Set the model instance for editing existing rows</div>
-					</dd>
-			<dt class="field">
-						<span class="method-title">setRecord</span>
-					</dt>
-		<dd class="index-item-body">
-			<div class="index-item-details"><a href="default/ZFDoctrine_Form_Model.html#methodsetRecord">ZFDoctrine_Form_Model::setRecord()</a> in Beberlei.php</div>
-							<div class="index-item-description">Set the model instance for editing existing rows</div>
-					</dd>
-			<dt class="field">
-						<span class="method-title">setRedirect</span>
-					</dt>
-		<dd class="index-item-body">
-			<div class="index-item-details"><a href="Patchwork/Controller/Patchwork_Controller_Helper_Doctrine.html#methodsetRedirect">Patchwork_Controller_Helper_Doctrine::setRedirect()</a> in Doctrine.php</div>
-							<div class="index-item-description">Set the redirection target</div>
+			<div class="index-item-details"><a href="--PACKAGE--/--SUBPACKAGE--/BaseToken.html#methodsetTableDefinition">BaseToken::setTableDefinition()</a> in BaseToken.php</div>
 					</dd>
 			<dt class="field">
 						<span class="method-title">setTableDefinition</span>
@@ -1088,6 +531,19 @@
 		<dd class="index-item-body">
 			<div class="index-item-details"><a href="--PACKAGE--/--SUBPACKAGE--/BaseUser.html#methodsetUp">BaseUser::setUp()</a> in BaseUser.php</div>
 					</dd>
+			<dt class="field">
+						<span class="method-title">setUp</span>
+					</dt>
+		<dd class="index-item-body">
+			<div class="index-item-details"><a href="--PACKAGE--/--SUBPACKAGE--/BaseToken.html#methodsetUp">BaseToken::setUp()</a> in BaseToken.php</div>
+					</dd>
+			<dt class="field">
+						<span class="method-title">startWithToken</span>
+					</dt>
+		<dd class="index-item-body">
+			<div class="index-item-details"><a href="Service/TokenTriggered.html#methodstartWithToken">TokenTriggered::startWithToken()</a> in TokenTriggered.php</div>
+							<div class="index-item-description">method to start the service using a token's data</div>
+					</dd>
 		</dl>
 	<a name="t"></a>
 	<div class="index-letter-section">
@@ -1097,30 +553,49 @@
 	</div>
 	<dl>
 			<dt class="field">
-						<span class="include-title">Tableize.php</span>
+						<span class="include-title">Token.php</span>
 					</dt>
 		<dd class="index-item-body">
-			<div class="index-item-details"><a href="Patchwork/Form/_library---Patchwork---Form---Tableize.php.html">Tableize.php</a> in Tableize.php</div>
+			<div class="index-item-details"><a href="Models/_models---Token.php.html">Token.php</a> in Token.php</div>
 					</dd>
 			<dt class="field">
-						<span class="method-title">tableize</span>
+						<span class="include-title">TokenTriggered.php</span>
 					</dt>
 		<dd class="index-item-body">
-			<div class="index-item-details"><a href="Patchwork/Form/Patchwork_Form_Tableize.html#methodtableize">Patchwork_Form_Tableize::tableize()</a> in Tableize.php</div>
-							<div class="index-item-description">apply decorators to all elements</div>
+			<div class="index-item-details"><a href="Service/_models---TokenTriggered.php.html">TokenTriggered.php</a> in TokenTriggered.php</div>
+					</dd>
+			<dt class="field">
+						<span class="method-title">testcacheAction</span>
+					</dt>
+		<dd class="index-item-body">
+			<div class="index-item-details"><a href="default/IndexController.html#methodtestcacheAction">IndexController::testcacheAction()</a> in IndexController.php</div>
 					</dd>
 			<dt class="field">
 						<span class="const-title">TMP_PATH</span>
 					</dt>
 		<dd class="index-item-body">
-			<div class="index-item-details"><a href="Application/Bootstrap/_application---env.php.html#defineTMP_PATH">TMP_PATH</a> in env.php</div>
+			<div class="index-item-details"><a href="Application/Bootstrap/_env.php.html#defineTMP_PATH">TMP_PATH</a> in env.php</div>
 					</dd>
 			<dt class="field">
-						<span class="method-title">toJSON</span>
+						Token
 					</dt>
 		<dd class="index-item-body">
-			<div class="index-item-details"><a href="Patchwork/Controller/Patchwork_Controller_RESTModelController.html#methodtoJSON">Patchwork_Controller_RESTModelController::toJSON()</a> in RESTModelController.php</div>
-							<div class="index-item-description">renders json strings using special views</div>
+			<div class="index-item-details"><a href="Models/Token.html">Token</a> in Token.php</div>
+							<div class="index-item-description">Token</div>
+					</dd>
+			<dt class="field">
+						TokenTriggered
+					</dt>
+		<dd class="index-item-body">
+			<div class="index-item-details"><a href="Service/TokenTriggered.html">TokenTriggered</a> in TokenTriggered.php</div>
+							<div class="index-item-description">TokenTriggered interface</div>
+					</dd>
+			<dt class="field">
+						<span class="method-title">trigger</span>
+					</dt>
+		<dd class="index-item-body">
+			<div class="index-item-details"><a href="Models/Token.html#methodtrigger">Token::trigger()</a> in Token.php</div>
+							<div class="index-item-description">trigger the service</div>
 					</dd>
 		</dl>
 	<a name="u"></a>
@@ -1131,28 +606,16 @@
 	</div>
 	<dl>
 			<dt class="field">
-						<span class="include-title">UserController.php</span>
-					</dt>
-		<dd class="index-item-body">
-			<div class="index-item-details"><a href="default/_application---controllers---UserController.php.html">UserController.php</a> in UserController.php</div>
-					</dd>
-			<dt class="field">
 						<span class="include-title">User.php</span>
 					</dt>
 		<dd class="index-item-body">
-			<div class="index-item-details"><a href="Application/Models/_application---models---User.php.html">User.php</a> in User.php</div>
+			<div class="index-item-details"><a href="Application/Models/_models---User.php.html">User.php</a> in User.php</div>
 					</dd>
 			<dt class="field">
-						<span class="include-title">user_dump.phtml</span>
+						<span class="include-title">UserController.php</span>
 					</dt>
 		<dd class="index-item-body">
-			<div class="index-item-details"><a href="default/_application---views---models---user_dump.phtml.html">user_dump.phtml</a> in user_dump.phtml</div>
-					</dd>
-			<dt class="field">
-						<span class="include-title">user_json.phtml</span>
-					</dt>
-		<dd class="index-item-body">
-			<div class="index-item-details"><a href="default/_application---views---models---user_json.phtml.html">user_json.phtml</a> in user_json.phtml</div>
+			<div class="index-item-details"><a href="API/Controller/_modules---api---controllers---UserController.php.html">UserController.php</a> in UserController.php</div>
 					</dd>
 			<dt class="field">
 						User
@@ -1160,13 +623,6 @@
 		<dd class="index-item-body">
 			<div class="index-item-details"><a href="Application/Models/User.html">User</a> in User.php</div>
 							<div class="index-item-description">User class</div>
-					</dd>
-			<dt class="field">
-						UserController
-					</dt>
-		<dd class="index-item-body">
-			<div class="index-item-details"><a href="Patchwork/Controller/UserController.html">UserController</a> in UserController.php</div>
-							<div class="index-item-description">Related to Doctrine User</div>
 					</dd>
 		</dl>
 	<a name="w"></a>
@@ -1177,31 +633,10 @@
 	</div>
 	<dl>
 			<dt class="field">
-						<span class="include-title">welcome.phtml</span>
-					</dt>
-		<dd class="index-item-body">
-			<div class="index-item-details"><a href="default/_application---views---scripts---auth---welcome.phtml.html">welcome.phtml</a> in welcome.phtml</div>
-					</dd>
-			<dt class="field">
 						<span class="method-title">welcomeAction</span>
 					</dt>
 		<dd class="index-item-body">
 			<div class="index-item-details"><a href="default/AuthController.html#methodwelcomeAction">AuthController::welcomeAction()</a> in AuthController.php</div>
-					</dd>
-		</dl>
-	<a name="z"></a>
-	<div class="index-letter-section">
-		<div style="float: left" class="index-letter-title">z</div>
-		<div style="float: right"><a href="#top">top</a></div>
-		<div style="clear: both"></div>
-	</div>
-	<dl>
-			<dt class="field">
-						ZFDoctrine_Form_Model
-					</dt>
-		<dd class="index-item-body">
-			<div class="index-item-details"><a href="default/ZFDoctrine_Form_Model.html">ZFDoctrine_Form_Model</a> in Beberlei.php</div>
-							<div class="index-item-description">Class for autogenerating forms based on Doctrine models</div>
 					</dd>
 		</dl>
 	<a name="_"></a>
@@ -1212,19 +647,6 @@
 	</div>
 	<dl>
 			<dt class="field">
-						<span class="var-title">$_adapter</span>
-					</dt>
-		<dd class="index-item-body">
-			<div class="index-item-details"><a href="default/ZFDoctrine_Form_Model.html#var$_adapter">ZFDoctrine_Form_Model::$_adapter</a> in Beberlei.php</div>
-					</dd>
-			<dt class="field">
-						<span class="var-title">$_authenticateResultInfo</span>
-					</dt>
-		<dd class="index-item-body">
-			<div class="index-item-details"><a href="Patchwork/Authentification/Patchwork_Auth_Adapter_Doctrine.html#var$_authenticateResultInfo">Patchwork_Auth_Adapter_Doctrine::$_authenticateResultInfo</a> in Doctrine.php</div>
-							<div class="index-item-description">$_authenticateResultInfo</div>
-					</dd>
-			<dt class="field">
 						<span class="var-title">$_authResult</span>
 					</dt>
 		<dd class="index-item-body">
@@ -1232,310 +654,11 @@
 							<div class="index-item-description">result of auth</div>
 					</dd>
 			<dt class="field">
-						<span class="var-title">$_columnHooks</span>
+						<span class="method-title">_generateHash</span>
 					</dt>
 		<dd class="index-item-body">
-			<div class="index-item-details"><a href="Patchwork/Doctrine/Patchwork_Form_Doctrine_ModelForm.html#var$_columnHooks">Patchwork_Form_Doctrine_ModelForm::$_columnHooks</a> in ModelForm.php</div>
-							<div class="index-item-description">Array of hooks that are called before saving the column</div>
-					</dd>
-			<dt class="field">
-						<span class="var-title">$_columnTypes</span>
-					</dt>
-		<dd class="index-item-body">
-			<div class="index-item-details"><a href="default/ZFDoctrine_Form_Model.html#var$_columnTypes">ZFDoctrine_Form_Model::$_columnTypes</a> in Beberlei.php</div>
-							<div class="index-item-description">Which Zend_Form element types are associated with which doctrine type?</div>
-					</dd>
-			<dt class="field">
-						<span class="var-title">$_columnTypes</span>
-					</dt>
-		<dd class="index-item-body">
-			<div class="index-item-details"><a href="Patchwork/Doctrine/Patchwork_Form_Doctrine_ModelForm.html#var$_columnTypes">Patchwork_Form_Doctrine_ModelForm::$_columnTypes</a> in ModelForm.php</div>
-							<div class="index-item-description">Which Zend_Form element types are associated with which doctrine type?</div>
-					</dd>
-			<dt class="field">
-						<span class="var-title">$_columnValidators</span>
-					</dt>
-		<dd class="index-item-body">
-			<div class="index-item-details"><a href="Patchwork/Doctrine/Patchwork_Form_Doctrine_ModelForm.html#var$_columnValidators">Patchwork_Form_Doctrine_ModelForm::$_columnValidators</a> in ModelForm.php</div>
-							<div class="index-item-description">Default validators for doctrine column types</div>
-					</dd>
-			<dt class="field">
-						<span class="var-title">$_columnValidators</span>
-					</dt>
-		<dd class="index-item-body">
-			<div class="index-item-details"><a href="default/ZFDoctrine_Form_Model.html#var$_columnValidators">ZFDoctrine_Form_Model::$_columnValidators</a> in Beberlei.php</div>
-							<div class="index-item-description">Default validators for doctrine column types</div>
-					</dd>
-			<dt class="field">
-						<span class="var-title">$_credential</span>
-					</dt>
-		<dd class="index-item-body">
-			<div class="index-item-details"><a href="Patchwork/Authentification/Patchwork_Auth_Adapter_Doctrine.html#var$_credential">Patchwork_Auth_Adapter_Doctrine::$_credential</a> in Doctrine.php</div>
-							<div class="index-item-description">$_credential - Credential values</div>
-					</dd>
-			<dt class="field">
-						<span class="var-title">$_credentialColumn</span>
-					</dt>
-		<dd class="index-item-body">
-			<div class="index-item-details"><a href="Patchwork/Authentification/Patchwork_Auth_Adapter_Doctrine.html#var$_credentialColumn">Patchwork_Auth_Adapter_Doctrine::$_credentialColumn</a> in Doctrine.php</div>
-							<div class="index-item-description">$_credentialColumns - columns to be used as the credentials</div>
-					</dd>
-			<dt class="field">
-						<span class="var-title">$_credentialTreatment</span>
-					</dt>
-		<dd class="index-item-body">
-			<div class="index-item-details"><a href="Patchwork/Authentification/Patchwork_Auth_Adapter_Doctrine.html#var$_credentialTreatment">Patchwork_Auth_Adapter_Doctrine::$_credentialTreatment</a> in Doctrine.php</div>
-							<div class="index-item-description">$_credentialTreatment - Treatment applied to the credential,</div>
-					</dd>
-			<dt class="field">
-						<span class="var-title">$_fieldLabels</span>
-					</dt>
-		<dd class="index-item-body">
-			<div class="index-item-details"><a href="default/ZFDoctrine_Form_Model.html#var$_fieldLabels">ZFDoctrine_Form_Model::$_fieldLabels</a> in Beberlei.php</div>
-							<div class="index-item-description">Field labels. key = column name, value = label</div>
-					</dd>
-			<dt class="field">
-						<span class="var-title">$_fieldLabels</span>
-					</dt>
-		<dd class="index-item-body">
-			<div class="index-item-details"><a href="Patchwork/Doctrine/Patchwork_Form_Doctrine_ModelForm.html#var$_fieldLabels">Patchwork_Form_Doctrine_ModelForm::$_fieldLabels</a> in ModelForm.php</div>
-							<div class="index-item-description">Field labels. key = column name, value = label</div>
-					</dd>
-			<dt class="field">
-						<span class="var-title">$_fieldPrefix</span>
-					</dt>
-		<dd class="index-item-body">
-			<div class="index-item-details"><a href="Patchwork/Doctrine/Patchwork_Form_Doctrine_ModelForm.html#var$_fieldPrefix">Patchwork_Form_Doctrine_ModelForm::$_fieldPrefix</a> in ModelForm.php</div>
-							<div class="index-item-description">Prefix fields with this</div>
-					</dd>
-			<dt class="field">
-						<span class="var-title">$_fieldTypes</span>
-					</dt>
-		<dd class="index-item-body">
-			<div class="index-item-details"><a href="default/ZFDoctrine_Form_Model.html#var$_fieldTypes">ZFDoctrine_Form_Model::$_fieldTypes</a> in Beberlei.php</div>
-							<div class="index-item-description">Use this to override field types for columns. key = column, value = field type</div>
-					</dd>
-			<dt class="field">
-						<span class="var-title">$_fieldTypes</span>
-					</dt>
-		<dd class="index-item-body">
-			<div class="index-item-details"><a href="Patchwork/Doctrine/Patchwork_Form_Doctrine_ModelForm.html#var$_fieldTypes">Patchwork_Form_Doctrine_ModelForm::$_fieldTypes</a> in ModelForm.php</div>
-							<div class="index-item-description">Use this to override field types for columns. key = column, value = field type</div>
-					</dd>
-			<dt class="field">
-						<span class="var-title">$_form</span>
-					</dt>
-		<dd class="index-item-body">
-			<div class="index-item-details"><a href="Patchwork/Doctrine/Patchwork_Form_Doctrine_ModelForm.html#var$_form">Patchwork_Form_Doctrine_ModelForm::$_form</a> in ModelForm.php</div>
-							<div class="index-item-description">Instance of the Zend_Form based form used</div>
-					</dd>
-			<dt class="field">
-						<span class="var-title">$_formLoader</span>
-					</dt>
-		<dd class="index-item-body">
-			<div class="index-item-details"><a href="Patchwork/Doctrine/Patchwork_Form_Doctrine_ModelForm.html#var$_formLoader">Patchwork_Form_Doctrine_ModelForm::$_formLoader</a> in ModelForm.php</div>
-							<div class="index-item-description">Form PluginLoader</div>
-					</dd>
-			<dt class="field">
-						<span class="var-title">$_generateManyFields</span>
-					</dt>
-		<dd class="index-item-body">
-			<div class="index-item-details"><a href="Patchwork/Doctrine/Patchwork_Form_Doctrine_ModelForm.html#var$_generateManyFields">Patchwork_Form_Doctrine_ModelForm::$_generateManyFields</a> in ModelForm.php</div>
-							<div class="index-item-description">Whether or not to generate fields for many parts of m2o and m2m relations</div>
-					</dd>
-			<dt class="field">
-						<span class="var-title">$_generateManyFields</span>
-					</dt>
-		<dd class="index-item-body">
-			<div class="index-item-details"><a href="default/ZFDoctrine_Form_Model.html#var$_generateManyFields">ZFDoctrine_Form_Model::$_generateManyFields</a> in Beberlei.php</div>
-					</dd>
-			<dt class="field">
-						<span class="var-title">$_identity</span>
-					</dt>
-		<dd class="index-item-body">
-			<div class="index-item-details"><a href="Patchwork/Authentification/Patchwork_Auth_Adapter_Doctrine.html#var$_identity">Patchwork_Auth_Adapter_Doctrine::$_identity</a> in Doctrine.php</div>
-							<div class="index-item-description">$_identity - Identity value</div>
-					</dd>
-			<dt class="field">
-						<span class="var-title">$_identityColumn</span>
-					</dt>
-		<dd class="index-item-body">
-			<div class="index-item-details"><a href="Patchwork/Authentification/Patchwork_Auth_Adapter_Doctrine.html#var$_identityColumn">Patchwork_Auth_Adapter_Doctrine::$_identityColumn</a> in Doctrine.php</div>
-							<div class="index-item-description">$_identityColumn - the column to use as the identity</div>
-					</dd>
-			<dt class="field">
-						<span class="var-title">$_ignoreColumns</span>
-					</dt>
-		<dd class="index-item-body">
-			<div class="index-item-details"><a href="Patchwork/Doctrine/Patchwork_Form_Doctrine_ModelForm.html#var$_ignoreColumns">Patchwork_Form_Doctrine_ModelForm::$_ignoreColumns</a> in ModelForm.php</div>
-							<div class="index-item-description">Column names listed in this array will not be shown in the form</div>
-					</dd>
-			<dt class="field">
-						<span class="var-title">$_ignoreFields</span>
-					</dt>
-		<dd class="index-item-body">
-			<div class="index-item-details"><a href="default/ZFDoctrine_Form_Model.html#var$_ignoreFields">ZFDoctrine_Form_Model::$_ignoreFields</a> in Beberlei.php</div>
-							<div class="index-item-description">Field names listed in this array will not be shown in the form</div>
-					</dd>
-			<dt class="field">
-						<span class="var-title">$_instance</span>
-					</dt>
-		<dd class="index-item-body">
-			<div class="index-item-details"><a href="Patchwork/Doctrine/Patchwork_Form_Doctrine_ModelForm.html#var$_instance">Patchwork_Form_Doctrine_ModelForm::$_instance</a> in ModelForm.php</div>
-							<div class="index-item-description">Model instance for editing existing models</div>
-					</dd>
-			<dt class="field">
-						<span class="var-title">$_model</span>
-					</dt>
-		<dd class="index-item-body">
-			<div class="index-item-details"><a href="Patchwork/Doctrine/Patchwork_Form_Doctrine_ModelForm.html#var$_model">Patchwork_Form_Doctrine_ModelForm::$_model</a> in ModelForm.php</div>
-							<div class="index-item-description">Name of the model class</div>
-					</dd>
-			<dt class="field">
-						<span class="var-title">$_model</span>
-					</dt>
-		<dd class="index-item-body">
-			<div class="index-item-details"><a href="default/ZFDoctrine_Form_Model.html#var$_model">ZFDoctrine_Form_Model::$_model</a> in Beberlei.php</div>
-							<div class="index-item-description">Name of the model class</div>
-					</dd>
-			<dt class="field">
-						<span class="var-title">$_redirect</span>
-					</dt>
-		<dd class="index-item-body">
-			<div class="index-item-details"><a href="Patchwork/Controller/Patchwork_Controller_Helper_Doctrine.html#var$_redirect">Patchwork_Controller_Helper_Doctrine::$_redirect</a> in Doctrine.php</div>
-							<div class="index-item-description">standard redirect</div>
-					</dd>
-			<dt class="field">
-						<span class="var-title">$_relationForms</span>
-					</dt>
-		<dd class="index-item-body">
-			<div class="index-item-details"><a href="Patchwork/Doctrine/Patchwork_Form_Doctrine_ModelForm.html#var$_relationForms">Patchwork_Form_Doctrine_ModelForm::$_relationForms</a> in ModelForm.php</div>
-							<div class="index-item-description">Stores form class names for many-relations</div>
-					</dd>
-			<dt class="field">
-						<span class="var-title">$_relationLabels</span>
-					</dt>
-		<dd class="index-item-body">
-			<div class="index-item-details"><a href="Patchwork/Doctrine/Patchwork_Form_Doctrine_ModelForm.html#var$_relationLabels">Patchwork_Form_Doctrine_ModelForm::$_relationLabels</a> in ModelForm.php</div>
-							<div class="index-item-description">Labels to use with many to many relations.</div>
-					</dd>
-			<dt class="field">
-						<span class="var-title">$_relations</span>
-					</dt>
-		<dd class="index-item-body">
-			<div class="index-item-details"><a href="default/ZFDoctrine_Form_Model.html#var$_relations">ZFDoctrine_Form_Model::$_relations</a> in Beberlei.php</div>
-					</dd>
-			<dt class="field">
-						<span class="var-title">$_result</span>
-					</dt>
-		<dd class="index-item-body">
-			<div class="index-item-details"><a href="Patchwork/Authentification/Patchwork_Auth_Adapter_Doctrine.html#var$_result">Patchwork_Auth_Adapter_Doctrine::$_result</a> in Doctrine.php</div>
-							<div class="index-item-description">identity</div>
-					</dd>
-			<dt class="field">
-						<span class="var-title">$_table</span>
-					</dt>
-		<dd class="index-item-body">
-			<div class="index-item-details"><a href="Patchwork/Doctrine/Patchwork_Form_Doctrine_ModelForm.html#var$_table">Patchwork_Form_Doctrine_ModelForm::$_table</a> in ModelForm.php</div>
-							<div class="index-item-description">Reference to the model's table class</div>
-					</dd>
-			<dt class="field">
-						<span class="var-title">$_tableName</span>
-					</dt>
-		<dd class="index-item-body">
-			<div class="index-item-details"><a href="Patchwork/Authentification/Patchwork_Auth_Adapter_Doctrine.html#var$_tableName">Patchwork_Auth_Adapter_Doctrine::$_tableName</a> in Doctrine.php</div>
-							<div class="index-item-description">$_tableName - the table name to check</div>
-					</dd>
-			<dt class="field">
-						<span class="method-title">_checkOptions</span>
-					</dt>
-		<dd class="index-item-body">
-			<div class="index-item-details"><a href="Patchwork/Authentification/Patchwork_Auth_Adapter_Doctrine.html#method_checkOptions">Patchwork_Auth_Adapter_Doctrine::_checkOptions()</a> in Doctrine.php</div>
-							<div class="index-item-description">assures that valid options have been passed to the constructor</div>
-					</dd>
-			<dt class="field">
-						<span class="method-title">_columnsToFields</span>
-					</dt>
-		<dd class="index-item-body">
-			<div class="index-item-details"><a href="Patchwork/Doctrine/Patchwork_Form_Doctrine_ModelForm.html#method_columnsToFields">Patchwork_Form_Doctrine_ModelForm::_columnsToFields()</a> in ModelForm.php</div>
-							<div class="index-item-description">Parses columns to fields</div>
-					</dd>
-			<dt class="field">
-						<span class="method-title">_columnsToFields</span>
-					</dt>
-		<dd class="index-item-body">
-			<div class="index-item-details"><a href="default/ZFDoctrine_Form_Model.html#method_columnsToFields">ZFDoctrine_Form_Model::_columnsToFields()</a> in Beberlei.php</div>
-							<div class="index-item-description">Parses columns to fields</div>
-					</dd>
-			<dt class="field">
-						<span class="method-title">_doctrineizeValue</span>
-					</dt>
-		<dd class="index-item-body">
-			<div class="index-item-details"><a href="Patchwork/Doctrine/Patchwork_Form_Doctrine_ModelForm.html#method_doctrineizeValue">Patchwork_Form_Doctrine_ModelForm::_doctrineizeValue()</a> in ModelForm.php</div>
-							<div class="index-item-description">Correct form value types for Doctrine</div>
-					</dd>
-			<dt class="field">
-						<span class="method-title">_generateForm</span>
-					</dt>
-		<dd class="index-item-body">
-			<div class="index-item-details"><a href="Patchwork/Doctrine/Patchwork_Form_Doctrine_ModelForm.html#method_generateForm">Patchwork_Form_Doctrine_ModelForm::_generateForm()</a> in ModelForm.php</div>
-							<div class="index-item-description">Generates the form</div>
-					</dd>
-			<dt class="field">
-						<span class="method-title">_generateForm</span>
-					</dt>
-		<dd class="index-item-body">
-			<div class="index-item-details"><a href="default/ZFDoctrine_Form_Model.html#method_generateForm">ZFDoctrine_Form_Model::_generateForm()</a> in Beberlei.php</div>
-							<div class="index-item-description">Generates the form</div>
-					</dd>
-			<dt class="field">
-						<span class="method-title">_getAuthResult</span>
-					</dt>
-		<dd class="index-item-body">
-			<div class="index-item-details"><a href="Patchwork/Authentification/Patchwork_Auth_Adapter_Doctrine.html#method_getAuthResult">Patchwork_Auth_Adapter_Doctrine::_getAuthResult()</a> in Doctrine.php</div>
-							<div class="index-item-description">creates a Zend_Auth_Result object from the information that has been  collected during the authenticate() attempt.</div>
-					</dd>
-			<dt class="field">
-						<span class="method-title">_getColumns</span>
-					</dt>
-		<dd class="index-item-body">
-			<div class="index-item-details"><a href="Patchwork/Doctrine/Patchwork_Form_Doctrine_ModelForm.html#method_getColumns">Patchwork_Form_Doctrine_ModelForm::_getColumns()</a> in ModelForm.php</div>
-							<div class="index-item-description">Get unignored columns</div>
-					</dd>
-			<dt class="field">
-						<span class="method-title">_getDeleteButtonName</span>
-					</dt>
-		<dd class="index-item-body">
-			<div class="index-item-details"><a href="Patchwork/Doctrine/Patchwork_Form_Doctrine_ModelForm.html#method_getDeleteButtonName">Patchwork_Form_Doctrine_ModelForm::_getDeleteButtonName()</a> in ModelForm.php</div>
-							<div class="index-item-description">Returns the name of the delete button field for relation alias</div>
-					</dd>
-			<dt class="field">
-						<span class="method-title">_getFormName</span>
-					</dt>
-		<dd class="index-item-body">
-			<div class="index-item-details"><a href="Patchwork/Doctrine/Patchwork_Form_Doctrine_ModelForm.html#method_getFormName">Patchwork_Form_Doctrine_ModelForm::_getFormName()</a> in ModelForm.php</div>
-							<div class="index-item-description">Returns the new form name for relation alias</div>
-					</dd>
-			<dt class="field">
-						<span class="method-title">_getNewButtonName</span>
-					</dt>
-		<dd class="index-item-body">
-			<div class="index-item-details"><a href="Patchwork/Doctrine/Patchwork_Form_Doctrine_ModelForm.html#method_getNewButtonName">Patchwork_Form_Doctrine_ModelForm::_getNewButtonName()</a> in ModelForm.php</div>
-							<div class="index-item-description">Returns the name of the new button field for relation alias</div>
-					</dd>
-			<dt class="field">
-						<span class="method-title">_getRelations</span>
-					</dt>
-		<dd class="index-item-body">
-			<div class="index-item-details"><a href="Patchwork/Doctrine/Patchwork_Form_Doctrine_ModelForm.html#method_getRelations">Patchwork_Form_Doctrine_ModelForm::_getRelations()</a> in ModelForm.php</div>
-							<div class="index-item-description">Returns all un-ignored relations</div>
-					</dd>
-			<dt class="field">
-						<span class="method-title">_initAcl</span>
-					</dt>
-		<dd class="index-item-body">
-			<div class="index-item-details"><a href="Application/Bootstrap/Bootstrap.html#method_initAcl">Bootstrap::_initAcl()</a> in Bootstrap.php</div>
-							<div class="index-item-description">access control, registerd in registry for navigation</div>
+			<div class="index-item-details"><a href="Models/Token.html#method_generateHash">Token::_generateHash()</a> in Token.php</div>
+							<div class="index-item-description">generates and sets the hash if own hash is null</div>
 					</dd>
 			<dt class="field">
 						<span class="method-title">_initAppAutoload</span>
@@ -1545,18 +668,17 @@
 							<div class="index-item-description">start autoloading</div>
 					</dd>
 			<dt class="field">
+						<span class="method-title">_initCli</span>
+					</dt>
+		<dd class="index-item-body">
+			<div class="index-item-details"><a href="Application/Bootstrap/Bootstrap.html#method_initCli">Bootstrap::_initCli()</a> in Bootstrap.php</div>
+							<div class="index-item-description">command line interface bootstrapping</div>
+					</dd>
+			<dt class="field">
 						<span class="method-title">_initConfigToRegistry</span>
 					</dt>
 		<dd class="index-item-body">
 			<div class="index-item-details"><a href="Application/Bootstrap/Bootstrap.html#method_initConfigToRegistry">Bootstrap::_initConfigToRegistry()</a> in Bootstrap.php</div>
-							<div class="index-item-description">make config available in registry</div>
-					</dd>
-			<dt class="field">
-						<span class="method-title">_initDoctrine</span>
-					</dt>
-		<dd class="index-item-body">
-			<div class="index-item-details"><a href="Application/Bootstrap/Bootstrap.html#method_initDoctrine">Bootstrap::_initDoctrine()</a> in Bootstrap.php</div>
-							<div class="index-item-description">starting doctrine</div>
 					</dd>
 			<dt class="field">
 						<span class="method-title">_initLocale</span>
@@ -1570,118 +692,7 @@
 					</dt>
 		<dd class="index-item-body">
 			<div class="index-item-details"><a href="Application/Bootstrap/Bootstrap.html#method_initNavigation">Bootstrap::_initNavigation()</a> in Bootstrap.php</div>
-							<div class="index-item-description">start Zend_Navigation, register it in registry</div>
-					</dd>
-			<dt class="field">
-						<span class="method-title">_isButton</span>
-					</dt>
-		<dd class="index-item-body">
-			<div class="index-item-details"><a href="Patchwork/Form/Patchwork_Form_Tableize.html#method_isButton">Patchwork_Form_Tableize::_isButton()</a> in Tableize.php</div>
-							<div class="index-item-description">check ig button decorators are needed</div>
-					</dd>
-			<dt class="field">
-						<span class="method-title">_isIgnoredField</span>
-					</dt>
-		<dd class="index-item-body">
-			<div class="index-item-details"><a href="default/ZFDoctrine_Form_Model.html#method_isIgnoredField">ZFDoctrine_Form_Model::_isIgnoredField()</a> in Beberlei.php</div>
-							<div class="index-item-description">Should this field be ignored in rendering?</div>
-					</dd>
-			<dt class="field">
-						<span class="method-title">_isValidResultSet</span>
-					</dt>
-		<dd class="index-item-body">
-			<div class="index-item-details"><a href="Patchwork/Authentification/Patchwork_Auth_Adapter_Doctrine.html#method_isValidResultSet">Patchwork_Auth_Adapter_Doctrine::_isValidResultSet()</a> in Doctrine.php</div>
-							<div class="index-item-description">validate the result collection</div>
-					</dd>
-			<dt class="field">
-						<span class="method-title">_manyRelationsToFields</span>
-					</dt>
-		<dd class="index-item-body">
-			<div class="index-item-details"><a href="default/ZFDoctrine_Form_Model.html#method_manyRelationsToFields">ZFDoctrine_Form_Model::_manyRelationsToFields()</a> in Beberlei.php</div>
-							<div class="index-item-description">Parses relations to fields</div>
-					</dd>
-			<dt class="field">
-						<span class="method-title">_postGenerate</span>
-					</dt>
-		<dd class="index-item-body">
-			<div class="index-item-details"><a href="Patchwork/Doctrine/Patchwork_Form_Doctrine_ModelForm.html#method_postGenerate">Patchwork_Form_Doctrine_ModelForm::_postGenerate()</a> in ModelForm.php</div>
-							<div class="index-item-description">Override to provide custom post-form generation logic</div>
-					</dd>
-			<dt class="field">
-						<span class="method-title">_postGenerate</span>
-					</dt>
-		<dd class="index-item-body">
-			<div class="index-item-details"><a href="default/ZFDoctrine_Form_Model.html#method_postGenerate">ZFDoctrine_Form_Model::_postGenerate()</a> in Beberlei.php</div>
-							<div class="index-item-description">Override to provide custom post-form generation logic</div>
-					</dd>
-			<dt class="field">
-						<span class="method-title">_postSave</span>
-					</dt>
-		<dd class="index-item-body">
-			<div class="index-item-details"><a href="Patchwork/Doctrine/Patchwork_Form_Doctrine_ModelForm.html#method_postSave">Patchwork_Form_Doctrine_ModelForm::_postSave()</a> in ModelForm.php</div>
-							<div class="index-item-description">Override to provide custom post-save logic</div>
-					</dd>
-			<dt class="field">
-						<span class="method-title">_postSave</span>
-					</dt>
-		<dd class="index-item-body">
-			<div class="index-item-details"><a href="default/ZFDoctrine_Form_Model.html#method_postSave">ZFDoctrine_Form_Model::_postSave()</a> in Beberlei.php</div>
-							<div class="index-item-description">Override to provide custom post-save logic</div>
-					</dd>
-			<dt class="field">
-						<span class="method-title">_preGenerate</span>
-					</dt>
-		<dd class="index-item-body">
-			<div class="index-item-details"><a href="default/ZFDoctrine_Form_Model.html#method_preGenerate">ZFDoctrine_Form_Model::_preGenerate()</a> in Beberlei.php</div>
-							<div class="index-item-description">Override to provide custom pre-form generation logic</div>
-					</dd>
-			<dt class="field">
-						<span class="method-title">_preGenerate</span>
-					</dt>
-		<dd class="index-item-body">
-			<div class="index-item-details"><a href="Patchwork/Doctrine/Patchwork_Form_Doctrine_ModelForm.html#method_preGenerate">Patchwork_Form_Doctrine_ModelForm::_preGenerate()</a> in ModelForm.php</div>
-							<div class="index-item-description">Override to provide custom pre-form generation logic</div>
-					</dd>
-			<dt class="field">
-						<span class="method-title">_relationsToFields</span>
-					</dt>
-		<dd class="index-item-body">
-			<div class="index-item-details"><a href="Patchwork/Doctrine/Patchwork_Form_Doctrine_ModelForm.html#method_relationsToFields">Patchwork_Form_Doctrine_ModelForm::_relationsToFields()</a> in ModelForm.php</div>
-							<div class="index-item-description">Parses relations to fields</div>
-					</dd>
-			<dt class="field">
-						<span class="method-title">__construct</span>
-					</dt>
-		<dd class="index-item-body">
-			<div class="index-item-details"><a href="default/ZFDoctrine_Form_Model.html#method__construct">ZFDoctrine_Form_Model::__construct()</a> in Beberlei.php</div>
-					</dd>
-			<dt class="field">
-						<span class="method-title">__construct</span>
-					</dt>
-		<dd class="index-item-body">
-			<div class="index-item-details"><a href="Patchwork/Form/Patchwork_Form_Tableize.html#method__construct">Patchwork_Form_Tableize::__construct()</a> in Tableize.php</div>
-							<div class="index-item-description">constructor takes form as argument</div>
-					</dd>
-			<dt class="field">
-						<span class="method-title">__construct</span>
-					</dt>
-		<dd class="index-item-body">
-			<div class="index-item-details"><a href="Patchwork/Doctrine/Patchwork_Form_Doctrine_ModelForm.html#method__construct">Patchwork_Form_Doctrine_ModelForm::__construct()</a> in ModelForm.php</div>
-							<div class="index-item-description">constructor</div>
-					</dd>
-			<dt class="field">
-						<span class="method-title">__construct</span>
-					</dt>
-		<dd class="index-item-body">
-			<div class="index-item-details"><a href="Patchwork/Authentification/Patchwork_Auth_Adapter_Doctrine.html#method__construct">Patchwork_Auth_Adapter_Doctrine::__construct()</a> in Doctrine.php</div>
-							<div class="index-item-description">constructor requires configuration options</div>
-					</dd>
-			<dt class="field">
-						<span class="method-title">__construct</span>
-					</dt>
-		<dd class="index-item-body">
-			<div class="index-item-details"><a href="Patchwork/Security/Patchwork_Controller_Plugin_PHPIDS.html#method__construct">Patchwork_Controller_Plugin_PHPIDS::__construct()</a> in PHPIDS.php</div>
-							<div class="index-item-description">constructors read config</div>
+							<div class="index-item-description">start Zend_Navigation</div>
 					</dd>
 		</dl>
 
@@ -1698,14 +709,11 @@
 	<a class="index-letter" href="elementindex.html#l">l</a>
 	<a class="index-letter" href="elementindex.html#m">m</a>
 	<a class="index-letter" href="elementindex.html#n">n</a>
-	<a class="index-letter" href="elementindex.html#o">o</a>
-	<a class="index-letter" href="elementindex.html#p">p</a>
 	<a class="index-letter" href="elementindex.html#r">r</a>
 	<a class="index-letter" href="elementindex.html#s">s</a>
 	<a class="index-letter" href="elementindex.html#t">t</a>
 	<a class="index-letter" href="elementindex.html#u">u</a>
 	<a class="index-letter" href="elementindex.html#w">w</a>
-	<a class="index-letter" href="elementindex.html#z">z</a>
 	<a class="index-letter" href="elementindex.html#_">_</a>
 </div>	</body>
 </html>
