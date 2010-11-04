@@ -50,10 +50,11 @@ class Patchwork_Controller_Plugin_Auth extends Zend_Controller_Plugin_Abstract
     protected function _getConfig()
     {
         $config = Zend_Registry::get(Patchwork::CONFIG_REGISTRY_KEY);
-        if(isset($config->patchwork->options->acl))
+        if(isset($config->patchwork->options->acl)){
             return $config->patchwork->options->acl;
-        else
-            throw Patchwork_Exception::missingAclConfig();
+        }
+
+        throw Patchwork_Exception::missingAclConfig();
     }
 
     /**
@@ -61,16 +62,11 @@ class Patchwork_Controller_Plugin_Auth extends Zend_Controller_Plugin_Abstract
      * 
      * @return Patchwork_Acl
      */
-    protected function _getACL()
+    protected function _getACL(Zend_Controller_Request_Abstract $request)
     {
         if (!Zend_Registry::isRegistered(Patchwork::ACL_REGISTRY_KEY)) {
-            $config = $this->_getConfig();
-            if (isset($config->autoload) && $config->autoload) {
-                $acl = Patchwork_Acl::factory(self::getUserRole())
-                    ->registerInRegistry();
-            } else {
-                throw Patchwork_Exception::ACLnotRegistered();
-            }
+            $acl = Patchwork_Acl::factory(self::getUserRole(), $request)
+                ->registerInRegistry();
         } else {
             $acl = Zend_Registry::get(Patchwork::ACL_REGISTRY_KEY);
             if(!$acl instanceof Patchwork_Acl){
@@ -90,8 +86,7 @@ class Patchwork_Controller_Plugin_Auth extends Zend_Controller_Plugin_Abstract
      */
     public function dispatchLoopStartup(Zend_Controller_Request_Abstract $request)
     {
-        $acl = $this->_getACL();
-
+        $acl = $this->_getACL($request);
         if (!$acl->isAllowedRequest(self::getUserRole(), $request)) {
             $this->redirectToAccessDenied($request);
         }
@@ -104,8 +99,9 @@ class Patchwork_Controller_Plugin_Auth extends Zend_Controller_Plugin_Abstract
      *
      * @return void
      */
-    public function redirectToAccessDenied(Zend_Controller_Request_Abstract $request)
-    {
+    public function redirectToAccessDenied(
+        Zend_Controller_Request_Abstract $request
+    ){
         $config = $this->_getConfig();
         
         $request->setControllerName($config->errorController);

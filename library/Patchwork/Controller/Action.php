@@ -1,36 +1,31 @@
 <?php
-/* 
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
+/**
+ * Patchwork
+ *
+ * @category    Library
+ * @package     Patchwork
+ * @subpackage  Controller
+ * @author      Daniel Pozzi <bonndan76@googlemail.com>
  */
 
+/**
+ * Patchwork_Controller_Action
+ *
+ * @category    Library
+ * @package     Patchwork
+ * @subpackage  Controller
+ * @author      Daniel Pozzi <bonndan76@googlemail.com>
+ */
 class Patchwork_Controller_Action extends Zend_Controller_Action
 {
     /**
-     * @return Zend_Application_Bootstrap_Bootstrap
+     * get the dependency injection container
+     * 
+     * @return Patchwork_Container
      */
-    public function getBootstrap()
+    public function getContainer()
     {
-        return $this->_invokeArgs['bootstrap'];
+        return $this->_invokeArgs['bootstrap']->getContainer();
     }
 
-    /**
-     * get the doctrine default connection
-     * 
-     * @return Doctrine_Connection|null
-     */
-    protected function _getDoctrine()
-    {
-        return $this->getBootstrap()->getResource('doctrine');
-    }
-
-    /**
-     * get the bootstrap config
-     * 
-     * @return Zend_Config
-     */
-    protected function _getConfig()
-    {
-        return new Zend_Config($this->getBootstrap()->getOptions());
-    }
 }

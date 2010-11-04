@@ -35,4 +35,11 @@ return array
         'controller' => 'auth',
         'action' => 'index',
     ),
+
+    array(
+        'label' => 'Howto',
+        'module' => 'howto',
+        'controller' => 'index',
+        'action' => 'index',
+    )
 );

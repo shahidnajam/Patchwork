@@ -12,7 +12,8 @@
 /**
  * Patchwork_Acl
  *
- * an ini-based Acl mapped to modules as resources and controllers as privilege
+ * An ini-based Acl mapped to controllers as resources and actions as privileges.
+ * The factory loads a config from the module directory
  *
  * @category   Library
  * @package    Patchwork
@@ -38,12 +39,12 @@ class Patchwork_Acl extends Zend_Acl
      * 
      * @return Patchwork_Acl
      */
-    public static function factory($role, $iniFile = null)
-    {
-        if($iniFile == null)
-            $iniFile = Zend_Registry::get(Patchwork::CONFIG_REGISTRY_KEY)
-            ->patchwork->options->{self::APPLICATION_CONFIG_ACL_KEY}->iniFile;
-
+    public static function factory(
+        $role,
+        Zend_Controller_Request_Abstract $request
+    ) {
+        $moduleDir = Zend_Controller_Front::getInstance()->getModuleDirectory();
+        $iniFile = $moduleDir . '/configs/acl.ini';
         $config = new Patchwork_Acl_Ini($iniFile, $role);
         return new self($config);
     }
@@ -55,14 +56,17 @@ class Patchwork_Acl extends Zend_Acl
      */
     public function __construct(Patchwork_Acl_Ini $config)
     {
-        $parentRole = ($config->getExtendedRole()!='')?$config->getExtendedRole():null;
-        if($parentRole)
+        $parentRole = ($config->getExtendedRole()!='')?
+            $config->getExtendedRole():null;
+        if($parentRole){
             $this->addRole($parentRole);
+        }
         $role = $config->getSectionName();
         $this->addRole($role, $parentRole);
         foreach ($config as $module => $controllers) {
-            if($module == '_extends')
+            if($module == '_extends'){
                 continue;
+            }
             $this->addResource(new Zend_Acl_Resource($module));
             foreach ($controllers as $controller => $true) {
                 $this->allow($role, $module, $controller);
@@ -83,29 +87,32 @@ class Patchwork_Acl extends Zend_Acl
 
     /**
      * check if a request is allowed
-     * 
+     *
+     * @param string                           $role    role
      * @param Zend_Controller_Request_Abstract $request request
      * 
      * @return boolean
      */
-    public function isAllowedRequest($role, Zend_Controller_Request_Abstract $request)
-    {
+    public function isAllowedRequest(
+        $role,
+        Zend_Controller_Request_Abstract $request
+    ) {
         if(!$this->hasRole($role)){
             return false;
         }
         
-        if(!$this->has($request->getModuleName())){
+        if(!$this->has($request->getControllerName())){
             return false;
         }
 
-        if(!$this->isAllowed(
+        if($this->isAllowed(
             $role,
-            $request->getModuleName(),
-            $request->getControllerName()
+            $request->getControllerName(),
+            $request->getActionName()
         )){
-            return false;
+            return true;
         }
 
-        return true;
+        return false;
     }
 }
