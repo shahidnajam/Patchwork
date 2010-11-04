@@ -241,7 +241,7 @@ class Zend_Amf_Parse_Amf3_Serializer extends Zend_Amf_Parse_Serializer
             $this->_referenceStrings[] = $string;
             $this->writeBinaryString($string);
         } else {
-            $ref <<= 1;
+            $ref <?php echo 1;
             $this->writeInteger($ref);
         }
 
@@ -390,7 +390,7 @@ class Zend_Amf_Parse_Amf3_Serializer extends Zend_Amf_Parse_Serializer
 
         // quickly handle object references
         if ($ref !== false){
-            $ref <<= 1;
+            $ref <?php echo 1;
             $this->writeInteger($ref);
             return true;
         }

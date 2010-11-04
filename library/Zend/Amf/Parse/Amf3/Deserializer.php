@@ -137,17 +137,17 @@ class Zend_Amf_Parse_Amf3_Deserializer extends Zend_Amf_Parse_Deserializer
         $intReference = $this->_stream->readByte();
         $result       = 0;
         while ((($intReference & 0x80) != 0) && $count < 4) {
-            $result       <<= 7;
+            $result       <?php echo 7;
             $result        |= ($intReference & 0x7f);
             $intReference   = $this->_stream->readByte();
             $count++;
         }
         if ($count < 4) {
-            $result <<= 7;
+            $result <?php echo 7;
             $result  |= $intReference;
         } else {
             // Use all 8 bits from the 4th byte
-            $result <<= 8;
+            $result <?php echo 8;
             $result  |= $intReference;
 
             // Check if the integer should be negative
