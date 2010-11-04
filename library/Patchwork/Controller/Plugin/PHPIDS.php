@@ -61,10 +61,10 @@ class Patchwork_Controller_Plugin_PHPIDS extends Zend_Controller_Plugin_Abstract
             'POST' => $_POST,
             'COOKIE' => $_COOKIE
         );
+        $container = Patchwork_Container::getBootstrapContainer();
         $init = IDS_Init::init();
-        $init->setConfig(Zend_Registry::get(Patchwork::CONFIG_REGISTRY_KEY)
-            ->{self::PHPIDS_CONFIG_SECTION}->toArray()
-        );
+        $config = $container->config->{self::PHPIDS_CONFIG_SECTION};
+        $init->setConfig($config->toArray());
 
         // run the ids monitor
         $ids = new IDS_Monitor($input, $init);

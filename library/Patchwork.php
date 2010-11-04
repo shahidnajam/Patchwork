@@ -17,7 +17,7 @@ class Patchwork
     /**
      * where to find the config in the registry
      */
-    const CONFIG_REGISTRY_KEY = 'config';
+    const CONFIG_CONTAINER_KEY = 'config';
 
     /**
      * acl registry key

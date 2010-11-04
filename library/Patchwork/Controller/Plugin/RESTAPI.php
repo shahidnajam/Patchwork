@@ -35,9 +35,8 @@ class Patchwork_Controller_Plugin_RESTAPI extends Zend_Controller_Plugin_Abstrac
     public function routeStartup(Zend_Controller_Request_Abstract $request)
     {
         $httpBasicAuth = false;
-        if (Zend_Registry::isRegistered(Patchwork::CONFIG_REGISTRY_KEY)) {
-            $config = Zend_Registry::get(Patchwork::CONFIG_REGISTRY_KEY);
-
+        $container = Patchwork_Container::getBootstrapContainer();
+        if ($config = $container->config) {
             if ($config->patchwork && $config->patchwork->options->restAPI) {
                 $restRoutingModule = $config->patchwork->options->restAPI->module;
                 $httpBasicAuth = $config->patchwork->options->restAPI->useHttpBasicAuth;

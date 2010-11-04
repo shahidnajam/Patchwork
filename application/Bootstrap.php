@@ -1,16 +1,56 @@
 <?php
-
+/**
+ * Patchwork
+ *
+ * @category    Application
+ * @package     Default
+ * @subpackage  Bootstrap
+ * @author      Daniel Pozzi <bonndan76@googlemail.com>
+ */
 /**
  * Bootstrap class
  *
  * registers registry keys and starts Doctrine
  *
  * @package    Application
- * @subpackage Bootstrap
- * @author     Daniel Pozzi
+ * @subpackage Default
+ * @author     Daniel Pozzi <bonndan76@googlemail.com>
  */
 class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
 {
+
+    /**
+     * This method ensures that the dependency injection container is
+     * initialized before any other component.
+     *
+     * @param  null|string|array $resource
+     * @return void
+     * @throws Zend_Application_Bootstrap_Exception
+     */
+    protected function _bootstrap($resource = null)
+    {
+        if ($this->_container === null) {
+            /** Create the container and register it */
+            $this->setContainer(new Patchwork_Container);
+
+            /** Ensure we bootstrap the configuration into the container now */
+            $this->_executeResource('config');
+            /** Ensure we bootstrap the Front Controller too */
+            $this->_executeResource('config');
+        }
+
+        /** Remove underscores */
+        if (!empty($resource)) {
+            $resource = strtr(
+                    $resource,
+                    array(
+                        '_' => ''
+                    )
+            );
+        }
+
+        parent::_bootstrap($resource);
+    }
 
     /**
      * start autoloading
@@ -30,12 +70,13 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
         return $mal;
     }
 
-    protected function _initConfigToRegistry()
+    /**
+     * store "config" in container
+     * @return Zend_Config
+     */
+    protected function _initConfig()
     {
-        Zend_Registry::set(
-                Patchwork::CONFIG_REGISTRY_KEY,
-                new Zend_Config($this->getOptions())
-        );
+        return new Zend_Config($this->getOptions());
     }
 
     /**
@@ -60,7 +101,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
         $locale = new Zend_Locale();
         Zend_Registry::set('Zend_Locale', $locale);
 
-        // Return it, so that it can be stored by the bootstrap
+        // Return it, so that it can be stored in the container
         return $locale;
     }
 
