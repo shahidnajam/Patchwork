@@ -1,25 +1,31 @@
 <?php
 /**
- * takes a Zend_Form and sets all decorators to render a table-based form
+ * Patchwork
  *
- * @author     Daniel Pozzi
- * @category   Library
- * @package    Patchwork
- * @subpackage Form
+ * @category    Library
+ * @package     Forms
+ * @subpackage  Redecorators
+ * @author      Daniel Pozzi <bonndan76@googlemail.com>
  */
 
 /**
- * takes a Zend_Form and sets all decorators to render a table-based form
-<code>
-new Patchwork_Form_Tableize($myForm);
-</code>
- * @author     Daniel Pozzi
- * @category   Library
- * @package    Patchwork
- * @subpackage Form
+ * Patchwork_Form_Redecorator_Table
+ *
+ * sets the decorators to render the form as a table
+ *
+ * @category    Library
+ * @package     Forms
+ * @subpackage  Redecorators
+ * @author      Daniel Pozzi <bonndan76@googlemail.com>
  */
-class Patchwork_Form_Tableize
+class Patchwork_Form_Redecorator_Table implements Patchwork_Form_Redecorator
 {
+    /**
+     * options
+     * @var array
+     */
+    public $options = array();
+
     /**
      * element decorators
      * @var array
@@ -51,23 +57,24 @@ class Patchwork_Form_Tableize
     );
 
     /**
-     * constructor takes form as argument
-     *
-     * @param Zend_Form $form zend form instance
-     *
-     * @return self
+     * Constructor
      */
-    public function __construct(Zend_Form $form = null)
+    public function  __construct(array $options = array())
     {
-       $this->tableize($form);
+        $this->options['elementDecorators'] = $this->elementDecorators;
+        $this->options['buttonDecorators']  = $this->buttnDecorators;
+
+        array_merge($this->options, $options);
     }
 
     /**
-     * apply decorators to all elements
-     *
-     * @param Zend_Form $form form
+     * redecorate
+     * 
+     * @param Zend_Form $form form to redecorate
+     * 
+     * @return Patchwork_Form_Redecorator_Table
      */
-    public function tableize(Zend_Form $form)
+    public function redecorate(Zend_Form $form)
     {
         $form->setDecorators(
             array(
@@ -78,21 +85,26 @@ class Patchwork_Form_Tableize
         );
 
         foreach($form->getElements() as $el){
-            if($this->_isButton($el))
-                $el->clearDecorators()->setDecorators($this->buttonDecorators);
-            else
-                $el->clearDecorators()->setDecorators($this->elementDecorators);
+            $el->clearDecorators();
+            if($this->_isButton($el)) {
+                $el->setDecorators($this->buttonDecorators);
+            } else {
+                $el->setDecorators($this->elementDecorators);
+            }
         }
 
-        foreach($form->getSubForms() as $sf)
-            $this->tableize($sf);
+        foreach($form->getSubForms() as $sf) {
+            $this->redecorate($sf);
+        }
+
+        return $this;
     }
 
     /**
-     * check ig button decorators are needed
+     * check if button decorators are needed
      *
      * @param Zend_Form_Element $el
-     * 
+     *
      * @return boolean
      * @todo captchas, else?
      */
