@@ -13,7 +13,7 @@
  * Patchwork_Acl
  *
  * An ini-based Acl mapped to controllers as resources and actions as privileges.
- * The factory loads a config from the module directory
+ * The factory loads acl.ini form each module directory
  *
  * @category   Library
  * @package    Patchwork
@@ -32,56 +32,54 @@ class Patchwork_Acl extends Zend_Acl
     const GUEST_ROLE = 'guest';
 
     /**
-     * factory methods
+     * concats module and controller into a resource
+     */
+    const MODULE_CONTROLLER_GLUE = '_';
+
+    /**
+     * factory method
      *
-     * @param string $role    role
-     * @param string $iniFile location of the ini file to use
+     * @param Zend_Controller_Request_Abstract $request request
      * 
      * @return Patchwork_Acl
      */
-    public static function factory(
-        $role,
-        Zend_Controller_Request_Abstract $request
-    ) {
-        $moduleDir = Zend_Controller_Front::getInstance()->getModuleDirectory();
-        $iniFile = $moduleDir . '/configs/acl.ini';
-        $config = new Patchwork_Acl_Ini($iniFile, $role);
-        return new self($config);
-    }
-
-    /**
-     * instantiate with an ini file
-     * 
-     * @param Patchwork_Acl_Ini $config configuration
-     */
-    public function __construct(Patchwork_Acl_Ini $config)
+    public static function factory()
     {
-        $parentRole = ($config->getExtendedRole()!='')?
-            $config->getExtendedRole():null;
-        if($parentRole){
-            $this->addRole($parentRole);
+        $staticPath = '/configs/acl.ini';
+        $acl = new self();
+        $defaultIni = APPLICATION_PATH . $staticPath;
+        if(is_file($defaultIni)) {
+            $acl->addConfig(new Patchwork_Acl_Ini($defaultIni));
         }
-        $role = $config->getSectionName();
-        $this->addRole($role, $parentRole);
-        foreach ($config as $module => $controllers) {
-            if($module == '_extends'){
+
+        $path = APPLICATION_PATH . DIRECTORY_SEPARATOR . 'modules';
+        $iter = new DirectoryIterator($path);
+        foreach ($iter as $moduleDir) {
+            
+            if (!$moduleDir->isDir() || $moduleDir->isDot()) {
+                 continue;
+            }
+            $iniFile = APPLICATION_PATH . '/modules/' . $moduleDir . $staticPath;
+            if(!is_file($iniFile)){
                 continue;
             }
-            $this->addResource(new Zend_Acl_Resource($module));
-            foreach ($controllers as $controller => $true) {
-                $this->allow($role, $module, $controller);
-            }
+            
+            $config = new Patchwork_Acl_Ini($iniFile);
+            $acl->addConfig($config);
         }
+
+        return $acl;
     }
 
     /**
-     * registers itself in Zend_Registry under Patchwork::ACL_REGISTRY_KEY
+     * add a configuration
      * 
-     * @return Patchwork_Acl
+     * @param Patchwork_Acl_Ini $config configuration
+     * @return self
      */
-    public function registerInRegistry()
+    public function addConfig(Patchwork_Acl_Ini $config)
     {
-        Zend_Registry::set(Patchwork::ACL_REGISTRY_KEY, $this);
+        $config->addConfigToAcl($this);
         return $this;
     }
 
@@ -94,25 +92,28 @@ class Patchwork_Acl extends Zend_Acl
      * @return boolean
      */
     public function isAllowedRequest(
-        $role,
-        Zend_Controller_Request_Abstract $request
-    ) {
-        if(!$this->hasRole($role)){
+        $role, Zend_Controller_Request_Abstract $request
+    )
+    {
+        if (!$this->hasRole($role)) {
             return false;
         }
-        
-        if(!$this->has($request->getControllerName())){
+
+        $resource = $request->getModuleName() . self::MODULE_CONTROLLER_GLUE .
+            $request->getControllerName();
+        if (!$this->has($resource)) {
             return false;
         }
 
         if($this->isAllowed(
             $role,
-            $request->getControllerName(),
+            $resource,
             $request->getActionName()
-        )){
+        )) {
             return true;
         }
 
         return false;
     }
+
 }

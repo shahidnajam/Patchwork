@@ -19,63 +19,97 @@ class Patchwork_AclTest extends Zend_Test_PHPUnit_ControllerTestCase
      * get config
      * @return Zend_Config_Ini 
      */
-    protected function _getConfig($role = 'guest')
+    protected function _getConfig()
     {
-        return new Patchwork_Acl_Ini(dirname(__FILE__) . '/acltest.ini', $role);
+        return new Patchwork_Acl_Ini(dirname(__FILE__) . '/Acl/test.ini');
     }
 
-    public function testConfig()
+    /**
+     * get config
+     * @return Zend_Config_Ini
+     */
+    protected function _getConfig2()
     {
-        $config = $this->_getConfig('guest');
-        $this->assertFalse($config->areAllSectionsLoaded());
-
-        $this->assertTrue($config instanceof Zend_Config);
-        $this->assertTrue($config->default instanceof Zend_Config);
-        $this->assertEquals(1, $config->default->index);
-        $this->assertTrue($config->user instanceof Zend_Config);
-
-        
-    }
-
-    public function testGuestAcl()
-    {
-        $config = $this->_getConfig();
-        $this->acl = new Patchwork_Acl($config);
-
-        $this->assertTrue($this->acl->has('default'));
-        $this->assertTrue($this->acl->has('user'));
-        $this->assertTrue($this->acl->isAllowed('guest', 'default', 'index'));
-        $this->assertFalse($this->acl->isAllowed('guest', 'default', 'x'));
-    }
-
-    public function testUserAcl()
-    {
-        $config = $this->_getConfig('user');
-        $this->acl = new Patchwork_Acl($config);
-
-        $this->assertTrue($this->acl->has('default'));
-        $this->assertTrue($this->acl->has('user'));
-
-        $this->assertTrue($this->acl->isAllowed('user', 'userstuff', 'index'));
-        $this->assertFalse($this->acl->isAllowed('guest', 'userstuff', 'index'));
+        return new Patchwork_Acl_Ini(dirname(__FILE__) . '/Acl/test_1.ini');
     }
 
     public function testRequestIsAllowed()
     {
-        $this->acl = new Patchwork_Acl($this->_getConfig());
-        $request = $this->getRequest()->setModuleName('default')
-            ->setControllerName('index');
-
+        $this->acl = new Patchwork_Acl();
+        $this->acl->addConfig($this->_getConfig());
+        
+        $request = $this->getRequest()->setModuleName('howto')
+            ->setControllerName('index')
+            ->setActionName('index');
         $this->assertTrue($this->acl->isAllowedRequest('guest', $request));
+
+        $request = $this->getRequest()->setModuleName('howto')
+            ->setControllerName('forusers')
+            ->setActionName('index');
+
+        $this->assertTrue($this->acl->isAllowedRequest('user', $request));
     }
 
-    public function testRequestIsForbidden()
+    public function testRequestIsAllowedWithTwoConfigs()
     {
-        $this->acl = new Patchwork_Acl($this->_getConfig());
+        $this->acl = new Patchwork_Acl();
+        $this->acl->addConfig($this->_getConfig());
+        $this->acl->addConfig($this->_getConfig2());
+
+        $request = $this->getRequest()->setModuleName('howto')
+            ->setControllerName('index')
+            ->setActionName('index');
+
+        $this->assertTrue($this->acl->isAllowedRequest('guest', $request));
+
+        $request = $this->getRequest()->setModuleName('user')
+            ->setControllerName('forusers')
+            ->setActionName('index');
+
+        $this->assertTrue($this->acl->isAllowedRequest('user', $request));
+    }
+
+    public function testNotRegisteredRoleIsForbidden()
+    {
+        $this->acl = new Patchwork_Acl();
+        $this->acl->addConfig($this->_getConfig());
+
+        $request = $this->getRequest()
+            ->setModuleName('admin')
+            ->setControllerName('index');
+
+        $this->assertFalse($this->acl->isAllowedRequest('gg', $request));
+    }
+
+    public function testNotRegisteredResourceIsForbidden()
+    {
+        $this->acl = new Patchwork_Acl();
+        $this->acl->addConfig($this->_getConfig());
+        
         $request = $this->getRequest()
             ->setModuleName('admin')
             ->setControllerName('index');
 
         $this->assertFalse($this->acl->isAllowedRequest('guest', $request));
+    }
+
+    public function testRequestIsForbiddenForGuest()
+    {
+        $this->acl = new Patchwork_Acl();
+        $this->acl->addConfig($this->_getConfig());
+        $request = $this->getRequest()
+            ->setModuleName('howto')
+            ->setControllerName('forusers');
+
+        $this->assertFalse($this->acl->isAllowedRequest('guest', $request));
+    }
+
+    public function testFactory()
+    {
+        $acl = Patchwork_Acl::factory();
+        $this->assertType('Patchwork_Acl', $acl);
+
+        $this->assertTrue($acl->has('default_index'));
+        $this->assertTrue($acl->has('howto_index'));
     }
 }
