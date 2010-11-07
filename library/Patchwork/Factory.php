@@ -64,4 +64,18 @@ class Patchwork_Factory
     {
         return Zend_Controller_Front::getInstance()->getRequest();
     }
+
+    /**
+     * create a Zend_Navigation
+     * 
+     * @return Zend_Navigation
+     */
+    public function navigation($path = null)
+    {
+        if($path == null) {
+            $path = CONFIG_PATH . DIRECTORY_SEPARATOR . 'navigation.php';
+        }
+
+        return new Zend_Navigation(require($path));
+    }
 }

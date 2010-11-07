@@ -6,7 +6,8 @@
  * @author Daniel Pozzi
  * @see http://blog.simlau.net/zendframework-http-auth.html
  */
-class Patchwork_Auth_Adapter_Http_Resolver_Doctrine implements Zend_Auth_Adapter_Http_Resolver_Interface
+class Patchwork_Auth_Adapter_Http_Resolver_Doctrine
+implements Zend_Auth_Adapter_Http_Resolver_Interface
 {
     const AUTH_CLASS = 'User';
 

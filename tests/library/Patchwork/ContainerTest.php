@@ -19,6 +19,16 @@ require_once((dirname(dirname(dirname(__FILE__))))) . '/bootstrap.php';
 class Patchwork_ContainerTest extends ControllerTestCase
 {
 
+    public $options = array(
+        'patchwork' => array(
+            'container' => array(
+                'Patchwork_Controller_Plugin_Auth' => array(
+                    'bindImplementation' => 'Patchwork_Controller_Plugin_Auth_Basic'
+                )
+            )
+        )
+    );
+    
     public function testContrustructor()
     {
         $container = new Patchwork_Container;
@@ -32,22 +42,12 @@ class Patchwork_ContainerTest extends ControllerTestCase
      */
     public function testConstructorWithOptions()
     {
-        $options = array(
-            'patchwork' => array(
-                'container' => array(
-                    'interfaceX' => array(
-                        'bindImplementation' => 'App_Implementation_Y'
-                    )
-                )
-            )
-        );
-
-        $container = new Patchwork_Container($options);
+        $container = new Patchwork_Container($this->options);
         $this->assertType('Patchwork_Container', $container);
 
         $binds = $container->getBindings();
-        $this->assertContains('interfaceX', array_keys($binds));
-        $this->assertEquals('App_Implementation_Y', $binds['interfaceX']);
+        $this->assertContains('Patchwork_Controller_Plugin_Auth', array_keys($binds));
+        $this->assertEquals('Patchwork_Controller_Plugin_Auth_Basic', $binds['Patchwork_Controller_Plugin_Auth']);
     }
 
     public function testGetBootStrapContainer()
@@ -73,10 +73,11 @@ class Patchwork_ContainerTest extends ControllerTestCase
     public function testCreateInstanceFromBinding()
     {
         $container = new Patchwork_Container;
-        $container->bindImplementation('ABC', 'Patchwork_Controller_Plugin_Auth');
+        $container->bindFactory('Zend_Acl', 'Patchwork_Factory', 'acl');
+        $container->bindImplementation('ABC', 'Patchwork_Controller_Plugin_Auth_Basic');
 
         $this->assertEquals($container, $container->__get('Patchwork_Container'));
-        $this->assertType('Patchwork_Controller_Plugin_Auth', $container->ABC);
+        $this->assertType('Patchwork_Controller_Plugin_Auth_Basic', $container->ABC);
     }
 
     public function testCreateInstanceFromFactory()

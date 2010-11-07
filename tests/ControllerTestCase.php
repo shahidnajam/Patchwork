@@ -124,4 +124,49 @@ abstract class ControllerTestCase extends Zend_Test_PHPUnit_ControllerTestCase
     {
         return $this->bootstrap->getBootstrap()->getContainer();
     }
+
+    /**
+     * provide an authenticated user
+     *
+     *
+     * 
+     */
+    public function provideAuthenticatedUser()
+    {
+        $user = new stdClass();
+        $user->role = 'user';
+        
+
+        $adapter = new MockAuthAdapter();
+        $adapter->setUser($user);
+
+        Zend_Auth::getInstance()->authenticate($adapter);
+        Zend_Auth::getInstance()->getStorage()->write($user);
+    }
+}
+
+/**
+ * MOck auth adapter
+ */
+class MockAuthAdapter implements Zend_Auth_Adapter_Interface
+{
+    /**
+     *
+     * @param object $user
+     */
+    public function setUser($user){
+        $this->user = $user;
+        return $this;
+    }
+
+    /**
+     * auth
+     *
+     * @return Zend_Auth_Result
+     */
+    public function authenticate()
+    {
+        $res = new Zend_Auth_Result(1, $this->user);
+        return $res;
+    }
 }

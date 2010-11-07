@@ -80,26 +80,6 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
     }
 
     /**
-     * start Zend_Navigation
-     *
-     * @return Zend_Navigation
-     */
-    protected function _initNavigation()
-    {
-        return new Zend_Navigation(
-            require(CONFIG_PATH . DIRECTORY_SEPARATOR . 'navigation.php')
-        );
-    }
-
-    protected function _initAcl()
-    {
-        $this->getContainer()
-            ->bindImplementation('acl', 'Patchwork_Acl');
-        $this->getContainer()
-            ->bindFactory('Patchwork_Acl', 'Patchwork_Acl', 'factory');
-    }
-
-    /**
      * init app-wide locale
      *
      * @return Zend_Locale

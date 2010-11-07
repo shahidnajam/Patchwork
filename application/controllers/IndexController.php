@@ -1,8 +1,20 @@
 <?php
 /**
- * Example Index Controller, associated to User model
+ * Patchwork
  *
- * 
+ * @category    Application
+ * @package     Default
+ * @subpackage  Controllers
+ * @author      Daniel Pozzi <bonndan76@googlemail.com>
+ */
+
+/**
+ * Patchwork
+ *
+ * @category    Application
+ * @package     Default
+ * @subpackage  Controllers
+ * @author      Daniel Pozzi <bonndan76@googlemail.com>
  */
 class IndexController extends Patchwork_Controller_Action
 {
@@ -13,7 +25,7 @@ class IndexController extends Patchwork_Controller_Action
      *
      */
     public function indexAction(){
-        $doctrine = $this->_getDoctrine();
+        $doctrine = $this->_helper->doctrine();
         $this->model = new User;
         $this->model->email = 'test@test.com';
         $this->view->user = $this->model;

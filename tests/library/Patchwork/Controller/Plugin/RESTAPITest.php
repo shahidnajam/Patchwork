@@ -15,53 +15,83 @@ require_once(dirname(dirname(dirname(dirname(dirname(__FILE__)))))).'/bootstrap.
  */
 class Patchwork_Controller_Plugin_RESTAPITest extends ControllerTestCase
 {
+    public function setUp()
+    {
+        parent::setUp();
+        $acl = new Zend_Acl;
+        $ini = new Patchwork_Acl_Ini(dirname(dirname(__FILE__)) .'/acl.ini');
+        $ini->addConfigToAcl($acl);
 
+        $this->getContainer()->set('Zend_Acl', $acl);
+    }
 
     /**
      * test that
      */
-    public function _testAPIModuleRouting()
+    public function testAPIModuleRouting()
     {
-        Patchwork_Acl::factory();
-        
         $request = new Zend_Controller_Request_Http;
         $request->setModuleName('api');
         $request->setControllerName('users');
-        $_SERVER['REQUEST_METHOD'] = 'POST';
         $_SERVER['HTTP_HOST'] = 'testhost';
 
-        $front =  Zend_Controller_Front::getInstance();
-        if($front->hasPlugin('Patchwork_Controller_Plugin_HttpAuth'))
-            $front->unregisterPlugin('Patchwork_Controller_Plugin_HttpAuth');
-
-        $plugin = new Patchwork_Controller_Plugin_RESTAPI;
+        $plugin = $this->getContainer()->getInstance(
+            'Patchwork_Controller_Plugin_RESTAPI', true
+        );
         $plugin->routeStartup($request);
 
         $this->dispatch('api/user', 'GET', array('id' => 1));
         $this->assertAction('get');
-
-        $this->dispatch('api/user', 'POST');
-        $this->assertAction('post');
-
-        $this->dispatch('api/user', 'PUT');
-        $this->assertAction('put');
-
-        $this->dispatch('api/user', 'DELETE');
-        $this->assertAction('delete');
     }
 
-    public function _testOtherModuleNotAffected()
+    public function testAPIModuleRoutingPOST()
     {
-        Patchwork_Container::getBootstrapContainer()
-            ->bindFactory('Patchwork_Acl', 'Patchwork_Acl', 'factory');
-        
         $request = new Zend_Controller_Request_Http;
         $request->setModuleName('api');
         $request->setControllerName('users');
         $_SERVER['REQUEST_METHOD'] = 'POST';
         $_SERVER['HTTP_HOST'] = 'testhost';
 
-        $plugin = new Patchwork_Controller_Plugin_RESTAPI;
+        $plugin = $this->getContainer()->getInstance(
+            'Patchwork_Controller_Plugin_RESTAPI', true
+        );
+        $plugin->routeStartup($request);;
+
+        $this->dispatch('api/user', 'POST');
+        $this->assertAction('post');
+    }
+
+    public function testAPIModuleRoutingPUT()
+    {
+        $request = new Zend_Controller_Request_Http;
+        $request->setModuleName('api');
+        $request->setControllerName('users');
+        $_SERVER['REQUEST_METHOD'] = 'PUT';
+        $_SERVER['HTTP_HOST'] = 'testhost';
+
+        $front =  Zend_Controller_Front::getInstance();
+
+        $plugin = $this->getContainer()->getInstance(
+            'Patchwork_Controller_Plugin_RESTAPI'
+        );
+        $plugin->routeStartup($request);
+
+        $this->dispatch('api/user', 'PUT');
+        $this->assertAction('put');
+    }
+
+
+    public function testOtherModuleNotAffected()
+    {
+        $request = new Zend_Controller_Request_Http;
+        $request->setModuleName('api');
+        $request->setControllerName('users');
+        $_SERVER['REQUEST_METHOD'] = 'POST';
+        $_SERVER['HTTP_HOST'] = 'testhost';
+
+        $plugin = $this->getContainer()->getInstance(
+            'Patchwork_Controller_Plugin_RESTAPI'
+        );
         $plugin->routeStartup($request);
 
         $this->dispatch('index/index', 'POST');

@@ -26,8 +26,12 @@ class Patchwork_Controller_Plugin_AuthTest extends ControllerTestCase
         
         $acl = new Zend_Acl();
         $this->_getConfig()->addConfigToAcl($acl);
-        $this->getContainer()->set('acl', $acl);
-        $this->auth = new Patchwork_Controller_Plugin_Auth($this->getContainer());
+        $this->getContainer()->set('Zend_Acl', $acl);
+        $this->getContainer()->bindImplementation(
+            'Patchwork_Controller_Plugin_Auth',
+            'Patchwork_Controller_Plugin_Auth_Basic'
+        );
+        $this->auth = $this->getContainer()->Patchwork_Controller_Plugin_Auth;
     }
 
     /**
@@ -59,7 +63,7 @@ class Patchwork_Controller_Plugin_AuthTest extends ControllerTestCase
     public function testGetUserRoleOfAdmin()
     {
         User::authenticate('dpozzi@gmx.net', 'test');
-        $role = Patchwork_Controller_Plugin_Auth::getUserRole();
+        $role = $this->auth->getUserRole();
         $this->assertEquals('admin', $role);
     }
 
@@ -69,7 +73,7 @@ class Patchwork_Controller_Plugin_AuthTest extends ControllerTestCase
     public function testDefaultUserRoleIsGuest()
     {
         User::authenticate('dpozzi@gmx.net', 'not');
-        $role = Patchwork_Controller_Plugin_Auth::getUserRole();
+        $role = $this->auth->getUserRole();
         $this->assertEquals('guest', $role);
     }
 
@@ -87,35 +91,34 @@ class Patchwork_Controller_Plugin_AuthTest extends ControllerTestCase
 
     public function testRequestIsAllowed()
     {
-        $auth = new Patchwork_Controller_Plugin_Auth($this->getContainer());
-
         $request = $this->getRequest()->setModuleName('howto')
             ->setControllerName('index')
             ->setActionName('index');
-        $this->assertTrue($auth->isAllowedRequest('guest', $request));
+        $this->assertTrue($this->auth->isAllowedRequest($request));
 
+        $this->provideAuthenticatedUser();
         $request = $this->getRequest()->setModuleName('howto')
             ->setControllerName('forusers')
             ->setActionName('index');
 
-        $this->assertTrue($auth->isAllowedRequest('user', $request));
+        $this->assertTrue($this->auth->isAllowedRequest($request));
     }
 
     public function testRequestIsAllowedWithTwoConfigs()
     {
-        $this->_getConfig2()->addConfigToAcl($this->getContainer()->acl);
-
+        $this->_getConfig2()->addConfigToAcl($this->getContainer()->Zend_Acl);
+        $this->provideAuthenticatedUser();
         $request = $this->getRequest()->setModuleName('howto')
             ->setControllerName('index')
             ->setActionName('index');
 
-        $this->assertTrue($this->auth->isAllowedRequest('guest', $request));
+        $this->assertTrue($this->auth->isAllowedRequest($request));
 
         $request = $this->getRequest()->setModuleName('user')
             ->setControllerName('forusers')
             ->setActionName('index');
 
-        $this->assertTrue($this->auth->isAllowedRequest('user', $request));
+        $this->assertTrue($this->auth->isAllowedRequest($request));
     }
 
     public function testNotRegisteredRoleIsForbidden()
@@ -124,7 +127,7 @@ class Patchwork_Controller_Plugin_AuthTest extends ControllerTestCase
             ->setModuleName('admin')
             ->setControllerName('index');
 
-        $this->assertFalse($this->auth->isAllowedRequest('gg', $request));
+        $this->assertFalse($this->auth->isAllowedRequest($request));
     }
 
     public function testNotRegisteredResourceIsForbidden()
@@ -133,7 +136,7 @@ class Patchwork_Controller_Plugin_AuthTest extends ControllerTestCase
             ->setModuleName('admin')
             ->setControllerName('index');
 
-        $this->assertFalse($this->auth->isAllowedRequest('guest', $request));
+        $this->assertFalse($this->auth->isAllowedRequest($request));
     }
 
     public function testRequestIsForbiddenForGuest()
@@ -142,6 +145,6 @@ class Patchwork_Controller_Plugin_AuthTest extends ControllerTestCase
             ->setModuleName('howto')
             ->setControllerName('forusers');
 
-        $this->assertFalse($this->auth->isAllowedRequest('guest', $request));
+        $this->assertFalse($this->auth->isAllowedRequest($request));
     }
 }

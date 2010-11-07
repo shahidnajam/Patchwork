@@ -1,5 +1,14 @@
 <?php
 /**
+ * Patchwork
+ *
+ * @category    Library
+ * @package     Patchwork
+ * @subpackage  Controller
+ * @author      Daniel Pozzi <bonndan76@googlemail.com>
+ */
+
+/**
  * REST Controller plus Doctrine, uses basic http auth
  *
  * make sure to enable rest routing
@@ -50,7 +59,7 @@ abstract class Patchwork_Controller_RESTModelController
         }
 
         try{
-        $this->_helper->viewRenderer->setNoRender(true);
+            $this->_helper->viewRenderer->setNoRender(true);
         } catch (Zend_Controller_Action_Exception $e){
             //ok, since not needed
         }

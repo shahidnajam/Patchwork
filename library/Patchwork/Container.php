@@ -94,22 +94,12 @@ class Patchwork_Container
      * retrieve an instance
      *
      * @param string $name                   class or interface name
-     * @param bool   $tryDirectInstantiation try "new" $name
      *
      * @return object
      */
     public function __get($name)
     {
-        if(isset($this->$name)){
-            return $this->$name;
-        }
-        
-        $resource = strtolower($name);
-        if (isset($this->$resource)) {
-            return $this->$resource;
-        }
-
-        return $this->createInstance($name);
+        return $this->getInstance($name, false);
     }
 
     /**
@@ -119,7 +109,7 @@ class Patchwork_Container
      * @param string $name                   class or interface name
      * @param bool   $tryDirectInstantiation try "new" $name
      */
-    public function getInstance($name, $tryDirectInstantiation = false)
+    public function getInstance($name, $tryDirectInstantiation = true)
     {
         if(isset($this->$name)){
             return $this->$name;
@@ -130,7 +120,7 @@ class Patchwork_Container
             return $this->$resource;
         }
 
-        return $this->_createInstance($name, $tryDirectInstantiation);
+        return $this->createInstance($name, $tryDirectInstantiation);
     }
 
     /**
@@ -204,7 +194,7 @@ class Patchwork_Container
     protected function _createInstanceFromBinding($name)
     {
         $className = $this->_bindings[$name];
-        $instance = $this->getInstance($className, true);
+        $instance = $this->getInstance($className);
         self::set($name, $instance);
         return $instance;
     }
@@ -238,6 +228,9 @@ class Patchwork_Container
             throw new Patchwork_Exception('Could not resolve class ' . $name);
         }
         $ref = new ReflectionClass($name);
+        if($ref->isAbstract()) {
+            throw new Patchwork_Exception($name . ' is an abstract class');
+        }
         $constructor = $ref->getConstructor();
         if(!$constructor) {
             return new $name;

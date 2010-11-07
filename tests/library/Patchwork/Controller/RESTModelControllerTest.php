@@ -8,6 +8,16 @@ require_once(dirname(dirname(dirname(dirname(__FILE__))))).'/bootstrap.php';
  */
 class Patchwork_Controller_RESTModelControllerTest extends ControllerTestCase
 {
+    public function setUp()
+    {
+        parent::setUp();
+        $acl = new Zend_Acl;
+        $ini = new Patchwork_Acl_Ini(dirname(__FILE__) .'/acl.ini');
+        $ini->addConfigToAcl($acl);
+        
+        $this->getContainer()->set('Zend_Acl', $acl);
+    }
+
     /**
      *
      * @return TestController
@@ -20,16 +30,6 @@ class Patchwork_Controller_RESTModelControllerTest extends ControllerTestCase
         );
 
         return $controller;
-    }
-
-    /**
-     * disable http auth plugin
-     */
-    protected function _disableHttpAuth()
-    {
-        $front =  Zend_Controller_Front::getInstance();
-        if($front->hasPlugin('Patchwork_Controller_Plugin_HttpAuth'))
-            $front->unregisterPlugin('Patchwork_Controller_Plugin_HttpAuth');
     }
 
     /**
@@ -68,7 +68,6 @@ class Patchwork_Controller_RESTModelControllerTest extends ControllerTestCase
      */
     public function testIndex()
     {
-        $this->_disableHttpAuth();
         $this->dispatch('api/user');
 
         $this->assertAction('index');
@@ -84,7 +83,6 @@ class Patchwork_Controller_RESTModelControllerTest extends ControllerTestCase
      */
     public function testIndexWithSearch()
     {
-        $this->_disableHttpAuth();
         $this->dispatch('api/user', 'GET', array('username' => 'bon'));
 
         $this->assertAction('index');
@@ -100,7 +98,6 @@ class Patchwork_Controller_RESTModelControllerTest extends ControllerTestCase
      */
     public function testIndexWithLimit()
     {
-        $this->_disableHttpAuth();
         $this->dispatch('api/user', 'GET', array('limit'=>1));
 
         $this->assertAction('index');
@@ -116,7 +113,6 @@ class Patchwork_Controller_RESTModelControllerTest extends ControllerTestCase
      */
     public function testIndexWithOffset()
     {
-        $this->_disableHttpAuth();
         $this->dispatch('api/user', 'GET', array('offset'=>1,'limit' => 1));
 
         $this->assertAction('index');
@@ -131,7 +127,6 @@ class Patchwork_Controller_RESTModelControllerTest extends ControllerTestCase
      */
     public function testGET()
     {
-        $this->_disableHttpAuth();
         $this->dispatch('api/user', 'GET', array('id' => 1));
 
         $this->assertAction('get');
@@ -148,7 +143,6 @@ class Patchwork_Controller_RESTModelControllerTest extends ControllerTestCase
      */
     public function testPOST()
     {
-        $this->_disableHttpAuth();
         $this->dispatch(
             'api/user',
             'POST',
@@ -169,7 +163,6 @@ class Patchwork_Controller_RESTModelControllerTest extends ControllerTestCase
      */
     public function testPutAction()
     {
-        $this->_disableHttpAuth();
         $payload = array('id' => 1, 'email' => 'test@123.com');
         $this->dispatch('api/user', 'PUT', $payload);
         $this->assertAction(
@@ -196,7 +189,11 @@ class Patchwork_Controller_RESTModelControllerTest extends ControllerTestCase
      */
     public function testUnauthDeleteAction()
     {
-        Zend_Registry::set(Patchwork::ACL_REGISTRY_KEY, new Zend_Acl);
+        $this->getContainer()->bindFactory('Zend_Acl', 'Patchwork_Factory', 'acl');
+        $plugin = $this->getContainer()
+            ->getInstance('Patchwork_Controller_Plugin_Auth_HttpBasic');
+        Zend_Controller_Front::getInstance()->registerPlugin($plugin);
+        $plugin->setModule('api');
         $payload = array('id' => 1);
         $this->dispatch('api/user', 'DELETE', $payload);
         $this->assertAction('denied');
@@ -210,12 +207,12 @@ class Patchwork_Controller_RESTModelControllerTest extends ControllerTestCase
      */
     public function testDeleteAction()
     {
-        $this->_disableHttpAuth();
-
+        $this->provideAuthenticatedUser();
         $payload = array('id' => 1);
         $this->dispatch('api/user', 'DELETE', $payload);
 
-       $this->assertResponseCode(
+        $this->assertAction('delete');
+        $this->assertResponseCode(
             204
         );
         /**
