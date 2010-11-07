@@ -12,7 +12,7 @@
  * Patchwork_Container
  *
  * Dependency Injection container for Patchwork. Tries to resolve dependencies
- * on its on, inspired by Horde's Injector
+ * on its own, inspired by Horde's Injector
  *
  * @category    Library
  * @package     Patchwork
@@ -21,6 +21,8 @@
  */
 class Patchwork_Container
 {
+    const CONFIG_BINDING_IMPL = 'bindImplementation';
+
     /**
      * interface bindings
      * @var array
@@ -31,25 +33,104 @@ class Patchwork_Container
      * @var array
      */
     protected $_factories = array();
+    
+    /**
+     * Constructor
+     *
+     * can take options from application.ini
+     *
+     * @param array $options options for bindings
+     */
+    public function  __construct(array $options = NULL)
+    {
+        if(is_array($options) && isset($options['patchwork']['container'])){
+            $this->_setBindingsFromConfig($options['patchwork']['container']);
+        }
+
+        $this->set('Patchwork_Container', $this);
+    }
+
+    /**
+     * check if a binding etc is registered
+     *
+     * @param string $name identifier, interface or class name
+     *
+     * @return boolean
+     */
+    public function has($name)
+    {
+        return isset($this->$name)
+            || array_key_exists($name, $this->_bindings)
+            || array_key_exists($name, $this->_factories);
+    }
+
+    /**
+     * set config
+     * 
+     * @param array $config from application.ini
+     * @return void
+     */
+    private function _setBindingsFromConfig(array $config)
+    {
+        foreach($config as $name => $bindingType){
+            if(isset($bindingType[self::CONFIG_BINDING_IMPL])){
+                $this->bindImplementation(
+                    $name,
+                    $bindingType[self::CONFIG_BINDING_IMPL]
+                );
+            } else {
+                $this->bindFactory(
+                    $name,
+                    $bindingType['bindFactory'],
+                    $bindingType['bindFactoryMethod']
+                );
+            }
+        }
+    }
+
+    
 
     /**
      * retrieve an instance
      *
-     * @param string $name class or interface name
+     * @param string $name                   class or interface name
+     * @param bool   $tryDirectInstantiation try "new" $name
      *
      * @return object
      */
     public function __get($name)
     {
-        if (isset($this->$name)) {
+        if(isset($this->$name)){
             return $this->$name;
         }
+        
         $resource = strtolower($name);
         if (isset($this->$resource)) {
             return $this->$resource;
         }
 
         return $this->createInstance($name);
+    }
+
+    /**
+     * same as get, but allows direct isntantiation
+     * 
+     *
+     * @param string $name                   class or interface name
+     * @param bool   $tryDirectInstantiation try "new" $name
+     */
+    public function getInstance($name, $tryDirectInstantiation = false)
+    {
+        if(isset($this->$name)){
+            return $this->$name;
+        }
+
+        $resource = strtolower($name);
+        if (isset($this->$resource)) {
+            return $this->$resource;
+        }
+
+        return $this->_createInstance($name, $tryDirectInstantiation);
     }
 
     /**
@@ -68,6 +149,9 @@ class Patchwork_Container
             );
         }
         $this->$name = $class;
+        if($name != get_class($class)) {
+            $this->__set(get_class($class), $class);
+        }
         return $this;
     }
 
@@ -83,11 +167,12 @@ class Patchwork_Container
     /**
      * create a new instance
      *
-     * @param string $name class or interface name
+     * @param string $name                   class or interface name
+     * @param string $tryDirectInstantiation try directInstantiation
      *
      * @return object $name
      */
-    public function createInstance($name)
+    public function createInstance($name, $tryDirectInstantiation = false)
     {
         /**
          * interface binding present?
@@ -103,9 +188,11 @@ class Patchwork_Container
             return $this->_createInstanceFromFactory($name);
         }
 
-        $instance = $this->_createInstance($name);
-        self::set($name, $instance);
-        return $instance;
+        if($tryDirectInstantiation == false) {
+            throw new Patchwork_Exception('Not able to resolve "' . $name . '"');
+        } else {
+            return $this->_createInstance($name);
+        }
     }
 
     /**
@@ -117,7 +204,7 @@ class Patchwork_Container
     protected function _createInstanceFromBinding($name)
     {
         $className = $this->_bindings[$name];
-        $instance = $this->_createInstance($name);
+        $instance = $this->getInstance($className, true);
         self::set($name, $instance);
         return $instance;
     }
@@ -147,21 +234,30 @@ class Patchwork_Container
      */
     protected function _createInstance($name)
     {
+        if(!class_exists($name)) {
+            throw new Patchwork_Exception('Could not resolve class ' . $name);
+        }
         $ref = new ReflectionClass($name);
-
+        $constructor = $ref->getConstructor();
+        if(!$constructor) {
+            return new $name;
+        }
+        
         $params = $ref->getConstructor()->getParameters();
         $args = array();
         foreach ($params as $param) {
-            $reqClass = $param->getClass();
-            if (class_exists($reqClass) || interface_exists($reqClass)) {
-                $args[] = $this->getInstance($reqClass);
+            $reqClass = $param->getClass()->getShortName();
+            if (isset($this->$reqClass) || class_exists($reqClass) || interface_exists($reqClass)) {
+                $args[] = $this->__get($reqClass);
             } else {
-                $args[] = null;
+                throw new Patchwork_Exception(
+                    'Could not resolve dependency ' . $reqClass .' for '. $name
+                );
             }
         }
 
-        $class = call_user_func_array('new ' . $name, $args);
-        return $class;
+        $ref = new ReflectionClass($name);
+        return $ref->newInstanceArgs($args);
     }
 
     /**
@@ -203,5 +299,15 @@ class Patchwork_Container
         return Zend_Controller_Front::getInstance()
             ->getParam('bootstrap')
             ->getContainer();
+    }
+
+    /**
+     * lists all bindings
+     * 
+     * @return array
+     */
+    public function getBindings()
+    {
+        return $this->_bindings;
     }
 }
