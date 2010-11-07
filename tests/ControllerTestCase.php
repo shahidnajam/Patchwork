@@ -29,26 +29,21 @@ abstract class ControllerTestCase extends Zend_Test_PHPUnit_ControllerTestCase
     public function setUp()
     {
         Zend_Controller_Front::getInstance()->resetInstance();
-        $this->application = new Zend_Application(
-                APPLICATION_ENV,
-                APPLICATION_PATH . '/configs/application.ini'
+        /**
+         * @see http://framework.zend.com/issues/browse/ZF-10607
+         */
+        $this->bootstrap = new Zend_Application(
+            APPLICATION_ENV,
+            APPLICATION_PATH . '/configs/application.ini'
         );
 
-        $this->bootstrap = array($this, 'appBootstrap');
         parent::setUp();
-    }
+        /**
+         * @see http://framework.zend.com/issues/browse/ZF-8193
+         */
+        $this->frontController->setParam('bootstrap', $this);
 
-    /**
-     *
-     */
-    public function appBootstrap()
-    {
-        $this->frontController->setControllerDirectory(
-            '/application/controllers', 'application'
-        );
-        $this->frontController->setDefaultModule('default');
-        $this->frontController->addModuleDirectory(APPLICATION_PATH);
-        $this->application->bootstrap();
+        
         Doctrine::createTablesFromModels();
         Doctrine::loadData(APPLICATION_PATH . '/doctrine/fixtures');
     }
@@ -64,6 +59,9 @@ abstract class ControllerTestCase extends Zend_Test_PHPUnit_ControllerTestCase
         $this->resetRequest();
         $this->resetResponse();
 
+        $this->_frontController->setControllerDirectory(
+            '/application/controllers', 'application'
+        );
         $this->request->setPost(array());
         $this->request->setQuery(array());
     }
@@ -105,13 +103,25 @@ abstract class ControllerTestCase extends Zend_Test_PHPUnit_ControllerTestCase
             foreach ($requestArgs as $key => $value)
                 $request->setParam($key, $value);
 
+        
+        $this->frontController->setDefaultModule('default');
+        $this->frontController->addModuleDirectory(APPLICATION_PATH);
+        
         $this->getFrontController()
             ->setRequest($request)
             ->setResponse($this->getResponse())
             ->throwExceptions(true)
             ->returnResponse(false);
 
-        $this->application->getBootstrap()->run();
+        $this->bootstrap->run();
     }
 
+    /**
+     *
+     * @return Patchwork_Container
+     */
+    public function getContainer()
+    {
+        return $this->bootstrap->getBootstrap()->getContainer();
+    }
 }

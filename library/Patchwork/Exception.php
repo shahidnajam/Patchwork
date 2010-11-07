@@ -35,16 +35,6 @@ class Patchwork_Exception extends Zend_Exception
     /**
      * @return Patchwork_Exception
      */
-    public static function wrongACLType()
-    {
-        return new self(
-            'Controller auth plugin needs Patchwork_Acl in registry, Zend_Acl found'
-        );
-    }
-
-    /**
-     * @return Patchwork_Exception
-     */
     public static function missingAclConfig()
     {
         return new self(

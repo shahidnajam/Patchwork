@@ -17,7 +17,7 @@ class Patchwork
     /**
      * where to find the config in the registry
      */
-    const CONFIG_CONTAINER_KEY = 'config';
+    const CONTAINER_CONFIG_KEY = 'config';
 
     /**
      * acl registry key
@@ -27,10 +27,19 @@ class Patchwork
     /**
      * Zend_Navigation
      */
-    const BOOTSTRAP_NAVIGATION_KEY = 'navigation';
+    const CONTAINER_NAVIGATION_KEY = 'navigation';
 
     /**
      * Zend_Session
      */
     const SESSION_REGISTRY_KEY = 'Zend_Session';
+
+     /**
+     * where the config is stored: patchwork.options.acl
+     */
+    const CONTAINER_ACL_KEY = 'acl';
+    /**
+     * default role
+     */
+    const ACL_GUEST_ROLE = 'guest';
 }

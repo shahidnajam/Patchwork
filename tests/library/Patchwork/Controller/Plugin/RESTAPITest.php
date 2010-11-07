@@ -20,10 +20,9 @@ class Patchwork_Controller_Plugin_RESTAPITest extends ControllerTestCase
     /**
      * test that
      */
-    public function testAPIModuleRouting()
+    public function _testAPIModuleRouting()
     {
-        Patchwork_Acl::factory('user', dirname(__FILE__) . '/acl.ini' )
-            ->registerInRegistry();
+        Patchwork_Acl::factory();
         
         $request = new Zend_Controller_Request_Http;
         $request->setModuleName('api');
@@ -51,9 +50,11 @@ class Patchwork_Controller_Plugin_RESTAPITest extends ControllerTestCase
         $this->assertAction('delete');
     }
 
-    public function testOtherModuleNotAffected()
+    public function _testOtherModuleNotAffected()
     {
-        Zend_Registry::set(Patchwork::ACL_REGISTRY_KEY, new Zend_Acl);
+        Patchwork_Container::getBootstrapContainer()
+            ->bindFactory('Patchwork_Acl', 'Patchwork_Acl', 'factory');
+        
         $request = new Zend_Controller_Request_Http;
         $request->setModuleName('api');
         $request->setControllerName('users');

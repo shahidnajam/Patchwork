@@ -32,6 +32,12 @@ extends Zend_Controller_Plugin_Abstract
      * @var string
      */
     protected $_module;
+
+    /**
+     * acl
+     * @var Zend_Acl
+     */
+    public $acl;
     
     /**
      * constructor
@@ -39,9 +45,12 @@ extends Zend_Controller_Plugin_Abstract
      * @param string $module module name
      * @return self
      */
-    public function  __construct($module)
-    {
-        $this->_module = $module;
+    public function  __construct(
+        Zend_Controller_Request_Abstract $request,
+        Zend_Acl $acl
+    ) {
+        $this->_module = $request->getModuleName();
+        $this->acl = $acl;
     }
 
     /**

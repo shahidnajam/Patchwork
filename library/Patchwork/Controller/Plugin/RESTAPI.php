@@ -55,11 +55,8 @@ class Patchwork_Controller_Plugin_RESTAPI extends Zend_Controller_Plugin_Abstrac
         );
         $frontController->getRouter()->addRoute('rest', $restRoute);
 
-        /**
-         * TODO rewrite to use dependency injection
-         */
         if ($httpBasicAuth) {
-            $plugin = new Patchwork_Controller_Plugin_HttpAuth($restRoutingModule);
+            $plugin = $container->Patchwork_Controller_Plugin_HttpAuth;
             $frontController->registerPlugin($plugin);
         }
         parent::routeStartup($request);

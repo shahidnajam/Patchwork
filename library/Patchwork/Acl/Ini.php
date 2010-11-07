@@ -77,11 +77,11 @@ class Patchwork_Acl_Ini extends Zend_Config_Ini
     /**
      * add roles, permissions and privileges to an acl
      *
-     * @param Patchwork_Acl $acl acl
+     * @param Zend_Acl $acl acl
      * 
      * @return self
      */
-    public function addConfigToAcl(Patchwork_Acl $acl)
+    public function addConfigToAcl(Zend_Acl $acl)
     {
         $this->_acl = $acl;
         foreach($this as $section => $config){

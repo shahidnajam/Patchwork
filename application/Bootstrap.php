@@ -31,7 +31,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
     {
         if ($this->_container === null) {
             /** Create the container and register it */
-            $this->setContainer(new Patchwork_Container);
+            $this->setContainer(new Patchwork_Container($this->getOptions()));
 
             /** Ensure we bootstrap the configuration into the container now */
             $this->_executeResource('config');
@@ -89,6 +89,14 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
         return new Zend_Navigation(
             require(CONFIG_PATH . DIRECTORY_SEPARATOR . 'navigation.php')
         );
+    }
+
+    protected function _initAcl()
+    {
+        $this->getContainer()
+            ->bindImplementation('acl', 'Patchwork_Acl');
+        $this->getContainer()
+            ->bindFactory('Patchwork_Acl', 'Patchwork_Acl', 'factory');
     }
 
     /**

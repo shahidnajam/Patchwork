@@ -26,7 +26,7 @@ class Patchwork_Acl_IniTest extends ControllerTestCase
     public function  setUp()
     {
         parent::setUp();
-        $this->iniFile = dirname(__FILE__) . '/test.ini';
+        $this->iniFile = dirname(__FILE__) . '/../test.ini';
     }
 
     /**
@@ -47,7 +47,7 @@ class Patchwork_Acl_IniTest extends ControllerTestCase
 
     public function testAddConfigToAcl()
     {
-        $acl = new Patchwork_Acl;
+        $acl = new Zend_Acl;
 
         $config = new Patchwork_Acl_Ini($this->iniFile);
         $config->addConfigToAcl($acl);
