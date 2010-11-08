@@ -37,7 +37,8 @@ class Patchwork_Container
     /**
      * Constructor
      *
-     * can take options from application.ini
+     * can take options from application.ini, automatically sets itself,
+     * automatically binds Zend_Controller_Front as its own factory
      *
      * @param array $options options for bindings
      */
@@ -48,6 +49,11 @@ class Patchwork_Container
         }
 
         $this->set('Patchwork_Container', $this);
+        $this->bindFactory(
+            'Zend_Controller_Front',
+            'Zend_Controller_Front',
+            'getInstance'
+        );
     }
 
     /**
