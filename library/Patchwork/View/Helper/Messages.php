@@ -51,7 +51,7 @@ class Patchwork_View_Helper_Messages extends Zend_View_Helper_Abstract
      * @param $translator An optional instance of Zend_Translate
      * @return string HTML of output messages
      */
-    public function flashMessages($translator = NULL)
+    public function messages($translator = NULL)
     {
         $messages = $this->getMessages();
         if (count($messages) == 0) {
