@@ -10,6 +10,8 @@
     <filter>
         <blacklist>
             <directory suffix=".php">workspace/library</directory>
+            <directory suffix=".php">workspace/library/Doctrine</directory>
+            <directory suffix=".php">workspace/library/vendor</directory>
             <directory suffix=".php">/var/www</directory>
             <exclude>
                 <directory suffix=".php">workspace/library/Patchwork</directory>
