@@ -32,7 +32,7 @@ class Patchwork_ContainerTest extends ControllerTestCase
     public function testContrustructor()
     {
         $container = new Patchwork_Container;
-        $this->assertType('Patchwork_Container', $container);
+        $this->assertInstanceOf('Patchwork_Container', $container);
 
         $this->assertEquals($container->Patchwork_Container, $container);
     }
@@ -43,7 +43,7 @@ class Patchwork_ContainerTest extends ControllerTestCase
     public function testConstructorWithOptions()
     {
         $container = new Patchwork_Container($this->options);
-        $this->assertType('Patchwork_Container', $container);
+        $this->assertInstanceOf('Patchwork_Container', $container);
 
         $binds = $container->getBindings();
         $this->assertContains('Patchwork_Controller_Plugin_Auth', array_keys($binds));
@@ -52,7 +52,7 @@ class Patchwork_ContainerTest extends ControllerTestCase
 
     public function testGetBootStrapContainer()
     {
-        $this->assertType('Patchwork_Container',
+        $this->assertInstanceOf('Patchwork_Container',
             Patchwork_Container::getBootstrapContainer()
         );
     }
@@ -77,7 +77,7 @@ class Patchwork_ContainerTest extends ControllerTestCase
         $container->bindImplementation('ABC', 'Patchwork_Controller_Plugin_Auth_Basic');
 
         $this->assertEquals($container, $container->__get('Patchwork_Container'));
-        $this->assertType('Patchwork_Controller_Plugin_Auth_Basic', $container->ABC);
+        $this->assertInstanceOf('Patchwork_Controller_Plugin_Auth_Basic', $container->ABC);
     }
 
     public function testCreateInstanceFromFactory()
@@ -85,7 +85,7 @@ class Patchwork_ContainerTest extends ControllerTestCase
         $container = new Patchwork_Container;
         $container->bindFactory('Zend_Acl', 'Patchwork_Factory', 'acl');
 
-        $this->assertType('Zend_Acl', $container->Zend_Acl);
+        $this->assertInstanceOf('Zend_Acl', $container->Zend_Acl);
     }
 
     /**

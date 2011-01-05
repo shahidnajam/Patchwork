@@ -42,10 +42,14 @@ abstract class ControllerTestCase extends Zend_Test_PHPUnit_ControllerTestCase
          * @see http://framework.zend.com/issues/browse/ZF-8193
          */
         $this->frontController->setParam('bootstrap', $this);
-
         
         Doctrine::createTablesFromModels();
         Doctrine::loadData(APPLICATION_PATH . '/doctrine/fixtures');
+
+        $this->getContainer()->bindImplementation(
+            'Patchwork_Storage_Service',
+            'Patchwork_Storage_Service_Doctrine'
+        );
     }
 
     /**
