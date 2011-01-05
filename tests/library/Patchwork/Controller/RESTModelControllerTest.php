@@ -33,36 +33,6 @@ class Patchwork_Controller_RESTModelControllerTest extends ControllerTestCase
     }
 
     /**
-     * test for doctrine controller helper
-     */
-    public function testInit()
-    {
-        $controller = $this->_getController();
-        $controller->init();
-
-        $this->assertTrue(
-            Zend_Controller_Action_HelperBroker::hasHelper('Doctrine')
-            );
-    }
-
-    public function testInitModel()
-    {
-        $controller = $this->_getController();
-        $res = $controller->initModel(false);
-        $this->assertTrue($res instanceof User);
-    }
-    
-    /**
-     * 
-     */
-    public function testInitModel1()
-    {
-        $controller = $this->_getController();
-        $res = $controller->initModel(1);
-        $this->assertTrue($res instanceof User);
-    }
-
-    /**
      * test index/list request
      *
      */
@@ -103,6 +73,7 @@ class Patchwork_Controller_RESTModelControllerTest extends ControllerTestCase
         $this->assertAction('index');
         $this->assertResponseCode(200);
         $body = json_decode($this->getResponse()->getBody());
+        
         $this->assertEquals(1, count($body));
         $this->assertEquals('bonndan', $body[0]->username);
     }
@@ -152,7 +123,7 @@ class Patchwork_Controller_RESTModelControllerTest extends ControllerTestCase
         $this->assertModule('api');
         $this->assertController('user');
         $this->assertAction('post');
-        $this->assertResponseCode(201);
+        $this->assertResponseCode(201, $this->getResponse()->getBody());
     }
 
     /**

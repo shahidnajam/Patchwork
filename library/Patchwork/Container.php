@@ -269,6 +269,12 @@ class Patchwork_Container
      */
     public function bindImplementation($interface, $class)
     {
+        if (!is_string($interface) || !is_string($class)) {
+            throw new InvalidArgumentException(
+                 'bindImplementation requires strings, use set instead'
+            );
+        }
+
         $this->_bindings[$interface] = $class;
         return $this;
     }

@@ -9,7 +9,7 @@
  */
 
 /**
- * REST Controller plus Doctrine, uses basic http auth
+ * REST Controller, uses basic http auth
  *
  * make sure to enable rest routing
  *
@@ -34,17 +34,32 @@ abstract class Patchwork_Controller_RESTModelController
     public $modelPrimaryKey = 'id';
 
     /**
-     * model instance
-     * @var Doctrine_Record
-     */
-    public $model;
-
-    /**
      * request constants
      */
     const OFFSET_PARAM = 'offset';
     const LIMIT_PARAM  = 'limit';
-    
+    const ORDER_PARAM  = 'orderby';
+
+    /**
+     * get the dependency injection container
+     *
+     * @return Patchwork_Container
+     */
+    public function getContainer()
+    {
+        return $this->_invokeArgs['bootstrap']->getContainer();
+    }
+
+    /**
+     * get the storage service instance
+     * 
+     * @return Patchwork_Storage_Service
+     */
+    public function getStorageService()
+    {
+        return $this->getContainer()->getInstance('Patchwork_Storage_Service');
+    }
+
     /**
      * disable views and layouts
      *
@@ -63,34 +78,6 @@ abstract class Patchwork_Controller_RESTModelController
         } catch (Zend_Controller_Action_Exception $e){
             //ok, since not needed
         }
-        
-        $doctrine = new Patchwork_Controller_Helper_Doctrine($this);
-        Zend_Controller_Action_HelperBroker::addHelper($doctrine);
-    }
-    
-    /**
-     * finds the model if PK is in request
-     *
-     * @param boolean|integer $withPrimaryKey can be pk or bool
-     * 
-     * @return Doctrine_Record
-     * @throws Patchwork_Exception
-     */
-    public function initModel($withPrimaryKey = true)
-    {
-        if(!$withPrimaryKey)
-            return new $this->modelName;
-
-        if($withPrimaryKey === TRUE)
-            $withPrimaryKey = (int)$this->_getParam($this->modelPrimaryKey);
-        else
-            $withPrimaryKey = (int)$withPrimaryKey;
-
-        return $this->model = $this->_helper->Doctrine
-            ->getRecordOrException(
-            $this->modelName,
-            $withPrimaryKey
-        );
     }
 
     /**
@@ -100,8 +87,12 @@ abstract class Patchwork_Controller_RESTModelController
      * 
      * @return string
      */
-    public function getModelURL(Doctrine_Record $model)
+    protected function getModelURL($model)
     {
+        if(!is_object($model)) {
+            throw new InvalidArgumentException('Object required');
+        }
+
         $url = $_SERVER['HTTP_HOST']
             . Zend_Controller_Front::getInstance()->getBaseUrl()
             . DIRECTORY_SEPARATOR . $this->getRequest()->getControllerName()
@@ -114,7 +105,7 @@ abstract class Patchwork_Controller_RESTModelController
      * returns limit param
      * @return int
      */
-    protected function _getLimit()
+    protected function  _getLimit()
     {
         return (int)$this->_getParam(self::LIMIT_PARAM, 0);
     }
@@ -128,6 +119,26 @@ abstract class Patchwork_Controller_RESTModelController
         return (int)$this->_getParam(self::OFFSET_PARAM, 0);
     }
 
+    protected function _getOrderBy()
+    {
+        return $this->_getParam(self::ORDER_PARAM, null);
+    }
+
+    /**
+     * retrieves a storage record by configured name and pk
+     * 
+     * @return object
+     */
+    protected function findObject()
+    {
+        $object = $this->getStorageService()->find(
+            $this->modelName,
+            (int)$this->_getParam($this->modelPrimaryKey)
+        );
+
+        return $object;
+    }
+
     /**
      * list, the standard GET request without an id
      *
@@ -135,9 +146,10 @@ abstract class Patchwork_Controller_RESTModelController
      */
     public function indexAction()
     {
-        $objects = $this->_helper->Doctrine->listRecords(
+        $objects = $this->getStorageService()->fetch(
             $this->modelName,
             $where = null,
+            $this->_getOrderBy(),
             $this->_getLimit(),
             $this->_getOffset()
         );
@@ -145,32 +157,24 @@ abstract class Patchwork_Controller_RESTModelController
         $this->getResponse()
             ->setHttpResponseCode(200)
             ->setHeader('Content-type', 'application/json')
-            ->appendBody($this->_helper->Doctrine->toJSON($objects));
+            ->appendBody(new Patchwork_JSON_Decorator($objects));
     }
 
     /**
-     * one object
+     * GET: find one object by primary key
      *
      *
-     * @todo enable application/json header
      */
     public function getAction()
     {
-        try {
-            $this->initModel();
-        } catch (Exception $e){
-            $this->invalidAction();
+        if (!$object = $this->findObject()) {
+            return $this->setNotFoundCode();
         }
-
-        if(!$this->model)
-            return $this->_returnNotfound();
 
         $this->getResponse()
             ->setHttpResponseCode(200)
             ->setHeader('Content-type', 'application/json')
-            ->appendBody(
-                $this->_helper->Doctrine->toJSON($this->model)
-            );
+            ->appendBody(new Patchwork_JSON_Decorator($object));
     }
 
     /**
@@ -179,26 +183,19 @@ abstract class Patchwork_Controller_RESTModelController
      */
     public function putAction()
     {
-        try {
-            $this->initModel();
-        } catch (Exception $e){
-            $this->invalidAction();
+        if (!$object = $this->findObject()) {
+            return $this->setNotFoundCode();
         }
 
-        if(!$this->model)
-            return $this->_returnNotfound();
+        $this->getStorageService()->setObjectValues($object, $this->_getAllParams());
+        $this->getStorageService()->save($object);
         
-        $params = $this->_getAllParams();
-
-        $this->model->fromArray($params);
-        $this->model->save();
-        
-        $url = $this->getModelURL($this->model);
+        $url = $this->getModelURL($object);
 
         $this->getResponse()
             ->setHttpResponseCode(200)
             ->setHeader("Location", $url)
-            ->appendBody($this->_helper->Doctrine->toJSON($this->model));
+            ->appendBody(new Patchwork_JSON_Decorator($object));
     }
 
     /**
@@ -208,21 +205,23 @@ abstract class Patchwork_Controller_RESTModelController
      */
     public function postAction()
     {
-        $model = new $this->modelName;
-        $params = $this->_getAllParams();
-        $model->fromArray($params);
-        try {
-            $model->save();
-        } catch (Exception $e) {
-            return $this->errorAction('Error creating entity.');
+        $object = new $this->modelName;
+        $this->getStorageService()->setObjectValues(
+            $object,
+            $this->_getAllParams()
+        );
+
+        if(!$this->getStorageService()->save($object)) {
+            return $this->setErrorCode(
+                'Could not create ' . $this->modelName . ': '.
+                $this->getStorageService()->getErrorMessage()
+            );
         }
         
-        if($model->id) {
-            $this->getResponse()
-                ->setHttpResponseCode(201)
-                ->setHeader("Location", $this->getModelURL($model))
-                ->appendBody($this->_helper->Doctrine->toJSON($model));
-        }
+        $this->getResponse()
+            ->setHttpResponseCode(201)
+            ->setHeader("Location", $this->getModelURL($object))
+            ->appendBody(new Patchwork_JSON_Decorator($object));
     }
 
     /**
@@ -232,20 +231,15 @@ abstract class Patchwork_Controller_RESTModelController
      */
     public function deleteAction()
     {
-        try {
-            $this->initModel();
-        } catch (Exception $e){
-            $this->invalidAction();
+        if (!$object = $this->findObject()) {
+            return $this->_returnNotfound();
         }
 
-        if(!$this->model)
-            return $this->_returnNotfound();
-
-        if(!$this->model->delete())
-            return $this->errorAction();
+        if (!$this->getStorageService()->delete($object)) {
+            return $this->setErrorCode('Delete not possible');
+        }
         
-        $this->getResponse()
-            ->setHttpResponseCode(204);
+        $this->getResponse()->setHttpResponseCode(204);
     }
 
     /**
@@ -253,30 +247,27 @@ abstract class Patchwork_Controller_RESTModelController
      *
      * @param string $message error message
      */
-    public function errorAction($message = null)
+    protected function setErrorCode($message = null)
     {
         $this->getResponse()->setHttpResponseCode(500);
-        if($message)
+        if ($message) {
             $this->getResponse()->setBody($message);
+        }
     }
 
     /**
      * Invalid request
-     *
-     *
      */
-    public function invalidAction()
+    protected function setInvalidActionCode()
     {
         $this->getResponse()->setHttpResponseCode(403);
     }
 
     /**
      * not found
-     *
-     *
      */
-    protected function _returnNotfound()
+    protected function setNotFoundCode()
     {
-        return $this->getResponse()->setHttpResponseCode(404);
+        $this->getResponse()->setHttpResponseCode(404);
     }
 }

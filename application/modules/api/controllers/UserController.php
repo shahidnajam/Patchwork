@@ -26,9 +26,10 @@ class Api_UserController extends Patchwork_Controller_RESTModelController
             $where['username LIKE ?'] = $username.'%';
         }
 
-        $objects = $this->_helper->Doctrine->listRecords(
+        $objects = $this->getStorageService()->fetch(
             $this->modelName,
             $where,
+            $this->_getOrderBy(),
             $this->_getLimit(),
             $this->_getOffset()
         );
@@ -36,8 +37,6 @@ class Api_UserController extends Patchwork_Controller_RESTModelController
         $this->getResponse()
             ->setHttpResponseCode(200)
             ->setHeader('Content-type', 'application/json')
-            ->appendBody(
-                $this->_helper->Doctrine->toJSON($objects)
-            );
+            ->appendBody(new Patchwork_JSON_Decorator($objects));
     }
 }

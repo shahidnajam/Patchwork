@@ -29,7 +29,7 @@ class Patchwork_Controller_Plugin_FirewallTest extends ControllerTestCase
 
     public function testConstructor()
     {
-        $this->assertType('Patchwork_Controller_Plugin_Firewall', $this->firewall);
+        $this->assertInstanceOf('Patchwork_Controller_Plugin_Firewall', $this->firewall);
     }
 
     public function testGetDispatch()

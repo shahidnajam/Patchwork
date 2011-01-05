@@ -63,47 +63,6 @@ class Patchwork_Controller_Helper_Doctrine
     }
 
     /**
-     * Set the redirection target
-     *
-     * @param $action string action name
-     * @param $controller string controller name
-     * @param $module string module name
-     *
-     * @return CU_Controller_Action_Helper_Doctrine implements a fluent interface
-     */
-    public function setRedirect(
-        $action,
-        $controller = null,
-        $module = null
-    ) {
-        $this->_redirect['action'] = $action;
-        $this->_redirect['controller'] = $controller;
-        $this->_redirect['module'] = $module;
-
-        return $this;
-    }
-
-    /**
-     * Fetch record from DB or redirect
-     *
-     * @param $model string Name of the model class
-     * @param $id int the record's PK
-     * @return Doctrine_Record
-     */
-    public function getRecordOrRedirect($model, $id) {
-        $record = $this->getRecord($model, $id);
-        if($record == false) {
-            $this->getActionController()->getHelper('Redirector')->goto(
-                $this->_redirect['action'],
-                $this->_redirect['controller'],
-                $this->_redirect['module']
-            );
-        }
-
-        return $record;
-    }
-
-    /**
      * Fetch record from DB or throw a not found exception
      *
      * @param string $model Name of the model class
@@ -165,36 +124,5 @@ class Patchwork_Controller_Helper_Doctrine
             $query->offset($offset);
 
         return $query->execute();
-    }
-
-    /**
-     * renders json strings using special views
-     *
-     * @param Doctrine_Record|Doctrine_Collection $data
-     *
-     * @return string
-     * @throws InvalidArgumentException
-     * @todo fix json_encode missing fields from object
-     */
-    public function toJSON($data)
-    {
-        if($data instanceof Patchwork_Doctrine_Model_Renderable){
-            $output = $data->toArray();
-            foreach($data->getIgnoredColumns() as $field)
-                unset($output[$field]);
-            return json_encode((object)$output);
-        } elseif ($data instanceof Doctrine_Record) {
-            return json_encode((object)$data->toArray());
-        } elseif($data instanceOf Doctrine_Collection){
-            $return = array();
-            foreach($data as $model){
-                $return[] = $this->toJSON($model);
-            }
-            return "[". implode(',', $return).']'; //array entries come as json
-        } else {
-            throw new InvalidArgumentException(
-                'Doctrine_Record or Doctrine_Collection required'
-            );
-        }
     }
 }
