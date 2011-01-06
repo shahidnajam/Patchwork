@@ -3,3 +3,5 @@ library/Zend
 library/IDS
 library/Doctrine
 library/Doctrine.php
+library/POM
+library/POM.php
