@@ -32,6 +32,13 @@ class User
     protected static $authenticatedUser;
 
     /**
+     *
+     * @var Zend_Auth_Adapter_Interface
+     */
+    protected static $authAdapter;
+
+
+    /**
      * result of auth
      * @var Zend_Auth_Result
      */
@@ -61,6 +68,25 @@ class User
         return $this->_get('role');
     }
 
+    public static function setAdapter(Zend_Auth_Adapter_Interface $adapter)
+    {
+        self::$authAdapter = $adapter;
+    }
+
+    public static function getAdapter()
+    {
+        if (!self::$authAdapter) {
+            $adapter = new Patchwork_Auth_Adapter_Doctrine(
+                __CLASS__,
+                self::AUTH_IDENTITY_COLUMN,
+                self::AUTH_CREDENTIAL_COLUMN,
+                self::AUTH_CREDENTIAL_TREATMENT
+            );
+            self::setAdapter($adapter);
+        }
+        return self::$authAdapter;
+    }
+
     /**
      * authenticate using Zend_Auth
      *
@@ -71,13 +97,8 @@ class User
      */
     public static function authenticate($identity, $credential)
     {
-        $adapter = new Patchwork_Auth_Adapter_Doctrine(
-            __CLASS__,
-            self::AUTH_IDENTITY_COLUMN,
-            self::AUTH_CREDENTIAL_COLUMN,
-            self::AUTH_CREDENTIAL_TREATMENT
-            );
-		$adapter->setIdentity($identity)->setCredential($credential);
+        $adapter = self::getAdapter();
+        $adapter->setIdentity($identity)->setCredential($credential);
 		self::$_authResult = Zend_Auth::getInstance()->authenticate($adapter);
 
 		/*
