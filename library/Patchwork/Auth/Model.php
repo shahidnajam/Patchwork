@@ -5,12 +5,19 @@
  * allows authentication
  *
  * @category   Library
- * @package    Authentication
- * @subpackage AuthModel
+ * @package    Patchwork
+ * @subpackage Auth
  * @author     Daniel Pozzi
  */
 interface Patchwork_Auth_Model
 {
+    /**
+     * set an authentication adapter
+     *
+     * @param Zend_Auth_Adapter_Interface $adapter
+     */
+    public static function setAdapter(Zend_Auth_Adapter_Interface $adapter);
+
     /**
      * authenticate against the db using the Patchwork Doctrine Adapter
      *
