@@ -44,27 +44,78 @@
  * @package    Models
  * @author     Daniel Pozzi <bonndan76@googlemail.com>
  */
-class Token extends BaseToken
+class Token extends BaseToken implements Patchwork_Token
 {
+    private $triggeredService;
+    private $context;
 
     /**
-     * factory method
-     * 
-     * @param string  $triggers triggered action
-     * @param mixed   $context  context data
-     * @param boolean $multiple multiple usage flag (default is false)
+     * set the service to be triggered
      *
-     * @return Token
+     * @param Patchwork_Token_Triggered $service service instance
      */
-    public static function factory($triggers, $context = null, $multiple = false)
+    function setTriggeredService(Patchwork_Token_Triggered $service)
     {
-        $token = new Token;
-        $token->service = (string) $triggers;
-        $token->jsoncontext = serialize($context);
-        $token->once = !$multiple;
-        $token->_generateHash();
-        $token->save();
-        return $token;
+        $this->triggeredService = $service;
+    }
+
+    /**
+     * get the instance of the service to be triggered
+     * @return Patchwork_Token_Triggered
+     */
+    function getTriggeredService()
+    {
+        return $this->triggeredService;
+    }
+
+    /**
+     * set contextual data
+     * @param array $context
+     */
+    function setContext(array $context)
+    {
+        $this->context = serialize($context);
+        return $this;
+    }
+
+    /**
+     * get contextual data
+     *
+     */
+    function getContext()
+    {
+        return unserialize($this->context);
+    }
+
+    /**
+     * get the hash
+     * @return string
+     */
+    function getHash()
+    {
+        if($this->hash == '') {
+            $this->_generateHash();
+        }
+        return $this->hash;
+    }
+
+    /**
+     * set mutliple usage
+     * @param boolean $flag flag
+     */
+    function setMultipleUse($flag)
+    {
+        $this->once = !$flag;
+        return $this;
+    }
+
+    /**
+     * check if token can be use more than once
+     * @return boolean
+     */
+    function isMultiplyUsable()
+    {
+        return !$this->once;
     }
 
     /**
@@ -77,39 +128,6 @@ class Token extends BaseToken
         if ($this->hash == null) {
             $this->hash = sha1(uniqid(time(), true));
         }
-    }
-
-    /**
-     * returns the json-decoded context data
-     * 
-     * @return mixed
-     */
-    public function getContext()
-    {
-        return unserialize($this->jsoncontext);
-    }
-
-    /**
-     * trigger the service
-     *
-     * @return TokenTriggered
-     */
-    public function trigger()
-    {
-        $className = $this->service;
-        $service = new $className;
-        if (!$service instanceof TokenTriggered)
-            throw new RuntimeException(
-                $className . ' does not implement TokenTriggered',
-                404
-            );
-
-        if ($this->once) {
-            $this->delete();
-            $this->deleted_at = date('Y-m-d H:i');
-        }
-
-        return $service->startWithToken($this);
     }
 
 }

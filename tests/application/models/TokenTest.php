@@ -16,14 +16,32 @@ require_once(dirname(dirname(dirname(dirname(__FILE__))))).'/tests/bootstrap.php
  */
 class TokenTest extends ControllerTestCase
 {
-    public function testFactory()
+    /**
+     *
+     * @var Patchwork_Token_Service
+     */
+    private $service;
+
+    public function  setUp()
     {
-        $res = Token::factory('Nothing');
-        $this->assertTrue($res instanceof Token);
-        $this->assertNotNull($res->hash);
-        $this->assertEquals('Nothing', $res->service);
-        $this->assertGreaterThan(0, $res->id);
-        $this->assertTrue($res->once > 0);
+        parent::setUp();
+        $this->service = $this->getContainer()
+            ->bindImplementation('Patchwork_Token', 'Token')
+            ->getInstance('Patchwork_Token_Service');
+    }
+
+    /**
+     *
+     * @param int $data
+     * @return Patchwork_Token
+     */
+    private function getToken($data = NULL)
+    {
+        if($data === NULL)
+            $data = array('test' => 123);
+        
+        $token = $this->service->createToken(new ServiceX, $data);
+        return $token;
     }
 
     /**
@@ -34,7 +52,8 @@ class TokenTest extends ControllerTestCase
      */
     public function testGetContext($data)
     {
-        $token = Token::factory('X', $data);
+        $token = $this->getToken($data);
+        $this->assertInstanceOf('Patchwork_Token', $token);
         $this->assertEquals($data, $token->getContext());
     }
 
@@ -46,29 +65,26 @@ class TokenTest extends ControllerTestCase
     public function contextProvider()
     {
         return array(
-            array( 'string' ),
+            array( array('string') ),
             array( array('an' => 'array') ),
-            array( null ),
-            array( new stdClass() )
+            array( array(new stdClass()) )
         );
     }
 
     /**
      * test that service is triggered
      */
-    public function testTriggerService()
+    public function testGetTriggeredService()
     {
-        $token = Token::factory('ServiceX', array('some' => 'data'));
-        $res = $token->trigger();
+        $token = $this->getToken();
+        $this->assertInstanceOf('Patchwork_Token', $token);
+        $res = $token->getTriggeredService();
         $this->assertTrue($res instanceof ServiceX);
-        $this->assertGreaterThan(0, strtotime($token->deleted_at));
     }
 
     public function testMultipleUseDoesNotDeleteAfterTrigger()
     {
-        $token = Token::factory('ServiceX', array('some' => 'data'), true);
-        $token->trigger();
-        $this->assertNull($token->deleted_at);
+        $this->markTestIncomplete();
     }
 }
 
@@ -76,14 +92,14 @@ class TokenTest extends ControllerTestCase
  * Stub
  * 
  */
-class ServiceX implements TokenTriggered
+class ServiceX implements Patchwork_Token_Triggered
 {
     /**
-     *
+     * 
      * @param Token $token
      * @return <type>
      */
-    public function  startWithToken(Token $token)
+    public function  startWithToken(Patchwork_Token $token)
     {
         return $this;
     }
