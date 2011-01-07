@@ -7,6 +7,12 @@
 class Patchwork_Storage_Service_POM implements Patchwork_Storage_Service
 {
     /**
+     * POM instance
+     * @var POM
+     */
+    private $pom;
+
+    /**
      * constructor needs a POM instance
      * @param POM $pom 
      */
@@ -31,6 +37,15 @@ class Patchwork_Storage_Service_POM implements Patchwork_Storage_Service
         return $this->pom->save($object);
     }
 
+    /**
+     * fetch
+     * @param <type> $model
+     * @param array $where
+     * @param <type> $order
+     * @param <type> $limit
+     * @param <type> $offset
+     * @return <type> 
+     */
     public function fetch($model, array $where = null, $order = NULL, $limit = 0, $offset = null) {
 
         return $this->pom->select($model, $where, $order, $limit, $offset);
@@ -50,5 +65,18 @@ class Patchwork_Storage_Service_POM implements Patchwork_Storage_Service
         }
 
         return $this;
+    }
+
+    /**
+     * execute sql with params
+     * 
+     * @param string $sql
+     * @param array  $params
+     * @param string $modelName
+     * @return array
+     */
+    public function query($sql, array $params = NULL, $modelName = NULL)
+    {
+        return $this->pom->fetchQuery($sql, $params, $modelName);
     }
 }

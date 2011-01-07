@@ -25,8 +25,6 @@ defined('LIBRARY_PATH')
     || define('LIBRARY_PATH', ROOT_PATH . '/library');
 defined('TMP_PATH')
     || define('TMP_PATH', ROOT_PATH . '/tmp');
-defined('MODELS_PATH')
-    || define('MODELS_PATH', APPLICATION_PATH . '/models');
 
 
 /**

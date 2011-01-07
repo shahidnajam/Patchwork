@@ -8,7 +8,7 @@
  * @category Application
  * @todo refactor move to user module
  */
-class AuthController extends Zend_Controller_Action
+class AuthController extends Patchwork_Controller_Action
 {
 
     /**
@@ -50,6 +50,8 @@ class AuthController extends Zend_Controller_Action
                 $identity = $request->getParam(User::AUTH_IDENTITY_COLUMN);
                 $credential = $request->getParam(User::AUTH_CREDENTIAL_COLUMN);
 
+                $adapter = $this->getContainer()->getDBAuthAdapter();
+                
                 if (User::authenticate($identity, $credential)) {
                     return $this->_forward('welcome');
                 }

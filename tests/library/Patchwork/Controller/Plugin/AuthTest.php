@@ -62,7 +62,7 @@ class Patchwork_Controller_Plugin_AuthTest extends ControllerTestCase
      */
     public function testGetUserRoleOfAdmin()
     {
-        User::authenticate('dpozzi@gmx.net', 'test');
+        $this->getContainer()->Patchwork_DBAuthenticator->authenticate('dpozzi@gmx.net', 'test');
         $role = $this->auth->getUserRole();
         $this->assertEquals('admin', $role);
     }
@@ -72,7 +72,7 @@ class Patchwork_Controller_Plugin_AuthTest extends ControllerTestCase
      */
     public function testDefaultUserRoleIsGuest()
     {
-        User::authenticate('dpozzi@gmx.net', 'not');
+        $this->getContainer()->Patchwork_DBAuthenticator->authenticate('dpozzi@gmx.net', 'not');
         $role = $this->auth->getUserRole();
         $this->assertEquals('guest', $role);
     }

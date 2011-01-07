@@ -15,13 +15,7 @@ class Patchwork_Auth_Adapter_DoctrineTest extends ControllerTestCase
 {
     protected function getAdapter()
     {
-        $adapter = new Patchwork_Auth_Adapter_Doctrine(
-            'users',
-            'email',
-            'password',
-            'CONCAT(md5('
-        );
-        return $adapter;
+        return $this->getContainer()->getDBAuthAdapter();
     }
 
     /**
@@ -47,7 +41,7 @@ class Patchwork_Auth_Adapter_DoctrineTest extends ControllerTestCase
      */
     public function testAuthenticate()
     {
-        $res = User::authenticate('dpozzi@gmx.net', 'test');
+        $res = $this->getContainer()->getInstance('Patchwork_DBAuthenticator')->authenticate('dpozzi@gmx.net', 'test');
         $this->assertTrue($res);
     }
 }

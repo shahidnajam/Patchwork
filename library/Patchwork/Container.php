@@ -105,7 +105,7 @@ class Patchwork_Container
      */
     public function __get($name)
     {
-        return $this->getInstance($name, false);
+        return $this->getInstance($name, true);
     }
 
     /**
@@ -223,15 +223,23 @@ class Patchwork_Container
     }
 
     /**
-     *
-     * @param string $name
+     * tries to create a new instance of the given name and to resolve the
+     * dependencies
+     * 
+     * @param string $name class name
      *
      * @return object
      */
     protected function _createInstance($name)
     {
-        if(!class_exists($name)) {
-            throw new Patchwork_Exception('Could not resolve class ' . $name);
+        if(!class_exists($name, false)) {
+            try {
+                $old =error_reporting(E_ERROR);
+                Zend_Loader::loadClass($name);
+                error_reporting($old);
+            } catch (Zend_Exception $e) {
+                throw new Patchwork_Exception('Could not resolve class ' . $name);
+            }
         }
         $ref = new ReflectionClass($name);
         if($ref->isAbstract()) {
@@ -245,7 +253,17 @@ class Patchwork_Container
         $params = $ref->getConstructor()->getParameters();
         $args = array();
         foreach ($params as $param) {
-            $reqClass = $param->getClass()->getShortName();
+            $class = $param->getClass();
+            if(!$class) {
+                if($param->isOptional()) {
+                    break;
+                }
+                throw new Patchwork_Exception(
+                    'Could not resolve param ' . $param .' of '. $ref->name
+                );
+            }
+            
+            $reqClass = $class->getShortName();
             if (isset($this->$reqClass) || class_exists($reqClass) || interface_exists($reqClass)) {
                 $args[] = $this->__get($reqClass);
             } else {
@@ -314,5 +332,24 @@ class Patchwork_Container
     public function getBindings()
     {
         return $this->_bindings;
+    }
+
+    /**
+     * get the authentication adapter
+     *
+     * @return Patchwork_Auth_DBAdapter
+     */
+    public function getDBAuthAdapter()
+    {
+        return $this->getInstance('Patchwork_Auth_DBAdapter');
+    }
+
+    /**
+     * get the storage service
+     * @return Patchwork_Storage_Service
+     */
+    public function getStorageService()
+    {
+        return $this->getInstance('Patchwork_Storage_Service');
     }
 }

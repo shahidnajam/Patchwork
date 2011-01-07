@@ -49,6 +49,17 @@ interface Patchwork_Storage_Service
     );
 
     /**
+     * execute sql
+     *
+     * @param string $sql       sql query string
+     * @param array  $params    query params
+     * @param string $modelName class name of the model(s) to fetch
+     *
+     * @return mixed result
+     */
+    function query($sql, array $params = NULL, $modelName = NULL);
+
+    /**
      * exceptions error messages etc
      * 
      * @return string

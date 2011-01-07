@@ -143,4 +143,9 @@ class Patchwork_Storage_Service_Doctrine implements Patchwork_Storage_Service
     {
         return $this->errorMessage;
     }
+
+    public function  query($sql, array $params = NULL, $modelName = NULL)
+    {
+        throw new Exception('not implemented');
+    }
 }

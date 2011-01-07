@@ -18,7 +18,7 @@ class User
     extends BaseUser
     implements Zend_Acl_Role_Interface,
     Patchwork_Doctrine_Model_Renderable,
-    Patchwork_Auth_Model
+    Patchwork_Auth_DBModel
 {
     const AUTH_IDENTITY_COLUMN = 'email';
     const AUTH_CREDENTIAL_COLUMN = 'password';
@@ -68,52 +68,6 @@ class User
         return $this->_get('role');
     }
 
-    public static function setAdapter(Zend_Auth_Adapter_Interface $adapter)
-    {
-        self::$authAdapter = $adapter;
-    }
-
-    public static function getAdapter()
-    {
-        if (!self::$authAdapter) {
-            $adapter = new Patchwork_Auth_Adapter_Doctrine(
-                __CLASS__,
-                self::AUTH_IDENTITY_COLUMN,
-                self::AUTH_CREDENTIAL_COLUMN,
-                self::AUTH_CREDENTIAL_TREATMENT
-            );
-            self::setAdapter($adapter);
-        }
-        return self::$authAdapter;
-    }
-
-    /**
-     * authenticate using Zend_Auth
-     *
-     * @param string $identity   identity
-     * @param string $credential credential (password)
-     *
-     * @return boolean
-     */
-    public static function authenticate($identity, $credential)
-    {
-        $adapter = self::getAdapter();
-        $adapter->setIdentity($identity)->setCredential($credential);
-		self::$_authResult = Zend_Auth::getInstance()->authenticate($adapter);
-
-		/*
-		 * save object on success
-		 */
-		if(self::$_authResult->isValid() && Zend_Auth::getInstance()->hasIdentity())
-		{
-			Zend_Auth::getInstance()->getStorage()->write(
-                $adapter->getAuthIdentity()->toArray()
-            );
-			return true;
-		}
-        return false;
-    }
-
     /**
      * returns the authentication result
      * 
@@ -143,5 +97,35 @@ class User
             
             return self::$authenticatedUser;
         }
+    }
+
+    public function getAuthenticationTable()
+    {
+        return __CLASS__;
+    }
+    
+    public function getAuthenticationIdentityColumn()
+    {
+        return self::AUTH_IDENTITY_COLUMN;
+    }
+    
+    public function getAuthenticationCredentialColumn()
+    {
+        return self::AUTH_CREDENTIAL_COLUMN;
+    }
+
+    public function getAuthenticationCredentialTreatment()
+    {
+        return self::AUTH_CREDENTIAL_TREATMENT;
+    }
+
+    public function getAuthenticationIdentity()
+    {
+        return $this->username;
+    }
+
+    public function getAuthenticationCredential()
+    {
+        return $this->password;
     }
 }

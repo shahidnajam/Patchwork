@@ -63,29 +63,42 @@ abstract class Patchwork_Auth_Adapter_DB
     protected $_authenticateResultInfo = null;
 
     /**
+     *
+     * @var Patchwork_Storage_Service
+     */
+    private $storageService;
+
+    /**
+     *
+     * @var Patchwork_Auth_Model
+     */
+    private $authModel;
+    /**
      * identity
      * @var object
      */
     protected $_result = null;
 
     /**
-     * constructor requires configuration options
-     *
-     * @param string $tableName
-     * @param string $identityColumn
-     * @param string $credentialColumn
-     * @param string $credentialTreatment
+     * constructor
+     * 
+     * @param Patchwork_Storage_Service $service storage service
+     * @param Patchwork_Auth_DBModel    $model   model instance
      */
     public function __construct(
-            $tableName,
-            $identityColumn,
-            $credentialColumn,
-            $credentialTreatment
+        Patchwork_Storage_Service $service,
+        Patchwork_Auth_DBModel $model
+
     ) {
-        $this->_tableName = $tableName;
-        $this->_identityColumn = $identityColumn;
-        $this->_credentialColumn = $credentialColumn;
-        $this->_credentialTreatment = $credentialTreatment;
+        $this->storageService = $service;
+        $this->authModel = $model;
+
+        $this->_tableName = $model->getAuthenticationTable();
+        $this->_identityColumn = $model->getAuthenticationIdentityColumn();
+        $this->_credentialColumn = $model->getAuthenticationCredentialColumn();
+        $this->setCredentialTreatment(
+            $model->getAuthenticationCredentialTreatment()
+         );
     }
 
     /**
@@ -122,7 +135,7 @@ abstract class Patchwork_Auth_Adapter_DB
      * set the identity
      *
      * @param string $identity
-     * @return Patchwork_Auth_Adapter_Doctrine
+     * @return Patchwork_Auth_Adapter_DB
      */
     public function setIdentity($identity)
     {
@@ -152,6 +165,18 @@ abstract class Patchwork_Auth_Adapter_DB
     }
 
     /**
+     * set credential treatment
+     * 
+     * @param string $treatment
+     * @return Patchwork_Auth_Adapter_DB
+     */
+    public function setCredentialTreatment($treatment)
+    {
+        $this->_credentialTreatment = $treatment;
+        return $this;
+    }
+
+    /**
      * Return the identity
      *
      * @return Doctrine_Record
@@ -174,5 +199,25 @@ abstract class Patchwork_Auth_Adapter_DB
                 $this->_authenticateResultInfo['identity'],
                 $this->_authenticateResultInfo['messages']
         );
+    }
+
+    /**
+     * get the injected storage service
+     * 
+     * @return Patchwork_Storage_Service
+     */
+    protected function getStorageService()
+    {
+        return $this->storageService;
+    }
+
+    /**
+     * get injected model
+     * 
+     * @return Patchwork_Auth_DBModel
+     */
+    protected function getAuthModel()
+    {
+        return $this->authModel;
     }
 }

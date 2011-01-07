@@ -17,8 +17,8 @@
  * @author     Daniel Pozzi
  */
 class Patchwork_Auth_Adapter_Doctrine
-extends Patchwork_Auth_Adapter_DB
-implements Zend_Auth_Adapter_Interface
+    extends Patchwork_Auth_Adapter_DB
+    implements Patchwork_Auth_DBAdapter
 {
     /**
      * attempt an authenication.
@@ -33,10 +33,11 @@ implements Zend_Auth_Adapter_Interface
         $dql = $this->_identityColumn . ' = ? AND ' . $this->_credentialColumn
             . ' = ' . $this->_credentialTreatment;
         try {
-            $resultIdentities = Doctrine::getTable($this->_tableName)->findByDql(
-                $dql,
-                array( $this->_identity, $this->_credential )
-            );
+            $resultIdentities = Doctrine::getTable($this->_tableName)
+                ->findByDql(
+                    $dql,
+                    array( $this->_identity, $this->_credential )
+                );
         } catch (Exception $e) {
             throw new Zend_Auth_Adapter_Exception($e->getMessage());
         }
@@ -87,5 +88,19 @@ implements Zend_Auth_Adapter_Interface
         }
         
         return true;
+    }
+
+    /**
+     *
+     * @return array
+     */
+    public function getAuthIdentityData()
+    {
+        if (Zend_Auth::getInstance()->hasIdentity()) {
+            $record = Doctrine::getTable(get_class($this->getAuthModel()))
+                ->findOneBy($this->_identityColumn, $this->_identity);
+
+            return $record->toArray();
+        }
     }
 }
