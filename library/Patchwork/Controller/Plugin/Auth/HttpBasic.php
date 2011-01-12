@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Patchwork_Controller_Plugin_HttpAuth
  *
@@ -16,15 +17,14 @@
  * @subpackage Authorisation
  * @author     Daniel Pozzi <bonndan76@googlemail.com>
  */
-class Patchwork_Controller_Plugin_Auth_HttpBasic
-extends Patchwork_Controller_Plugin_Auth_Abstract
+class Patchwork_Controller_Plugin_Auth_HttpBasic extends Patchwork_Controller_Plugin_Auth_Abstract
 {
+
     /**
      * resolver
-     * @var Patchwork_Auth_Adapter_Http_Resolver_Doctrine
+     * @var Patchwork_Auth_Adapter_Http_Resolver_DB
      */
-    public $resolver;
-
+    protected $resolver;
     /**
      * module to protect
      * @var string
@@ -32,26 +32,20 @@ extends Patchwork_Controller_Plugin_Auth_Abstract
     protected $_module;
 
     /**
-     * acl
-     * @var Zend_Acl
-     */
-    public $acl;
-
-    /**
      * 
      */
     public function _setConfigToOptions()
     {
         parent::_setConfigToOptions();
-        if($container->has('config')) {
-            if(isset($container->config->patchwork->options->restAPI->module)) {
+        if ($this->getContainer()->has('config')) {
+            if (isset($this->getContainer()->config->patchwork->options->restAPI->module)) {
                 $this->setModule(
                     $container->config->patchwork->options->restAPI->module
                 );
             }
         }
     }
-    
+
     /**
      * return the current role
      *
@@ -60,12 +54,15 @@ extends Patchwork_Controller_Plugin_Auth_Abstract
      */
     public function getUserRole()
     {
-        $user = $this->resolver->user;
-        if ($user) {
-            $role = $user->role;
+        $user = $this->resolver->getAuthModel();
+        if ($user instanceof Zend_Acl_Role_Interface) {
+            $role = $user->getRoleId();
         }
 
-        if(!$user || $role == '') {
+        /**
+         * @todo check: remove dependency?
+         */
+        if (!$user || $role == '') {
             return Patchwork::ACL_GUEST_ROLE;
         }
     }
@@ -78,12 +75,14 @@ extends Patchwork_Controller_Plugin_Auth_Abstract
      */
     public function dispatchLoopStartup(Zend_Controller_Request_Abstract $request)
     {
-        if($request->getModuleName() != $this->_module) {
+        if ($request->getModuleName() != $this->_module) {
             return;
         }
 
-        $this->resolver = new Patchwork_Auth_Adapter_Http_Resolver_Doctrine;
+        $this->resolver = $this->getContainer()
+                ->getInstance('Patchwork_Auth_Adapter_Http_Resolver_DB');
 
+        /** @todo adapter requires no dependencies, but getAdapter() better */
         $adapter = new Patchwork_Auth_Adapter_Http(
             array(
                 'accept_schemes' => 'basic',
@@ -93,7 +92,7 @@ extends Patchwork_Controller_Plugin_Auth_Abstract
         $adapter->setBasicResolver($this->resolver);
         $storage = new Zend_Auth_Storage_NonPersistent;
         Zend_Auth::getInstance()->setStorage($storage);
-        
+
         $response = Zend_Controller_Front::getInstance()->getResponse();
         assert($request instanceof Zend_Controller_Request_Http);
         assert($response instanceof Zend_Controller_Response_Http);
@@ -103,7 +102,7 @@ extends Patchwork_Controller_Plugin_Auth_Abstract
 
         $result = Zend_Auth::getInstance()->authenticate($adapter);
 
-        $resource = $request->getModuleName() . 
+        $resource = $request->getModuleName() .
             '_' . $request->getControllerName();
         $privilege = $request->getActionName();
         if (
@@ -127,4 +126,5 @@ extends Patchwork_Controller_Plugin_Auth_Abstract
         $this->_module = $module;
         return $this;
     }
+
 }

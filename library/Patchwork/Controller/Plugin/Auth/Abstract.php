@@ -30,13 +30,14 @@ abstract class Patchwork_Controller_Plugin_Auth_Abstract extends Zend_Controller
      *
      * @var Zend_Acl
      */
-    public $acl;
+    protected $acl;
 
     /**
      * di container
      * @var Patchwork_Container
      */
-    protected $_container;
+    protected $container;
+    
     /**
      * options for access denied redirection target
      * @var array
@@ -58,7 +59,17 @@ abstract class Patchwork_Controller_Plugin_Auth_Abstract extends Zend_Controller
         Patchwork_Container $container
     ) {
         $this->acl = $acl;
-        $this->_container = $container;
+        $this->container = $container;
+    }
+
+    /**
+     * get the container
+     * 
+     * @return Patchwork_Container
+     */
+    protected function getContainer()
+    {
+        return $this->container;
     }
 
     /**
@@ -68,12 +79,12 @@ abstract class Patchwork_Controller_Plugin_Auth_Abstract extends Zend_Controller
      */
     protected function _setConfigToOptions()
     {
-        if($this->_container->has('config') 
-            && $this->_container->config->patchwork->options->acl
+        if($this->container->has('config') 
+            && $this->container->config->patchwork->options->acl
         ){
             array_merge(
                 $this->_options,
-                $this->_container->config->patchwork->options->acl->toArray()
+                $this->container->config->patchwork->options->acl->toArray()
             );
         }
     }

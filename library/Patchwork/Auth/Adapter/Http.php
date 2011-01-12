@@ -58,10 +58,7 @@ class Patchwork_Auth_Adapter_Http extends Zend_Auth_Adapter_Http
 
         $password = $this->_basicResolver->resolve($creds[0], $this->_realm);
         $salted = $this->_basicResolver->saltPlainPassword($creds[1]);
-        if ($password
-            &&
-            $password == $salted
-        ) {
+        if ($password && $password === $salted) {
             $identity = array('username'=>$creds[0], 'realm'=>$this->_realm);
             return new Zend_Auth_Result(Zend_Auth_Result::SUCCESS, $identity);
         } else {
