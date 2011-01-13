@@ -74,17 +74,29 @@ class TokenTest extends ControllerTestCase
     /**
      * test that service is triggered
      */
-    public function testGetTriggeredService()
+    public function testGetTriggeredServiceName()
     {
         $token = $this->getToken();
+        $token->setMultipleUse(true);
         $this->assertInstanceOf('Patchwork_Token', $token);
-        $res = $token->getTriggeredService();
-        $this->assertTrue($res instanceof ServiceX);
+        
+        $res = $token->getTriggeredServiceName();
+        $this->assertEquals('ServiceX', $res);
+    }
+
+    public function testTrigger()
+    {
+        $token = $this->getToken(array('test' => '123'));
+        $token->save();
+        $res = $this->service->trigger($token->getHash());
+        $this->assertInstanceOf('Patchwork_Token_Triggered', $res);
     }
 
     public function testMultipleUseDoesNotDeleteAfterTrigger()
     {
-        $this->markTestIncomplete();
+        $token = $this->getToken(array('test' => '123'));
+        $token->setMultipleUse(true);
+        $this->service->trigger($token->getHash());
     }
 }
 

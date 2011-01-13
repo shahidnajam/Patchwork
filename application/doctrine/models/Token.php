@@ -46,8 +46,12 @@
  */
 class Token extends BaseToken implements Patchwork_Token
 {
-    private $triggeredService;
     private $context;
+
+    public function  __construct($table = null, $isNewEntry = false)
+    {
+        parent::__construct($table, $isNewEntry);
+    }
 
     /**
      * set the service to be triggered
@@ -56,16 +60,16 @@ class Token extends BaseToken implements Patchwork_Token
      */
     function setTriggeredService(Patchwork_Token_Triggered $service)
     {
-        $this->triggeredService = $service;
+        $this->service = get_class($service);
     }
 
     /**
      * get the instance of the service to be triggered
-     * @return Patchwork_Token_Triggered
+     * @return string
      */
-    function getTriggeredService()
+    function getTriggeredServiceName()
     {
-        return $this->triggeredService;
+        return $this->service;
     }
 
     /**
@@ -93,10 +97,10 @@ class Token extends BaseToken implements Patchwork_Token
      */
     function getHash()
     {
-        if($this->hash == '') {
+        if($this->_get('hash') == '') {
             $this->_generateHash();
         }
-        return $this->hash;
+        return $this->_get('hash');
     }
 
     /**
@@ -113,7 +117,7 @@ class Token extends BaseToken implements Patchwork_Token
      * check if token can be use more than once
      * @return boolean
      */
-    function isMultiplyUsable()
+    function isMultipleUsable()
     {
         return !$this->once;
     }
@@ -125,9 +129,14 @@ class Token extends BaseToken implements Patchwork_Token
      */
     protected function _generateHash()
     {
-        if ($this->hash == null) {
+        if ($this->_get('hash') == null) {
             $this->hash = sha1(uniqid(time(), true));
         }
     }
 
+    public function  save(Doctrine_Connection $conn = null)
+    {
+        $this->_generateHash();
+        parent::save($conn);
+    }
 }

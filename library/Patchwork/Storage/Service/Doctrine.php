@@ -23,6 +23,20 @@ class Patchwork_Storage_Service_Doctrine implements Patchwork_Storage_Service
     }
 
     /**
+     * find one record by criteria
+     * 
+     * @param string $model
+     * @param array $where
+     * 
+     * @return array
+     */
+    public function  findWhere($model, array $where)
+    {
+        return Doctrine::getTable($model)
+            ->findOneBy(key($where), current($where));
+    }
+
+    /**
      * set object values
      * 
      * @param object $object
@@ -74,7 +88,7 @@ class Patchwork_Storage_Service_Doctrine implements Patchwork_Storage_Service
             throw new Patchwork_Exception(
                 'Could not query query object for ' . $model
             );
-
+        $query->select();
         if($where){
             foreach($where as $key => $cond)
                 $query->where($key, $cond);
@@ -96,6 +110,17 @@ class Patchwork_Storage_Service_Doctrine implements Patchwork_Storage_Service
             return null;
         }
 
+        return $this->collectionToRecordArray($collection);
+    }
+
+    /**
+     * converts a collection to array of records
+     * 
+     * @param Doctrine_Collection $collection
+     * @return Doctrine_Collection
+     */
+    private function collectionToRecordArray(Doctrine_Collection $collection)
+    {
         $return = array();
         foreach ($collection as $record) {
             $return[] = $record;

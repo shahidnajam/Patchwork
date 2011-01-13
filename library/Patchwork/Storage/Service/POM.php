@@ -14,6 +14,7 @@ class Patchwork_Storage_Service_POM implements Patchwork_Storage_Service
 
     /**
      * constructor needs a POM instance
+     * 
      * @param POM $pom 
      */
     public function  __construct(POM $pom)
@@ -24,6 +25,17 @@ class Patchwork_Storage_Service_POM implements Patchwork_Storage_Service
     public function  find($model, $pk)
     {
         return $this->pom->find($model, $pk);
+    }
+
+    /**
+     * find one row which matches conditions
+     * 
+     * @param string $model
+     * @param array $where 
+     */
+    public function  findWhere($model, array $where)
+    {
+        return $this->pom->select($model, $where, null, 1);
     }
 
     /**

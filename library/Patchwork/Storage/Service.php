@@ -28,6 +28,14 @@ interface Patchwork_Storage_Service
     );
 
     /**
+     * find one row which matches conditions
+     * 
+     * @param string $model
+     * @param array  $where conditions, assoc
+     */
+    function findWhere($model, array $where);
+
+    /**
      * implement fluent interface!
      * 
      * @return Patchwork_Storage_Service

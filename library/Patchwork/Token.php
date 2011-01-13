@@ -19,7 +19,7 @@ interface Patchwork_Token
      * get the instance of the service to be triggered
      * @return Patchwork_Token_Triggered
      */
-    function getTriggeredService();
+    function getTriggeredServiceName();
 
     /**
      * set contextual data
@@ -49,5 +49,5 @@ interface Patchwork_Token
      * check if token can be use more than once
      * @return boolean
      */
-    function isMultiplyUsable();
+    function isMultipleUsable();
 }
