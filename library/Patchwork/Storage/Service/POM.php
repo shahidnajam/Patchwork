@@ -35,7 +35,11 @@ class Patchwork_Storage_Service_POM implements Patchwork_Storage_Service
      */
     public function  findWhere($model, array $where)
     {
-        return $this->pom->select($model, $where, null, 1);
+        $res = $this->pom->select($model, $where, null, 1);
+        if(count($res) > 0) {
+            return current($res);
+        }
+        return null;
     }
 
     /**
@@ -90,5 +94,21 @@ class Patchwork_Storage_Service_POM implements Patchwork_Storage_Service
     public function query($sql, array $params = NULL, $modelName = NULL)
     {
         return $this->pom->fetchQuery($sql, $params, $modelName);
+    }
+
+    /**
+     *
+     * @param <type> $mixed
+     * @param array $where
+     * @return <type> 
+     */
+    public function  delete($mixed, array $where = null)
+    {
+        return $this->pom->delete($mixed, $where);
+    }
+
+    public function getErrorMessage()
+    {
+        return '';
     }
 }

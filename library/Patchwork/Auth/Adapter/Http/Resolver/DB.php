@@ -16,11 +16,17 @@ implements Zend_Auth_Adapter_Http_Resolver_Interface
     private $authModel;
 
     /**
-     *
+     * storage service
      * @var Patchwork_Storage_Service
      */
     private $storageService;
 
+    /**
+     * constructor
+     * 
+     * @param Patchwork_Auth_DBModel $authModel
+     * @param Patchwork_Storage_Service $storageService
+     */
     public function  __construct(
         Patchwork_Auth_DBModel $authModel,
         Patchwork_Storage_Service $storageService
@@ -29,7 +35,6 @@ implements Zend_Auth_Adapter_Http_Resolver_Interface
         $this->authModel = $authModel;
         $this->storageService = $storageService;
     }
-
 
     /**
      * auth against database
@@ -42,12 +47,12 @@ implements Zend_Auth_Adapter_Http_Resolver_Interface
     public function resolve($username, $realm)
     {
         $modelName = get_class($this->authModel);
-        $credCol = $this->authModel->getAuthenticationCredentialColumn();
+        $credCol = $this->authModel->getAuthenticationIdentityColumn();
         $where = array($credCol => $username);
-        $user = $this->storageService->fetch($modelName, $where);
+        $user = $this->storageService->findWhere($modelName, $where);
         if ($user instanceof Patchwork_Auth_DBModel) {
             $this->authModel = $user;
-            return $this->authModel->getAuthenticationCredential();
+            return $this->authModel->getSharedSecret();
         }
 
         return false;

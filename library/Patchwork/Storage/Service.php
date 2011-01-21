@@ -32,6 +32,7 @@ interface Patchwork_Storage_Service
      * 
      * @param string $model
      * @param array  $where conditions, assoc
+     * @return object
      */
     function findWhere($model, array $where);
 

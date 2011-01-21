@@ -160,11 +160,13 @@ class Patchwork_Controller_RESTModelControllerTest extends ControllerTestCase
      */
     public function testUnauthDeleteAction()
     {
+        Zend_Auth::getInstance()->clearIdentity();
         $this->getContainer()->bindFactory('Zend_Acl', 'Patchwork_Factory', 'acl');
         $plugin = $this->getContainer()
             ->getInstance('Patchwork_Controller_Plugin_Auth_HttpBasic');
-        Zend_Controller_Front::getInstance()->registerPlugin($plugin);
         $plugin->setModule('api');
+        Zend_Controller_Front::getInstance()->registerPlugin($plugin);
+        
         $payload = array('id' => 1);
         $this->dispatch('api/user', 'DELETE', $payload);
         $this->assertAction('denied');

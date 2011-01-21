@@ -128,4 +128,14 @@ class User
     {
         return $this->password;
     }
+    
+    public function getSharedSecret()
+    {
+        return $this->password;
+    }
+    
+    public function getSaltedPassword($password)
+    {
+        return md5($password.$this->salt);
+    }
 }

@@ -18,4 +18,14 @@ interface Patchwork_Auth_DBModel
     
     public function getAuthenticationIdentity();
     public function getAuthenticationCredential();
+
+    /**
+     * salt the password
+     */
+    public function getSaltedPassword($password);
+
+    /**
+     * the stored pw
+     */
+    public function getSharedSecret();
 }

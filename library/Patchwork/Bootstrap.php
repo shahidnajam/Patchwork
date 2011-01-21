@@ -65,4 +65,14 @@ class Patchwork_Bootstrap extends Zend_Application_Bootstrap_Bootstrap
 
         return $mal;
     }
+
+    /**
+     * the container instance
+     * 
+     * @return Patchwork_Container
+     */
+    public function getContainer()
+    {
+        return $this->_container;
+    }
 }

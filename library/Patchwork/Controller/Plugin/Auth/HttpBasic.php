@@ -17,7 +17,9 @@
  * @subpackage Authorisation
  * @author     Daniel Pozzi <bonndan76@googlemail.com>
  */
-class Patchwork_Controller_Plugin_Auth_HttpBasic extends Patchwork_Controller_Plugin_Auth_Abstract
+class Patchwork_Controller_Plugin_Auth_HttpBasic
+extends Patchwork_Controller_Plugin_Auth_Abstract
+implements Patchwork_Controller_Plugin_Auth
 {
 
     /**
@@ -81,7 +83,7 @@ class Patchwork_Controller_Plugin_Auth_HttpBasic extends Patchwork_Controller_Pl
 
         $this->resolver = $this->getContainer()
                 ->getInstance('Patchwork_Auth_Adapter_Http_Resolver_DB');
-
+        assert($this->resolver instanceof Zend_Auth_Adapter_Http_Resolver_Interface);
         /** @todo adapter requires no dependencies, but getAdapter() better */
         $adapter = new Patchwork_Auth_Adapter_Http(
             array(
@@ -102,19 +104,27 @@ class Patchwork_Controller_Plugin_Auth_HttpBasic extends Patchwork_Controller_Pl
 
         $result = Zend_Auth::getInstance()->authenticate($adapter);
 
-        $resource = $request->getModuleName() .
-            '_' . $request->getControllerName();
-        $privilege = $request->getActionName();
-        if (
-            !$this->acl->has($resource) ||
-            !$this->acl->isAllowed($this->getUserRole(), $resource, $privilege)
-        ) {
-            //throw new Exception($resource.' '.$this->getUserRole());
+        if (!$this->isAllowedRequest($request)) {
             $request->setControllerName('index');
             $request->setActionName('denied');
         }
     }
 
+    /**
+     * check if acl allows module/controller/action
+     * 
+     * @param Zend_Controller_Request_Abstract $request
+     * @return boolean
+     */
+    public function  isAllowedRequest(Zend_Controller_Request_Abstract $request)
+    {
+        $resource = $request->getModuleName() . '_' . $request->getControllerName();
+        $privilege = $request->getActionName();
+
+        return $this->acl->has($resource) &&
+            $this->acl->isAllowed($this->getUserRole(), $resource, $privilege);
+    }
+    
     /**
      * set the module to provide basic auth for
      * 

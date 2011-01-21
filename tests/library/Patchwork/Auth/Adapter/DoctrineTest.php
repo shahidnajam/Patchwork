@@ -41,7 +41,8 @@ class Patchwork_Auth_Adapter_DoctrineTest extends ControllerTestCase
      */
     public function testAuthenticate()
     {
-        $res = $this->getContainer()->getInstance('Patchwork_DBAuthenticator')->authenticate('dpozzi@gmx.net', 'test');
+        $res = $this->getContainer()->getInstance('Patchwork_Auth_DBAuthenticator')
+            ->authenticate('dpozzi@gmx.net', 'test');
         $this->assertTrue($res);
     }
 }
