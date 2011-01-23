@@ -11,16 +11,14 @@ ready to start a new ZF project.
 * shipped with a phing buildfile
 * shipped with a blueprint css template for compass, see scripts/generate-css.sh
 
-##Libraries:
+##Libraries / Dependencies:
 
-Zend Framework 1.10.6 is used where all require-statements have been stripped
-using the instruction from:
+Patchwork provides scripts to automatically install the following libraries:
+
+* Zend Framework 1.x - you should read
 http://framework.zend.com/manual/en/performance.classloading.html#performance.classloading.striprequires
-
-Doctrine 1.2.3 is included.
-
-PHPIDS 0.6.4 is included.
-
+* Doctrine 1.x
+* PHPIDS 0.
 
 
 ##Installation
@@ -40,14 +38,9 @@ COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER
 IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
 CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-Doctrine is published under the LGPL
-http://www.doctrine-project.org
-
 PHPIDS is released under the LGPL
 http://code.google.com/p/phpids/
 
-Zend Framework is released under the BSD license.
-http://framework.zend.com/license
 
 Patchwork contains code from ZFDoctrine, published under the BSD license
 http://github.com/beberlei/zf-doctrine
@@ -59,11 +52,13 @@ http://github.com/beberlei/zf-doctrine
 - extend unit testing
 - make scripts callable form everywhere
 - user management module
-- modular acl
 - blueprint flash messenger view helper
 - application firewall
 - check: form csrf protection using zend hash element
-- check: zend registry vs dependency injection container
+
+## Done
+- Dependency injection container
+- Modular acl based on per-module ini files
 
 ##Not to do (Best practise - howto instead)
 
