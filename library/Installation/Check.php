@@ -20,6 +20,8 @@ abstract class Installation_Check
      */
     protected $checkResults = array();
     
+    private $reportTableClass = 'report';
+    
     /**
      * set a config object
      * 
@@ -46,12 +48,15 @@ abstract class Installation_Check
 
     /**
      * log failed check message
-     *
+     * 
+     * @param string $message
+     * @param string $userMessage
+     * 
      * @return false
      */
-    private function addFailure($message)
+    private function addFailure($message,  $userMessage = '')
     {
-        $this->checkResults[] = array(false, $message);
+        $this->checkResults[] = array(false, $message,  $userMessage);
         return false;
     }
 
@@ -62,12 +67,12 @@ abstract class Installation_Check
      * @param string $dir directory location
      * @return boolean
      */
-    protected function checkIsDir($dir)
+    protected function checkIsDir($dir, $message = '')
     {
         if (is_dir($dir)) {
             return $this->addSuccess($dir . ' is a directory');
         } else {
-            return $this->addFailure($dir . ' is not a directory');
+            return $this->addFailure($dir . ' is not a directory', $message);
         }
     }
 
@@ -77,12 +82,12 @@ abstract class Installation_Check
      * @param string $filename file location
      * @return boolean
      */
-    protected function checkIsFile($filename)
+    protected function checkIsFile($filename, $message = '')
     {
         if (file_exists($filename)) {
             return $this->addSuccess($filename . ' is a file');
         } else {
-            return $this->addFailure($filename . ' is not a file');
+            return $this->addFailure($filename . ' is not a file', $message);
         }
     }
 
@@ -92,12 +97,12 @@ abstract class Installation_Check
      * @param string $filename file location
      * @return boolean
      */
-    protected function checkIsNotFile($filename)
+    protected function checkIsNotFile($filename, $message = '')
     {
         if (!file_exists($filename)) {
             return $this->addSuccess($filename . ' is not present');
         } else {
-            return $this->addFailure($filename . ' is present');
+            return $this->addFailure($filename . ' is present', $message);
         }
     }
 
@@ -105,12 +110,12 @@ abstract class Installation_Check
      * check that a file or dir is writeable
      * @param string $filename
      */
-    protected function checkIsWriteable ($filename)
+    protected function checkIsWriteable ($filename,  $message = '')
     {
         if (is_writeable($filename)) {
             return $this->addSuccess($filename . ' is writeable');
         } else {
-            return $this->addFailure($filename . ' is not writeable');
+            return $this->addFailure($filename . ' is not writeable', $message);
         }
     }
 
@@ -180,12 +185,18 @@ abstract class Installation_Check
      */
     public function  toHTML()
     {
-        $buffer = '<table>';
+        $buffer = '<table class="'.$this->reportTableClass.'">';
         foreach ($this->checkResults as $result) {
             $color = ($result[0])?'green':'red';
             $buffer .= '<tr>';
             $buffer .= '<td style="background-color: '.$color.'">';
+            $buffer .= ($result[0])?'OK':'FAIL';
+            $buffer .= '</td>';
+            $buffer .= '<td>';
             $buffer .= $result[1];
+            $buffer .= '</td>';
+            $buffer .= '<td>';
+            $buffer .= (isset($result[2]))?$result[2]:'';
             $buffer .= '</td>';
             $buffer .= '</tr>';
         }
