@@ -24,14 +24,17 @@ class Patchwork_Auth_Adapter_Http extends Zend_Auth_Adapter_Http
             /**
              * @see Zend_Auth_Adapter_Exception
              */
-            throw new Zend_Auth_Adapter_Exception('The value of the client Authorization header is required');
+            throw new Zend_Auth_Adapter_Exception(
+                'The value of the client Authorization header is required'
+            );
         }
         if (empty($this->_basicResolver)) {
             /**
              * @see Zend_Auth_Adapter_Exception
              */
-            throw new Zend_Auth_Adapter_Exception('A basicResolver object must be set before doing Basic '
-                                                . 'authentication');
+            throw new Zend_Auth_Adapter_Exception(
+                'A basicResolver object must be set before doing Basic '
+                    . 'authentication');
         }
 
         // Decode the Authorization header

@@ -38,7 +38,12 @@ class Patchwork_Factory
         }
 
         $path = APPLICATION_PATH . DIRECTORY_SEPARATOR . 'modules';
-        $iter = new DirectoryIterator($path);
+        try {
+            $iter = new DirectoryIterator($path);
+        } catch (UnexpectedValueException $e) {
+            /** directory is not present */
+            return $acl;
+        }
         foreach ($iter as $moduleDir) {
 
             if (!$moduleDir->isDir() || $moduleDir->isDot()) {

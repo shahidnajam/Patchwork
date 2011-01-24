@@ -20,12 +20,16 @@
  * @subpackage Authorisation
  * @author     Daniel Pozzi <bonndan76@googlemail.com>
  */
-abstract class Patchwork_Controller_Plugin_Auth_Abstract extends Zend_Controller_Plugin_Abstract
+abstract class Patchwork_Controller_Plugin_Auth_Abstract
+extends Zend_Controller_Plugin_Abstract
 {
     /**
      * concats module and controller into a resource
      */
     const MODULE_CONTROLLER_GLUE = '_';
+    const MODULE_ONLY = 'module';
+    const CONTROLLER_ONLY = 'controller';
+    
     /**
      *
      * @var Zend_Acl
@@ -37,6 +41,13 @@ abstract class Patchwork_Controller_Plugin_Auth_Abstract extends Zend_Controller
      * @var Patchwork_Container
      */
     protected $container;
+
+    /**
+     * identifier how the acl resource is detected
+     * (module = resource, controller, both)
+     * @var string
+     */
+    protected $_resourceBuildingMethod = self::MODULE_CONTROLLER_GLUE;
     
     /**
      * options for access denied redirection target
@@ -119,15 +130,48 @@ abstract class Patchwork_Controller_Plugin_Auth_Abstract extends Zend_Controller
     }
 
     /**
+     * set the resource string building method
+     * 
+     * @param string $method
+     */
+    public function setResourceBuildingMethod($method)
+    {
+        $allowedMethods = array(
+            self::MODULE_ONLY,
+            self::CONTROLLER_ONLY,
+            self::MODULE_CONTROLLER_GLUE
+        );
+        if(!in_array($method, $allowedMethods)) {
+            throw new InvalidArgumentException(
+                'Invalid resource building method '. $method
+            );
+        }
+
+        $this->_resourceBuildingMethod = $method;
+        return $this;
+        
+    }
+    /**
      * get the resource name
      * 
      * @param Zend_Controller_Request_Abstract $request request
      * @return string
+     * @throws RuntimeException
      */
     protected function _getResourceFromRequest(
         Zend_Controller_Request_Abstract $request
     ){
-        return $request->getModuleName() . self::MODULE_CONTROLLER_GLUE .
-            $request->getControllerName();
+        switch ($this->_resourceBuildingMethod) {
+            case self::MODULE_ONLY:
+                return $request->getModuleName();
+            case self::CONTROLLER_ONLY:
+                return $request->getControllerName();
+            case self::MODULE_CONTROLLER_GLUE:
+                return $request->getModuleName()
+                . self::MODULE_CONTROLLER_GLUE .
+                $request->getControllerName();
+            default:
+                throw new RuntimeException('Could not determine acl resource');
+        }
     }
 }

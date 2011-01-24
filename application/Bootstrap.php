@@ -20,24 +20,6 @@ class Bootstrap extends Patchwork_Bootstrap
 {
 
     /**
-     * start autoloading
-     *
-     * @return Zend_Loader_Autoloader
-     */
-    protected function _initAppAutoload()
-    {
-        $autoloader = Zend_Loader_Autoloader::getInstance();
-        $autoloader->setFallbackAutoloader(true);
-
-        $mal = new Zend_Application_Module_Autoloader(array(
-                'namespace' => 'App',
-                'basePath' => dirname(__FILE__),
-            ));
-
-        return $mal;
-    }
-
-    /**
      * init app-wide locale
      *
      * @return Zend_Locale

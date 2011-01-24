@@ -141,7 +141,8 @@ class Patchwork_Container
     {
         if(!is_object($class)){
             throw new InvalidArgumentException(
-                'Second argument must be an object'
+                'Container::__set: Second argument to assign to '. $name
+                . ' must be an object - ' .  serialize($class)
             );
         }
         $this->$name = $class;
@@ -247,7 +248,9 @@ class Patchwork_Container
         }
         $constructor = $ref->getConstructor();
         if(!$constructor) {
-            return new $name;
+            $instance = new $name;
+            $this->$name = $instance;
+            return $instance;
         }
         
         $params = $ref->getConstructor()->getParameters();
@@ -274,7 +277,9 @@ class Patchwork_Container
         }
 
         $ref = new ReflectionClass($name);
-        return $ref->newInstanceArgs($args);
+        $instance = $ref->newInstanceArgs($args);
+        $this->$name = $instance;
+        return $instance;
     }
 
     /**
@@ -351,5 +356,15 @@ class Patchwork_Container
     public function getStorageService()
     {
         return $this->getInstance('Patchwork_Storage_Service');
+    }
+
+    /**
+     * returns the config made from application.ini
+     * 
+     * @return Zend_Config
+     */
+    public function getApplicationConfig()
+    {
+        return $this->{Patchwork::CONTAINER_CONFIG_KEY};
     }
 }

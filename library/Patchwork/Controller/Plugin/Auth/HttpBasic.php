@@ -56,11 +56,11 @@ implements Patchwork_Controller_Plugin_Auth
      */
     public function getUserRole()
     {
+        $role = Patchwork::ACL_GUEST_ROLE;
         $user = $this->resolver->getAuthModel();
         if ($user instanceof Zend_Acl_Role_Interface) {
-            $role = $user->getRoleId();
+            return $user->getRoleId();
         }
-
         /**
          * @todo check: remove dependency?
          */
@@ -86,10 +86,10 @@ implements Patchwork_Controller_Plugin_Auth
         assert($this->resolver instanceof Zend_Auth_Adapter_Http_Resolver_Interface);
         /** @todo adapter requires no dependencies, but getAdapter() better */
         $adapter = new Patchwork_Auth_Adapter_Http(
-            array(
-                'accept_schemes' => 'basic',
-                'realm' => $this->_module
-            )
+                array(
+                    'accept_schemes' => 'basic',
+                    'realm' => $this->_module
+                )
         );
         $adapter->setBasicResolver($this->resolver);
         $storage = new Zend_Auth_Storage_NonPersistent;
@@ -103,10 +103,18 @@ implements Patchwork_Controller_Plugin_Auth
         $adapter->setResponse($response);
 
         $result = Zend_Auth::getInstance()->authenticate($adapter);
+        if (!$result->isValid()) {
+            return; /** @todo keep here until challenging is refactored */
+        }
 
         if (!$this->isAllowedRequest($request)) {
-            $request->setControllerName('index');
-            $request->setActionName('denied');
+            $controllerName = $this->getContainer()->getApplicationConfig()
+                ->patchwork->options->acl->errorController;
+            $actionName = $this->getContainer()->getApplicationConfig()
+                ->patchwork->options->acl->errorAction;
+            die($actionName);
+            $request->setControllerName($controllerName);
+            $request->setActionName($actionName);
         }
     }
 
@@ -116,15 +124,14 @@ implements Patchwork_Controller_Plugin_Auth
      * @param Zend_Controller_Request_Abstract $request
      * @return boolean
      */
-    public function  isAllowedRequest(Zend_Controller_Request_Abstract $request)
+    public function isAllowedRequest(Zend_Controller_Request_Abstract $request)
     {
-        $resource = $request->getModuleName() . '_' . $request->getControllerName();
+        $resource = $this->_getResourceFromRequest($request);
         $privilege = $request->getActionName();
-
         return $this->acl->has($resource) &&
-            $this->acl->isAllowed($this->getUserRole(), $resource, $privilege);
+        $this->acl->isAllowed($this->getUserRole(), $resource, $privilege);
     }
-    
+
     /**
      * set the module to provide basic auth for
      * 

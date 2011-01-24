@@ -40,7 +40,8 @@ class Patchwork_Bootstrap extends Zend_Application_Bootstrap_Bootstrap
     }
 
     /**
-     * store "config" in container
+     * store "config" in container, container->getApplicationConfig()
+     * 
      * @return Zend_Config
      */
     protected function _initConfig()
