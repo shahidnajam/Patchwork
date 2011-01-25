@@ -352,4 +352,13 @@ class Patchwork_Container
     {
         return $this->getInstance('Patchwork_Storage_Service');
     }
+
+    /**
+     * logging service for the domain / business events
+     * @return Patchwork_DomainLog_Service
+     */
+    public function getDomainLogService()
+    {
+        return $this->getInstance('Patchwork_DomainLog_Service');
+    }
 }
