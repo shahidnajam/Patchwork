@@ -5,6 +5,8 @@
  * use it to log any uncaught exception to the log and to give it a
  * reference number
  *
+ * - Remember to add a writer to Zend_Log, the container won't do it by itself.
+ *
  * @author Daniel Pozzi
  */
 class Patchwork_Error_Logger
@@ -53,8 +55,8 @@ class Patchwork_Error_Logger
      */
     private function makeRefCode(Exception $e)
     {
-        $firstPart = substr(0, 4, strtoupper(md5($e->getMessage())));
-        $secondPart = substr(0, 4, strtoupper(md5(time())));
+        $firstPart = substr(strtoupper(md5($e->getMessage())), 0, 4);
+        $secondPart = substr(strtoupper(md5(time())), 0, 4);
 
         $this->refCode = $firstPart . PATH_SEPARATOR . $secondPart;
     }

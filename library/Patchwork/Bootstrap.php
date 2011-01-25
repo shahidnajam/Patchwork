@@ -1,8 +1,10 @@
 <?php
 /**
  * Bootstrap which invokes Patchwork_Container
+ * - inject the application ini config into the container
+ * - registers the error handler to throw ErrorExceptions at any time
  *
- * @author     Daniel Pozzi
+ * @author     Daniel Pozzi <bonndan76@googlemail.com>
  * @package    Patchwork
  * @subpackage Bootstrap
  */
@@ -65,6 +67,23 @@ class Patchwork_Bootstrap extends Zend_Application_Bootstrap_Bootstrap
             ));
 
         return $mal;
+    }
+
+    /**
+     * registers an error handler that turns every error into an exception
+     * 
+     * DO NOT CHANGE THIS! BETTER CODE WITHOUT ERRORS.
+     *
+     * If you really need to evade, you can unregister the error handler
+     * temporarily
+     *
+     * @see Patchwork_Error_Handler
+     */
+    protected function _initErrorHandler()
+    {
+        $this->getContainer()
+            ->getInstance('Patchwork_Error_Handler')
+            ->registerAsErrorHandler();
     }
 
     /**

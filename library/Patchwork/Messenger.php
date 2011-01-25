@@ -48,7 +48,7 @@ class Patchwork_Messenger
      * @param string $message error message
      * @return void
      */
-    public static function notice($message)
+    public function notice($message)
     {
         self::getFlashMessenger()->addMessage(array(self::NOTICE => $message));
     }
@@ -59,7 +59,7 @@ class Patchwork_Messenger
      * @param string $message error message
      * @return void
      */
-    public static function error($message)
+    public function error($message)
     {
         self::getFlashMessenger()->addMessage(array(self::ERROR => $message));
     }
@@ -70,7 +70,7 @@ class Patchwork_Messenger
      * @param string $message error message
      * @return void
      */
-    public static function success($message)
+    public function success($message)
     {
         self::getFlashMessenger()->addMessage(array(self::SUCCESS => $message));
     }
@@ -81,7 +81,7 @@ class Patchwork_Messenger
      * @param string $message error message
      * @return void
      */
-    public static function added($message)
+    public function added($message)
     {
         self::getFlashMessenger()->addMessage(array(self::ADDED => $message));
     }
@@ -92,7 +92,7 @@ class Patchwork_Messenger
      * @param string $message error message
      * @return void
      */
-    public static function removed($message)
+    public function removed($message)
     {
         self::getFlashMessenger()->addMessage(array(self::REMOVED => $message));
     }

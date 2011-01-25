@@ -89,7 +89,7 @@ class Patchwork_ContainerTest extends ControllerTestCase
     }
 
     /**
-     * @expectedException Patchwork_Exception
+     * @expectedException ErrorException
      */
     public function testUnregisteredDependencyException()
     {

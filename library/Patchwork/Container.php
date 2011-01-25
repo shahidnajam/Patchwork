@@ -235,9 +235,7 @@ class Patchwork_Container
     {
         if(!class_exists($name, false)) {
             try {
-                $old =error_reporting(E_ERROR);
                 Zend_Loader::loadClass($name);
-                error_reporting($old);
             } catch (Zend_Exception $e) {
                 throw new Patchwork_Exception('Could not resolve class ' . $name);
             }
@@ -268,7 +266,16 @@ class Patchwork_Container
             
             $reqClass = $class->getShortName();
             if (isset($this->$reqClass) || class_exists($reqClass) || interface_exists($reqClass)) {
-                $args[] = $this->__get($reqClass);
+                try {
+                    $args[] = $this->__get($reqClass);
+                } catch (Patchwork_Exception $e) {
+                    if($param->isOptional()) {
+                        $args[] = NULL;
+                    } else {
+                        throw $e;
+                    }
+                }
+
             } else {
                 throw new Patchwork_Exception(
                     'Could not resolve dependency ' . $reqClass .' for '. $name
@@ -374,5 +381,16 @@ class Patchwork_Container
     public function getDomainLogService()
     {
         return $this->getInstance('Patchwork_DomainLog_Service');
+    }
+
+    /**
+     * returns a convenience interface to Zends FlashMessenger, the public
+     * methods correspond to the Blueprint CSS framework error states
+     * 
+     * @return Patchwork_Messenger
+     */
+    public function getMessenger()
+    {
+        return $this->getInstance('Patchwork_Messenger');
     }
 }

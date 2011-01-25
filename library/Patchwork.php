@@ -42,4 +42,6 @@ class Patchwork
      * default role
      */
     const ACL_GUEST_ROLE = 'guest';
+
+    const ERROR_HANDLER = 'Patchwork_Error_Handler';
 }

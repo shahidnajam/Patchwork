@@ -50,19 +50,20 @@ class Patchwork_Controller_Plugin_Firewall extends Zend_Controller_Plugin_Abstra
     }
 
     /**
-     *
+     * fire on dispatch loop startup
+     * 
      * @param Zend_Controller_Request_Http $request request
      */
-    public function dispatchLoopStartup(Zend_Controller_Request_Http $request)
+    public function dispatchLoopStartup(Zend_Controller_Request_Abstract $request)
     {
         $controller = $this->front->getDispatcher()
             ->getControllerClass($request);
-        $action     = $this->front->getDispatcher()
+        $action = $this->front->getDispatcher()
             ->getActionMethod($request);
-        $method    = strtolower($_SERVER['REQUEST_METHOD']);
+        $method = strtolower($request->getServer('REQUEST_METHOD'));
         
         $class = $this->front->getDispatcher()->loadClass($controller);
-        $ref       = new ReflectionClass($controller);
+        $ref = new ReflectionClass($controller);
         $refMethod = $ref->getMethod($action);
         $this->parseDocCommentToRules($refMethod->getDocComment(), $method);
 
@@ -83,18 +84,16 @@ class Patchwork_Controller_Plugin_Firewall extends Zend_Controller_Plugin_Abstra
     }
 
     /**
+     * parses a functions comments for tags beginning with get,post,request
      *
-     * @param <type> $docComment
-     * @param <type> $method
-     *
-     *
+     * @param string $docComment doc block
+     * @param string $method     method name (get, post, request)
      */
     protected function parseDocCommentToRules($docComment, $method)
     {
         $entries = explode('@', $docComment);
         unset($entries[0]);
         foreach ($entries as $entry) {
-            str_replace('*', '', $entry);
             if(substr($entry, 0, strlen($method)) == $method) {
                 $json = substr($entry, strlen($method));
                 $this->addRule(new Patchwork_Controller_Plugin_Firewall_Rule($json));
@@ -105,8 +104,8 @@ class Patchwork_Controller_Plugin_Firewall extends Zend_Controller_Plugin_Abstra
     /**
      * check if param has been registered
      *
-     * @param <type> $param
-     * @param <type> $method
+     * @param string $param
+     * @param string $method
      *
      * @return boolean
      */

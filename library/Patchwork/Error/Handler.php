@@ -10,12 +10,26 @@
 class Patchwork_Error_Handler
 {
     /**
-     * constructor registers itself as error handler
+     * @var mixed
+     */
+    private $oldErrorHandler;
+    
+    /**
+     * registers as error handler
      *
      */
-    public function __construct()
+    public function registerAsErrorHandler()
     {
-        set_error_handler($this, 'handleError');
+        $this->oldErrorHandler = set_error_handler(array($this, 'handleError'));
+    }
+
+    /**
+     * unregister as error handler
+     * 
+     */
+    public function unregister()
+    {
+        set_error_handler($this->oldErrorHandler);
     }
 
     /**
@@ -29,12 +43,6 @@ class Patchwork_Error_Handler
      * @throws ErrorException
      */
     public function handleError($errno, $errstr, $errfile, $errline )
-    {
-        $this->throwException($errno, $errstr, $errfile, $errline);
-        return false;
-    }
-
-    private function throwException($errno, $errstr, $errfile, $errline)
     {
         throw new ErrorException($errstr, 0, $errno, $errfile, $errline);
     }

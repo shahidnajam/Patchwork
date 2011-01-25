@@ -158,19 +158,27 @@ class Patchwork_Controller_RESTModelControllerTest extends ControllerTestCase
      *
      * 
      */
-    public function testUnauthDeleteAction()
+    public function testUnauthedUserSendsChallenge()
     {
         Zend_Auth::getInstance()->clearIdentity();
-        $this->getContainer()->bindFactory('Zend_Acl', 'Patchwork_Factory', 'acl');
+        $this->getContainer()
+            ->bindFactory('Zend_Acl', 'Patchwork_Factory', 'acl');
+
+        $acl = $this->getContainer()->Zend_Acl;
+        //var_dump($acl->getResources());
+        $this->getContainer()->bindImplementation(
+            'Patchwork_Controller_Plugin_Auth',
+            'Patchwork_Controller_Plugin_Auth_HttpBasic'
+        );
         $plugin = $this->getContainer()
-            ->getInstance('Patchwork_Controller_Plugin_Auth_HttpBasic');
+            ->getInstance('Patchwork_Controller_Plugin_Auth');
         $plugin->setModule('api');
         Zend_Controller_Front::getInstance()->registerPlugin($plugin);
         
         $payload = array('id' => 1);
         $this->dispatch('api/user', 'DELETE', $payload);
-        $this->assertAction('denied');
-        $this->assertResponseCode(403);
+        $headers = $this->getResponse()->getHeaders();
+        $this->assertEquals('Www-Authenticate', $headers[0]['name']);
     }
 
     /**

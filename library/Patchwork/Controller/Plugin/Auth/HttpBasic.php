@@ -112,7 +112,6 @@ implements Patchwork_Controller_Plugin_Auth
                 ->patchwork->options->acl->errorController;
             $actionName = $this->getContainer()->getApplicationConfig()
                 ->patchwork->options->acl->errorAction;
-            die($actionName);
             $request->setControllerName($controllerName);
             $request->setActionName($actionName);
         }
