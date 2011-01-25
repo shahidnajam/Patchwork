@@ -367,4 +367,12 @@ class Patchwork_Container
     {
         return $this->{Patchwork::CONTAINER_CONFIG_KEY};
     }
+    /**
+     * logging service for the domain / business events
+     * @return Patchwork_DomainLog_Service
+     */
+    public function getDomainLogService()
+    {
+        return $this->getInstance('Patchwork_DomainLog_Service');
+    }
 }
