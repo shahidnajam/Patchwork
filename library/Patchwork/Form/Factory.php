@@ -88,4 +88,24 @@ class Patchwork_Form_Factory
 
         return new $className($options);
     }
+
+    /**
+     * build a complete generic form from the contents of an ini file
+     * and redecorates it
+     * 
+     * @param string $ini     ini file location
+     * @param string $section which section to parse
+     * @return Zend_Form
+     * @link http://www.vayanis.com/2008/03/17/using-zend_form-with-zend_config/
+     */
+    public function getGenericFormFromIni($ini, $section)
+    {
+        $form = new Zend_Form;
+        $form->setMethod('POST');
+        $this->addElementsFromIni($form, $ini, $section)
+            ->redecorate($form)
+            ->addHash($form);
+
+        return $form;
+    }
 }
