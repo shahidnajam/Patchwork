@@ -2,6 +2,10 @@
 /**
  * Patchwork Authenticator for databases
  *
+ * @package    Patchwork
+ * @subpackage Authentication
+ * @author     Daniel Pozzi <bonndan76@googlemail.com>
+ * 
  * <code>
  * $a = $this->getContainer()->Pachworkwork_DBAuthenticator;
  * $isLoggedIn = $a->authenticate($username, $password);
@@ -50,7 +54,9 @@ class Patchwork_Auth_DBAuthenticator
      */
     public function authenticate($identity, $credential)
     {
-        $this->adapter->setIdentity($identity)->setCredential($credential);
+        $this->adapter
+            ->setIdentity($identity)
+            ->setCredential($credential);
 		$this->result = Zend_Auth::getInstance()->authenticate($this->adapter);
 
 		/*
@@ -59,7 +65,7 @@ class Patchwork_Auth_DBAuthenticator
 		if($this->result->isValid() && Zend_Auth::getInstance()->hasIdentity())
 		{
 			Zend_Auth::getInstance()->getStorage()->write(
-                $this->adapter->getAuthIdentityData()
+                $this->adapter->getAuthModel()
             );
 			return true;
 		}

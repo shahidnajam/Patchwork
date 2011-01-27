@@ -84,13 +84,21 @@ class Patchwork_Token_Service
     /**
      * get an instance of the service associated to the token
      * 
-     * @param Patchwork_Token $token
+     * @param Patchwork_Token $token token instance
+     * 
      * @return Patchwork_Token_Triggered
      */
     private function getTriggeredServiceFromToken(Patchwork_Token $token)
     {
         $serviceName = $token->getTriggeredServiceName();
-        $service = $this->container->getInstance($serviceName);
+        try {
+            $service = $this->container->getInstance($serviceName);
+        } catch (ErrorException $e) {
+            throw new Patchwork_Token_Service_Exception(
+                'Unknown service '. $serviceName, 404
+            );
+        }
+        
         if (!$service instanceof Patchwork_Token_Triggered) {
             throw new Patchwork_Token_Service_Exception(
                 $className . ' does not implement TokenTriggered', 500

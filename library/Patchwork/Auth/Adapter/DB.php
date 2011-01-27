@@ -16,7 +16,7 @@
  * @subpackage Authentification
  * @author     Daniel Pozzi
  */
-abstract class Patchwork_Auth_Adapter_DB
+abstract class Patchwork_Auth_Adapter_DB implements Patchwork_Auth_DBAdapter
 {
 
     /**
@@ -73,11 +73,6 @@ abstract class Patchwork_Auth_Adapter_DB
      * @var Patchwork_Auth_Model
      */
     private $authModel;
-    /**
-     * identity
-     * @var object
-     */
-    protected $_result = null;
 
     /**
      * constructor
@@ -123,9 +118,9 @@ abstract class Patchwork_Auth_Adapter_DB
         }
 
         $this->_authenticateResultInfo = array(
-                'code'     => Zend_Auth_Result::FAILURE,
-                'identity' => $this->_identity,
-                'messages' => array()
+            'code'     => Zend_Auth_Result::FAILURE,
+            'identity' => $this->_identity,
+            'messages' => array()
         );
 
         return true;
@@ -177,16 +172,6 @@ abstract class Patchwork_Auth_Adapter_DB
     }
 
     /**
-     * Return the identity
-     *
-     * @return Doctrine_Record
-     */
-    public function getAuthIdentity()
-    {
-        return $this->_result;
-    }
-
-    /**
      *  creates a Zend_Auth_Result object from the information that has been
      * collected during the authenticate() attempt.
      *
@@ -195,9 +180,9 @@ abstract class Patchwork_Auth_Adapter_DB
     protected function _getAuthResult()
     {
         return new Zend_Auth_Result(
-                $this->_authenticateResultInfo['code'],
-                $this->_authenticateResultInfo['identity'],
-                $this->_authenticateResultInfo['messages']
+            $this->_authenticateResultInfo['code'],
+            $this->_authenticateResultInfo['identity'],
+            $this->_authenticateResultInfo['messages']
         );
     }
 

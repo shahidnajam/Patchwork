@@ -84,6 +84,23 @@ class TokenTest extends ControllerTestCase
         $this->assertEquals('ServiceX', $res);
     }
 
+    /**
+     * test that service is triggered
+     *
+     * @expectedException Patchwork_Token_Service_Exception
+     */
+    public function testGetTriggeredServiceException()
+    {
+        $token = new BadToken;
+        $token->setContext(array('test' => '123'));
+        $token->setBadService('NotAService');
+        $token->save();
+        $this->assertInstanceOf('Patchwork_Token', $token);
+
+        $res = $this->service->trigger($token->getHash());
+        $this->assertInstanceOf('Patchwork_Token_Triggered', $res);
+    }
+
     public function testTrigger()
     {
         $token = $this->getToken(array('test' => '123'));
@@ -114,5 +131,18 @@ class ServiceX implements Patchwork_Token_Triggered
     public function  startWithToken(Patchwork_Token $token)
     {
         return $this;
+    }
+}
+
+class BadToken extends Token
+{
+    /**
+     * set the service to be triggered
+     *
+     * @param Patchwork_Token_Triggered $service service instance
+     */
+    function setBadService($service)
+    {
+        $this->service = $service;
     }
 }

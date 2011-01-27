@@ -11,6 +11,10 @@
 /**
  * Patchwork_Controller_Action
  *
+ * Instead of inheriting from Patchwork_Controller_Action you can 
+ * 1) implement getContainer in your controller or
+ * 2) use a controller helper that calls Patchwork_Container::getBootstrapContainer()
+ *
  * @category    Library
  * @package     Patchwork
  * @subpackage  Controller
@@ -23,9 +27,8 @@ class Patchwork_Controller_Action extends Zend_Controller_Action
      * 
      * @return Patchwork_Container
      */
-    public function getContainer()
+    protected function getContainer()
     {
         return $this->_invokeArgs['bootstrap']->getContainer();
     }
-
 }

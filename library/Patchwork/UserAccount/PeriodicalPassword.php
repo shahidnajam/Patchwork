@@ -2,8 +2,10 @@
 /**
  * Periodically changing passwords
  *
- *
- * 
+ * @category   Library
+ * @package    Patchwork
+ * @subpackage UserAccount
+ * @author     Daniel Pozzi
  */
 interface Patchwork_UserAccount_PeriodicalPassword
 {

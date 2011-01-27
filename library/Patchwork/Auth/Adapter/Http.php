@@ -10,7 +10,30 @@
  * 
  */
 class Patchwork_Auth_Adapter_Http extends Zend_Auth_Adapter_Http
+implements Patchwork_Auth_DBAdapter
 {
+    /**
+     * identity is set through http challenge
+     */
+    public function setIdentity($identity)
+    {
+        return $this;
+    }
+
+    /**
+     * credential is set through http challenge
+     */
+    public function setCredential($credential)
+    {
+        return $this;
+    }
+
+    
+    public function getAuthModel()
+    {
+        return $this->_basicResolver->getAuthModel();
+    }
+
     /**
      * Basic Authentication
      *
