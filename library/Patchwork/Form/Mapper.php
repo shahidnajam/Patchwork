@@ -3,7 +3,14 @@
  * Patchwork_Form_Mapper
  * 
  * A mapper  to create/modify models from form data and vice versa
- * 
+ *
+ * <code>
+ * $mapper = new XForm_Mapper();
+ * $mapper->populateFormWith($model);
+ * $this->view->form = $mapper->getForm();
+ * $mapper->applyFormDataTo($model);
+ * </code>
+ *
  * @package    Patchwork
  * @subpackage Form
  * @category   Library
@@ -37,9 +44,3 @@ interface Patchwork_Form_Mapper
      */
     function getForm();
 }
-
-$mapper = new XForm_Mapper();
-$mapper->populateFormWith($model);
-$this->view->form = $mapper->getForm();
-
-$mapper->applyFormDataTo($model);

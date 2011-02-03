@@ -1,11 +1,15 @@
 <?php
 /**
- * Log Domain events
+ * Service Log Domain events
  *
+ * -proxy to Zend_Log
+ * 
  * - the writer passes events with DOMAIN priority to a model which handles
  * the event (write to db, else)
  *
- * @author Daniel Pozzi
+ * @package    Patchwork
+ * @subpackage DomainLog
+ * @author     Daniel Pozzi <bonndan76@googlemail.com>
  */
 class Patchwork_DomainLog_Service
 {
@@ -39,10 +43,10 @@ class Patchwork_DomainLog_Service
     /**
      * log a domain event
      * 
-     * @param string $message
-     * @param string $entityType
-     * @param int    $entityId
-     * @param int    $userId
+     * @param string $message    log message
+     * @param string $entityType class name / model name
+     * @param int    $entityId   model identifier (uuid etc)
+     * @param int    $userId     id of the current user
      */
     public function log(
         $message,
@@ -53,7 +57,11 @@ class Patchwork_DomainLog_Service
         $this->log->log(
             $message,
             self::DOMAIN,
-            array($entityType, $entityId, $userId)
+            array(
+                'entityType' => $entityType,
+                'entityId'   => $entityId,
+                'userId'     => $userId
+            )
         );
     }
 }

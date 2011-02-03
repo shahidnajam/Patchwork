@@ -1,17 +1,25 @@
 <?php
-
+/**
+ * Patchwork_DomainLog_Writer
+ *
+ * writer for Zend_Log which logs event with DOMAIN priority
+ *
+ * @package    Patchwork
+ * @subpackage DomainLog
+ * @author     Daniel Pozzi <bonndan76@googlemail.com>
+ */
 class Patchwork_DomainLog_Writer extends Zend_Log_Writer_Abstract
 {
     /**
-     *
+     * model
      * @var Patchwork_DomainLog_Model
      */
     private $logModel;
 
     /**
-     * construct
+     * constructor
      * 
-     * @param Patchwork_Storage_Service $service 
+     * @param Patchwork_DomainLog_Model $model model instance
      */
     public function  __construct(Patchwork_DomainLog_Model $model)
     {
@@ -21,7 +29,7 @@ class Patchwork_DomainLog_Writer extends Zend_Log_Writer_Abstract
     /**
      * write event if it is a domain event
      * 
-     * @param array $event
+     * @param array $event event
      */
     protected function  _write($event)
     {
