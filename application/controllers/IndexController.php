@@ -25,7 +25,6 @@ class IndexController extends Patchwork_Controller_Action
      *
      */
     public function indexAction(){
-        $doctrine = $this->_helper->doctrine();
         $this->model = new User;
         $this->model->email = 'test@test.com';
         $this->view->user = $this->model;
@@ -39,17 +38,6 @@ class IndexController extends Patchwork_Controller_Action
        if(!isset($_GET['test'])){
            $this->_redirect('/index/badrequest/?test=<script>');
        }
-    }
-
-    /**
-     * 
-     */
-    public function formAction()
-    {
-        $this->model = new User;
-        $this->model->email = 'test@test.com';
-        $this->view->form = new Patchwork_Doctrine_Model_Form($this->model);
-        new Patchwork_Form_Tableize($this->view->form);
     }
 
     /**

@@ -10,8 +10,6 @@
 /**
  * Bootstrap class
  *
- * registers registry keys and starts Doctrine
- *
  * @package    Application
  * @subpackage Default
  * @author     Daniel Pozzi <bonndan76@googlemail.com>

@@ -65,8 +65,10 @@ class UserTest extends ControllerTestCase
 
     public function testGetAuthenticatedUser()
     {
-        $this->getContainer()->Patchwork_Auth_DBAuthenticator->authenticate('dpozzi@gmx.net', 'test');
-        $res = User::getAuthenticatedUser();
-        $this->assertTrue($res->id == 1);
+        $this->getContainer()->Patchwork_Auth_DBAuthenticator
+            ->authenticate('dpozzi@gmx.net', 'test');
+        $res = $this->getContainer()->Patchwork_Auth_DBAdapter->getAuthModel();
+        $this->assertTrue($res instanceOf Patchwork_Auth_DBModel);
+        $this->assertEquals($res->username, 'bonndan');
     }
 }

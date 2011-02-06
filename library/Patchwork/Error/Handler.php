@@ -35,10 +35,10 @@ class Patchwork_Error_Handler
     /**
      * handle error, throw exception
      * 
-     * @param <type> $errno
-     * @param <type> $errstr
-     * @param <type> $errfile
-     * @param <type> $errline
+     * @param int    $errno
+     * @param string $errstr
+     * @param string $errfile
+     * @param int    $errline
      * 
      * @throws ErrorException
      */

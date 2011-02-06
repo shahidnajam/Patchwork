@@ -43,8 +43,11 @@ class Patchwork_Controller_RESTModelControllerTest extends ControllerTestCase
         $this->assertAction('index');
         $this->assertResponseCode(200);
         $body = json_decode($this->getResponse()->getBody());
-        $this->assertEquals(2, count($body));
-        $this->assertEquals('bonndan', $body[0]->username);
+        $this->assertEquals(2, count($body), $this->getResponse()->getBody());
+        $this->assertEquals(
+            'bonndan', $body[0]->username,
+            $this->getResponse()->getBody()
+        );
     }
 
     /**
@@ -165,7 +168,6 @@ class Patchwork_Controller_RESTModelControllerTest extends ControllerTestCase
             ->bindFactory('Zend_Acl', 'Patchwork_Factory', 'acl');
 
         $acl = $this->getContainer()->Zend_Acl;
-        //var_dump($acl->getResources());
         $this->getContainer()->bindImplementation(
             'Patchwork_Controller_Plugin_Auth',
             'Patchwork_Controller_Plugin_Auth_HttpBasic'
@@ -200,9 +202,7 @@ class Patchwork_Controller_RESTModelControllerTest extends ControllerTestCase
          * user entry deleted?
          */
         $user = Doctrine::getTable('User')->find(1);
-        $this->assertFalse($user);
-
-        
+        $this->assertNotNull($user->deleted_at);
     }
 }
 

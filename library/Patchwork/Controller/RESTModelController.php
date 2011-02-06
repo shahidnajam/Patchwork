@@ -157,7 +157,7 @@ abstract class Patchwork_Controller_RESTModelController
         $this->getResponse()
             ->setHttpResponseCode(200)
             ->setHeader('Content-type', 'application/json')
-            ->appendBody(new Patchwork_JSON_Decorator($objects));
+            ->appendBody(new Patchwork_Decorator_JSON($objects));
     }
 
     /**
@@ -174,7 +174,7 @@ abstract class Patchwork_Controller_RESTModelController
         $this->getResponse()
             ->setHttpResponseCode(200)
             ->setHeader('Content-type', 'application/json')
-            ->appendBody(new Patchwork_JSON_Decorator($object));
+            ->appendBody(new Patchwork_Decorator_JSON($object));
     }
 
     /**
@@ -195,7 +195,7 @@ abstract class Patchwork_Controller_RESTModelController
         $this->getResponse()
             ->setHttpResponseCode(200)
             ->setHeader("Location", $url)
-            ->appendBody(new Patchwork_JSON_Decorator($object));
+            ->appendBody(new Patchwork_Decorator_JSON($object));
     }
 
     /**
@@ -221,7 +221,7 @@ abstract class Patchwork_Controller_RESTModelController
         $this->getResponse()
             ->setHttpResponseCode(201)
             ->setHeader("Location", $this->getModelURL($object))
-            ->appendBody(new Patchwork_JSON_Decorator($object));
+            ->appendBody(new Patchwork_Decorator_JSON($object));
     }
 
     /**

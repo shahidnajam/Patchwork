@@ -16,9 +16,10 @@
  */
 class User
     extends BaseUser
-    implements Zend_Acl_Role_Interface,
-    Patchwork_Doctrine_Model_Renderable,
-    Patchwork_Auth_DBModel
+    implements
+    Zend_Acl_Role_Interface,
+    Patchwork_Auth_DBModel,
+    Patchwork_Serializable_JSON
 {
     const AUTH_IDENTITY_COLUMN = 'email';
     const AUTH_CREDENTIAL_COLUMN = 'password';
@@ -68,37 +69,6 @@ class User
         return $this->_get('role');
     }
 
-    /**
-     * returns the authentication result
-     * 
-     * @return Zend_Auth_Result
-     */
-    public static function getAuthenticationResult()
-    {
-        return self::$_authResult;
-    }
-
-    /**
-     * for Patchwork_Auth_Model interface, return the authenticated user
-     *
-     * @return User|null
-     */
-    public static function getAuthenticatedUser()
-    {
-        if(Zend_Auth::getInstance()->hasIdentity()){
-            if(self::$authenticatedUser == null){
-                $data = Zend_Auth::getInstance()->getIdentity();
-                self::$authenticatedUser = Doctrine::getTable(__CLASS__)
-                    ->findOneBy(
-                    self::AUTH_IDENTITY_COLUMN,
-                    $data[self::AUTH_IDENTITY_COLUMN]
-                );
-            }
-            
-            return self::$authenticatedUser;
-        }
-    }
-
     public function getAuthenticationTable()
     {
         return __CLASS__;
@@ -137,5 +107,18 @@ class User
     public function getSaltedPassword($password)
     {
         return md5($password.$this->salt);
+    }
+
+    /**
+     * json
+     * @return string
+     */
+    public function toJSON()
+    {
+        $data = $this->toArray();
+        unset($data['salt']);
+        unset($data['password']);
+
+        return json_encode((object)$data);
     }
 }

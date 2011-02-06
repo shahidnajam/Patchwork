@@ -53,7 +53,7 @@ implements Patchwork_Controller_Plugin_Auth
     {
         $auth = Zend_Auth::getInstance();
         if (!$auth->hasIdentity()) {
-            return Patchwork::ACL_GUEST_ROLE;
+            return self::GUEST_ROLE;
         }
 
         $id = $auth->getIdentity();
@@ -65,7 +65,7 @@ implements Patchwork_Controller_Plugin_Auth
         elseif (isset($id['role'])) {
             return $id['role'];
         } else {
-            return Patchwork::ACL_GUEST_ROLE;
+            return self::GUEST_ROLE;
         }
     }
 

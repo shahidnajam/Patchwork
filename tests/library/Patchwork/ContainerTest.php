@@ -66,8 +66,7 @@ class Patchwork_ContainerTest extends ControllerTestCase
     public function testGetWithRegisteredResourceIsLowerCase()
     {
         $container = Patchwork_Container::getBootstrapContainer();
-        $this->assertTrue($container->doctrine instanceof Doctrine_Connection);
-        $this->assertTrue($container->Doctrine instanceof Doctrine_Connection);
+        $this->assertTrue($container->doctrine instanceof ZFDoctrine_Registry);
     }
 
     public function testCreateInstanceFromBinding()

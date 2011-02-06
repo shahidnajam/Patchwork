@@ -18,12 +18,18 @@ class Patchwork_Error_HandlerTest extends ControllerTestCase
     {
         parent::setUp();
         $this->handler = $this->getContainer()
-            ->getInstance(Patchwork::ERROR_HANDLER);
+            ->getInstance('Patchwork_Error_Handler');
+        if(!$this->handler instanceof Patchwork_Error_Handler) {
+            throw new Exception('Could not register error handler');
+        }
     }
 
     public function  tearDown()
     {
         parent::tearDown();
+        if(!$this->handler instanceof Patchwork_Error_Handler) {
+            throw new Exception('Could not register error handler');
+        }
         $this->handler->unregister();
     }
 

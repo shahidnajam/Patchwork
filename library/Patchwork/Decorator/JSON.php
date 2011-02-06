@@ -22,7 +22,7 @@ class Patchwork_Decorator_JSON
      * @param Doctrine_Collection $coll collection
      * @return string
      */
-    private function serializeDoctrineCollection(Doctrine_Collection $coll)
+    private function serializeCollection($coll)
     {
         $res = array();
         foreach ($coll as $record) {
@@ -46,10 +46,10 @@ class Patchwork_Decorator_JSON
         if ($subject instanceof Patchwork_Serializable_JSON) {
             $this->json = $subject->toJSON();
         } elseif ($subject instanceof Doctrine_Collection) {
-            $this->json = $this->serializeDoctrineCollection($subject);
-        } elseif (is_object($subject) && method_exists($subject, 'toArray')) {
-            $this->json = json_encode((object) $subject->toArray());
-        } else {
+            $this->json = $this->serializeCollection($subject);
+        } elseif (is_array($subject) && is_object(current($subject))) {
+            $this->json = $this->serializeCollection($subject);
+        } else  {
             $this->json = json_encode($subject);
         }
     }

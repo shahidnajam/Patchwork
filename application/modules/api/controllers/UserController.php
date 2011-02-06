@@ -37,6 +37,6 @@ class Api_UserController extends Patchwork_Controller_RESTModelController
         $this->getResponse()
             ->setHttpResponseCode(200)
             ->setHeader('Content-type', 'application/json')
-            ->appendBody(new Patchwork_JSON_Decorator($objects));
+            ->appendBody(new Patchwork_Decorator_JSON($objects));
     }
 }

@@ -134,10 +134,11 @@ abstract class Patchwork_Auth_Adapter_DB implements Patchwork_Auth_DBAdapter
      */
     public function setIdentity($identity)
     {
-        if ($identity == '')
+        if ($identity == '') {
             throw new Zend_Auth_Adapter_Exception(
                 'A value for the identity was not provided for authentication.'
             );
+        }
         $this->_identity = $identity;
         return $this;
     }
@@ -201,7 +202,7 @@ abstract class Patchwork_Auth_Adapter_DB implements Patchwork_Auth_DBAdapter
      * 
      * @return Patchwork_Auth_DBModel
      */
-    protected function getAuthModel()
+    public function getAuthModel()
     {
         return $this->authModel;
     }

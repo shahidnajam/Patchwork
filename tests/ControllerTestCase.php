@@ -43,7 +43,7 @@ abstract class ControllerTestCase extends Zend_Test_PHPUnit_ControllerTestCase
          */
         $this->frontController->setParam('bootstrap', $this);
         
-        Doctrine::createTablesFromModels();
+        Doctrine::createTablesFromModels(APPLICATION_PATH . '/doctrine/models');
         Doctrine::loadData(APPLICATION_PATH . '/doctrine/fixtures');
 
         $this->getContainer()->bindImplementation(
