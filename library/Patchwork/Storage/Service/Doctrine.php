@@ -126,6 +126,7 @@ class Patchwork_Storage_Service_Doctrine implements Patchwork_Storage_Service
             $return[] = $record;
         }
         return $return;
+
     }
 
     /**
@@ -159,6 +160,8 @@ class Patchwork_Storage_Service_Doctrine implements Patchwork_Storage_Service
             Doctrine::getTable($mixed)->getQueryObject()
                 ->delete()
                 ->where($where);
+        } else {
+            return false;
         }
 
         return true;

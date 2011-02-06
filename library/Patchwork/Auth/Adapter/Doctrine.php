@@ -91,16 +91,16 @@ class Patchwork_Auth_Adapter_Doctrine
     }
 
     /**
-     *
-     * @return array
+     * 
+     * @return Patchwork_Auth_DBModel
      */
-    public function getAuthIdentityData()
+    public function  getAuthModel()
     {
         if (Zend_Auth::getInstance()->hasIdentity()) {
-            $record = Doctrine::getTable(get_class($this->getAuthModel()))
+            $record = Doctrine::getTable($this->_tableName)
                 ->findOneBy($this->_identityColumn, $this->_identity);
 
-            return $record->toArray();
+            return $record;
         }
     }
 }
