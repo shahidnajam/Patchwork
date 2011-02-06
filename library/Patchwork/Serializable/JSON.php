@@ -3,13 +3,15 @@
  * interface for objects that provide a method to be serialized
  * into JSON
  *
- * @author     Daniel Pozzi
+ * @author     Daniel Pozzi <bonndan76@googlemail.com>
  * @package    Patchwork
- * @subpackage JSON
+ * @subpackage Serializable
+ * @category   Library
  */
-interface Patchwork_JSON_Serializable
+interface Patchwork_Serializable_JSON
 {
     /**
+     * returns a json representation
      * @return string
      */
     function toJSON();

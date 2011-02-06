@@ -1,4 +1,5 @@
 <?php
+
 /**
  * generic JSON decorator
  *
@@ -8,6 +9,7 @@
  */
 class Patchwork_Decorator_JSON
 {
+
     /**
      * json representation
      * @var string
@@ -15,17 +17,38 @@ class Patchwork_Decorator_JSON
     private $json;
 
     /**
-     * turn the argument into json, regards Patchwork_JSON_Serializable
+     * serialization of doctrine collections
+     * 
+     * @param Doctrine_Collection $coll collection
+     * @return string
+     */
+    private function serializeDoctrineCollection(Doctrine_Collection $coll)
+    {
+        $res = array();
+        foreach ($coll as $record) {
+            $res[] = new self($record);
+        }
+
+        return "[" . implode(',', $res) . "]";
+    }
+
+    /**
+     * turn the argument into json
+     *
+     * regards Patchwork_JSON_Serializable
+     * regards Doctrine_Collections, which should not appear if StorageService
+     * is used
      * 
      * @param mixed $subject
      */
-    public function  __construct($subject)
+    public function __construct($subject)
     {
-        if ($subject instanceof Patchwork_JSON_Serializable) {
+        if ($subject instanceof Patchwork_Serializable_JSON) {
             $this->json = $subject->toJSON();
+        } elseif ($subject instanceof Doctrine_Collection) {
+            $this->json = $this->serializeDoctrineCollection($subject);
         } elseif (is_object($subject) && method_exists($subject, 'toArray')) {
-            /** @todo treat Doctrine_Records automatically */
-            $this->json = json_encode((object)$subject->toArray());
+            $this->json = json_encode((object) $subject->toArray());
         } else {
             $this->json = json_encode($subject);
         }
@@ -36,8 +59,9 @@ class Patchwork_Decorator_JSON
      * 
      * @return string json
      */
-    public function  __toString()
+    public function __toString()
     {
         return $this->json;
     }
+
 }
