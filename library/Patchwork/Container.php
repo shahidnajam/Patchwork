@@ -21,6 +21,7 @@
  */
 class Patchwork_Container
 {
+    const APPLICATION_CONFIG_KEY = 'config';
     const CONFIG_BINDING_IMPL = 'bindImplementation';
 
     /**
@@ -372,8 +373,9 @@ class Patchwork_Container
      */
     public function getApplicationConfig()
     {
-        return $this->{Patchwork::CONTAINER_CONFIG_KEY};
+        return $this->{Patchwork_Container::APPLICATION_CONFIG_KEY};
     }
+    
     /**
      * logging service for the domain / business events
      * @return Patchwork_DomainLog_Service
