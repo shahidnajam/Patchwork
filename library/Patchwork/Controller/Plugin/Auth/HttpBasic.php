@@ -65,7 +65,7 @@ implements Patchwork_Controller_Plugin_Auth
          * @todo check: remove dependency?
          */
         if (!$user || $role == '') {
-            return Patchwork::ACL_GUEST_ROLE;
+            return self::GUEST_ROLE;
         }
     }
 

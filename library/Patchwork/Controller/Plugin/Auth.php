@@ -18,6 +18,8 @@
  */
 interface Patchwork_Controller_Plugin_Auth
 {
+    const GUEST_ROLE = 'guest';
+    
     /**
      * the role of the current user
      * @return string
