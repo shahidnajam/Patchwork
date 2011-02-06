@@ -37,4 +37,16 @@ class Patchwork_DomainLog_Writer extends Zend_Log_Writer_Abstract
             $this->logModel->createFromEvent($event);
         }
     }
+
+    /**
+     * Construct a Zend_Log driver
+     *
+     * @param  array|Zen_Config $config
+     * @return Zend_Log_FactoryInterface
+     */
+    static public function factory($config)
+    {
+        return Patchwork_Container::getBootstrapContainer()
+            ->getInstance(__CLASS__);
+    }
 }

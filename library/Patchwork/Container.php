@@ -242,8 +242,10 @@ class Patchwork_Container
             }
         }
         $ref = new ReflectionClass($name);
-        if($ref->isAbstract()) {
-            throw new Patchwork_Exception($name . ' is an abstract class');
+        if ($ref->isAbstract()) {
+            throw new Patchwork_Exception(
+                $name . ' is an abstract class or interface'
+            );
         }
         $constructor = $ref->getConstructor();
         if(!$constructor) {

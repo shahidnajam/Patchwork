@@ -95,4 +95,72 @@ class Patchwork_ContainerTest extends ControllerTestCase
         $container = new Patchwork_Container;
         $fails = $container->notRegistered;
     }
+
+    public function testGetMessenger()
+    {
+        $container = new Patchwork_Container;
+        $this->assertInstanceOf(
+            'Patchwork_Messenger',
+            $container->getMessenger()
+        );
+    }
+
+    public function testGetDomainLogService()
+    {
+        $container = new Patchwork_Container;
+        $container->bindImplementation(
+            'Patchwork_Storage_Service',
+            'Patchwork_Storage_Service_Doctrine'
+        );
+        $container->bindImplementation(
+            'Patchwork_DomainLog_Model',
+            'DLStub'
+        );
+        $this->assertInstanceOf(
+            'Patchwork_DomainLog_Service',
+            $container->getDomainLogService()
+        );
+    }
+
+    public function testGetStorageService()
+    {
+        $container = new Patchwork_Container;
+        $container->bindImplementation(
+            'Patchwork_Storage_Service',
+            'Patchwork_Storage_Service_Doctrine'
+        );
+        $this->assertInstanceOf(
+            'Patchwork_Storage_Service',
+            $container->getStorageService()
+        );
+    }
+
+    public function testGetAppConfig()
+    {
+        $container = Patchwork_Container::getBootstrapContainer();
+        $this->assertInstanceOf(
+            'Zend_Config',
+            $container->getApplicationConfig()
+        );
+    }
+
+    /**
+     * @expectedException InvalidArgumentException
+     */
+    public function testBindImplementationException()
+    {
+        $container = new Patchwork_Container;
+        $container->bindImplementation('An_Interface', new stdClass());
+    }
+}
+
+class DLStub implements Patchwork_DomainLog_Model
+{
+    public function  __construct(Patchwork_Storage_Service $service)
+    {
+    }
+
+    public function  createFromEvent(array $event)
+    {
+    }
 }
