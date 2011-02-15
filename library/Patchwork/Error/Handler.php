@@ -10,9 +10,10 @@
 class Patchwork_Error_Handler
 {
     /**
-     * @var mixed
+     * flag if it is the actual error handler
+     * @var boolean
      */
-    private $oldErrorHandler;
+    private $isErrorHandler = false;
     
     /**
      * registers as error handler
@@ -20,7 +21,9 @@ class Patchwork_Error_Handler
      */
     public function registerAsErrorHandler()
     {
-        $this->oldErrorHandler = set_error_handler(array($this, 'handleError'));
+        set_error_handler(array($this, 'handleError'));
+        $this->isErrorHandler = true;
+        return $this;
     }
 
     /**
@@ -29,7 +32,7 @@ class Patchwork_Error_Handler
      */
     public function unregister()
     {
-        set_error_handler($this->oldErrorHandler);
+        $this->isErrorHandler = false;
     }
 
     /**
@@ -44,6 +47,9 @@ class Patchwork_Error_Handler
      */
     public function handleError($errno, $errstr, $errfile, $errline )
     {
+        if (!$this->isErrorHandler) {
+            return false;
+        }
         throw new ErrorException($errstr, 0, $errno, $errfile, $errline);
     }
 }
