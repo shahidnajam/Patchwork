@@ -8,7 +8,7 @@
  * @category Application
  * @todo refactor move to user module
  */
-class AuthController extends Patchwork_Controller_Action
+class User_AuthController extends Patchwork_Controller_Action
 {
 
     /**
@@ -39,31 +39,11 @@ class AuthController extends Patchwork_Controller_Action
 
     public function loginAction()
     {
-        $form = new App_Form_Auth_Login;
-        new Patchwork_Form_Tableize($form);
-
-        $request = $this->getRequest();
-
-        if ($request->isPost()) {
-            $params = $request->getParams();
-            if ($form->isValid($params)) {
-                $identity = $request->getParam(User::AUTH_IDENTITY_COLUMN);
-                $credential = $request->getParam(User::AUTH_CREDENTIAL_COLUMN);
-
-                $adapter = $this->getContainer()->getDBAuthAdapter();
-                
-                if (User::authenticate($identity, $credential)) {
-                    return $this->_forward('welcome');
-                }
-
-                $this->view->messages = User::getAuthenticationResult()
-                        ->getMessages();
-            } else {
-                $form->populate($params);
-            }
-        }
-
-        $this->view->form = $form;
+        $this->view->form = $this->getContainer()->getFormFactory()
+            ->getGenericFormFromIni(
+                APPLICATION_PATH . '/modules/user/forms/login.ini',
+                'login'
+            );
     }
 
     /*
