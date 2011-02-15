@@ -397,4 +397,14 @@ class Patchwork_Container
     {
         return $this->getInstance('Patchwork_Messenger');
     }
+
+    /**
+     * get the form factory
+     * 
+     * @return Patchwork_Form_Factory
+     */
+    public function getFormFactory()
+    {
+        return $this->getInstance('Patchwork_Form_Factory');
+    }
 }
