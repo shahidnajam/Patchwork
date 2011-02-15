@@ -62,7 +62,7 @@ class Patchwork_Form_Redecorator_Table implements Patchwork_Form_Redecorator
     public function  __construct(array $options = array())
     {
         $this->options['elementDecorators'] = $this->elementDecorators;
-        $this->options['buttonDecorators']  = $this->buttnDecorators;
+        $this->options['buttonDecorators']  = $this->buttonDecorators;
 
         array_merge($this->options, $options);
     }

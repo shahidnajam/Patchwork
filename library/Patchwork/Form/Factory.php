@@ -101,9 +101,7 @@ class Patchwork_Form_Factory
     public function getGenericFormFromIni($ini, $section)
     {
         $form = new Zend_Form;
-        $form->setMethod('POST');
         $this->addElementsFromIni($form, $ini, $section)
-            ->redecorate($form)
             ->addHash($form);
 
         return $form;
