@@ -27,7 +27,6 @@ class Patchwork_FactoryTest extends ControllerTestCase
         $acl = Patchwork_Factory::acl();
         $this->assertInstanceOf('Zend_Acl', $acl);
         $this->assertTrue($acl->has('default_index'));
-        $this->assertTrue($acl->has('howto_index'));
     }
 
 }
