@@ -152,6 +152,30 @@ class Patchwork_ContainerTest extends ControllerTestCase
         $container = new Patchwork_Container;
         $container->bindImplementation('An_Interface', new stdClass());
     }
+
+    public function testGetFormFactory()
+    {
+        $this->assertInstanceOf(
+            'Patchwork_Form_Factory',
+            $this->getContainer()->getFormFactory()
+        );
+    }
+
+    public function testApplicationConfig()
+    {
+        $this->assertInstanceOf(
+            'Zend_Config',
+            $this->getContainer()->getApplicationConfig()
+        );
+    }
+
+    public function testGetDBAuthAdapter()
+    {
+        $this->assertInstanceOf(
+            'Patchwork_Auth_DBAdapter',
+            $this->getContainer()->getDBAuthAdapter()
+        );
+    }
 }
 
 class DLStub implements Patchwork_DomainLog_Model
