@@ -48,17 +48,17 @@ http://github.com/beberlei/zf-doctrine
 
 ##To Do
 
-- integrate ZFDoctrine as gitmodule
 - extend unit testing
 - make scripts callable form everywhere
 - user management module
-- blueprint flash messenger view helper
 - application firewall
 - check: form csrf protection using zend hash element
 
 ## Done
 - Dependency injection container
 - Modular acl based on per-module ini files
+- blueprint flash messenger helper
+- integrate ZFDoctrine instead of own implementation
 
 ##Not to do (Best practise - howto instead)
 
