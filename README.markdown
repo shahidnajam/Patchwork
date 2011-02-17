@@ -47,7 +47,6 @@ http://github.com/beberlei/zf-doctrine
 
 
 ##To Do
-
 - extend unit testing
 - make scripts callable form everywhere
 - user management module

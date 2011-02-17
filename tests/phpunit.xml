@@ -1,5 +1,20 @@
-<phpunit bootstrap="./bootstrap.php" colors="true">
-    <testsuite name="AllTests">
-        <directory>./</directory>
-    </testsuite>
+<?xml version="1.0" encoding="UTF-8"?>
+<phpunit bootstrap="bootstrap.php"
+    convertErrorsToExceptions="true"
+    convertNoticesToExceptions="true"
+    convertWarningsToExceptions="true"
+    stopOnFailure="false"
+    backupGlobals="false"
+    syntaxCheck="true">
+
+    <filter>
+        <blacklist>
+            <directory suffix=".php">workspace/library</directory>
+            <directory suffix=".php">workspace/library/Doctrine</directory>
+            <directory suffix=".php">workspace/library/vendor</directory>
+            <exclude>
+                <directory suffix=".php">workspace/library/Patchwork</directory>
+            </exclude>
+        </blacklist>
+    </filter>
 </phpunit>
