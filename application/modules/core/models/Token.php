@@ -44,7 +44,7 @@
  * @package    Models
  * @author     Daniel Pozzi <bonndan76@googlemail.com>
  */
-class Token extends BaseToken implements Patchwork_Token
+class Core_Model_Token extends BaseToken implements Patchwork_Token
 {
     private $context;
 

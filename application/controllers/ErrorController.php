@@ -1,17 +1,17 @@
 <?php
-/**
- * ErrorController
- *
- * @category Application
- * @package  Controller
- * 
- */
+
 class ErrorController extends Zend_Controller_Action
 {
 
     public function errorAction()
     {
         $errors = $this->_getParam('error_handler');
+        
+        if (!$errors) {
+            $this->view->message = 'You have reached the error page';
+            return;
+        }
+        
         switch ($errors->type) {
             case Zend_Controller_Plugin_ErrorHandler::EXCEPTION_NO_ROUTE:
             case Zend_Controller_Plugin_ErrorHandler::EXCEPTION_NO_CONTROLLER:
@@ -41,33 +41,16 @@ class ErrorController extends Zend_Controller_Action
         $this->view->request   = $errors->request;
     }
 
-    /**
-     * 
-     */
-    public function deniedAction(){
-        
-    }
-
-    /**
-     * bad request caught by PHPIDS
-     *
-     *
-     */
-    public function badrequestAction()
-    {
-        $this->getResponse()->setHttpResponseCode(400);
-        $this->view->message = 'Bad request.';
-        $this->render('error');
-    }
-
     public function getLog()
     {
         $bootstrap = $this->getInvokeArg('bootstrap');
-        if (!$bootstrap->hasPluginResource('Log')) {
+        if (!$bootstrap->hasResource('Log')) {
             return false;
         }
         $log = $bootstrap->getResource('Log');
         return $log;
     }
+
+
 }
 

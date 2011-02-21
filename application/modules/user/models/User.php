@@ -14,7 +14,7 @@
  * @subpackage Models
  * @author     Daniel Pozzi <bonndan76@googlemail.com>
  */
-class User
+class User_Model_User
     extends BaseUser
     implements
     Zend_Acl_Role_Interface,

@@ -83,23 +83,3 @@ User_Model_Preference:
       User:
         class: User_Model_User
         local: user_id
-
-Default_Model_Token:
-  tableName: tokens
-  actAs: [Timestampable, SoftDelete]
-  columns:
-    id:
-      type: integer(4)
-      primary: true
-      autoincrement: true
-    hash:
-      type: string(64)
-      notnull: true
-    service:
-      type: string(255)
-      notnull: true
-    once:
-      type: boolean
-      default: 1
-    jsoncontext:
-      type: string
