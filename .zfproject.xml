@@ -6,6 +6,10 @@
       <apisDirectory enabled="false"/>
       <configsDirectory>
         <applicationConfigFile type="ini"/>
+        <yamlSchemaDirectory/>
+        <dataFixturesDirectory/>
+        <migrationsDirectory/>
+        <sqlDirectory/>
       </configsDirectory>
       <controllersDirectory>
         <controllerFile controllerName="Index">

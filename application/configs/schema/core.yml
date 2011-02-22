@@ -22,3 +22,23 @@ Core_Model_Token:
       default: 1
     jsoncontext:
       type: string
+
+Core_Model_Preference:
+  tableName: preferences
+  columns:
+    id:
+      type: integer(4)
+      primary: true
+      autoincrement: true
+    preference:
+      type: string(64)
+      notnull: true
+    value:
+      type: string(64)
+    user_id:
+      type: integer
+  relations:
+    User:
+      class: User_Model_User
+      local: user_id
+      foreign: id

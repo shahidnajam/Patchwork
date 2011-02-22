@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Bootstrap which invokes Patchwork_Container
  * - inject the application ini config into the container
@@ -10,6 +11,7 @@
  */
 class Patchwork_Bootstrap extends Zend_Application_Bootstrap_Bootstrap
 {
+
     /**
      * This method ensures that the dependency injection container is
      * initialized before any other component.
@@ -66,6 +68,23 @@ class Patchwork_Bootstrap extends Zend_Application_Bootstrap_Bootstrap
                 'basePath' => dirname(__FILE__),
             ));
 
+        /*
+        $loader = new Zend_Application_Module_Autoloader(array(
+                'namespace' => 'Core',
+                'basePath' => APPLICATION_PATH . '/modules/core',
+            ));
+        
+        $loader->addResourceTypes(array(
+            'model' => array(
+                'path' => 'models',
+                'namespace' => 'Model',
+            ),
+            'form' => array(
+                'path' => 'forms',
+                'namespace' => 'Form',
+            ),
+        ));
+*/
         return $mal;
     }
 
@@ -95,4 +114,5 @@ class Patchwork_Bootstrap extends Zend_Application_Bootstrap_Bootstrap
     {
         return $this->_container;
     }
+
 }
