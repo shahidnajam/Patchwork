@@ -15,6 +15,8 @@
  * @property string $password
  * @property string $salt
  * @property enum $status
+ * @property Core_Model_Preference $Preferences
+ * @property User_Model_Role $Roles
  * @property Doctrine_Collection $Core_Model_Preference
  * @property Doctrine_Collection $User_Model_UserRole
  * 
@@ -93,6 +95,14 @@ abstract class User_Model_Base_User extends Doctrine_Record
     public function setUp()
     {
         parent::setUp();
+        $this->hasOne('Core_Model_Preference as Preferences', array(
+             'local' => 'core__model__preference_id',
+             'foreign' => 'id'));
+
+        $this->hasOne('User_Model_Role as Roles', array(
+             'local' => 'user__model__role_id',
+             'foreign' => 'id'));
+
         $this->hasMany('Core_Model_Preference', array(
              'local' => 'id',
              'foreign' => 'user_id'));

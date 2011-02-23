@@ -27,7 +27,7 @@ class UserTest extends ControllerTestCase
      */
     public function testIsArray()
     {
-        $user = new User;
+        $user = new User_Model_User;
         $result = $user->getIgnoredColumns();
 
         $this->assertTrue( is_array($result), 'Ist kein Array.' );
@@ -57,7 +57,7 @@ class UserTest extends ControllerTestCase
 
     public function testGetRoleId()
     {
-        $user = new User;
+        $user = new User_Model_User;
         $user->role = 'guest';
         $this->assertTrue($user->getRoleid() == 'guest');
     }

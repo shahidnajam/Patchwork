@@ -10,6 +10,7 @@
  * @property string $value
  * @property integer $user_id
  * @property User_Model_User $User
+ * @property Doctrine_Collection $User_Model_User
  * 
  * @package    ##PACKAGE##
  * @subpackage ##SUBPACKAGE##
@@ -51,5 +52,9 @@ abstract class Core_Model_Base_Preference extends Doctrine_Record
         $this->hasOne('User_Model_User as User', array(
              'local' => 'user_id',
              'foreign' => 'id'));
+
+        $this->hasMany('User_Model_User', array(
+             'local' => 'id',
+             'foreign' => 'core__model__preference_id'));
     }
 }

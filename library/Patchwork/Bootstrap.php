@@ -9,6 +9,7 @@
  * @package    Patchwork
  * @subpackage Bootstrap
  */
+require_once dirname(__FILE__) . '/Container.php';
 class Patchwork_Bootstrap extends Zend_Application_Bootstrap_Bootstrap
 {
 
@@ -62,30 +63,6 @@ class Patchwork_Bootstrap extends Zend_Application_Bootstrap_Bootstrap
     {
         $autoloader = Zend_Loader_Autoloader::getInstance();
         $autoloader->setFallbackAutoloader(true);
-
-        $mal = new Zend_Application_Module_Autoloader(array(
-                'namespace' => 'App',
-                'basePath' => dirname(__FILE__),
-            ));
-
-        /*
-        $loader = new Zend_Application_Module_Autoloader(array(
-                'namespace' => 'Core',
-                'basePath' => APPLICATION_PATH . '/modules/core',
-            ));
-        
-        $loader->addResourceTypes(array(
-            'model' => array(
-                'path' => 'models',
-                'namespace' => 'Model',
-            ),
-            'form' => array(
-                'path' => 'forms',
-                'namespace' => 'Form',
-            ),
-        ));
-*/
-        return $mal;
     }
 
     /**

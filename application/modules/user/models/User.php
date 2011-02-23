@@ -15,7 +15,7 @@
  * @author     Daniel Pozzi <bonndan76@googlemail.com>
  */
 class User_Model_User
-    extends BaseUser
+    extends User_Model_Base_User
     implements
     Zend_Acl_Role_Interface,
     Patchwork_Auth_DBModel,
@@ -66,7 +66,8 @@ class User_Model_User
      */
     public function getRoleId()
     {
-        return $this->_get('role');
+        $roles = $this->Roles;
+        return current($roles);
     }
 
     public function getAuthenticationTable()

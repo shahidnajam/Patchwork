@@ -201,7 +201,7 @@ class Patchwork_Controller_RESTModelControllerTest extends ControllerTestCase
         /**
          * user entry deleted?
          */
-        $user = Doctrine::getTable('User')->find(1);
+        $user = Doctrine::getTable('User_Model_User')->find(1);
         $this->assertNotNull($user->deleted_at);
     }
 }

@@ -5,7 +5,9 @@ options:
 
 User_Model_User:
   tableName: users
-  actAs: [Timestampable, SoftDelete]
+  actAs:
+    Timestampable: ~
+    SoftDelete: ~
   columns:
     id:
       type: integer(4)
@@ -35,8 +37,10 @@ User_Model_User:
       values: ['inactive', 'active', 'locked', 'deleted']
       default: 'inactive'
   relations:
-      Preferences:
-        class: User_Model_Preference
+    Preferences:
+      class: Core_Model_Preference
+    Roles:
+      class: User_Model_Role
 
 User_Model_Role:
   tableName: roles
@@ -59,9 +63,9 @@ User_Model_UserRole:
       type: integer
       primary: true
   relations:
-    User_Model_User:
+    User:
       class: User_Model_User
       local: user_id
-    User_Model_Role:
+    Role:
       class: User_Model_Role
       local: role_id

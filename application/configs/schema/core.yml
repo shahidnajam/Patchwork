@@ -5,7 +5,9 @@ options:
 
 Core_Model_Token:
   tableName: tokens
-  actAs: [Timestampable, SoftDelete]
+  actAs:
+    Timestampable: ~
+    SoftDelete: ~
   columns:
     id:
       type: integer(4)

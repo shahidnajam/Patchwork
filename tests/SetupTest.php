@@ -15,7 +15,7 @@ class SetupTest extends ControllerTestCase
      */
     public function testUserFixureIsLoaded()
     {
-        $users = Doctrine::getTable('User')->findAll();
+        $users = Doctrine::getTable('User_Model_User')->findAll();
         $this->assertTrue($users instanceof Doctrine_Collection);
         $this->assertEquals(2, $users->count());
     }
