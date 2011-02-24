@@ -46,10 +46,13 @@ abstract class ControllerTestCase extends Zend_Test_PHPUnit_ControllerTestCase
 
         /**
          * create all tables
+         * @link http://stackoverflow.com/questions/299255/unit-testing-doctrine-objects-with-phpunit
+         * createtablesfrommodels does not work twice!!!
          */
-        
-        Doctrine::createTablesFromModels(APPLICATION_PATH . '/modules/user/models');
-        Doctrine::createTablesFromModels(APPLICATION_PATH . '/modules/core/models');
+        Doctrine::loadModels(APPLICATION_PATH . '/modules/user/models');
+        Doctrine::loadModels(APPLICATION_PATH . '/modules/core/models');
+        Doctrine::createTablesFromArray(Doctrine::getLoadedModels());
+
         Doctrine::loadData(APPLICATION_PATH . '/configs/fixtures');
 
         $this->getContainer()->bindImplementation(

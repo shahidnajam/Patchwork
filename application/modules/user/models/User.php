@@ -26,6 +26,8 @@ class User_Model_User
     const AUTH_SALT_COLUMN = 'salt';
     const AUTH_CREDENTIAL_TREATMENT = 'MD5(CONCAT(?, salt))';
 
+    const GUEST_ROLE = 'guest';
+    
     /**
      * instance of User
      * @var User
@@ -67,7 +69,13 @@ class User_Model_User
     public function getRoleId()
     {
         $roles = $this->Roles;
-        return current($roles);
+        if (count($roles) > 0) {
+            $role = current($roles);
+            return $role->name;
+        } else {
+            return self::GUEST_ROLE;
+        }
+
     }
 
     public function getAuthenticationTable()

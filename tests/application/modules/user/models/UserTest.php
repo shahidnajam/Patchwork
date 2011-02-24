@@ -58,7 +58,6 @@ class UserTest extends ControllerTestCase
     public function testGetRoleId()
     {
         $user = new User_Model_User;
-        $user->role = 'guest';
         $this->assertTrue($user->getRoleid() == 'guest');
     }
 

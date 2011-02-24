@@ -18,6 +18,7 @@
  * @property Core_Model_Preference $Preferences
  * @property User_Model_Role $Roles
  * @property Doctrine_Collection $Core_Model_Preference
+ * @property Doctrine_Collection $User_Model_Role
  * @property Doctrine_Collection $User_Model_UserRole
  * 
  * @package    ##PACKAGE##
@@ -106,6 +107,10 @@ abstract class User_Model_Base_User extends Doctrine_Record
         $this->hasMany('Core_Model_Preference', array(
              'local' => 'id',
              'foreign' => 'user_id'));
+
+        $this->hasMany('User_Model_Role', array(
+             'local' => 'id',
+             'foreign' => 'user__model__user_id'));
 
         $this->hasMany('User_Model_UserRole', array(
              'local' => 'id',

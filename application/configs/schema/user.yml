@@ -52,6 +52,9 @@ User_Model_Role:
     name:
       type: string(64)
       notnull: true
+  relations:
+    User:
+      class: User_Model_User
 
 User_Model_UserRole:
   tableName: user_roles
@@ -66,6 +69,7 @@ User_Model_UserRole:
     User:
       class: User_Model_User
       local: user_id
+      foreign: id
     Role:
       class: User_Model_Role
       local: role_id

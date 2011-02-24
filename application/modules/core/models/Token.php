@@ -107,9 +107,8 @@ class Core_Model_Token extends Core_Model_Base_Token implements Patchwork_Token
         }
     }
 
-    public function  save(Doctrine_Connection $conn = null)
+    public function preInsert($event)
     {
         $this->_generateHash();
-        parent::save($conn);
     }
 }
