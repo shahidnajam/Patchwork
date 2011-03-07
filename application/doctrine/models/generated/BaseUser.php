@@ -15,7 +15,13 @@
  * @property string $password
  * @property string $salt
  * @property enum $status
+<<<<<<< Updated upstream:application/doctrine/models/generated/BaseUser.php
  * @property enum $role
+=======
+ * @property Core_Model_Preference $Preferences
+ * @property Doctrine_Collection $Roles
+ * @property Doctrine_Collection $Core_Model_Preference
+>>>>>>> Stashed changes:application/modules/user/models/Base/User.php
  * 
  * @package    ##PACKAGE##
  * @subpackage ##SUBPACKAGE##
@@ -102,6 +108,22 @@ abstract class BaseUser extends Doctrine_Record
     public function setUp()
     {
         parent::setUp();
+<<<<<<< Updated upstream:application/doctrine/models/generated/BaseUser.php
+=======
+        $this->hasOne('Core_Model_Preference as Preferences', array(
+             'local' => 'core__model__preference_id',
+             'foreign' => 'id'));
+
+        $this->hasMany('User_Model_Role as Roles', array(
+             'refClass' => 'User_Model_UserRole',
+             'local' => 'id',
+             'foreign' => 'id'));
+
+        $this->hasMany('Core_Model_Preference', array(
+             'local' => 'id',
+             'foreign' => 'user_id'));
+
+>>>>>>> Stashed changes:application/modules/user/models/Base/User.php
         $timestampable0 = new Doctrine_Template_Timestampable();
         $softdelete0 = new Doctrine_Template_SoftDelete();
         $this->actAs($timestampable0);

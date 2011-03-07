@@ -35,8 +35,18 @@ User_Model_User:
       values: ['inactive', 'active', 'locked', 'deleted']
       default: 'inactive'
   relations:
+<<<<<<< Updated upstream:application/configs/schema/schema.yml
       Preferences:
         class: User_Model_Preference
+=======
+    Preferences:
+      class: Core_Model_Preference
+    Roles:
+      class: User_Model_Role
+      local: id
+      foreign: id
+      refClass: User_Model_UserRole
+>>>>>>> Stashed changes:application/configs/schema/user.yml
 
 User_Model_Role:
   tableName: roles
@@ -48,6 +58,14 @@ User_Model_Role:
     name:
       type: string(64)
       notnull: true
+<<<<<<< Updated upstream:application/configs/schema/schema.yml
+=======
+  relations:
+    UserRoles:
+      class: User_Model_UserRole
+      local: id
+      foreign: id
+>>>>>>> Stashed changes:application/configs/schema/user.yml
 
 User_Model_UserRole:
   columns:
@@ -61,6 +79,7 @@ User_Model_UserRole:
     User:
       class: User_Model_User
       local: user_id
+<<<<<<< Updated upstream:application/configs/schema/schema.yml
     Role:
       class: User_Model_Role
       local: role_id
@@ -103,3 +122,12 @@ Default_Model_Token:
       default: 1
     jsoncontext:
       type: string
+=======
+      foreign: id
+      foreignAlias: Roles
+    Role:
+      class: User_Model_Role
+      local: role_id
+      foreign: id
+      foreignAlias: UserRoles
+>>>>>>> Stashed changes:application/configs/schema/user.yml

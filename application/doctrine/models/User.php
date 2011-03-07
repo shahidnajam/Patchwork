@@ -66,7 +66,18 @@ class User
      */
     public function getRoleId()
     {
+<<<<<<< Updated upstream:application/doctrine/models/User.php
         return $this->_get('role');
+=======
+        $roles = $this->Roles;
+        if (count($roles) > 0) {
+            $role = $roles->getFirst();
+            return $role->name;
+        } else {
+            return self::GUEST_ROLE;
+        }
+
+>>>>>>> Stashed changes:application/modules/user/models/User.php
     }
 
     public function getAuthenticationTable()
