@@ -10,6 +10,7 @@
  * @subpackage Bootstrap
  */
 require_once dirname(__FILE__) . '/Container.php';
+
 class Patchwork_Bootstrap extends Zend_Application_Bootstrap_Bootstrap
 {
 
@@ -80,6 +81,37 @@ class Patchwork_Bootstrap extends Zend_Application_Bootstrap_Bootstrap
         $this->getContainer()
             ->getInstance('Patchwork_Error_Handler')
             ->registerAsErrorHandler();
+    }
+
+    /**
+     * init patchwork view which has hardcoded helpers
+     *
+     * @link   http://akrabat.com/wp-content/uploads/PHPUK11-Optimising_ZF1.pdf
+     * @return Patchwork_View
+     */
+    protected function _initView()
+    {
+        require_once dirname(__FILE__) . '/View.php';
+        $resources = $this->getOption('resources');
+        $options = array();
+        if (isset($resources['view'])) {
+            $options = $resources['view'];
+        }
+        $view = new patchwork_View($options);
+        if (isset($options['doctype'])) {
+            $view->doctype()->setDoctype(strtoupper($options['doctype']));
+            if (isset($options['charset']) && $view->doctype()->isHtml5()) {
+                $view->headMeta()->setCharset($options['charset']);
+            }
+        }
+        if (isset($options['contentType'])) {
+            $view->headMeta()->appendHttpEquiv('Content-Type',
+                $options['contentType']);
+        }
+        $viewRenderer = new Zend_Controller_Action_Helper_ViewRenderer();
+        $viewRenderer->setView($view);
+        Zend_Controller_Action_HelperBroker::addHelper($viewRenderer);
+        return $view;
     }
 
     /**
