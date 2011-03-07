@@ -9,9 +9,12 @@
 
 // Define application environment
 define('APPLICATION_ENV', 'testing');
+define('APPLICATION_PATH', dirname(dirname(__FILE__)) . '/application');
 
-require_once dirname(dirname(__FILE__)) . DIRECTORY_SEPARATOR . 'application'
-    . DIRECTORY_SEPARATOR . 'env.php';
+set_include_path(implode(PATH_SEPARATOR, array(
+    realpath(APPLICATION_PATH . '/../library'),
+    get_include_path(),
+)));
 
 /** Zend_Application */
 require_once 'Zend/Application.php';
@@ -21,6 +24,6 @@ $application = new Zend_Application(
     APPLICATION_ENV,
     APPLICATION_PATH . '/configs/application.ini'
 );
-$application->bootstrap('Cli');
+$application->bootstrap();
 
 require_once 'ControllerTestCase.php';

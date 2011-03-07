@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Bootstrap which invokes Patchwork_Container
  * - inject the application ini config into the container
@@ -8,8 +9,11 @@
  * @package    Patchwork
  * @subpackage Bootstrap
  */
+require_once dirname(__FILE__) . '/Container.php';
+
 class Patchwork_Bootstrap extends Zend_Application_Bootstrap_Bootstrap
 {
+
     /**
      * This method ensures that the dependency injection container is
      * initialized before any other component.
@@ -60,13 +64,6 @@ class Patchwork_Bootstrap extends Zend_Application_Bootstrap_Bootstrap
     {
         $autoloader = Zend_Loader_Autoloader::getInstance();
         $autoloader->setFallbackAutoloader(true);
-
-        $mal = new Zend_Application_Module_Autoloader(array(
-                'namespace' => 'App',
-                'basePath' => dirname(__FILE__),
-            ));
-
-        return $mal;
     }
 
     /**
@@ -87,6 +84,37 @@ class Patchwork_Bootstrap extends Zend_Application_Bootstrap_Bootstrap
     }
 
     /**
+     * init patchwork view which has hardcoded helpers
+     *
+     * @link   http://akrabat.com/wp-content/uploads/PHPUK11-Optimising_ZF1.pdf
+     * @return Patchwork_View
+     */
+    protected function _initView()
+    {
+        require_once dirname(__FILE__) . '/View.php';
+        $resources = $this->getOption('resources');
+        $options = array();
+        if (isset($resources['view'])) {
+            $options = $resources['view'];
+        }
+        $view = new patchwork_View($options);
+        if (isset($options['doctype'])) {
+            $view->doctype()->setDoctype(strtoupper($options['doctype']));
+            if (isset($options['charset']) && $view->doctype()->isHtml5()) {
+                $view->headMeta()->setCharset($options['charset']);
+            }
+        }
+        if (isset($options['contentType'])) {
+            $view->headMeta()->appendHttpEquiv('Content-Type',
+                $options['contentType']);
+        }
+        $viewRenderer = new Zend_Controller_Action_Helper_ViewRenderer();
+        $viewRenderer->setView($view);
+        Zend_Controller_Action_HelperBroker::addHelper($viewRenderer);
+        return $view;
+    }
+
+    /**
      * the container instance
      * 
      * @return Patchwork_Container
@@ -95,4 +123,5 @@ class Patchwork_Bootstrap extends Zend_Application_Bootstrap_Bootstrap
     {
         return $this->_container;
     }
+
 }

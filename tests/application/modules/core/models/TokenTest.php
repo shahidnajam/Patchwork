@@ -6,7 +6,7 @@
  * @package  Model
  * @author   Daniel Pozzi <bonndan76@googlemail.com>
  */
-require_once(dirname(dirname(dirname(dirname(__FILE__))))).'/tests/bootstrap.php';
+require_once(dirname(dirname(dirname(dirname(dirname(__DIR__)))))).'/tests/bootstrap.php';
 
 /**
  * Test for the token model
@@ -26,7 +26,7 @@ class TokenTest extends ControllerTestCase
     {
         parent::setUp();
         $this->service = $this->getContainer()
-            ->bindImplementation('Patchwork_Token', 'Token')
+            ->bindImplementation('Patchwork_Token', 'Core_Model_Token')
             ->getInstance('Patchwork_Token_Service');
     }
 
@@ -134,7 +134,7 @@ class ServiceX implements Patchwork_Token_Triggered
     }
 }
 
-class BadToken extends Token
+class BadToken extends Core_Model_Token
 {
     /**
      * set the service to be triggered

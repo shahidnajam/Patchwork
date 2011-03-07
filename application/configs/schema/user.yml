@@ -1,0 +1,75 @@
+options:
+  collate: utf8_general_ci
+  charset: utf8
+  type: INNODB
+
+User_Model_User:
+  tableName: users
+  actAs:
+    Timestampable: ~
+    SoftDelete: ~
+  columns:
+    id:
+      type: integer(4)
+      primary: true
+      autoincrement: true
+    gender:
+      type: enum
+      values: ['female', 'male', 'nn']
+    username:
+      type: string(255)
+    firstname:
+      type: string(255)
+    lastname:
+      type: string(255)
+    email:
+      type: string(255)
+      notnull: true
+    language:
+      type: string(5)
+      default: en_GB
+    password:
+      type: string(255)
+    salt:
+      type: string(255)
+    status:
+      type: enum
+      values: ['inactive', 'active', 'locked', 'deleted']
+      default: 'inactive'
+    role_id:
+      type: integer(2)
+
+User_Model_Role:
+  tableName: roles
+  columns:
+    id:
+      type: integer(4)
+      primary: true
+      autoincrement: true
+    name:
+      type: string(64)
+      notnull: true
+  relations:
+    Users:
+      class: User_Model_User
+      local: id
+      foreign: id
+
+User_Model_Preference:
+  columns:
+    id:
+      type: integer(4)
+      primary: true
+      autoincrement: true
+    user_id:
+      type: integer
+      notnull: true
+    preference:
+      type: string(64)
+      notnull: true
+    value:
+      type: string(64)
+  relations:
+    User:
+      class: User_Model_User
+      local: user_id

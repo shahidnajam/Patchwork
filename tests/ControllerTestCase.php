@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Patchwork
  *
@@ -33,8 +34,8 @@ abstract class ControllerTestCase extends Zend_Test_PHPUnit_ControllerTestCase
          * @see http://framework.zend.com/issues/browse/ZF-10607
          */
         $this->bootstrap = new Zend_Application(
-            APPLICATION_ENV,
-            APPLICATION_PATH . '/configs/application.ini'
+                APPLICATION_ENV,
+                APPLICATION_PATH . '/configs/application.ini'
         );
 
         parent::setUp();
@@ -42,9 +43,17 @@ abstract class ControllerTestCase extends Zend_Test_PHPUnit_ControllerTestCase
          * @see http://framework.zend.com/issues/browse/ZF-8193
          */
         $this->frontController->setParam('bootstrap', $this);
-        
-        Doctrine::createTablesFromModels(APPLICATION_PATH . '/doctrine/models');
-        Doctrine::loadData(APPLICATION_PATH . '/doctrine/fixtures');
+
+        /**
+         * create all tables
+         * @link http://stackoverflow.com/questions/299255/unit-testing-doctrine-objects-with-phpunit
+         * createtablesfrommodels does not work twice!!!
+         */
+        Doctrine::loadModels(APPLICATION_PATH . '/modules/user/models');
+        Doctrine::loadModels(APPLICATION_PATH . '/modules/core/models');
+        Doctrine::createTablesFromArray(Doctrine::getLoadedModels());
+
+        Doctrine::loadData(APPLICATION_PATH . '/configs/fixtures');
 
         $this->getContainer()->bindImplementation(
             'Patchwork_Storage_Service',
@@ -78,9 +87,7 @@ abstract class ControllerTestCase extends Zend_Test_PHPUnit_ControllerTestCase
      * @link http://blog.fedecarg.com/2008/12/27/testing-zend-framework-controllers/
      */
     public function dispatch(
-        $url = null,
-        $method = 'GET',
-        array $requestArgs = null
+    $url = null, $method = 'GET', array $requestArgs = null
     )
     {
         // redirector should not exit
@@ -107,10 +114,10 @@ abstract class ControllerTestCase extends Zend_Test_PHPUnit_ControllerTestCase
             foreach ($requestArgs as $key => $value)
                 $request->setParam($key, $value);
 
-        
+
         $this->frontController->setDefaultModule('default');
         $this->frontController->addModuleDirectory(APPLICATION_PATH);
-        
+
         $this->getFrontController()
             ->setRequest($request)
             ->setResponse($this->getResponse())
@@ -139,7 +146,7 @@ abstract class ControllerTestCase extends Zend_Test_PHPUnit_ControllerTestCase
     {
         $user = new stdClass();
         $user->role = 'user';
-        
+
 
         $adapter = new MockAuthAdapter();
         $adapter->setUser($user);
@@ -147,6 +154,7 @@ abstract class ControllerTestCase extends Zend_Test_PHPUnit_ControllerTestCase
         Zend_Auth::getInstance()->authenticate($adapter);
         Zend_Auth::getInstance()->getStorage()->write($user);
     }
+
 }
 
 /**
@@ -154,11 +162,13 @@ abstract class ControllerTestCase extends Zend_Test_PHPUnit_ControllerTestCase
  */
 class MockAuthAdapter implements Zend_Auth_Adapter_Interface
 {
+
     /**
      *
      * @param object $user
      */
-    public function setUser($user){
+    public function setUser($user)
+    {
         $this->user = $user;
         return $this;
     }
@@ -173,4 +183,5 @@ class MockAuthAdapter implements Zend_Auth_Adapter_Interface
         $res = new Zend_Auth_Result(1, $this->user);
         return $res;
     }
+
 }

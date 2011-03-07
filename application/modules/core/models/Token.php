@@ -17,41 +17,14 @@
  *
  * A token is created using the factory method factory,
  *
- * Doctrine schema:
- * <code>
-  Token:
-  tableName: tokens
-  actAs: [Timestampable, SoftDelete]
-  columns:
-  id:
-  type: integer(4)
-  primary: true
-  autoincrement: true
-  hash:
-  type: string(64)
-  notnull: true
-  service:
-  type: string(255)
-  notnull: true
-  once:
-  type: boolean
-  default: 1
-  jsoncontext:
-  type: string
- * </code>
  *
  * @category   Application
  * @package    Models
  * @author     Daniel Pozzi <bonndan76@googlemail.com>
  */
-class Token extends BaseToken implements Patchwork_Token
+class Core_Model_Token extends Core_Model_Base_Token implements Patchwork_Token
 {
     private $context;
-
-    public function  __construct($table = null, $isNewEntry = false)
-    {
-        parent::__construct($table, $isNewEntry);
-    }
 
     /**
      * set the service to be triggered
@@ -134,9 +107,8 @@ class Token extends BaseToken implements Patchwork_Token
         }
     }
 
-    public function  save(Doctrine_Connection $conn = null)
+    public function preInsert($event)
     {
         $this->_generateHash();
-        parent::save($conn);
     }
 }

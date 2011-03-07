@@ -31,15 +31,15 @@ return array
 
     array(
         'label' => 'Login',
-        'module' => 'default',
+        'module' => 'user',
         'controller' => 'auth',
         'action' => 'index',
     ),
 
     array(
-        'label' => 'Howto',
-        'module' => 'howto',
-        'controller' => 'index',
+        'label' => 'Core Module',
+        'module' => 'core',
+        'controller' => 'test',
         'action' => 'index',
     )
 );

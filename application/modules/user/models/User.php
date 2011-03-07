@@ -14,8 +14,8 @@
  * @subpackage Models
  * @author     Daniel Pozzi <bonndan76@googlemail.com>
  */
-class User
-    extends BaseUser
+class User_Model_User
+    extends User_Model_Base_User
     implements
     Zend_Acl_Role_Interface,
     Patchwork_Auth_DBModel,
@@ -26,6 +26,8 @@ class User
     const AUTH_SALT_COLUMN = 'salt';
     const AUTH_CREDENTIAL_TREATMENT = 'MD5(CONCAT(?, salt))';
 
+    const GUEST_ROLE = 'guest';
+    
     /**
      * instance of User
      * @var User
@@ -66,18 +68,7 @@ class User
      */
     public function getRoleId()
     {
-<<<<<<< Updated upstream:application/doctrine/models/User.php
         return $this->_get('role');
-=======
-        $roles = $this->Roles;
-        if (count($roles) > 0) {
-            $role = $roles->getFirst();
-            return $role->name;
-        } else {
-            return self::GUEST_ROLE;
-        }
-
->>>>>>> Stashed changes:application/modules/user/models/User.php
     }
 
     public function getAuthenticationTable()

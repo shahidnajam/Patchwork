@@ -11,7 +11,7 @@ class Api_UserController extends Patchwork_Controller_RESTModelController
 {
     const SEARCH_USERNAME_PARAM = 'username';
 
-    public $modelName = 'User';
+    public $modelName = 'User_Model_User';
 
     /**
      * list

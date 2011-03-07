@@ -1,6 +1,5 @@
 <?php
-require_once(dirname(dirname(dirname(dirname(__FILE__))))).'/tests/bootstrap.php';
-
+require_once(dirname(dirname(dirname(dirname(dirname(__DIR__)))))).'/tests/bootstrap.php';
 
 class UserTest extends ControllerTestCase
 {
@@ -9,7 +8,7 @@ class UserTest extends ControllerTestCase
      */
     public function testContainsFields()
     {
-        $user = new User;
+        $user = new User_Model_User;
         $result = $user->getIgnoredColumns();
 
         $expected = array(
@@ -28,7 +27,7 @@ class UserTest extends ControllerTestCase
      */
     public function testIsArray()
     {
-        $user = new User;
+        $user = new User_Model_User;
         $result = $user->getIgnoredColumns();
 
         $this->assertTrue( is_array($result), 'Ist kein Array.' );
@@ -40,7 +39,7 @@ class UserTest extends ControllerTestCase
      */
     public function testUsername($id, $expected)
     {
-        $user = Doctrine::getTable('User')->find($id);
+        $user = Doctrine::getTable('User_Model_User')->find($id);
         $this->assertTrue ($user->username == $expected );
     }
 
@@ -58,8 +57,7 @@ class UserTest extends ControllerTestCase
 
     public function testGetRoleId()
     {
-        $user = new User;
-        $user->role = 'guest';
+        $user = new User_Model_User;
         $this->assertTrue($user->getRoleid() == 'guest');
     }
 
