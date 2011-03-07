@@ -38,6 +38,12 @@ User_Model_User:
       default: 'inactive'
     role_id:
       type: integer(2)
+      notnull: true
+  relations:
+    Role:
+      class: User_Model_Role
+      local: role_id
+      foreign: id
 
 User_Model_Role:
   tableName: roles

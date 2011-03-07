@@ -16,6 +16,7 @@
  * @property string $salt
  * @property enum $status
  * @property integer $role_id
+ * @property User_Model_Role $Role
  * @property Doctrine_Collection $Core_Model_Preference
  * @property Doctrine_Collection $User_Model_Role
  * @property Doctrine_Collection $User_Model_Preference
@@ -88,6 +89,7 @@ abstract class User_Model_Base_User extends Doctrine_Record
              ));
         $this->hasColumn('role_id', 'integer', 2, array(
              'type' => 'integer',
+             'notnull' => true,
              'length' => '2',
              ));
 
@@ -99,6 +101,10 @@ abstract class User_Model_Base_User extends Doctrine_Record
     public function setUp()
     {
         parent::setUp();
+        $this->hasOne('User_Model_Role as Role', array(
+             'local' => 'role_id',
+             'foreign' => 'id'));
+
         $this->hasMany('Core_Model_Preference', array(
              'local' => 'id',
              'foreign' => 'user_id'));

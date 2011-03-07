@@ -8,6 +8,7 @@
  * @property integer $id
  * @property string $name
  * @property User_Model_User $Users
+ * @property Doctrine_Collection $User_Model_User
  * 
  * @package    ##PACKAGE##
  * @subpackage ##SUBPACKAGE##
@@ -42,5 +43,9 @@ abstract class User_Model_Base_Role extends Doctrine_Record
         $this->hasOne('User_Model_User as Users', array(
              'local' => 'id',
              'foreign' => 'id'));
+
+        $this->hasMany('User_Model_User', array(
+             'local' => 'id',
+             'foreign' => 'role_id'));
     }
 }

@@ -68,7 +68,10 @@ class User_Model_User
      */
     public function getRoleId()
     {
-        return $this->_get('role');
+        if($this->role_id) {
+            return (string)$this->Role;
+        }
+        return self::GUEST_ROLE;
     }
 
     public function getAuthenticationTable()

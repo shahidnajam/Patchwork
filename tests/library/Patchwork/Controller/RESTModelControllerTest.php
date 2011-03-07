@@ -120,7 +120,9 @@ class Patchwork_Controller_RESTModelControllerTest extends ControllerTestCase
         $this->dispatch(
             'api/user',
             'POST',
-            array('username' => 'test', 'email' => 'test@123.com')
+            array('username' => 'test',
+                'email' => 'test@123.com',
+                'role_id' => 2)
         );
 
         $this->assertModule('api');
