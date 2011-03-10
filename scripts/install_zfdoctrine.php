@@ -7,6 +7,6 @@ require_once(LIBRARY_PATH . '/Installation/Dependency/Git.php');
 $zfd = new Installation_Dependency_Git(
     'git://github.com/beberlei/zf-doctrine.git', 
     LIBRARY_PATH,
-    'library/'
+    'library/ZFDoctrine'
 );
 $zfd->install();
