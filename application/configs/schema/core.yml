@@ -38,7 +38,7 @@ Core_Model_Preference:
     value:
       type: string(64)
     user_id:
-      type: integer
+      type: integer(4)
   relations:
     User:
       class: User_Model_User

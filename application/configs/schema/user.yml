@@ -37,7 +37,7 @@ User_Model_User:
       values: ['inactive', 'active', 'locked', 'deleted']
       default: 'inactive'
     role_id:
-      type: integer(2)
+      type: integer(4)
       notnull: true
   relations:
     Role:
@@ -68,7 +68,7 @@ User_Model_Preference:
       primary: true
       autoincrement: true
     user_id:
-      type: integer
+      type: integer(4)
       notnull: true
     preference:
       type: string(64)
